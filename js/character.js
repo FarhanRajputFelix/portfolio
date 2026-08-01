@@ -272,7 +272,9 @@ function boot(canvas) {
     projects: { cam: [0.3, -0.9, 7.0], rot: [0.26, -0.2, 0],      scale: 0.9 },
     certs:    { cam: [1.2, 1.1, 6.8],  rot: [-0.2, -0.42, 0.06],  scale: 0.88 },
     journey:  { cam: [-1.9, 0.1, 8.0], rot: [0.02, 0.85, 0.04],   scale: 0.92 },
-    contact:  { cam: [0, 0.15, 7.2],   rot: [0, 0, 0],            scale: 1.05 }
+    contact:  { cam: [0, 0.15, 7.2],   rot: [0, 0, 0],            scale: 1.05 },
+    // parked next to the chat panel, turned toward it
+    chat:     { cam: [0.6, 0.1, 7.0],  rot: [0.02, -0.3, -0.03],  scale: 1.0 }
   };
 
   const rotGoal = new THREE.Euler(0, 0, 0);
@@ -288,6 +290,20 @@ function boot(canvas) {
 
   document.addEventListener('section:change', e => setSection(e.detail && e.detail.id));
   setSection(document.body.dataset.section || 'hero');
+
+  /* ---------------- Talking ---------------- */
+  // the drone is the one answering in the chat, so it visibly reacts:
+  // a quick spin-up while thinking, then a nodding "talk" cycle while its
+  // speech bubble is on screen
+  let talk = 0, think = 0;
+
+  document.addEventListener('agent:thinking', () => { think = 1.1; kick(0.5); });
+  document.addEventListener('agent:reply', e => {
+    const len = (e.detail && e.detail.length) || 60;
+    talk = Math.min(6.5, 1.8 + len * 0.022);
+    think = 0;
+    kick(0.9);
+  });
 
   /* ---------------- Resize ---------------- */
   function resize() {
@@ -309,15 +325,19 @@ function boot(canvas) {
     if (running) { clock.getDelta(); loop(); }
   });
 
-  let blinkAt = 3, blinkT = -1;
+  let blinkAt = 3, blinkT = -1, prevT = 0;
 
   function loop() {
     if (!running) return;
     requestAnimationFrame(loop);
 
     const t = clock.getElapsedTime();
+    const dt = Math.min(0.05, t - prevT);
+    prevT = t;
     const now = performance.now();
     excite *= 0.965;
+    if (talk > 0) talk -= dt;
+    if (think > 0) think -= dt;
 
     // when the pointer has been still for a while the drone looks around by itself
     if (now - lastMove > 2600) {
@@ -334,13 +354,21 @@ function boot(canvas) {
     }
 
     if (!reduce) {
+      // while talking it nods on a faster cycle, like a mouth moving
+      const talking = talk > 0 ? 1 : 0;
+      const nod = talking ? Math.sin(t * 11) * 0.045 : 0;
+
       // hover bob + lean
-      root.position.y = Math.sin(t * 1.25) * 0.11 + excite * 0.1;
-      root.rotation.z = rotGoal.z + Math.sin(t * 0.8) * 0.022 + smooth.x * -0.05;
+      root.position.y = Math.sin(t * 1.25) * 0.11 + excite * 0.1 + nod;
+      // bank into the direction of travel: the further the camera still has to
+      // go, the harder it leans — so a section change reads as flying there
+      const travelX = camGoal.x - camPos.x;
+      root.rotation.z = rotGoal.z + Math.sin(t * 0.8) * 0.022 + smooth.x * -0.05
+                      - travelX * 0.09;
 
       // aim: pose orientation plus cursor tracking on top of it
       root.rotation.y += ((rotGoal.y + smooth.x * 0.42) - root.rotation.y) * 0.05;
-      root.rotation.x += ((rotGoal.x - smooth.y * 0.24) - root.rotation.x) * 0.05;
+      root.rotation.x += ((rotGoal.x - smooth.y * 0.24 + nod * 1.6) - root.rotation.x) * 0.05;
 
       // the core turns a little further than the body
       core.rotation.y = smooth.x * 0.16;
@@ -383,8 +411,11 @@ function boot(canvas) {
         s.rotation.y += 0.015;
       });
 
-      // emissive breathing + eye scan
-      const pulse = 1.9 + Math.sin(t * 2.6) * 0.5 + excite * 2.2;
+      // emissive breathing + eye scan.
+      // thinking = fast shallow flicker, talking = strong rhythmic pulse
+      const rate = think > 0 ? 9 : talk > 0 ? 6.5 : 2.6;
+      const depth = think > 0 ? 0.35 : talk > 0 ? 1.1 : 0.5;
+      const pulse = 1.9 + Math.sin(t * rate) * depth + excite * 2.2;
       eyeMat.emissiveIntensity = pulse;
       haloMat.opacity = 0.16 + Math.sin(t * 2.6) * 0.05 + excite * 0.22;
       trimMat.emissiveIntensity = 1.2 + Math.sin(t * 1.9) * 0.35 + excite * 1.4;

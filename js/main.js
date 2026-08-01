@@ -397,16 +397,37 @@
     return el;
   }
 
+  /* The drone is the one answering: it speaks a short version in a bubble
+     above itself and plays a talk animation, while the panel keeps the full text. */
+  const charBubble = $('#charBubble');
+  let bubbleTimer;
+
+  function speak(text) {
+    if (!charBubble) return;
+    const short = text.length > 150 ? text.slice(0, 147).trimEnd() + '…' : text;
+    charBubble.innerHTML = '<b>Farhan’s agent</b>' + short.replace(/\n+/g, ' ');
+    charBubble.classList.add('show');
+    clearTimeout(bubbleTimer);
+    bubbleTimer = setTimeout(() => charBubble.classList.remove('show'),
+      Math.min(9000, 3200 + short.length * 26));
+    document.dispatchEvent(new CustomEvent('agent:reply', {
+      detail: { length: short.length }
+    }));
+  }
+
   function send(question) {
     const q = (question || '').trim();
     if (!q) return;
     bubble(q, 'user');
     input.value = '';
+    document.dispatchEvent(new CustomEvent('agent:thinking'));
+
     const answer = Agent.ask(q);
     const dots = typing();
     setTimeout(() => {
       dots.remove();
       bubble(answer, 'bot');
+      speak(answer);
     }, Math.min(1100, 340 + answer.length * 2.2));
   }
 
@@ -414,9 +435,18 @@
     panel.classList.add('open');
     panel.setAttribute('aria-hidden', 'false');
     fab.classList.add('hidden');
+
+    // park the drone beside the panel so the replies visibly come from it
+    if (stage) {
+      SECTIONS.forEach(s => stage.classList.remove('at-' + s));
+      stage.classList.add('at-chat');
+      document.dispatchEvent(new CustomEvent('section:change', { detail: { id: 'chat' } }));
+    }
+
     if (!started) {
       started = true;
       bubble(Agent.greeting, 'bot');
+      setTimeout(() => speak("Hi! Ask me anything about Farhan."), 500);
       Agent.suggestions.forEach(s => {
         const b = document.createElement('button');
         b.type = 'button';
@@ -432,6 +462,14 @@
     panel.classList.remove('open');
     panel.setAttribute('aria-hidden', 'true');
     fab.classList.remove('hidden');
+    if (charBubble) charBubble.classList.remove('show');
+
+    // send the drone back to whichever section is on screen
+    if (stage) {
+      stage.classList.remove('at-chat');
+      stage.classList.add('at-' + (current || 'hero'));
+      document.dispatchEvent(new CustomEvent('section:change', { detail: { id: current || 'hero' } }));
+    }
   }
 
   fab.addEventListener('click', openPanel);

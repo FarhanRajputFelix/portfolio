@@ -176,27 +176,56 @@
     {
       id: 'certs',
       keys: ['certificate', 'certificates', 'certification', 'certifications', 'certified',
-             'anthropic', 'course', 'courses', 'coursera', 'ned', 'fluency', 'credential'],
-      phrases: ['what certifications', 'your certificates'],
+             'anthropic', 'course', 'courses', 'coursera', 'ned', 'fluency', 'credential',
+             'claude', 'cowork'],
+      phrases: ['what certifications', 'your certificates', 'how many certificates'],
       answer:
-        "Certifications:\n\n" +
-        "• Anthropic — AI Fluency for Educators\n" +
-        "• Anthropic — Teaching the AI Fluency Framework\n" +
-        "• Anthropic — AI Capabilities and Limitations\n" +
-        "• Open Doors High Achievement Diploma — Applied Mathematics & AI\n" +
-        "• Certified Data Science — NED Academy\n" +
-        "• Google AI Courses (Coursera)"
+        "17 certifications so far. The key ones:\n\n" +
+        "Anthropic Academy (10 in total, 2026) — the main ones being AI Fluency Framework & " +
+        "Foundations, AI Fluency for Builders, AI Capabilities and Limitations, and Introduction " +
+        "to Claude Cowork.\n\n" +
+        "• AWS Academy Graduate — Cloud Foundations (2026)\n" +
+        "• Open Doors High Achievement Diploma — Applied Mathematics & AI (2026)\n" +
+        "• Open Doors High Achievement Diploma — Engineering & Technology (2026)\n" +
+        "• Cyber Security & Ethical Hacking — NED University (2025)\n" +
+        "• Google AI Specialization (2025)\n" +
+        "• Certified Data Science — NED University (2025)\n" +
+        "• Foundations of Cyber Security — Google (2024)"
     },
     {
       id: 'achievements',
       keys: ['achievement', 'achievements', 'award', 'awards', 'medal', 'medalist', 'gold',
-             'tcf', 'accomplishment', 'accomplishments', 'leadership', 'captain', 'cricket'],
-      phrases: ['your achievements', 'any awards', 'leadership experience'],
+             'tcf', 'accomplishment', 'accomplishments', 'olympiad'],
+      phrases: ['your achievements', 'any awards'],
       answer:
-        "Achievements: Gold Medalist at TCF School, AI hackathon participant, research proposal " +
-        "author, Machine Learning project developer and active open-source learner.\n\n" +
-        "Leadership: cricket team captain, collaborative project leader, and a consistently " +
-        "research-driven learner."
+        "Achievements: Gold Medalist at TCF School, two Open Doors High Achievement Diplomas " +
+        "(Applied Mathematics & AI, and Engineering & Technology), AI hackathon participant, " +
+        "research proposal author, Machine Learning project developer and active open-source learner."
+    },
+    {
+      id: 'leadership',
+      keys: ['leadership', 'leader', 'lead', 'captain', 'cricket', 'team', 'manage',
+             'managing', 'mentor', 'teamwork', 'collaborate', 'collaboration'],
+      phrases: ['leadership skills', 'leadership experience', 'lead a team', 'work in a team'],
+      answer:
+        "Leadership: I captained my cricket team, and I lead collaborative projects — including " +
+        "hackathon teamwork at the Google AI Seekho Antigravity Hackathon, where we built Crisis " +
+        "Intelligence under time pressure.\n\n" +
+        "I'm also the kind of teammate who documents and reviews: software quality assurance and " +
+        "code review are among my top listed skills, and I hold Anthropic's Teaching the AI Fluency " +
+        "Framework certificate, which is about guiding other people through AI workflows."
+    },
+    {
+      id: 'security-cloud',
+      keys: ['security', 'cyber', 'cybersecurity', 'hacking', 'ethical', 'aws', 'cloud',
+             'devops', 'infrastructure'],
+      phrases: ['cyber security', 'ethical hacking', 'cloud experience', 'do you know aws'],
+      answer:
+        "Cloud: AWS Academy Graduate — Cloud Foundations (2026), covering cloud infrastructure, " +
+        "security and core AWS services. I also work with Docker, GitHub Actions and Firebase.\n\n" +
+        "Security: Cyber Security & Ethical Hacking — NED University (2025), and Foundations of " +
+        "Cyber Security — Google (2024). It's a supporting interest rather than my main track — " +
+        "my focus is AI and machine learning."
     },
     {
       id: 'contact',
@@ -276,18 +305,32 @@
       .filter(w => w.length > 1 && !STOP.has(w));
   }
 
+  /* How many entries claim each keyword. A word owned by one entry is a strong
+     signal; a word several entries share is weak. Without this, "leadership
+     skills" scored the tech-stack entry as highly as the achievements entry,
+     because both "leadership" and "skills" were worth a flat 3. */
+  const KEY_FREQ = {};
+  KB.forEach(e => {
+    new Set(e.keys).forEach(k => { KEY_FREQ[k] = (KEY_FREQ[k] || 0) + 1; });
+  });
+
+  function keyWeight(k) {
+    const f = KEY_FREQ[k] || 1;
+    return f === 1 ? 3.2 : f === 2 ? 1.8 : 0.9;
+  }
+
   function score(entry, tokens, raw) {
     let s = 0;
 
     tokens.forEach(tok => {
       entry.keys.forEach(k => {
-        if (k === tok) s += 3;
-        else if (k.length > 3 && (k.startsWith(tok) || tok.startsWith(k))) s += 1.5;
+        if (k === tok) s += keyWeight(k);
+        else if (k.length > 3 && (k.startsWith(tok) || tok.startsWith(k))) s += keyWeight(k) * 0.5;
       });
     });
 
     (entry.phrases || []).forEach(p => {
-      if (raw.includes(p)) s += 6;
+      if (raw.includes(p)) s += 6.5;
     });
 
     return s;

@@ -68,6 +68,7 @@ h1,h2,h3,h4{ margin:0; line-height:1.06; }
   font-style:italic; font-weight:600;
 }
 .sec-title{ margin-bottom:44px; }
+.sec-note{ max-width:60ch; margin:-28px 0 40px; color:var(--text-dim); font-size:.9rem; }
 .sec-title-2{ margin-top:-.14em; margin-bottom:52px; }
 .display.center,.center{ text-align:center; }
 
@@ -260,22 +261,19 @@ main{ position:relative; z-index:1; }
   letter-spacing:.16em; text-transform:uppercase; color:var(--text-faint);
 }
 
-/* 3D companion — fixed stage so it persists across sections.
-   pointer-events:none throughout, so it can never eat a click. */
+/* 3D companion — fixed stage that travels between sections.
+   All movement is done with transform: `left/right/bottom: auto` cannot be
+   interpolated, so mixing them made every section change jump instantly. */
 .char-stage{
-  position:fixed; z-index:2; pointer-events:none;
+  position:fixed; left:0; top:0; z-index:2; pointer-events:none;
   width:clamp(230px,26vw,380px); aspect-ratio:1/1;
-  left:50%; top:50%; transform:translate(-50%,-50%);
   opacity:0;
-  transition:left 1.15s var(--ease-out), top 1.15s var(--ease-out),
-             right 1.15s var(--ease-out), bottom 1.15s var(--ease-out),
-             width 1.15s var(--ease-out), transform 1.15s var(--ease-out),
-             opacity .7s var(--ease-out);
+  transform:translate(calc(50vw - 50%), calc(56vh - 50%));
+  transition:transform 1.25s var(--ease-out), opacity .7s var(--ease-out);
 }
 .char-stage.ready{ opacity:1; }
 #char-canvas{ width:100%; height:100%; display:block; }
 
-/* pedestal glow that travels with it */
 .char-stage::before{
   content:''; position:absolute; left:50%; top:56%; transform:translate(-50%,-50%);
   width:86%; height:66%; border-radius:50%;
@@ -284,14 +282,35 @@ main{ position:relative; z-index:1; }
 }
 @keyframes charGlow{ 50%{ transform:translate(-50%,-50%) scale(1.1); opacity:.75; } }
 
-/* --- per-section placement --- */
-.char-stage.at-hero    { left:50%; top:56%;  width:clamp(250px,27vw,400px); transform:translate(-50%,-50%); }
-.char-stage.at-about   { left:auto; right:3vw; top:64%; width:clamp(170px,15vw,240px); transform:translateY(-50%); }
-.char-stage.at-doing   { left:2vw;  top:auto; bottom:-6vh; width:clamp(160px,14vw,225px); transform:none; }
-.char-stage.at-projects{ left:auto; right:2vw; top:16vh; width:clamp(150px,13vw,210px); transform:none; z-index:0; }
-.char-stage.at-certs   { left:1vw;  top:50%;  width:clamp(160px,14vw,220px); transform:translateY(-50%); z-index:0; }
-.char-stage.at-journey { left:auto; right:2vw; top:auto; bottom:8vh; width:clamp(160px,14vw,225px); transform:none; }
-.char-stage.at-contact { left:50%; top:auto; bottom:-4vh; width:clamp(200px,20vw,300px); transform:translateX(-50%); }
+/* --- per-section stops (translate + scale, so they interpolate) --- */
+.char-stage.at-hero    { transform:translate(calc(50vw - 50%), calc(54vh - 50%)) scale(1); }
+.char-stage.at-about   { transform:translate(calc(84vw - 50%), calc(62vh - 50%)) scale(.72); }
+.char-stage.at-doing   { transform:translate(calc(13vw - 50%), calc(82vh - 50%)) scale(.66); }
+.char-stage.at-projects{ transform:translate(calc(88vw - 50%), calc(28vh - 50%)) scale(.62); z-index:0; }
+.char-stage.at-certs   { transform:translate(calc(11vw - 50%), calc(52vh - 50%)) scale(.66); z-index:0; }
+.char-stage.at-journey { transform:translate(calc(89vw - 50%), calc(74vh - 50%)) scale(.66); }
+.char-stage.at-contact { transform:translate(calc(50vw - 50%), calc(78vh - 50%)) scale(.82); }
+/* parked beside the chat panel while the agent is open */
+.char-stage.at-chat    { transform:translate(calc(72vw - 50%), calc(52vh - 50%)) scale(.7); z-index:95; }
+
+/* --- speech bubble: the drone answers, RAY-style --- */
+.char-bubble{
+  position:absolute; left:50%; bottom:100%; transform:translate(-50%,10px) scale(.94);
+  width:max(210px,100%); max-width:290px; margin-bottom:6px;
+  padding:12px 15px; border-radius:16px 16px 16px 4px;
+  background:rgba(14,11,26,.95); border:1px solid var(--line-2);
+  backdrop-filter:blur(14px); box-shadow:0 18px 44px rgba(0,0,0,.6);
+  font-size:.78rem; line-height:1.5; color:var(--text);
+  opacity:0; pointer-events:none;
+  transition:opacity .35s var(--ease-out), transform .35s var(--ease-out);
+}
+.char-bubble::after{
+  content:''; position:absolute; left:26px; top:100%;
+  border:7px solid transparent; border-top-color:rgba(14,11,26,.95);
+}
+.char-bubble.show{ opacity:1; transform:translate(-50%,0) scale(1); }
+.char-bubble b{ display:block; font-family:var(--mono); font-size:.56rem;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--violet-3); margin-bottom:5px; }
 
 .hero-foot{
   position:relative; z-index:4; display:flex; align-items:center; justify-content:center;
@@ -476,6 +495,19 @@ main{ position:relative; z-index:1; }
   text-transform:uppercase; color:var(--violet-3); }
 .cert h3{ font-family:var(--display); font-size:1.02rem; font-weight:600; line-height:1.3; }
 .cert p{ margin:0; font-size:.78rem; color:var(--text-faint); }
+.cert-foot{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  margin-top:6px; padding-top:12px; border-top:1px solid var(--line);
+}
+.cert-foot em{ font-family:var(--mono); font-size:.6rem; letter-spacing:.06em;
+  font-style:normal; color:var(--text-faint); word-break:break-all; }
+.cert-foot b{ font-family:var(--mono); font-size:.6rem; letter-spacing:.1em;
+  font-weight:500; color:var(--text-dim); white-space:nowrap;
+  padding:4px 9px; border:1px solid var(--line); border-radius:999px;
+  transition:color .25s, border-color .25s, background .25s; }
+.cert-foot b.verified{ color:#4ade80; border-color:rgba(74,222,128,.35); }
+.cert:hover .cert-foot b{ color:#fff; border-color:var(--violet); background:rgba(139,92,246,.18); }
+.cert.more{ background:linear-gradient(125deg,rgba(139,92,246,.1),transparent); }
 
 /* ==========================================================
    CAREER
@@ -638,9 +670,11 @@ main{ position:relative; z-index:1; }
   .hero-stage{ grid-template-columns:1fr; justify-items:center; text-align:center; gap:34px; }
   .hero-left,.hero-right{ padding-bottom:0; text-align:center; }
   .hero{ padding-top:96px; }
-  .char-stage{ width:min(58vw,260px); }
-  .char-stage:not(.at-hero){ opacity:0; }
-  .char-stage.at-hero{ left:50%; top:auto; bottom:20vh; transform:translateX(-50%); }
+  .char-stage{ width:min(56vw,230px); }
+  .char-stage:not(.at-hero):not(.at-chat){ opacity:0; }
+  .char-stage.at-hero{ transform:translate(calc(50vw - 50%), calc(52vh - 50%)) scale(1); }
+  .char-stage.at-chat{ opacity:0; }
+  .char-bubble{ max-width:220px; font-size:.74rem; }
   .hero-left{ order:1; }
   .hero-right{ order:3; }
   .hero-left .display{ margin-left:0; }

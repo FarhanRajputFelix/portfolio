@@ -44,6 +44,7 @@
 <!-- ============ 3D COMPANION (persists across sections) ============ -->
 <div id="charStage" class="char-stage at-hero" aria-hidden="true">
   <canvas id="char-canvas"></canvas>
+  <div id="charBubble" class="char-bubble"></div>
 </div>
 
 <!-- ============ NAV ============ -->
@@ -171,7 +172,7 @@
 
       <div class="about-stats">
         <div class="stat" data-anim="rise"><b class="count" data-to="8">0</b><span>Projects shipped</span></div>
-        <div class="stat" data-anim="rise"><b class="count" data-to="6">0</b><span>Certifications</span></div>
+        <div class="stat" data-anim="rise"><b class="count" data-to="17">0</b><span>Certifications</span></div>
         <div class="stat" data-anim="rise"><b class="count" data-to="15">0</b><span>Research areas</span></div>
         <div class="stat" data-anim="rise"><b class="count" data-to="30" data-suffix="+">0</b><span>Tools &amp; tech</span></div>
       </div>
@@ -361,31 +362,93 @@
 <section id="certs" class="section">
   <div class="wrap">
     <h2 class="display huge sec-title" data-split-words>CERTIFICATIONS</h2>
+    <p class="sec-note" data-anim="fade">
+      17 credentials — 10 from Anthropic Academy. Every card links to proof:
+      issuer verification where the credential is digitally verifiable, otherwise
+      the scanned certificate on LinkedIn.
+    </p>
+
     <div class="cert-grid">
-      <article class="cert" data-anim="rise">
+      <a class="cert" data-anim="rise" href="https://verify.skilljar.com/c/mcahqkoh8fza" target="_blank" rel="noopener">
         <span class="cert-issuer">Anthropic</span>
-        <h3>AI Fluency for Educators</h3><p>Certificate of completion</p>
-      </article>
-      <article class="cert" data-anim="rise">
+        <h3>AI Fluency Framework &amp; Foundations</h3>
+        <p>The 4D framework — Delegation, Description, Discernment, Diligence</p>
+        <span class="cert-foot"><em>mcahqkoh8fza</em><b class="verified">Verify ↗</b></span>
+      </a>
+      <a class="cert" data-anim="rise" href="https://verify.skilljar.com/c/zaujx5d969gf" target="_blank" rel="noopener">
         <span class="cert-issuer">Anthropic</span>
-        <h3>Teaching the AI Fluency Framework</h3><p>Certificate of completion</p>
-      </article>
-      <article class="cert" data-anim="rise">
+        <h3>AI Fluency for Builders</h3>
+        <p>Generative AI across the software engineering lifecycle</p>
+        <span class="cert-foot"><em>zaujx5d969gf</em><b class="verified">Verify ↗</b></span>
+      </a>
+      <a class="cert" data-anim="rise" href="https://verify.skilljar.com/c/tbpn7pwtt3wn" target="_blank" rel="noopener">
         <span class="cert-issuer">Anthropic</span>
-        <h3>AI Capabilities and Limitations</h3><p>Certificate of completion</p>
-      </article>
-      <article class="cert" data-anim="rise">
-        <span class="cert-issuer">Open Doors</span>
-        <h3>Applied Mathematics &amp; AI</h3><p>High Achievement Diploma</p>
-      </article>
-      <article class="cert" data-anim="rise">
-        <span class="cert-issuer">NED Academy</span>
-        <h3>Certified Data Science</h3><p>Professional certification</p>
-      </article>
-      <article class="cert" data-anim="rise">
+        <h3>AI Capabilities and Limitations</h3>
+        <p>Technical mental model of LLMs — diagnosing model behaviour</p>
+        <span class="cert-foot"><em>tbpn7pwtt3wn</em><b class="verified">Verify ↗</b></span>
+      </a>
+      <a class="cert" data-anim="rise" href="https://verify.skilljar.com/c/8i64i4zo5aao" target="_blank" rel="noopener">
+        <span class="cert-issuer">Anthropic</span>
+        <h3>Introduction to Claude Cowork</h3>
+        <p>AI agent execution, sandboxed workspaces, connectors</p>
+        <span class="cert-foot"><em>8i64i4zo5aao</em><b class="verified">Verify ↗</b></span>
+      </a>
+      <a class="cert" data-anim="rise" href="https://verify.skilljar.com/c/zep7y3v3x8qk" target="_blank" rel="noopener">
+        <span class="cert-issuer">Anthropic</span>
+        <h3>Teaching the AI Fluency Framework</h3>
+        <p>Designing AI curricula and multi-layered assessments</p>
+        <span class="cert-foot"><em>zep7y3v3x8qk</em><b class="verified">Verify ↗</b></span>
+      </a>
+      <a class="cert more" data-anim="rise" href="https://www.linkedin.com/in/farhan-rajput/details/certifications/" target="_blank" rel="noopener">
+        <span class="cert-issuer">Anthropic</span>
+        <h3>+ 5 more Anthropic certificates</h3>
+        <p>Claude 101 · AI Fluency for Students, Educators, Nonprofits and Small Businesses</p>
+        <span class="cert-foot"><em>all verifiable</em><b>See all ↗</b></span>
+      </a>
+
+      <a class="cert" data-anim="rise" href="https://www.coursera.org/account/accomplishments/verify/UYZ1HWZF5EUW" target="_blank" rel="noopener">
         <span class="cert-issuer">Google · Coursera</span>
-        <h3>Google AI Courses</h3><p>Course series</p>
-      </article>
+        <h3>Google AI Specialization</h3>
+        <p>Google AI Essentials, using AI responsibly · 2025</p>
+        <span class="cert-foot"><em>UYZ1HWZF5EUW</em><b class="verified">Verify ↗</b></span>
+      </a>
+      <a class="cert" data-anim="rise" href="https://www.coursera.org/account/accomplishments/verify/LJD77YK6QZJ3" target="_blank" rel="noopener">
+        <span class="cert-issuer">Google · Coursera</span>
+        <h3>Foundations of Cyber Security</h3>
+        <p>Security controls and cybersecurity fundamentals · 2024</p>
+        <span class="cert-foot"><em>LJD77YK6QZJ3</em><b class="verified">Verify ↗</b></span>
+      </a>
+
+      <a class="cert" data-anim="rise" href="https://www.linkedin.com/in/farhan-rajput/details/certifications/" target="_blank" rel="noopener">
+        <span class="cert-issuer">Amazon Web Services</span>
+        <h3>AWS Academy Graduate — Cloud Foundations</h3>
+        <p>Cloud infrastructure, security and core AWS services · 2026</p>
+        <span class="cert-foot"><em>badge</em><b>LinkedIn ↗</b></span>
+      </a>
+      <a class="cert" data-anim="rise" href="https://www.linkedin.com/in/farhan-rajput/details/certifications/" target="_blank" rel="noopener">
+        <span class="cert-issuer">Open Doors · Global Universities</span>
+        <h3>High Achievement Diploma — Applied Mathematics &amp; AI</h3>
+        <p>International Olympiad · 2026</p>
+        <span class="cert-foot"><em>2025-BT-APP-H108</em><b>LinkedIn ↗</b></span>
+      </a>
+      <a class="cert" data-anim="rise" href="https://www.linkedin.com/in/farhan-rajput/details/certifications/" target="_blank" rel="noopener">
+        <span class="cert-issuer">Open Doors · Global Universities</span>
+        <h3>High Achievement Diploma — Engineering &amp; Technology</h3>
+        <p>International Olympiad · 2026</p>
+        <span class="cert-foot"><em>2025-BT-ENG-H197</em><b>LinkedIn ↗</b></span>
+      </a>
+      <a class="cert" data-anim="rise" href="https://www.linkedin.com/in/farhan-rajput/details/certifications/" target="_blank" rel="noopener">
+        <span class="cert-issuer">NED University · PITP</span>
+        <h3>Certified Data Science</h3>
+        <p>Kaggle, web scraping, applied data science · 2025</p>
+        <span class="cert-foot"><em>ID 25277</em><b>LinkedIn ↗</b></span>
+      </a>
+      <a class="cert" data-anim="rise" href="https://www.linkedin.com/in/farhan-rajput/details/certifications/" target="_blank" rel="noopener">
+        <span class="cert-issuer">NED University · PITP</span>
+        <h3>Cyber Security &amp; Ethical Hacking</h3>
+        <p>Certificate of Competence · 2025</p>
+        <span class="cert-foot"><em>ID 31419</em><b>LinkedIn ↗</b></span>
+      </a>
     </div>
   </div>
 </section>
@@ -508,7 +571,7 @@
 
     <footer class="foot">
       <span>© <span id="year"></span> Farhan Bashir</span>
-      <span>Three.js · Vanilla JS · FlyRank AI Capstone</span>
+      <span>Karachi, Pakistan</span>
     </footer>
   </div>
 </section>
@@ -526,7 +589,16 @@
 <section id="agentPanel" aria-label="Personal AI agent" aria-hidden="true">
   <header class="agent-head">
     <div class="agent-id">
-      <span class="agent-avatar">FB</span>
+      <span class="agent-avatar" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22" fill="none">
+          <circle cx="16" cy="16" r="10.5" fill="#2a2a38" stroke="#8b5cf6" stroke-width="1.2"/>
+          <rect x="9" y="14" width="14" height="3.4" rx="1.7" fill="#a78bfa"/>
+          <circle cx="16" cy="15.7" r="1.5" fill="#fff"/>
+          <path d="M16 5.5V3" stroke="#22d3ee" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="16" cy="2.4" r="1.5" fill="#22d3ee"/>
+          <ellipse cx="16" cy="16" rx="14.5" ry="4.6" stroke="#8b5cf6" stroke-width="1" opacity=".65" transform="rotate(-14 16 16)"/>
+        </svg>
+      </span>
       <div>
         <strong>Ask Farhan's Agent</strong>
         <span class="agent-status"><i></i> online · runs fully offline</span>
