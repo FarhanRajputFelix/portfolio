@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Farhan Bashir — CS Student &amp; AI Developer</title>
+<meta name="description" content="Portfolio of Farhan Bashir — Computer Science student at SZABIST, AI Intern at FlyRank AI, building AI for social impact." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@200;300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+</head>
+<body>
+
+<!-- ============ LOADER ============ -->
+<div id="loader">
+  <div class="loader-inner">
+    <div class="loader-name">
+      <span>F</span><span>A</span><span>R</span><span>H</span><span>A</span><span>N</span>
+    </div>
+    <div class="loader-bar"><i></i></div>
+    <div class="loader-pct"><span id="loadPct">0</span>%</div>
+  </div>
+</div>
+
+<!-- ============ CHROME ============ -->
+<div id="progress"><i></i></div>
+<div id="grain" aria-hidden="true"></div>
+<div id="cursorRing" aria-hidden="true"></div>
+<div id="cursorDot" aria-hidden="true"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<!-- ============ 3D CANVAS ============ -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- ============ 3D COMPANION (persists across sections) ============ -->
+<div id="charStage" class="char-stage at-hero" aria-hidden="true">
+  <canvas id="char-canvas"></canvas>
+</div>
+
+<!-- ============ NAV ============ -->
+<header id="nav">
+  <a href="#hero" class="brand">
+    <span class="brand-mark">FB</span>
+    <span class="brand-name">farhan</span>
+  </a>
+  <nav class="nav-links" id="navLinks">
+    <a href="#about">ABOUT</a>
+    <a href="#doing">WHAT I DO</a>
+    <a href="#projects">WORK</a>
+    <a href="#certs">CERTS</a>
+    <a href="#journey">CAREER</a>
+    <a href="#contact">CONTACT</a>
+  </nav>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- ============ SIDE RAILS ============ -->
+<div class="rail rail-left" aria-label="Social links">
+  <a href="https://github.com/FarhanRajputFelix" target="_blank" rel="noopener" aria-label="GitHub">
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7 0-.7 0-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1a2.6 2.6 0 0 1 .8-1.6c-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.7.2-3.4 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6.2 0C17.6 4.9 18.6 5.2 18.6 5.2c.7 1.7.2 3 .1 3.4.8.8 1.3 1.9 1.3 3.2 0 4.7-2.9 5.7-5.6 6 .5.4.9 1.2.9 2.4v3.2c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
+  </a>
+  <a href="https://www.linkedin.com/in/farhan-rajput/" target="_blank" rel="noopener" aria-label="LinkedIn">
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05a4.2 4.2 0 0 1 3.75-2c4 0 4.4 2.4 4.4 5.6V21h-4v-5.6c0-1.4 0-3.2-2-3.2s-2.2 1.5-2.2 3.1V21H9z"/></svg>
+  </a>
+  <a href="mailto:farhanmuhammadbashir@gmail.com" aria-label="Email">
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+  </a>
+  <span class="rail-line"></span>
+</div>
+
+<div class="rail rail-right" aria-hidden="true">
+  <span class="rail-vert">FLYRANK AI · CAPSTONE</span>
+  <span class="rail-line"></span>
+</div>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section id="hero" class="hero">
+  <span class="glow glow-top"></span>
+  <span class="glow glow-bottom"></span>
+  <span class="orb orb-1"></span>
+  <span class="orb orb-2"></span>
+
+  <div class="hero-stage">
+    <div class="hero-left">
+      <span class="kicker" data-anim="fade">Hello! I'm</span>
+      <h1 class="display xl" data-split>FARHAN</h1>
+      <h1 class="display xl dim" data-split>BASHIR</h1>
+    </div>
+
+    <div class="hero-right">
+      <span class="kicker" data-anim="fade">Currently a</span>
+      <h2 class="display lg outline" data-split>CS STUDENT</h2>
+      <h2 class="display lg rotator" id="roleRotate" data-anim="fade">AI INTERN</h2>
+      <span class="role-note" data-anim="fade">AI enthusiast · ML engineer in progress</span>
+    </div>
+  </div>
+
+  <div class="hero-foot">
+    <div class="hero-badge" data-anim="fade">
+      <span class="pulse"></span> AI Intern @ FlyRank AI — open to work
+    </div>
+    <div class="hero-cta" data-anim="fade">
+      <a href="#projects" class="btn btn-primary" data-magnetic>
+        <span>See my work</span>
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <button class="btn btn-ghost" data-magnetic data-copy="farhanmuhammadbashir@gmail.com">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span>Copy email</span>
+      </button>
+    </div>
+    <div class="scroll-hint"><span></span>SCROLL</div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>PYTHON</span><i>✦</i><span>TENSORFLOW</span><i>✦</i><span>AGENTIC AI</span><i>✦</i>
+    <span>SCIKIT-LEARN</span><i>✦</i><span>FASTAPI</span><i>✦</i><span>FLUTTER</span><i>✦</i>
+    <span>POSTGRESQL</span><i>✦</i><span>DOCKER</span><i>✦</i><span>COMPUTER VISION</span><i>✦</i>
+    <span>LLM INTEGRATION</span><i>✦</i><span>DEEP LEARNING</span><i>✦</i><span>AWS</span><i>✦</i>
+    <span>PYTHON</span><i>✦</i><span>TENSORFLOW</span><i>✦</i><span>AGENTIC AI</span><i>✦</i>
+    <span>SCIKIT-LEARN</span><i>✦</i><span>FASTAPI</span><i>✦</i><span>FLUTTER</span><i>✦</i>
+    <span>POSTGRESQL</span><i>✦</i><span>DOCKER</span><i>✦</i><span>COMPUTER VISION</span><i>✦</i>
+    <span>LLM INTEGRATION</span><i>✦</i><span>DEEP LEARNING</span><i>✦</i><span>AWS</span><i>✦</i>
+  </div>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="section">
+  <span class="glow glow-left"></span>
+  <div class="wrap">
+    <div class="about-layout">
+      <div class="about-copy">
+        <span class="kicker" data-anim="fade">About me</span>
+        <p class="lead" data-anim="fade">
+          I'm a Computer Science undergraduate with a strong passion for
+          <em>Artificial Intelligence, Machine Learning, Data Science and Research.</em>
+        </p>
+        <p data-anim="fade">
+          Throughout my academic journey I've consistently explored technologies that combine
+          innovation with meaningful social impact. My interests extend beyond software engineering —
+          I aspire to become an AI researcher developing intelligent systems capable of improving
+          education, healthcare, environmental sustainability and humanitarian response.
+        </p>
+        <p data-anim="fade">
+          Alongside research I actively participate in hackathons, AI competitions and internships to
+          broaden my experience and collaborate globally. My long-term vision is to pursue graduate
+          study and contribute to impactful, open AI research.
+        </p>
+        <div class="about-facts" data-anim="fade">
+          <div><b>SZABIST</b><span>BS Computer Science · 2027</span></div>
+          <div><b>Karachi, PK</b><span>Remote friendly</span></div>
+          <div><b>FlyRank AI</b><span>AI Intern · 2026</span></div>
+        </div>
+      </div>
+
+      <div class="about-stats">
+        <div class="stat" data-anim="rise"><b class="count" data-to="8">0</b><span>Projects shipped</span></div>
+        <div class="stat" data-anim="rise"><b class="count" data-to="6">0</b><span>Certifications</span></div>
+        <div class="stat" data-anim="rise"><b class="count" data-to="15">0</b><span>Research areas</span></div>
+        <div class="stat" data-anim="rise"><b class="count" data-to="30" data-suffix="+">0</b><span>Tools &amp; tech</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT I DO ============ -->
+<section id="doing" class="section">
+  <div class="wrap">
+    <h2 class="display huge sec-title" data-split-words>WHAT I DO</h2>
+
+    <div class="do-rows">
+      <article class="do-row" data-anim="fade">
+        <span class="do-num">01</span>
+        <div class="do-head"><h3>MACHINE LEARNING</h3><span>Description</span></div>
+        <div class="do-body">
+          <p>I train and evaluate models end to end — from raw environmental data to a Random Forest
+             AQI predictor scoring R² ≈ 0.97. Classification, regression, model evaluation and
+             data visualization are day-to-day work for me.</p>
+          <div class="pills">
+            <span>Python</span><span>Scikit-learn</span><span>TensorFlow</span>
+            <span>Pandas</span><span>NumPy</span><span>OpenCV</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="do-row" data-anim="fade">
+        <span class="do-num">02</span>
+        <div class="do-head"><h3>AGENTIC AI &amp; LLMS</h3><span>Description</span></div>
+        <div class="do-body">
+          <p>I build systems where models act, not just answer. My Self-Regulating AI System prototype
+             explores agents that detect drift, hold stability and self-correct through entropy-based
+             regulation — and this site ships with my own retrieval agent.</p>
+          <div class="pills">
+            <span>Agentic AI</span><span>LLM Integration</span><span>Adaptive Systems</span>
+            <span>Responsible AI</span><span>Explainable AI</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="do-row" data-anim="fade">
+        <span class="do-num">03</span>
+        <div class="do-head"><h3>FULL-STACK BUILDS</h3><span>Description</span></div>
+        <div class="do-body">
+          <p>AI is worthless without a product around it. KIDO spans a Flutter client, FastAPI
+             services, PostgreSQL and Redis; I've also shipped Laravel and Node platforms with real
+             admin workflows and auth.</p>
+          <div class="pills">
+            <span>Flutter</span><span>FastAPI</span><span>Laravel</span><span>Node.js</span>
+            <span>PostgreSQL</span><span>Firebase</span><span>Docker</span><span>AWS</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="do-row" data-anim="fade">
+        <span class="do-num">04</span>
+        <div class="do-head"><h3>LEARNING &amp; RESEARCH</h3><span>Description</span></div>
+        <div class="do-body">
+          <p>I read papers, write research proposals and prototype ideas toward publication — focused on
+             trustworthy, explainable AI for education, healthcare, sustainability and humanitarian
+             response. No publications yet; that is the next goal.</p>
+          <div class="pills">
+            <span>Deep Learning</span><span>Reinforcement Learning</span><span>Computer Vision</span>
+            <span>NLP</span><span>Human-AI Interaction</span>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="stack-strip">
+      <div class="strip-col" data-anim="rise">
+        <h4>Languages</h4>
+        <p>Python · C++ · Java · JavaScript · PHP · SQL · HTML · CSS · Dart</p>
+      </div>
+      <div class="strip-col" data-anim="rise">
+        <h4>Data &amp; Cloud</h4>
+        <p>PostgreSQL · Neon · MySQL · Firebase · Redis · AWS · Docker · GitHub Actions</p>
+      </div>
+      <div class="strip-col" data-anim="rise">
+        <h4>Tools</h4>
+        <p>Git · GitHub · VS Code · Linux · Jupyter · Google Colab · Postman · Figma</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORK ============ -->
+<section id="projects" class="section">
+  <span class="glow glow-right"></span>
+  <div class="wrap">
+    <h2 class="display huge sec-title" data-split-words>MY WORK</h2>
+
+    <div class="work-grid">
+      <article class="work feat" data-anim="rise" data-tilt>
+        <div class="work-cover">
+          <span class="cover-index">01</span>
+          <span class="cover-orb"></span>
+          <span class="cover-tag">FLAGSHIP</span>
+        </div>
+        <div class="work-info">
+          <h3>KIDO</h3>
+          <span class="work-kind">AI education platform</span>
+          <p>AI-powered educational platform for children — adaptive quizzes, an AI tutor,
+             gamification, learning analytics, plus parent and teacher portals on a COPPA-aware
+             architecture.</p>
+          <div class="pills small">
+            <span>Flutter</span><span>FastAPI</span><span>PostgreSQL</span>
+            <span>Redis</span><span>Python</span><span>OpenAI APIs</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="work" data-anim="rise" data-tilt>
+        <div class="work-cover alt2">
+          <span class="cover-index">02</span>
+          <span class="cover-tag">RESEARCH</span>
+        </div>
+        <div class="work-info">
+          <h3>Self-Regulating AI System</h3>
+          <span class="work-kind">Agentic AI prototype</span>
+          <p>Adaptive agents that detect drift, maintain stability and self-correct using
+             entropy-based regulation.</p>
+          <div class="pills small"><span>Agentic AI</span><span>Adaptive Systems</span></div>
+        </div>
+      </article>
+
+      <article class="work" data-anim="rise" data-tilt>
+        <div class="work-cover alt3">
+          <span class="cover-index">03</span>
+          <span class="cover-tag">ML</span>
+        </div>
+        <div class="work-info">
+          <h3>Air Quality Prediction</h3>
+          <span class="work-kind">Environmental ML</span>
+          <p>AQI prediction from environmental datasets with a Random Forest regressor
+             reaching <strong>R² ≈ 0.97</strong>.</p>
+          <div class="pills small"><span>Random Forest</span><span>Data Science</span></div>
+        </div>
+      </article>
+
+      <article class="work" data-anim="rise" data-tilt>
+        <div class="work-cover alt4">
+          <span class="cover-index">04</span>
+          <span class="cover-tag">HACKATHON</span>
+        </div>
+        <div class="work-info">
+          <h3>Crisis Intelligence</h3>
+          <span class="work-kind">Google AI Seekho · Antigravity</span>
+          <p>Emergency-response tooling powered by AI agents and live maps.</p>
+          <div class="pills small"><span>Flutter</span><span>Firebase</span><span>Python</span></div>
+        </div>
+      </article>
+
+      <article class="work" data-anim="rise" data-tilt>
+        <div class="work-cover alt5">
+          <span class="cover-index">05</span>
+          <span class="cover-tag">CAPSTONE</span>
+        </div>
+        <div class="work-info">
+          <h3>Portfolio + Personal Agent</h3>
+          <span class="work-kind">Three.js · static AI agent</span>
+          <p>This site — a 3D portfolio with an embedded agent answering from a local knowledge
+             base, no backend required.</p>
+          <div class="pills small"><span>Three.js</span><span>JavaScript</span></div>
+        </div>
+      </article>
+
+      <article class="work" data-anim="rise" data-tilt>
+        <div class="work-cover alt6">
+          <span class="cover-index">06</span>
+          <span class="cover-tag">WEB</span>
+        </div>
+        <div class="work-info">
+          <h3>Canteen System · Job Portal</h3>
+          <span class="work-kind">Laravel &amp; PHP platforms</span>
+          <p>Restaurant ordering with a full admin workflow, and a job recruitment platform
+             connecting candidates with employers.</p>
+          <div class="pills small"><span>Laravel</span><span>PHP</span><span>MySQL</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CERTIFICATIONS ============ -->
+<section id="certs" class="section">
+  <div class="wrap">
+    <h2 class="display huge sec-title" data-split-words>CERTIFICATIONS</h2>
+    <div class="cert-grid">
+      <article class="cert" data-anim="rise">
+        <span class="cert-issuer">Anthropic</span>
+        <h3>AI Fluency for Educators</h3><p>Certificate of completion</p>
+      </article>
+      <article class="cert" data-anim="rise">
+        <span class="cert-issuer">Anthropic</span>
+        <h3>Teaching the AI Fluency Framework</h3><p>Certificate of completion</p>
+      </article>
+      <article class="cert" data-anim="rise">
+        <span class="cert-issuer">Anthropic</span>
+        <h3>AI Capabilities and Limitations</h3><p>Certificate of completion</p>
+      </article>
+      <article class="cert" data-anim="rise">
+        <span class="cert-issuer">Open Doors</span>
+        <h3>Applied Mathematics &amp; AI</h3><p>High Achievement Diploma</p>
+      </article>
+      <article class="cert" data-anim="rise">
+        <span class="cert-issuer">NED Academy</span>
+        <h3>Certified Data Science</h3><p>Professional certification</p>
+      </article>
+      <article class="cert" data-anim="rise">
+        <span class="cert-issuer">Google · Coursera</span>
+        <h3>Google AI Courses</h3><p>Course series</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAREER ============ -->
+<section id="journey" class="section">
+  <span class="glow glow-left"></span>
+  <div class="wrap">
+    <h2 class="display big sec-title" data-split-words>My career &amp;</h2>
+    <h2 class="display big accent sec-title-2" data-split-words>experience</h2>
+
+    <div class="journey-grid">
+      <div class="timeline">
+        <div class="tl-item" data-anim="rise">
+          <span class="dot"></span>
+          <div class="tl-body">
+            <span class="tl-when">JULY 2026 — NOW · REMOTE</span>
+            <h3>Artificial Intelligence Intern — FlyRank AI</h3>
+            <p>General AI Fluency track. Working on AI learning pathways, professional development
+               and applied AI projects; exploring modern AI workflows and real-world applications.
+               Completed the Anthropic AI Fluency certification series.</p>
+          </div>
+        </div>
+        <div class="tl-item" data-anim="rise">
+          <span class="dot"></span>
+          <div class="tl-body">
+            <span class="tl-when">2026 · GOOGLE AI SEEKHO</span>
+            <h3>Antigravity Hackathon — Crisis Intelligence</h3>
+            <p>Built an emergency-response tool combining AI agents, live maps, Flutter, Firebase
+               and a Python backend under hackathon time constraints.</p>
+          </div>
+        </div>
+        <div class="tl-item" data-anim="rise">
+          <span class="dot"></span>
+          <div class="tl-body">
+            <span class="tl-when">SEPT 2023 — 2027</span>
+            <h3>BS Computer Science — SZABIST University</h3>
+            <p>Karachi, Pakistan. Coursework and projects across AI, ML, data science and
+               software engineering.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="journey-side">
+        <div class="side-card" data-anim="rise">
+          <h3>Achievements</h3>
+          <ul class="ticks">
+            <li>Gold Medalist — TCF School</li>
+            <li>AI Hackathon participant</li>
+            <li>Research proposal author</li>
+            <li>Machine Learning project developer</li>
+            <li>Active open-source learner</li>
+          </ul>
+        </div>
+        <div class="side-card" data-anim="rise">
+          <h3>Leadership</h3>
+          <ul class="ticks">
+            <li>Cricket team captain</li>
+            <li>Collaborative project leader</li>
+            <li>Research-driven learner</li>
+          </ul>
+        </div>
+        <div class="side-card" data-anim="rise">
+          <h3>Research Goals</h3>
+          <ul class="ticks">
+            <li>Publish AI research papers</li>
+            <li>Collaborate internationally</li>
+            <li>Develop socially beneficial AI systems</li>
+            <li>Contribute to open-source AI</li>
+            <li>Pursue graduate study — MS and PhD</li>
+          </ul>
+        </div>
+        <div class="side-card interests" data-anim="rise">
+          <h3>Research Interests</h3>
+          <div class="pills">
+            <span>AI</span><span>Machine Learning</span><span>Deep Learning</span>
+            <span>Agentic AI</span><span>LLMs</span><span>RL</span><span>Data Science</span>
+            <span>Computer Vision</span><span>NLP</span><span>Human-AI Interaction</span>
+            <span>AI for Education</span><span>AI for Healthcare</span>
+            <span>AI for Sustainability</span><span>Responsible AI</span><span>Explainable AI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="section contact">
+  <span class="glow glow-bottom"></span>
+  <div class="wrap">
+    <span class="kicker center" data-anim="fade">Contact</span>
+    <h2 class="display big center sec-title" data-split-words>Let's build something</h2>
+    <p class="contact-lead" data-anim="fade">
+      Open to research collaborations, AI engineering roles and graduate opportunities.
+      The fastest way to reach me is email.
+    </p>
+
+    <a class="mail-hero" href="mailto:farhanmuhammadbashir@gmail.com" data-anim="fade">
+      <span class="mail-value">farhanmuhammadbashir@gmail.com</span>
+      <button class="mail-copy" type="button" data-copy="farhanmuhammadbashir@gmail.com" aria-label="Copy email address">COPY</button>
+    </a>
+
+    <div class="contact-grid">
+      <a class="contact-card" href="https://www.linkedin.com/in/farhan-rajput/" target="_blank" rel="noopener" data-anim="rise">
+        <span class="cc-label">LinkedIn</span><span class="cc-value">in/farhan-rajput</span><span class="cc-arrow">↗</span>
+      </a>
+      <a class="contact-card" href="https://github.com/FarhanRajputFelix" target="_blank" rel="noopener" data-anim="rise">
+        <span class="cc-label">GitHub</span><span class="cc-value">FarhanRajputFelix</span><span class="cc-arrow">↗</span>
+      </a>
+      <div class="contact-card static" data-anim="rise">
+        <span class="cc-label">Based in</span><span class="cc-value">Karachi, Pakistan</span><span class="cc-arrow">◉</span>
+      </div>
+      <div class="contact-card static" data-anim="rise">
+        <span class="cc-label">Availability</span><span class="cc-value">Remote · Open to relocate</span><span class="cc-arrow">◉</span>
+      </div>
+    </div>
+
+    <div class="big-name" aria-hidden="true">FARHAN BASHIR</div>
+
+    <footer class="foot">
+      <span>© <span id="year"></span> Farhan Bashir</span>
+      <span>Three.js · Vanilla JS · FlyRank AI Capstone</span>
+    </footer>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ AGENT WIDGET ============ -->
+<button id="agentFab" aria-label="Open chat with Farhan's AI agent">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+  </svg>
+  <span class="fab-ping"></span>
+</button>
+
+<section id="agentPanel" aria-label="Personal AI agent" aria-hidden="true">
+  <header class="agent-head">
+    <div class="agent-id">
+      <span class="agent-avatar">FB</span>
+      <div>
+        <strong>Ask Farhan's Agent</strong>
+        <span class="agent-status"><i></i> online · runs fully offline</span>
+      </div>
+    </div>
+    <button id="agentClose" aria-label="Close chat">&times;</button>
+  </header>
+  <div id="agentLog" class="agent-log" role="log" aria-live="polite"></div>
+  <div id="agentChips" class="agent-chips"></div>
+  <form id="agentForm" class="agent-form" autocomplete="off">
+    <input id="agentInput" type="text" placeholder="Ask about my skills, projects, goals…" aria-label="Your question" />
+    <button type="submit" aria-label="Send">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </form>
+</section>
+
+<script type="module" src="js/scene.js"></script>
+<script type="module" src="js/character.js"></script>
+<script src="js/agent.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
