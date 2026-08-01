@@ -42,11 +42,10 @@ python -m http.server 8000
 
 ## Deploy to GitHub Pages
 
+The repo is already initialised and committed. Create an empty repo named
+`portfolio` on github.com (no README, no .gitignore), then:
+
 ```bash
-git init
-git add .
-git commit -m "3D portfolio + personal agent"
-git branch -M main
 git remote add origin https://github.com/FarhanRajputFelix/portfolio.git
 git push -u origin main
 ```
@@ -54,6 +53,8 @@ git push -u origin main
 Then: **repo → Settings → Pages → Source: Deploy from a branch → `main` / `(root)` → Save.**
 The site is live at `https://FarhanRajputFelix.github.io/portfolio/` in a minute or two.
 `.nojekyll` is included so Jekyll doesn't touch the asset folders.
+
+To update later: `git add -A && git commit -m "update" && git push` — Pages redeploys itself.
 
 ## Updating the agent's answers
 
