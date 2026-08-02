@@ -406,7 +406,7 @@
         <span class="cert-foot"><em>all verifiable</em><b>See all ↗</b></span>
       </a>
 
-      <a class="cert" data-anim="rise" href="https://www.coursera.org/account/accomplishments/verify/UYZ1HWZF5EUW" target="_blank" rel="noopener">
+      <a class="cert" data-anim="rise" href="https://www.coursera.org/account/accomplishments/specialization/UYZ1HWZF5EUW" target="_blank" rel="noopener">
         <span class="cert-issuer">Google · Coursera</span>
         <h3>Google AI Specialization</h3>
         <p>Google AI Essentials, using AI responsibly · 2025</p>
@@ -586,34 +586,20 @@
   <span class="fab-ping"></span>
 </button>
 
-<section id="agentPanel" aria-label="Personal AI agent" aria-hidden="true">
-  <header class="agent-head">
-    <div class="agent-id">
-      <span class="agent-avatar" aria-hidden="true">
-        <svg viewBox="0 0 32 32" width="22" height="22" fill="none">
-          <circle cx="16" cy="16" r="10.5" fill="#2a2a38" stroke="#8b5cf6" stroke-width="1.2"/>
-          <rect x="9" y="14" width="14" height="3.4" rx="1.7" fill="#a78bfa"/>
-          <circle cx="16" cy="15.7" r="1.5" fill="#fff"/>
-          <path d="M16 5.5V3" stroke="#22d3ee" stroke-width="1.2" stroke-linecap="round"/>
-          <circle cx="16" cy="2.4" r="1.5" fill="#22d3ee"/>
-          <ellipse cx="16" cy="16" rx="14.5" ry="4.6" stroke="#8b5cf6" stroke-width="1" opacity=".65" transform="rotate(-14 16 16)"/>
-        </svg>
-      </span>
-      <div>
-        <strong>Ask Farhan's Agent</strong>
-        <span class="agent-status"><i></i> online · runs fully offline</span>
-      </div>
-    </div>
-    <button id="agentClose" aria-label="Close chat">&times;</button>
-  </header>
-  <div id="agentLog" class="agent-log" role="log" aria-live="polite"></div>
+<!-- Ask bar: the bot answers on screen, so there is no message list -->
+<section id="agentPanel" aria-label="Ask Farhan's assistant" aria-hidden="true">
+  <div class="ask-head">
+    <span class="ask-title"><i class="ask-dot"></i> BYTE · Farhan's assistant</span>
+    <button id="agentClose" aria-label="Close">&times;</button>
+  </div>
   <div id="agentChips" class="agent-chips"></div>
   <form id="agentForm" class="agent-form" autocomplete="off">
-    <input id="agentInput" type="text" placeholder="Ask about my skills, projects, goals…" aria-label="Your question" />
+    <input id="agentInput" type="text" placeholder="Ask about Farhan — skills, projects, goals…" aria-label="Your question" />
     <button type="submit" aria-label="Send">
       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
     </button>
   </form>
+  <p class="ask-note">Answers appear above BYTE · runs offline, no API key</p>
 </section>
 
 <script type="module" src="js/scene.js"></script>

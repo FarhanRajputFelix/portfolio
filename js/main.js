@@ -372,63 +372,70 @@
      ========================================================== */
   const fab   = $('#agentFab');
   const panel = $('#agentPanel');
-  const log   = $('#agentLog');
   const form  = $('#agentForm');
   const input = $('#agentInput');
   const chips = $('#agentChips');
   const Agent = window.PersonalAgent;
   let started = false;
 
-  function bubble(text, who) {
-    const el = document.createElement('div');
-    el.className = `msg ${who}`;
-    el.textContent = text;
-    log.appendChild(el);
-    log.scrollTop = log.scrollHeight;
-    return el;
-  }
-
-  function typing() {
-    const el = document.createElement('div');
-    el.className = 'msg bot typing';
-    el.innerHTML = '<i></i><i></i><i></i>';
-    log.appendChild(el);
-    log.scrollTop = log.scrollHeight;
-    return el;
-  }
-
-  /* The drone is the one answering: it speaks a short version in a bubble
-     above itself and plays a talk animation, while the panel keeps the full text. */
+  /* BYTE answers on screen — the reply is typed out in the bubble above the
+     bot, not listed in a chat log. The bubble is the whole conversation UI. */
   const charBubble = $('#charBubble');
-  let bubbleTimer;
+  let typeTimer, hideTimer;
 
-  function speak(text) {
+  function stopTyping() {
+    clearInterval(typeTimer);
+    clearTimeout(hideTimer);
+  }
+
+  function speak(text, opts = {}) {
     if (!charBubble) return;
-    const short = text.length > 150 ? text.slice(0, 147).trimEnd() + '…' : text;
-    charBubble.innerHTML = '<b>Farhan’s agent</b>' + short.replace(/\n+/g, ' ');
+    stopTyping();
+
+    const body = document.createElement('span');
+    body.className = 'bub-body';
+    charBubble.innerHTML = '<b>' + (opts.label || 'BYTE') + '</b>';
+    charBubble.appendChild(body);
     charBubble.classList.add('show');
-    clearTimeout(bubbleTimer);
-    bubbleTimer = setTimeout(() => charBubble.classList.remove('show'),
-      Math.min(9000, 3200 + short.length * 26));
-    document.dispatchEvent(new CustomEvent('agent:reply', {
-      detail: { length: short.length }
-    }));
+    charBubble.classList.toggle('wide', text.length > 180);
+
+    document.dispatchEvent(new CustomEvent('agent:reply', { detail: { length: text.length } }));
+
+    // typewriter, a few characters per tick so long answers still land quickly
+    let i = 0;
+    const step = text.length > 260 ? 4 : 2;
+    typeTimer = setInterval(() => {
+      i = Math.min(text.length, i + step);
+      body.textContent = text.slice(0, i);
+      charBubble.scrollTop = charBubble.scrollHeight;
+      if (i >= text.length) {
+        clearInterval(typeTimer);
+        if (!opts.sticky) {
+          hideTimer = setTimeout(() => charBubble.classList.remove('show'),
+            Math.max(4500, Math.min(16000, text.length * 55)));
+        }
+      }
+    }, 16);
   }
 
   function send(question) {
     const q = (question || '').trim();
     if (!q) return;
-    bubble(q, 'user');
     input.value = '';
+
+    // show the question briefly so it is clear what was asked
+    if (charBubble) {
+      stopTyping();
+      charBubble.innerHTML = '<b>you asked</b><span class="bub-body">' + q.replace(/[<>&]/g, '') + '</span>';
+      charBubble.classList.add('show', 'asking');
+    }
     document.dispatchEvent(new CustomEvent('agent:thinking'));
 
     const answer = Agent.ask(q);
-    const dots = typing();
     setTimeout(() => {
-      dots.remove();
-      bubble(answer, 'bot');
+      if (charBubble) charBubble.classList.remove('asking');
       speak(answer);
-    }, Math.min(1100, 340 + answer.length * 2.2));
+    }, 850);
   }
 
   function openPanel() {
@@ -445,8 +452,6 @@
 
     if (!started) {
       started = true;
-      bubble(Agent.greeting, 'bot');
-      setTimeout(() => speak("Hi! Ask me anything about Farhan."), 500);
       Agent.suggestions.forEach(s => {
         const b = document.createElement('button');
         b.type = 'button';
@@ -455,6 +460,7 @@
         chips.appendChild(b);
       });
     }
+    setTimeout(() => speak(Agent.greeting), 620);
     if (innerWidth > 760) setTimeout(() => input.focus(), 380);
   }
 
@@ -462,7 +468,8 @@
     panel.classList.remove('open');
     panel.setAttribute('aria-hidden', 'true');
     fab.classList.remove('hidden');
-    if (charBubble) charBubble.classList.remove('show');
+    stopTyping();
+    if (charBubble) charBubble.classList.remove('show', 'asking', 'wide');
 
     // send the drone back to whichever section is on screen
     if (stage) {
