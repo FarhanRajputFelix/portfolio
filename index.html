@@ -43,6 +43,8 @@
 <canvas id="bg-canvas"></canvas>
 
 <!-- ============ 3D COMPANION (persists across sections) ============ -->
+<div id="askScrim" class="ask-scrim" aria-hidden="true"></div>
+
 <div id="charStage" class="char-stage at-hero">
   <canvas id="char-canvas" aria-hidden="true"></canvas>
   <div id="charBubble" class="char-bubble" role="status" aria-live="polite"></div>
@@ -87,7 +89,7 @@
   <a href="https://www.linkedin.com/in/farhan-rajput/" target="_blank" rel="noopener" aria-label="LinkedIn">
     <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05a4.2 4.2 0 0 1 3.75-2c4 0 4.4 2.4 4.4 5.6V21h-4v-5.6c0-1.4 0-3.2-2-3.2s-2.2 1.5-2.2 3.1V21H9z"/></svg>
   </a>
-  <a href="mailto:farhanmuhammadbashir@gmail.com" data-copy="farhanmuhammadbashir@gmail.com" aria-label="Copy email address">
+  <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=farhanmuhammadbashir@gmail.com" target="_blank" rel="noopener" aria-label="Email Farhan">
     <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
   </a>
   <span class="rail-line"></span>
@@ -561,10 +563,12 @@
     </p>
 
     <div class="mail-hero" data-anim="fade">
-      <span class="mail-value" data-copy="farhanmuhammadbashir@gmail.com" role="button" tabindex="0">farhanmuhammadbashir@gmail.com</span>
+      <a class="mail-value" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=farhanmuhammadbashir@gmail.com"
+         target="_blank" rel="noopener">farhanmuhammadbashir@gmail.com</a>
       <span class="mail-actions">
+        <a class="mail-open primary" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=farhanmuhammadbashir@gmail.com" target="_blank" rel="noopener">WRITE EMAIL ↗</a>
         <button class="mail-copy" type="button" data-copy="farhanmuhammadbashir@gmail.com" aria-label="Copy email address">COPY</button>
-        <a class="mail-open" href="mailto:farhanmuhammadbashir@gmail.com">OPEN MAIL APP</a>
+        <a class="mail-open" href="mailto:farhanmuhammadbashir@gmail.com">MAIL APP</a>
       </span>
     </div>
 

@@ -439,6 +439,7 @@
 
   function openPanel() {
     fab.classList.add('hidden');
+    document.body.classList.add('asking');   // dims the page behind the bot
 
     // the ask controls are mounted on the bot, so bring the bot into view
     if (stage) {
@@ -463,6 +464,7 @@
 
   function closePanel() {
     fab.classList.remove('hidden');
+    document.body.classList.remove('asking');
     stopTyping();
     if (charBubble) charBubble.classList.remove('show', 'asking', 'wide');
 
@@ -476,6 +478,8 @@
 
   fab.addEventListener('click', openPanel);
   $('#agentClose').addEventListener('click', closePanel);
+  const scrim = $('#askScrim');
+  if (scrim) scrim.addEventListener('click', closePanel);   // click outside to dismiss
   form.addEventListener('submit', e => { e.preventDefault(); send(input.value); });
   addEventListener('keydown', e => {
     if (e.key === 'Escape') { closePanel(); closeNav(); }
