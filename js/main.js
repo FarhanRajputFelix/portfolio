@@ -415,26 +415,39 @@
 
     document.dispatchEvent(new CustomEvent('agent:reply', { detail: { length: text.length } }));
 
-    // typewriter, a few characters per tick so long answers still land quickly
+    // typewriter, a few characters per tick so long answers still land quickly.
+    // Deliberately NOT auto-scrolled to the bottom: a reader needs to start at
+    // the first line, and the panel scrolls on its own if they want the rest.
+    charBubble.scrollTop = 0;
     let i = 0;
-    const step = text.length > 260 ? 4 : 2;
+    const step = text.length > 260 ? 5 : 3;
     typeTimer = setInterval(() => {
       i = Math.min(text.length, i + step);
       body.textContent = text.slice(0, i);
-      charBubble.scrollTop = charBubble.scrollHeight;
       if (i >= text.length) {
         clearInterval(typeTimer);
-        if (!opts.sticky) {
-          hideTimer = setTimeout(() => charBubble.classList.remove('show'),
-            Math.max(4500, Math.min(16000, text.length * 55)));
+        // Long answers stay on screen. Reading 700 characters takes longer than
+        // any timer I would pick, and someone with the sound off has only the
+        // text — so only short replies auto-dismiss.
+        if (!opts.sticky && text.length < 220) {
+          hideTimer = setTimeout(() => charBubble.classList.remove('show'), 9000);
         }
       }
     }, 16);
   }
 
+  let chipToggle = null, extraCount = 0;
+
+  function collapseTopics() {
+    if (!chips.classList.contains('expanded')) return;
+    chips.classList.remove('expanded');
+    if (chipToggle) chipToggle.textContent = `+ ${extraCount} more topics`;
+  }
+
   function send(question) {
     const q = (question || '').trim();
     if (!q) return;
+    collapseTopics();        // give the answer panel the room
 
     // show what was asked, then BYTE answers it
     if (charBubble) {
@@ -484,15 +497,16 @@
       (Agent.moreTopics || []).forEach(s => extra.push(chip(s, s, 'extra')));
 
       if (extra.length) {
-        const toggle = document.createElement('button');
-        toggle.type = 'button';
-        toggle.className = 'chip-more';
-        toggle.textContent = `+ ${extra.length} more topics`;
-        toggle.addEventListener('click', () => {
+        extraCount = extra.length;
+        chipToggle = document.createElement('button');
+        chipToggle.type = 'button';
+        chipToggle.className = 'chip-more';
+        chipToggle.textContent = `+ ${extraCount} more topics`;
+        chipToggle.addEventListener('click', () => {
           const open = chips.classList.toggle('expanded');
-          toggle.textContent = open ? '− fewer topics' : `+ ${extra.length} more topics`;
+          chipToggle.textContent = open ? '− fewer topics' : `+ ${extraCount} more topics`;
         });
-        chips.appendChild(toggle);
+        chips.appendChild(chipToggle);
       }
     }
     setTimeout(() => {

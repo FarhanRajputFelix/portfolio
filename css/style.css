@@ -381,6 +381,20 @@ body.asking .ask-scrim{ opacity:1; visibility:visible; pointer-events:auto; }
 body.asking .char-hint{ opacity:0; }
 @keyframes hintPulse{ 50%{ opacity:.42; } }
 .char-bubble.wide{ max-width:400px; }
+
+/* When the assistant is open the reply becomes a fixed panel instead of a
+   balloon glued above the bot. Anchored to the stage it grew upward off the top
+   of the screen on any long answer, so the beginning of the text was unreadable. */
+body.asking .char-bubble{
+  position:fixed; left:50%; top:9vh; bottom:auto; margin:0;
+  width:min(620px,90vw); max-width:none; max-height:32vh;
+  transform:translate(-50%,-8px) scale(.98);
+  border-radius:18px; padding:16px 18px; z-index:97;
+}
+body.asking .char-bubble.show{ transform:translate(-50%,0) scale(1); }
+body.asking .char-bubble.wide{ max-width:none; }
+body.asking .char-bubble::after{ display:none; }   /* no tail in panel mode */
+.char-bubble .bub-body{ font-size:.84rem; line-height:1.62; }
 .char-bubble.asking b{ color:var(--text-faint); }
 .char-bubble .bub-body{ display:block; white-space:pre-wrap; }
 .char-bubble::-webkit-scrollbar{ width:5px; }
@@ -700,6 +714,7 @@ body.asking .char-hint{ opacity:0; }
     transform:translate(calc(50vw - 50%), calc(34vh - 50%)) scale(.8);
   }
   .char-bubble{ width:82vw; max-width:none; font-size:.76rem; max-height:30vh; }
+  body.asking .char-bubble{ width:92vw; top:7vh; max-height:30vh; }
   .byte-ui{ width:86vw; max-width:none; }
   .char-bubble.wide{ max-width:none; }
   #agentPanel{ right:0; left:0; bottom:0; width:100%; border-radius:20px 20px 0 0; }
