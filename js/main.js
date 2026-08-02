@@ -371,11 +371,26 @@
      Personal agent widget
      ========================================================== */
   const fab   = $('#agentFab');
-  const form  = $('#agentForm');
-  const input = $('#agentInput');
   const chips = $('#agentChips');
   const Agent = window.PersonalAgent;
   let started = false;
+
+  /* ---------- voice: BYTE speaks its answers out loud ---------- */
+  let voiceOn = true;
+  const synth = window.speechSynthesis;
+
+  function say(text) {
+    if (!voiceOn || !synth) return;
+    try {
+      synth.cancel();
+      const u = new SpeechSynthesisUtterance(
+        text.replace(/[•·↗]/g, ' ').replace(/\s+/g, ' ').slice(0, 420)
+      );
+      u.rate = 1.05;
+      u.pitch = 1.15;
+      synth.speak(u);
+    } catch (err) { /* speech is a bonus, never break the page for it */ }
+  }
 
   /* BYTE answers on screen — the reply is typed out in the bubble above the
      bot, not listed in a chat log. The bubble is the whole conversation UI. */
@@ -420,9 +435,8 @@
   function send(question) {
     const q = (question || '').trim();
     if (!q) return;
-    input.value = '';
 
-    // show the question briefly so it is clear what was asked
+    // show what was asked, then BYTE answers it
     if (charBubble) {
       stopTyping();
       charBubble.innerHTML = '<b>you asked</b><span class="bub-body">' + q.replace(/[<>&]/g, '') + '</span>';
@@ -434,6 +448,7 @@
     setTimeout(() => {
       if (charBubble) charBubble.classList.remove('asking');
       speak(answer);
+      say(answer);
     }, 850);
   }
 
@@ -458,8 +473,10 @@
         chips.appendChild(b);
       });
     }
-    setTimeout(() => speak(Agent.greeting), 620);
-    if (innerWidth > 760) setTimeout(() => input.focus(), 380);
+    setTimeout(() => {
+      speak(Agent.greeting);
+      say(Agent.greeting);
+    }, 620);
   }
 
   function closePanel() {
@@ -478,11 +495,76 @@
 
   fab.addEventListener('click', openPanel);
   $('#agentClose').addEventListener('click', closePanel);
+  $('#byteHit').addEventListener('click', () => {           // the bot itself is the button
+    if (document.body.classList.contains('asking')) closePanel();
+    else openPanel();
+  });
+
   const scrim = $('#askScrim');
   if (scrim) scrim.addEventListener('click', closePanel);   // click outside to dismiss
-  form.addEventListener('submit', e => { e.preventDefault(); send(input.value); });
+
   addEventListener('keydown', e => {
     if (e.key === 'Escape') { closePanel(); closeNav(); }
   });
+
+  /* ---------- voice toggle ---------- */
+  const muteBtn = $('#byteMute');
+  muteBtn.addEventListener('click', () => {
+    voiceOn = !voiceOn;
+    muteBtn.setAttribute('aria-pressed', String(voiceOn));
+    muteBtn.classList.toggle('off', !voiceOn);
+    muteBtn.querySelector('span').textContent = voiceOn ? 'voice on' : 'voice off';
+    if (!voiceOn && synth) synth.cancel();
+  });
+
+  /* ---------- talk to it: browser speech recognition, no API key ---------- */
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const micBtn = $('#byteMic');
+
+  if (SR && micBtn) {
+    micBtn.hidden = false;
+    const rec = new SR();
+    rec.lang = 'en-US';
+    rec.interimResults = false;
+    rec.maxAlternatives = 1;
+    let listening = false;
+
+    micBtn.addEventListener('click', () => {
+      if (listening) { rec.stop(); return; }
+      try { rec.start(); } catch (err) { /* already running */ }
+    });
+
+    rec.addEventListener('start', () => {
+      listening = true;
+      micBtn.classList.add('live');
+      micBtn.querySelector('span').textContent = 'listening…';
+      if (charBubble) {
+        stopTyping();
+        charBubble.innerHTML = '<b>BYTE</b><span class="bub-body">I’m listening — ask me about Farhan.</span>';
+        charBubble.classList.add('show');
+      }
+    });
+
+    const endListening = () => {
+      listening = false;
+      micBtn.classList.remove('live');
+      micBtn.querySelector('span').textContent = 'talk to me';
+    };
+    rec.addEventListener('end', endListening);
+    rec.addEventListener('error', endListening);
+
+    rec.addEventListener('result', e => {
+      const said = e.results[0] && e.results[0][0] && e.results[0][0].transcript;
+      if (said) send(said);
+    });
+  }
+
+  /* ---------- BYTE greets on its own, once, like a companion should ---------- */
+  const hint = $('#byteHint');
+  setTimeout(() => {
+    if (document.body.classList.contains('asking')) return;
+    speak("Hi! I'm BYTE, Farhan's assistant. Click me and I'll tell you about him.");
+    if (hint) hint.classList.add('show');
+  }, 4200);
 
 })();
