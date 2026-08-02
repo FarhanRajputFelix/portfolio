@@ -296,6 +296,26 @@
     'How can I contact you?'
   ];
 
+  /* Every knowledge-base entry needs a way in. There is no text box, so if a
+     topic is not listed here (or asked by voice) a visitor cannot reach it. */
+  const MORE_TOPICS = [
+    'What is your experience?',
+    'Where do you study?',
+    'What certifications do you have?',
+    'Do you have leadership experience?',
+    'What are your achievements?',
+    'Tell me about your AI and ML skills',
+    'What projects have you built?',
+    'Tell me about the Air Quality model',
+    'What is the Self-Regulating AI System?',
+    'Tell me about the hackathon project',
+    'Do you know AWS and cloud?',
+    'What is your career goal?',
+    'Any plans for graduate study?',
+    'Where are you based?',
+    'How was this site built?'
+  ];
+
   /* ---------------- Matching ---------------- */
   function tokenize(text) {
     return text
@@ -372,6 +392,7 @@
   global.PersonalAgent = {
     ask,
     suggestions: SUGGESTIONS,
+    moreTopics: MORE_TOPICS,
     greeting:
       "Hi! I'm Farhan's personal agent — I run entirely in this page, no server involved.\n\n" +
       "Ask me about his background, AI stack, projects, research interests or how to reach him."

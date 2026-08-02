@@ -465,13 +465,35 @@
 
     if (!started) {
       started = true;
-      Agent.suggestions.forEach(s => {
+
+      const chip = (label, question, cls) => {
         const b = document.createElement('button');
         b.type = 'button';
-        b.textContent = s;
-        b.addEventListener('click', () => send(s));
+        b.textContent = label;
+        if (cls) b.className = cls;
+        b.addEventListener('click', () => send(question));
         chips.appendChild(b);
-      });
+        return b;
+      };
+
+      Agent.suggestions.forEach(s => chip(s, s));
+
+      // every knowledge-base topic must be reachable — there is no text box,
+      // so the rest live behind a "more" toggle rather than being unaskable
+      const extra = [];
+      (Agent.moreTopics || []).forEach(s => extra.push(chip(s, s, 'extra')));
+
+      if (extra.length) {
+        const toggle = document.createElement('button');
+        toggle.type = 'button';
+        toggle.className = 'chip-more';
+        toggle.textContent = `+ ${extra.length} more topics`;
+        toggle.addEventListener('click', () => {
+          const open = chips.classList.toggle('expanded');
+          toggle.textContent = open ? '− fewer topics' : `+ ${extra.length} more topics`;
+        });
+        chips.appendChild(toggle);
+      }
     }
     setTimeout(() => {
       speak(Agent.greeting);
