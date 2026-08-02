@@ -13,7 +13,8 @@
 <script type="importmap">
 {
   "imports": {
-    "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
   }
 }
 </script>
@@ -42,9 +43,21 @@
 <canvas id="bg-canvas"></canvas>
 
 <!-- ============ 3D COMPANION (persists across sections) ============ -->
-<div id="charStage" class="char-stage at-hero" aria-hidden="true">
-  <canvas id="char-canvas"></canvas>
-  <div id="charBubble" class="char-bubble"></div>
+<div id="charStage" class="char-stage at-hero">
+  <canvas id="char-canvas" aria-hidden="true"></canvas>
+  <div id="charBubble" class="char-bubble" role="status" aria-live="polite"></div>
+
+  <!-- ask controls live on the bot itself, not in a chat window -->
+  <div class="byte-ui" id="byteUI">
+    <div id="agentChips" class="byte-chips"></div>
+    <form id="agentForm" class="byte-ask" autocomplete="off">
+      <input id="agentInput" type="text" placeholder="Ask about Farhan…" aria-label="Ask Farhan's assistant" />
+      <button type="submit" aria-label="Send">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+      <button type="button" id="agentClose" aria-label="Close">&times;</button>
+    </form>
+  </div>
 </div>
 
 <!-- ============ NAV ============ -->
@@ -74,7 +87,7 @@
   <a href="https://www.linkedin.com/in/farhan-rajput/" target="_blank" rel="noopener" aria-label="LinkedIn">
     <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05a4.2 4.2 0 0 1 3.75-2c4 0 4.4 2.4 4.4 5.6V21h-4v-5.6c0-1.4 0-3.2-2-3.2s-2.2 1.5-2.2 3.1V21H9z"/></svg>
   </a>
-  <a href="mailto:farhanmuhammadbashir@gmail.com" aria-label="Email">
+  <a href="mailto:farhanmuhammadbashir@gmail.com" data-copy="farhanmuhammadbashir@gmail.com" aria-label="Copy email address">
     <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
   </a>
   <span class="rail-line"></span>
@@ -547,10 +560,13 @@
       The fastest way to reach me is email.
     </p>
 
-    <a class="mail-hero" href="mailto:farhanmuhammadbashir@gmail.com" data-anim="fade">
-      <span class="mail-value">farhanmuhammadbashir@gmail.com</span>
-      <button class="mail-copy" type="button" data-copy="farhanmuhammadbashir@gmail.com" aria-label="Copy email address">COPY</button>
-    </a>
+    <div class="mail-hero" data-anim="fade">
+      <span class="mail-value" data-copy="farhanmuhammadbashir@gmail.com" role="button" tabindex="0">farhanmuhammadbashir@gmail.com</span>
+      <span class="mail-actions">
+        <button class="mail-copy" type="button" data-copy="farhanmuhammadbashir@gmail.com" aria-label="Copy email address">COPY</button>
+        <a class="mail-open" href="mailto:farhanmuhammadbashir@gmail.com">OPEN MAIL APP</a>
+      </span>
+    </div>
 
     <div class="contact-grid">
       <a class="contact-card" href="https://www.linkedin.com/in/farhan-rajput/" target="_blank" rel="noopener" data-anim="rise">
@@ -586,21 +602,6 @@
   <span class="fab-ping"></span>
 </button>
 
-<!-- Ask bar: the bot answers on screen, so there is no message list -->
-<section id="agentPanel" aria-label="Ask Farhan's assistant" aria-hidden="true">
-  <div class="ask-head">
-    <span class="ask-title"><i class="ask-dot"></i> BYTE · Farhan's assistant</span>
-    <button id="agentClose" aria-label="Close">&times;</button>
-  </div>
-  <div id="agentChips" class="agent-chips"></div>
-  <form id="agentForm" class="agent-form" autocomplete="off">
-    <input id="agentInput" type="text" placeholder="Ask about Farhan — skills, projects, goals…" aria-label="Your question" />
-    <button type="submit" aria-label="Send">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-    </button>
-  </form>
-  <p class="ask-note">Answers appear above BYTE · runs offline, no API key</p>
-</section>
 
 <script type="module" src="js/scene.js"></script>
 <script type="module" src="js/character.js"></script>

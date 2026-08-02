@@ -371,7 +371,6 @@
      Personal agent widget
      ========================================================== */
   const fab   = $('#agentFab');
-  const panel = $('#agentPanel');
   const form  = $('#agentForm');
   const input = $('#agentInput');
   const chips = $('#agentChips');
@@ -439,14 +438,12 @@
   }
 
   function openPanel() {
-    panel.classList.add('open');
-    panel.setAttribute('aria-hidden', 'false');
     fab.classList.add('hidden');
 
-    // park the drone beside the panel so the replies visibly come from it
+    // the ask controls are mounted on the bot, so bring the bot into view
     if (stage) {
       SECTIONS.forEach(s => stage.classList.remove('at-' + s));
-      stage.classList.add('at-chat');
+      stage.classList.add('at-chat', 'asking');
       document.dispatchEvent(new CustomEvent('section:change', { detail: { id: 'chat' } }));
     }
 
@@ -465,15 +462,13 @@
   }
 
   function closePanel() {
-    panel.classList.remove('open');
-    panel.setAttribute('aria-hidden', 'true');
     fab.classList.remove('hidden');
     stopTyping();
     if (charBubble) charBubble.classList.remove('show', 'asking', 'wide');
 
-    // send the drone back to whichever section is on screen
+    // send the bot back to whichever section is on screen
     if (stage) {
-      stage.classList.remove('at-chat');
+      stage.classList.remove('at-chat', 'asking');
       stage.classList.add('at-' + (current || 'hero'));
       document.dispatchEvent(new CustomEvent('section:change', { detail: { id: current || 'hero' } }));
     }
