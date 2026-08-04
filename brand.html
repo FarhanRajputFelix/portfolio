@@ -80,8 +80,13 @@
   .logo-box.light .cap{ color:#55555f; }
   .logo-box img.word{ width:min(100%,220px); height:auto; }
   .logo-box.light img.word{ filter:invert(1); }
-  .sizes{ display:flex; align-items:flex-end; gap:16px; justify-content:center; }
-  .sizes img{ image-rendering:auto; }
+  .sizes{ display:flex; align-items:flex-end; gap:18px; justify-content:center; }
+  /* must beat `.logo-box img{width:76px}` above, or the 16px and 32px icons get
+     upscaled to 76px and look blurry — which defeats the whole point of showing
+     them at their real sizes */
+  .logo-box .sizes img{ width:auto; height:auto; border-radius:0; }
+  .size-tag{ display:grid; gap:6px; justify-items:center; }
+  .size-tag span{ font-family:var(--display); font-size:.6rem; letter-spacing:.14em; color:var(--muted); }
 
   /* ---- style note ---- */
   .note{ padding:22px 24px; border:1px solid rgba(139,92,246,.4); border-radius:16px;
@@ -224,11 +229,20 @@
       </div>
       <div class="logo-box">
         <div class="sizes">
-          <img src="assets/brand/icon-32.png" width="16" height="16" alt="16px" />
-          <img src="assets/brand/icon-32.png" width="32" height="32" alt="32px" />
-          <img src="assets/brand/icon-180.png" width="56" height="56" alt="56px" />
+          <span class="size-tag">
+            <img src="assets/brand/favicon.svg" width="16" height="16" alt="Monogram at 16 pixels" />
+            <span>16</span>
+          </span>
+          <span class="size-tag">
+            <img src="assets/brand/favicon.svg" width="32" height="32" alt="Monogram at 32 pixels" />
+            <span>32</span>
+          </span>
+          <span class="size-tag">
+            <img src="assets/brand/favicon.svg" width="56" height="56" alt="Monogram at 56 pixels" />
+            <span>56</span>
+          </span>
         </div>
-        <span class="cap">Favicon at 16 / 32 / 56px</span>
+        <span class="cap">Favicon, actual size</span>
       </div>
     </div>
     <p class="sub" style="margin-top:16px">
