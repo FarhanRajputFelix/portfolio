@@ -173,7 +173,17 @@
   <div class="wrap">
     <div class="about-layout">
       <div class="about-copy">
-        <span class="kicker" data-anim="fade">About me</span>
+        <div class="about-id" data-anim="fade">
+          <figure class="avatar">
+            <img src="assets/farhan-avatar.jpg" alt="Farhan Bashir" width="520" height="520" loading="lazy" />
+            <span class="avatar-ring" aria-hidden="true"></span>
+          </figure>
+          <div class="about-id-text">
+            <span class="kicker">About me</span>
+            <b>Farhan Bashir</b>
+            <span>CS student · AI intern · Karachi</span>
+          </div>
+        </div>
         <p class="lead" data-anim="fade">
           I'm a Computer Science undergraduate with a strong passion for
           <em>Artificial Intelligence, Machine Learning, Data Science and Research.</em>
@@ -585,16 +595,39 @@
 
     <div class="contact-grid">
       <a class="contact-card" href="https://www.linkedin.com/in/farhan-rajput/" target="_blank" rel="noopener" data-anim="rise">
+        <span class="cc-art" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05a4.2 4.2 0 0 1 3.75-2c4 0 4.4 2.4 4.4 5.6V21h-4v-5.6c0-1.4 0-3.2-2-3.2s-2.2 1.5-2.2 3.1V21H9z"/></svg>
+        </span>
         <span class="cc-label">LinkedIn</span><span class="cc-value">in/farhan-rajput</span><span class="cc-arrow">↗</span>
       </a>
       <a class="contact-card" href="https://github.com/FarhanRajputFelix" target="_blank" rel="noopener" data-anim="rise">
+        <span class="cc-art" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7 0-.7 0-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1a2.6 2.6 0 0 1 .8-1.6c-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.7.2-3.4 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6.2 0C17.6 4.9 18.6 5.2 18.6 5.2c.7 1.7.2 3 .1 3.4.8.8 1.3 1.9 1.3 3.2 0 4.7-2.9 5.7-5.6 6 .5.4.9 1.2.9 2.4v3.2c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
+        </span>
         <span class="cc-label">GitHub</span><span class="cc-value">FarhanRajputFelix</span><span class="cc-arrow">↗</span>
       </a>
       <div class="contact-card static" data-anim="rise">
-        <span class="cc-label">Based in</span><span class="cc-value">Karachi, Pakistan</span><span class="cc-arrow">◉</span>
+        <!-- Pakistan traced from Natural Earth (public domain) and inlined: a real
+             map needs no API key, no request, and stays on-palette -->
+        <span class="cc-art map" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <path d="M96.0,22.4 L90.8,27.0 L84.7,27.8 L76.5,26.5 L73.8,28.8 L75.8,33.6 L77.6,37.2 L82.0,39.9 L77.4,43.1 L77.5,46.9 L72.2,52.4 L68.8,57.9 L63.1,63.6 L56.8,63.1 L50.9,68.8 L54.4,71.3 L55.0,75.4 L58.1,78.2 L59.2,82.8 L47.2,82.8 L43.6,86.4 L39.6,85.1 L38.0,81.2 L33.8,77.0 L23.8,78.1 L15.0,78.2 L7.4,78.9 L9.4,72.6 L17.2,69.8 L16.8,67.3 L14.2,66.5 L14.1,61.7 L8.9,59.3 L6.7,56.0 L4.0,53.2 L13.1,55.9 L18.5,55.1 L21.8,55.8 L22.9,54.6 L26.6,55.1 L33.7,52.8 L33.9,48.2 L36.9,45.2 L40.9,45.2 L41.5,43.7 L45.7,42.9 L47.7,43.5 L49.8,41.9 L49.5,38.7 L51.8,35.4 L55.2,34.0 L53.1,30.4 L58.3,30.6 L59.8,28.7 L59.5,26.6 L62.2,24.3 L61.6,21.6 L60.3,19.3 L63.5,16.9 L69.3,15.8 L75.6,15.2 L78.3,14.2 L81.5,13.6 L85.5,16.1 L87.1,20.2 L96.0,22.4 Z"
+                  fill="rgba(139,92,246,.13)" stroke="rgba(167,139,250,.5)" stroke-width="1.2"/>
+            <circle cx="37.2" cy="80.1" r="7" fill="rgba(139,92,246,.2)"/>
+            <circle cx="37.2" cy="80.1" r="2.6" fill="#a78bfa"/>
+          </svg>
+        </span>
+        <span class="cc-label">Based in</span><span class="cc-value">Karachi, Pakistan</span>
+        <span class="cc-coords">24.86°N · 67.00°E</span>
       </div>
       <div class="contact-card static" data-anim="rise">
-        <span class="cc-label">Availability</span><span class="cc-value">Remote · Open to relocate</span><span class="cc-arrow">◉</span>
+        <span class="cc-art" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 2.6 15 0 18M12 3c-2.6 2.6-2.6 15 0 18"/>
+          </svg>
+        </span>
+        <span class="cc-label">Availability</span><span class="cc-value">Remote · Open to relocate</span>
+        <span class="cc-coords">GMT+5 · replies same day</span>
       </div>
     </div>
 
