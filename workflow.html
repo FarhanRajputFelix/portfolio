@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Automation Workflow — Opportunity → Outreach Pack — Farhan Bashir</title>
+<meta name="description" content="A five-step no-code pipeline that turns a job, internship or scholarship posting into a claim-checked outreach pack." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@200;300;400;600&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
+<meta name="theme-color" content="#060608" />
+<style>
+  :root{
+    --ink:#060608; --paper:#f4f4f6; --main:#8b5cf6; --accent:#22d3ee;
+    --muted:#9d9da8; --faint:#6a6a76; --surface:#0c0c10; --line:rgba(255,255,255,.09);
+    --display:'Space Grotesk',system-ui,sans-serif; --body:'Sora',system-ui,sans-serif;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  body{ margin:0; background:var(--ink); color:var(--paper); font-family:var(--body);
+    font-weight:300; line-height:1.65; -webkit-font-smoothing:antialiased; }
+  a{ color:var(--main); }
+  .wrap{ max-width:1080px; margin:0 auto; padding:clamp(32px,6vw,72px) clamp(20px,5vw,40px) 80px; }
+
+  .label{ font-family:var(--display); font-size:.66rem; font-weight:500;
+    letter-spacing:.28em; text-transform:uppercase; color:var(--muted); }
+  h1{ font-family:var(--display); font-weight:700; letter-spacing:-.04em; text-transform:uppercase;
+    font-size:clamp(1.8rem,4.6vw,2.8rem); margin:.2em 0 .3em; }
+  h2{ font-family:var(--display); font-weight:600; letter-spacing:-.02em; font-size:1.2rem; margin:0; }
+  h3{ font-family:var(--display); font-weight:600; font-size:.98rem; margin:0 0 8px; }
+  .sub{ color:var(--muted); max-width:72ch; }
+  strong{ color:var(--paper); font-weight:600; }
+  code{ font-family:var(--display); font-size:.86em; color:var(--accent); }
+
+  header.top{ padding-bottom:26px; border-bottom:1px solid var(--line); }
+  section{ padding:38px 0; border-bottom:1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+  .sec-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:18px; }
+  .sec-head .n{ font-family:var(--display); font-size:.72rem; color:var(--main); letter-spacing:.2em; }
+
+  .notice{ padding:18px 22px; border:1px solid rgba(251,191,36,.4); border-radius:14px;
+    background:linear-gradient(120deg,rgba(251,191,36,.07),transparent); margin-bottom:22px; }
+  .notice b{ font-family:var(--display); color:#fbbf24; }
+  .notice p{ margin:6px 0 0; color:var(--muted); font-size:.9rem; }
+
+  /* flow diagram */
+  .flow{ display:grid; gap:0; }
+  .step{ display:grid; grid-template-columns:56px 1fr; gap:16px;
+    padding:18px 20px; border:1px solid var(--line); border-radius:14px;
+    background:var(--surface); }
+  .step .num{ font-family:var(--display); font-weight:700; font-size:1.3rem; color:var(--main); }
+  .step .tool{ font-family:var(--display); font-size:.58rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--accent); display:block; margin-bottom:4px; }
+  .step p{ margin:6px 0 0; color:var(--muted); font-size:.88rem; }
+  .handoff{ display:flex; align-items:center; gap:10px; padding:8px 0 8px 28px;
+    font-family:var(--display); font-size:.62rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--faint); }
+  .handoff::before{ content:'↓'; color:var(--main); font-size:1rem; }
+
+  pre{ margin:12px 0 0; padding:16px 18px; border:1px solid var(--line); border-radius:12px;
+    background:#000; color:#cfcfda; font-family:var(--display); font-size:.78rem;
+    line-height:1.6; white-space:pre-wrap; overflow-x:auto; }
+
+  table{ width:100%; border-collapse:collapse; font-size:.84rem; }
+  th,td{ text-align:left; padding:10px 11px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th{ font-family:var(--display); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--faint); font-weight:500; }
+  td.what{ color:var(--paper); }
+  td.why{ color:var(--muted); }
+  .todo{ color:var(--faint); font-style:italic; }
+
+  .fail{ padding:18px 20px; border:1px solid var(--line); border-radius:14px;
+    background:var(--surface); margin-bottom:12px; }
+  .fail h3{ color:var(--paper); }
+  .fail p{ margin:0; color:var(--muted); font-size:.88rem; }
+  .fail .sev{ font-family:var(--display); font-size:.55rem; letter-spacing:.14em; text-transform:uppercase;
+    padding:2px 8px; border-radius:999px; border:1px solid var(--line); margin-left:8px; }
+  .sev.high{ color:#f87171; border-color:rgba(248,113,113,.45); }
+  .sev.med{ color:#fbbf24; border-color:rgba(251,191,36,.4); }
+
+  ul.check{ list-style:none; padding:0; margin:10px 0 0; display:grid; gap:8px; }
+  ul.check li{ font-size:.88rem; color:var(--muted); display:flex; gap:10px; }
+  ul.check li::before{ content:'☐'; color:var(--accent); }
+
+  footer{ padding-top:30px; font-size:.78rem; color:var(--muted);
+    display:flex; gap:18px; flex-wrap:wrap; justify-content:space-between; }
+  @media (max-width:700px){ .step{ grid-template-columns:1fr; } }
+  @media print{ body{ background:#fff; color:#111 } pre{ background:#f6f6f8; color:#111 } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <span class="label">Automation workflow v2 · FL-04 · Week 4</span>
+    <h1>Opportunity → claim-checked outreach pack</h1>
+    <p class="sub">A five-step no-code pipeline that turns a job, internship or scholarship posting
+      into a tailored email, CV tweaks and a fit assessment — with a built-in audit step that refuses
+      to let any claim through unless my own knowledge base supports it.</p>
+  </header>
+
+  <!-- ============ 00 WHY THIS PIPELINE ============ -->
+  <section>
+    <div class="sec-head"><span class="n">00</span><h2>Why this pipeline, from my audit</h2></div>
+    <p class="sub" style="margin-top:0">
+      The task I repeat most is the same every time: read a posting, work out whether I actually fit,
+      then write a short email that proves it without overselling. I am applying to internships,
+      research groups and funded graduate programmes, so I do this several times a week and it takes
+      me 25–35 minutes each because I keep re-reading my own CV to remember specifics.
+    </p>
+    <p class="sub">
+      It is also the task where I am most tempted to overclaim. That is why step 4 exists: an
+      adversarial audit that traces every sentence back to evidence and deletes anything it can't
+      support. The pipeline is designed to make me <em>more</em> honest under time pressure, not less.
+    </p>
+  </section>
+
+  <!-- ============ 01 FLOW ============ -->
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2>The flow — five steps, named handoffs</h2></div>
+    <div class="flow">
+
+      <div class="step">
+        <span class="num">1</span>
+        <div>
+          <span class="tool">Claude Project · gather</span>
+          <h3>Extract the posting into a structured requirement list</h3>
+          <p>Paste the raw posting. Output is a numbered list of requirements, each tagged
+            <code>must-have</code> or <code>nice-to-have</code>, plus deadline, contact name and the
+            three keywords the posting repeats.</p>
+        </div>
+      </div>
+      <div class="handoff">Handoff: REQUIREMENT LIST (numbered, tagged)</div>
+
+      <div class="step">
+        <span class="num">2</span>
+        <div>
+          <span class="tool">Claude Project · synthesize</span>
+          <h3>Match each requirement to real evidence, and mark the gaps</h3>
+          <p>Reads my knowledge files (<code>PROJECT-BRIEF.md</code>, CV facts). Every requirement gets
+            <code>SUPPORTED</code> + the specific evidence, <code>PARTIAL</code> + what's thin, or
+            <code>NO EVIDENCE</code>. Ends with a fit score and an apply / don't-apply call.</p>
+        </div>
+      </div>
+      <div class="handoff">Handoff: EVIDENCE MAP + fit score</div>
+
+      <div class="step">
+        <span class="num">3</span>
+        <div>
+          <span class="tool">Claude Project · draft</span>
+          <h3>Draft a 150-word email and three CV tweaks</h3>
+          <p>May only use rows marked SUPPORTED or PARTIAL. Anything marked NO EVIDENCE is forbidden,
+            not softened. Output: subject line, email body, three specific CV edits.</p>
+        </div>
+      </div>
+      <div class="handoff">Handoff: DRAFT PACK</div>
+
+      <div class="step">
+        <span class="num">4</span>
+        <div>
+          <span class="tool">Fresh chat · review</span>
+          <h3>Adversarial audit — trace every claim or cut it</h3>
+          <p>Deliberately run in a <strong>new conversation</strong> with only the evidence map and the
+            draft, so it can't be persuaded by the earlier reasoning. It labels each sentence
+            <code>TRACED</code> / <code>WEAK</code> / <code>UNSUPPORTED</code> and rewrites the
+            offenders.</p>
+        </div>
+      </div>
+      <div class="handoff">Handoff: AUDITED PACK + verdict</div>
+
+      <div class="step">
+        <span class="num">5</span>
+        <div>
+          <span class="tool">Claude Project · format</span>
+          <h3>Assemble the send-ready pack</h3>
+          <p>Fixed template every time: subject, email, CV tweaks, deadline, fit score, and the one
+            thing I must verify by hand before sending.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 BUILD ============ -->
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2>The build — every prompt, verbatim</h2></div>
+
+    <h3>Project setup (one time)</h3>
+    <p class="sub" style="margin-top:0">A Claude Project with two knowledge files:
+      <code>PROJECT-BRIEF.md</code> (identity, projects, claim, gather list) and <code>cv-facts.md</code>
+      (dates, grades, credential IDs). Project instructions:</p>
+<pre>You are my application assistant. You work only from the knowledge files in this
+Project: my project brief and my CV facts.
+
+Hard rules:
+1. Never state a skill, result, date or credential that is not in the knowledge files.
+2. If something is missing, output NO EVIDENCE. Do not soften it, do not infer it,
+   do not substitute a similar-sounding fact.
+3. Numbers are quoted exactly as written in the files (e.g. R^2 = 0.97, 17
+   certifications). Never round, never upgrade.
+4. I am a CS undergraduate with no publications. Never describe me as a researcher,
+   engineer with industry years, or expert.
+5. Prefer specifics over adjectives. "Built a Flutter + FastAPI platform" beats
+   "passionate about building".
+
+Output format: whatever the step asks for, nothing else. No preamble.</pre>
+
+    <h3 style="margin-top:30px">Step 1 — GATHER</h3>
+<pre>STEP 1 of 5 — GATHER.
+Here is a posting. Extract, in this exact format:
+
+DEADLINE: (date or "not stated")
+CONTACT: (name/email or "not stated")
+REPEATED KEYWORDS: (the 3 phrases the posting uses most)
+REQUIREMENTS:
+1. [must-have|nice-to-have] requirement, in the posting's own words
+2. ...
+
+Do not comment on my fit yet. Do not invent requirements that are not written.
+
+POSTING:
+&lt;&lt;paste raw posting&gt;&gt;</pre>
+
+    <h3 style="margin-top:30px">Step 2 — SYNTHESIZE</h3>
+<pre>STEP 2 of 5 — EVIDENCE MAP.
+Using ONLY the knowledge files, map each requirement from the list above.
+
+For each, output:
+N. [SUPPORTED|PARTIAL|NO EVIDENCE] — requirement
+   evidence: the specific project, credential or number from my files
+   (for PARTIAL, name exactly what is thin)
+
+Then:
+FIT SCORE: x/10, counting must-haves only
+CALL: apply / apply with caveat / skip — and one sentence why
+BIGGEST GAP: the single thing that would most improve my case</pre>
+
+    <h3 style="margin-top:30px">Step 3 — DRAFT</h3>
+<pre>STEP 3 of 5 — DRAFT.
+Write, using only SUPPORTED and PARTIAL rows:
+
+SUBJECT: (under 60 characters, specific, no buzzwords)
+EMAIL: 150 words max. Structure: why them (1 sentence), my strongest matching
+evidence with the number attached (2 sentences), one honest gap and how I am
+closing it (1 sentence), a clear ask (1 sentence). No "I am passionate about".
+CV TWEAKS: exactly 3, each naming the section and the new wording.
+
+Anything marked NO EVIDENCE is forbidden. Do not hint at it.</pre>
+
+    <h3 style="margin-top:30px">Step 4 — REVIEW (new chat, no Project context)</h3>
+<pre>You are a skeptical hiring reviewer. Below is an EVIDENCE MAP and a DRAFT EMAIL.
+Your job is to catch overclaiming.
+
+For every sentence of the email, output:
+[TRACED] sentence — which evidence row supports it
+[WEAK] sentence — supported but overstated; give a tighter rewrite
+[UNSUPPORTED] sentence — no evidence row; delete it
+
+Then output a CLEAN VERSION with all WEAK lines rewritten and all UNSUPPORTED
+lines removed. Finally: SEND / DO NOT SEND, and one sentence why.
+
+EVIDENCE MAP: &lt;&lt;paste&gt;&gt;
+DRAFT: &lt;&lt;paste&gt;&gt;</pre>
+
+    <h3 style="margin-top:30px">Step 5 — FORMAT</h3>
+<pre>STEP 5 of 5 — PACK.
+Assemble the audited email into this exact block:
+
+--- OUTREACH PACK ---
+ORG / PROGRAMME:
+DEADLINE:
+FIT SCORE:      /10
+SUBJECT:
+EMAIL:
+CV TWEAKS: 1. 2. 3.
+VERIFY BY HAND: (the one fact I must confirm before sending)
+--- END ---</pre>
+  </section>
+
+  <!-- ============ 03 RUNS ============ -->
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2>The five runs</h2></div>
+    <div class="notice">
+      <b>To be filled in with real runs</b>
+      <p>These rows stay empty until the pipeline has actually been run on five real postings, with a
+        stopwatch. Inventing outputs and timings would defeat the point of an assignment about honest
+        time accounting — and it is the exact failure my own claim-audit step exists to catch.</p>
+    </div>
+    <table>
+      <thead><tr><th>#</th><th>Real input</th><th>Fit score / call</th><th>Outcome of the audit step</th><th>Time</th></tr></thead>
+      <tbody>
+        <tr><td class="what">1</td><td class="todo">posting name + link</td><td class="todo">—</td><td class="todo">—</td><td class="todo">—</td></tr>
+        <tr><td class="what">2</td><td class="todo">posting name + link</td><td class="todo">—</td><td class="todo">—</td><td class="todo">—</td></tr>
+        <tr><td class="what">3</td><td class="todo">posting name + link</td><td class="todo">—</td><td class="todo">—</td><td class="todo">—</td></tr>
+        <tr><td class="what">4</td><td class="todo">posting name + link</td><td class="todo">—</td><td class="todo">—</td><td class="todo">—</td></tr>
+        <tr><td class="what">5</td><td class="todo">brand-new input, run without edits, to prove it works cold</td><td class="todo">—</td><td class="todo">—</td><td class="todo">—</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ 04 TIME ============ -->
+  <section>
+    <div class="sec-head"><span class="n">04</span><h2>Time accounting</h2></div>
+    <table>
+      <thead><tr><th>Item</th><th>Measured</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td class="what">Setup — writing knowledge files, instructions and five prompts</td><td class="todo">—</td><td class="why">Counted honestly as a one-off cost. Paid back only after several runs.</td></tr>
+        <tr><td class="what">Manual baseline — one application done by hand, start to finish</td><td class="todo">—</td><td class="why">Timed first, before using the pipeline, so the comparison is fair.</td></tr>
+        <tr><td class="what">Pipeline, per run (average of 5)</td><td class="todo">—</td><td class="why">Includes my own reading and editing, not just model time.</td></tr>
+        <tr><td class="what">Break-even point</td><td class="todo">—</td><td class="why">setup ÷ (manual − pipeline) = runs needed before it pays for itself.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ 05 FAILURE POINTS ============ -->
+  <section>
+    <div class="sec-head"><span class="n">05</span><h2>Where it breaks, and what a human must still check</h2></div>
+
+    <div class="fail">
+      <h3>Step 2 substitutes a near-neighbour fact<span class="sev high">High</span></h3>
+      <p>Asked about "experience with PyTorch" it may reach for TensorFlow and call it SUPPORTED,
+        because they occupy the same slot in its head. The instruction forbids it, but adjacent facts
+        are the most likely leak. <strong>Human check: read every SUPPORTED row against the actual
+        requirement word, not the topic.</strong></p>
+    </div>
+
+    <div class="fail">
+      <h3>Step 4 is only honest in a fresh chat<span class="sev high">High</span></h3>
+      <p>Run in the same conversation, the auditor has already seen the reasoning that produced the
+        draft and rubber-stamps it. The isolation is the mechanism, not a formality.
+        <strong>Human check: confirm it is a new chat with no Project knowledge attached.</strong></p>
+    </div>
+
+    <div class="fail">
+      <h3>Numbers drift when re-typed<span class="sev med">Medium</span></h3>
+      <p>R² ≈ 0.97 can become "97% accuracy", which is a different claim. Deadlines can shift by a day.
+        <strong>Human check: every number in the final email compared character by character against
+        the source file — this is what the VERIFY BY HAND line is for.</strong></p>
+    </div>
+
+    <div class="fail">
+      <h3>Postings pasted as prose lose structure<span class="sev med">Medium</span></h3>
+      <p>Copying from a PDF or a JS-rendered page mangles bullet lists, so step 1 misses requirements
+        entirely. <strong>Human check: count the requirements it found against the posting.</strong></p>
+    </div>
+
+    <div class="fail">
+      <h3>Knowledge files go stale<span class="sev med">Medium</span></h3>
+      <p>New certificate, new project, new grade — none of it exists to the pipeline until the file is
+        updated, and the model will confidently report NO EVIDENCE for something true.
+        <strong>Human check: update the knowledge files before a batch of applications.</strong></p>
+    </div>
+
+    <h3 style="margin-top:26px">Pre-send checklist (never skipped)</h3>
+    <ul class="check">
+      <li>Every number in the email matches the source file exactly</li>
+      <li>The recipient's name and organisation are spelled correctly — the pipeline never verifies these</li>
+      <li>Deadline confirmed on the original posting, not from the extraction</li>
+      <li>No sentence claims a title I don't hold (researcher, engineer, expert)</li>
+      <li>The stated gap is one I am genuinely closing, and the way I describe closing it is true</li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>Farhan Bashir · Karachi, Pakistan</span>
+    <span><a href="./">← Portfolio</a> · <a href="stack.html">Stack decision</a> ·
+      <a href="plan.html">Content map</a> ·
+      <a href="https://github.com/FarhanRajputFelix/portfolio">Source</a></span>
+  </footer>
+
+</div>
+</body>
+</html>
