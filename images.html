@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Image Audit — Farhan Bashir</title>
+<meta name="description" content="Curated image set for Farhan Bashir's portfolio: what it needs, what was kept, what was rejected and why." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@200;300;400;600&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
+<meta name="theme-color" content="#060608" />
+<style>
+  :root{
+    --ink:#060608; --paper:#f4f4f6; --main:#8b5cf6; --accent:#22d3ee;
+    --muted:#9d9da8; --faint:#6a6a76; --surface:#0c0c10; --line:rgba(255,255,255,.09);
+    --display:'Space Grotesk',system-ui,sans-serif; --body:'Sora',system-ui,sans-serif;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  body{ margin:0; background:var(--ink); color:var(--paper); font-family:var(--body);
+    font-weight:300; line-height:1.65; -webkit-font-smoothing:antialiased; }
+  a{ color:var(--main); }
+  .wrap{ max-width:1060px; margin:0 auto; padding:clamp(32px,6vw,72px) clamp(20px,5vw,40px) 80px; }
+
+  .label{ font-family:var(--display); font-size:.66rem; font-weight:500;
+    letter-spacing:.28em; text-transform:uppercase; color:var(--muted); }
+  h1{ font-family:var(--display); font-weight:700; letter-spacing:-.04em; text-transform:uppercase;
+    font-size:clamp(2rem,5.4vw,3.2rem); margin:.2em 0 .3em; }
+  h2{ font-family:var(--display); font-weight:600; letter-spacing:-.02em; font-size:1.22rem; margin:0; }
+  h3{ font-family:var(--display); font-weight:600; font-size:.98rem; margin:0 0 6px; }
+  .sub{ color:var(--muted); max-width:66ch; }
+
+  header.top{ padding-bottom:26px; border-bottom:1px solid var(--line); }
+  section{ padding:38px 0; border-bottom:1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+  .sec-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:20px; }
+  .sec-head .n{ font-family:var(--display); font-size:.72rem; color:var(--main); letter-spacing:.2em; }
+
+  /* content map */
+  table{ width:100%; border-collapse:collapse; font-size:.86rem; }
+  th,td{ text-align:left; padding:11px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th{ font-family:var(--display); font-size:.62rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--faint); font-weight:500; }
+  td.what{ color:var(--paper); }
+  td.why{ color:var(--muted); }
+  .tag{ display:inline-block; font-family:var(--display); font-size:.58rem; letter-spacing:.14em;
+    text-transform:uppercase; padding:3px 8px; border-radius:999px; white-space:nowrap;
+    border:1px solid var(--line); }
+  .tag.real{ color:#4ade80; border-color:rgba(74,222,128,.4); }
+  .tag.code{ color:var(--accent); border-color:rgba(34,211,238,.4); }
+  .tag.none{ color:var(--faint); }
+  .tag.todo{ color:#fbbf24; border-color:rgba(251,191,36,.4); }
+
+  /* keepers grid */
+  .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px; }
+  figure{ margin:0; border:1px solid var(--line); border-radius:14px; overflow:hidden;
+    background:var(--surface); }
+  figure img{ width:100%; height:auto; display:block; border-bottom:1px solid var(--line); }
+  figcaption{ padding:12px 14px; font-size:.78rem; color:var(--muted); }
+  figcaption b{ display:block; font-family:var(--display); font-weight:600; font-size:.86rem;
+    color:var(--paper); margin-bottom:3px; }
+  figure.tall img{ max-height:340px; object-fit:cover; object-position:top; }
+
+  /* decision cards */
+  .cards{ display:grid; gap:14px; }
+  .card{ padding:20px 22px; border:1px solid var(--line); border-radius:14px; background:var(--surface); }
+  .card.kill{ border-color:rgba(248,113,113,.35); background:linear-gradient(120deg,rgba(248,113,113,.06),transparent); }
+  .card.keep{ border-color:rgba(74,222,128,.3); background:linear-gradient(120deg,rgba(74,222,128,.05),transparent); }
+  .card p{ margin:0; color:var(--muted); font-size:.9rem; }
+  .card p + p{ margin-top:8px; }
+  .card .verdict{ font-family:var(--display); font-size:.62rem; letter-spacing:.18em;
+    text-transform:uppercase; margin-bottom:8px; }
+  .kill .verdict{ color:#f87171; }
+  .keep .verdict{ color:#4ade80; }
+
+  footer{ padding-top:30px; font-size:.78rem; color:var(--muted);
+    display:flex; gap:18px; flex-wrap:wrap; justify-content:space-between; }
+  @media print{ body{ background:#fff; color:#111 } .card,figure,td,th{ border-color:#ddd } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <span class="label">Image audit · Week 3 · Curate your images</span>
+    <h1>What my portfolio shows,<br />and what I threw away</h1>
+    <p class="sub">
+      My portfolio contains <strong>no photographs and no AI-generated pictures at all</strong>.
+      Every visual is either a real screen capture of working software or geometry generated by code
+      at runtime. That was a decision, not an accident, and this page shows the reasoning — including
+      the images I made and killed.
+    </p>
+  </header>
+
+  <!-- ============ 01 CONTENT MAP ============ -->
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2>What the portfolio actually needs</h2></div>
+    <p class="sub" style="margin-top:0">
+      Mapped section by section against the live site. The point of the exercise is that most rows
+      resolve to “real capture” or “nothing needed”, and only two resolve to “generate something”.
+    </p>
+    <table>
+      <thead>
+        <tr><th>Section</th><th>Image need</th><th>Decision</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="what">Hero</td>
+          <td>Background texture + a character</td>
+          <td><span class="tag code">Code-generated</span></td>
+          <td class="why">A Three.js particle field and a procedural robot, both built from primitives in the browser. Reacts to the cursor, weighs 0 KB as an image, and can't look like the same AI abstract gradient every other portfolio uses.</td>
+        </tr>
+        <tr>
+          <td class="what">About</td>
+          <td>Portrait of me</td>
+          <td><span class="tag none">Deliberately none</span></td>
+          <td class="why">If a portrait appears, it must be a real photograph — never a generated likeness. I have one, and it's on my LinkedIn and CV. On the site I chose a code-built mascot instead, so the page leads with the work rather than my face.</td>
+        </tr>
+        <tr>
+          <td class="what">What I Do</td>
+          <td>Icons per capability</td>
+          <td><span class="tag none">Nothing needed</span></td>
+          <td class="why">Four dashed rows with numbers and typography carry it. Icons would have been decoration competing with the type.</td>
+        </tr>
+        <tr>
+          <td class="what">Work — KIDO, AQI, Crisis Intelligence</td>
+          <td>Screenshot per project</td>
+          <td><span class="tag todo">Real captures pending</span></td>
+          <td class="why">These need genuine captures from the apps and notebooks. Until I have them the cards use plain gradient covers with index numbers. An AI-generated “app mockup” here would be inventing evidence.</td>
+        </tr>
+        <tr>
+          <td class="what">Certifications</td>
+          <td>Certificate images</td>
+          <td><span class="tag real">Real, off-site</span></td>
+          <td class="why">Rather than embed 17 images, each card links to issuer verification (Anthropic, Coursera) or the scanned certificate on LinkedIn. A link that proves it beats a picture of it.</td>
+        </tr>
+        <tr>
+          <td class="what">Brand</td>
+          <td>Logo / favicon</td>
+          <td><span class="tag code">Vector, real typeface</span></td>
+          <td class="why">FB monogram drawn from actual Space Grotesk outlines, so the icon can never fall back to a system font.</td>
+        </tr>
+        <tr>
+          <td class="what">Documentation / posts</td>
+          <td>Screenshots of the site</td>
+          <td><span class="tag real">Real captures</span></td>
+          <td class="why">The ten captures below — used for the capstone document, LinkedIn post and this audit.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ 02 KEEPERS ============ -->
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2>The keepers — ten real captures</h2></div>
+    <p class="sub" style="margin-top:0">
+      Every image below is a real screenshot of the live site, taken at a fixed viewport with load
+      animations disabled so nothing is caught mid-fade. Cropped to one section each, so a reviewer
+      never has to hunt for the subject.
+    </p>
+    <div class="grid">
+      <figure><img src="assets/captures/01-hero.jpg" alt="Hero section" loading="lazy" />
+        <figcaption><b>Hero</b>Real capture · name, roles, BYTE, CTAs</figcaption></figure>
+      <figure><img src="assets/captures/09-byte-closeup.jpg" alt="BYTE close-up" loading="lazy" />
+        <figcaption><b>BYTE, the agent</b>Real capture of code-generated geometry</figcaption></figure>
+      <figure><img src="assets/captures/02-about.jpg" alt="About section" loading="lazy" />
+        <figcaption><b>About</b>Real capture · bio and stat tiles</figcaption></figure>
+      <figure class="tall"><img src="assets/captures/03-what-i-do.jpg" alt="What I Do section" loading="lazy" />
+        <figcaption><b>What I Do</b>Real capture · four capability rows</figcaption></figure>
+      <figure class="tall"><img src="assets/captures/04-work.jpg" alt="Work section" loading="lazy" />
+        <figcaption><b>Work</b>Real capture · six project cards</figcaption></figure>
+      <figure class="tall"><img src="assets/captures/05-certifications.jpg" alt="Certifications section" loading="lazy" />
+        <figcaption><b>Certifications</b>Real capture · 13 cards, verify links</figcaption></figure>
+      <figure class="tall"><img src="assets/captures/06-career.jpg" alt="Career section" loading="lazy" />
+        <figcaption><b>Career</b>Real capture · timeline and achievements</figcaption></figure>
+      <figure><img src="assets/captures/07-contact.jpg" alt="Contact section" loading="lazy" />
+        <figcaption><b>Contact</b>Real capture · email, links, wordmark</figcaption></figure>
+      <figure><img src="assets/captures/08-mobile-hero.jpg" alt="Mobile view" loading="lazy" />
+        <figcaption><b>Mobile</b>Real capture at 430px · proof it's responsive</figcaption></figure>
+      <figure class="tall"><img src="assets/captures/10-identity-kit.jpg" alt="Identity kit page" loading="lazy" />
+        <figcaption><b>Identity kit</b>Real capture · type, palette, mark</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- ============ 03 KILLED ============ -->
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2>Killed — and the reasoning</h2></div>
+    <div class="cards">
+
+      <div class="card kill">
+        <div class="verdict">Rejected · generated project mockups</div>
+        <p>I could have generated slick “app screenshots” for KIDO and the Crisis Intelligence
+          hackathon build in seconds, and the Work section would look finished today.</p>
+        <p><strong>Why it's out:</strong> a generated mockup of software I built is not evidence of
+          the software — it's a drawing of a claim. A reviewer who assumed those were real captures
+          would have been misled by me. I would rather ship plain numbered gradient covers that are
+          obviously graphic devices, and add real captures when I record them. The empty spot is
+          honest; a pretty fake isn't.</p>
+      </div>
+
+      <div class="card kill">
+        <div class="verdict">Rejected · AI hero background</div>
+        <p>My first instinct for the hero was a generated abstract texture — nebula, mesh gradient,
+          that whole look. I dropped it before it reached the page.</p>
+        <p><strong>Why it's out:</strong> two reasons. It's the single most recognisable "made with
+          AI in 2026" visual, so it would have made an AI-fluency portfolio look generic. And it's a
+          dead image — the particle field I wrote instead reacts to the cursor, ties into the same
+          violet palette as everything else, and costs nothing to download.</p>
+      </div>
+
+      <div class="card kill">
+        <div class="verdict">Rejected · a generated portrait / avatar of me</div>
+        <p>An illustrated or AI-rendered "me" for the About section.</p>
+        <p><strong>Why it's out:</strong> where the subject is a person, the only honest image is a
+          photograph. A synthetic face of a real person on a professional profile is a small lie in
+          the most sensitive possible place, and scholarship and hiring reviewers are exactly the
+          audience that would care. I used a real photo when I trialled a portrait, and when I
+          removed the portrait I replaced it with an obviously non-human mascot — not a fake me.</p>
+      </div>
+
+      <div class="card keep">
+        <div class="verdict">Kept, after a rethink · the photo pipeline</div>
+        <p>I did put a real photograph of myself in the hero at one point, and even cut the studio
+          background out of it programmatically so the subject floated on the dark theme.</p>
+        <p><strong>What I learned:</strong> it was a real photo doing the wrong job. A light studio
+          portrait fought a near-black page, and it pulled attention to my face on a page whose
+          argument is my work. Removing it was the harder call than generating a replacement would
+          have been. The photo still exists and is used where a portrait belongs — LinkedIn and my CV.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ 04 REAL OVER AI ============ -->
+  <section>
+    <div class="sec-head"><span class="n">04</span><h2>Where I chose a real capture over AI</h2></div>
+    <table>
+      <tbody>
+        <tr><td class="what">Everything showing my work</td>
+            <td class="why">Ten screenshots of the running site, at fixed viewports with animations
+            disabled. AI cannot produce a capture of software that exists — only a picture that
+            resembles one.</td></tr>
+        <tr><td class="what">Certificates</td>
+            <td class="why">Issuer verification links and LinkedIn scans instead of images. I tested
+            every link before shipping; one Coursera URL was wrong and got fixed.</td></tr>
+        <tr><td class="what">Anything depicting me</td>
+            <td class="why">Real photograph only, or no image at all. Never a generated likeness.</td></tr>
+        <tr><td class="what">The logo</td>
+            <td class="why">Built from the real Space Grotesk font outlines, not an AI-drawn mark, so
+            it matches the site's headings exactly at any size.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    <span>Farhan Bashir · Karachi, Pakistan</span>
+    <span><a href="./">← Portfolio</a> · <a href="brand.html">Identity kit</a> ·
+      <a href="https://github.com/FarhanRajputFelix/portfolio">Source</a></span>
+  </footer>
+
+</div>
+</body>
+</html>
