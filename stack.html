@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Three Roads — Stack Decision — Farhan Bashir</title>
+<meta name="description" content="Three stack options, the pressure test, and why Farhan Bashir chose a hand-built static site on GitHub Pages." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@200;300;400;600&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
+<meta name="theme-color" content="#060608" />
+<style>
+  :root{
+    --ink:#060608; --paper:#f4f4f6; --main:#8b5cf6; --accent:#22d3ee;
+    --muted:#9d9da8; --faint:#6a6a76; --surface:#0c0c10; --line:rgba(255,255,255,.09);
+    --display:'Space Grotesk',system-ui,sans-serif; --body:'Sora',system-ui,sans-serif;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  body{ margin:0; background:var(--ink); color:var(--paper); font-family:var(--body);
+    font-weight:300; line-height:1.65; -webkit-font-smoothing:antialiased; }
+  a{ color:var(--main); }
+  .wrap{ max-width:1080px; margin:0 auto; padding:clamp(32px,6vw,72px) clamp(20px,5vw,40px) 80px; }
+
+  .label{ font-family:var(--display); font-size:.66rem; font-weight:500;
+    letter-spacing:.28em; text-transform:uppercase; color:var(--muted); }
+  h1{ font-family:var(--display); font-weight:700; letter-spacing:-.04em; text-transform:uppercase;
+    font-size:clamp(1.9rem,5vw,3rem); margin:.2em 0 .3em; }
+  h2{ font-family:var(--display); font-weight:600; letter-spacing:-.02em; font-size:1.2rem; margin:0; }
+  h3{ font-family:var(--display); font-weight:600; font-size:1rem; margin:0 0 6px; }
+  .sub{ color:var(--muted); max-width:70ch; }
+  strong{ color:var(--paper); font-weight:600; }
+
+  header.top{ padding-bottom:26px; border-bottom:1px solid var(--line); }
+  section{ padding:38px 0; border-bottom:1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+  .sec-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:18px; }
+  .sec-head .n{ font-family:var(--display); font-size:.72rem; color:var(--main); letter-spacing:.2em; }
+
+  table{ width:100%; border-collapse:collapse; font-size:.85rem; }
+  th,td{ text-align:left; padding:11px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th{ font-family:var(--display); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--faint); font-weight:500; }
+  td.what{ color:var(--paper); }
+  td.why{ color:var(--muted); }
+
+  /* constraints */
+  .cons{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; }
+  .con{ padding:18px 20px; border:1px solid var(--line); border-radius:14px; background:var(--surface); }
+  .con .k{ font-family:var(--display); font-size:.58rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--accent); margin-bottom:8px; display:block; }
+  .con p{ margin:0; font-size:.86rem; color:var(--muted); }
+
+  /* options */
+  .opt{ padding:24px 26px; border:1px solid var(--line); border-radius:16px;
+    background:var(--surface); margin-bottom:16px; }
+  .opt.chosen{ border-color:rgba(139,92,246,.5);
+    background:linear-gradient(120deg,rgba(139,92,246,.11),transparent); }
+  .opt > header{ display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+  .opt .road{ font-family:var(--display); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--faint); }
+  .badge{ font-family:var(--display); font-size:.55rem; letter-spacing:.16em; text-transform:uppercase;
+    padding:3px 9px; border-radius:999px; border:1px solid var(--line); color:var(--muted); }
+  .badge.pick{ color:#4ade80; border-color:rgba(74,222,128,.45); }
+  .badge.no{ color:#f87171; border-color:rgba(248,113,113,.4); }
+  .rows{ display:grid; gap:0; }
+  .row{ display:grid; grid-template-columns:150px 1fr; gap:14px; padding:9px 0;
+    border-bottom:1px dashed rgba(255,255,255,.08); font-size:.86rem; }
+  .row:last-child{ border-bottom:none; }
+  .row .k{ font-family:var(--display); font-size:.6rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--faint); padding-top:3px; }
+  .row .v{ color:var(--muted); }
+  .row .v.bad{ color:#fca5a5; }
+
+  /* pressure test */
+  .q{ padding:20px 22px; border:1px solid var(--line); border-radius:14px;
+    background:var(--surface); margin-bottom:12px; }
+  .q h3{ color:var(--paper); }
+  .q p{ margin:0; color:var(--muted); font-size:.9rem; }
+
+  /* verdict */
+  .verdict{ padding:26px 28px; border:1px solid rgba(34,211,238,.4); border-radius:18px;
+    background:linear-gradient(120deg,rgba(34,211,238,.09),transparent); }
+  .verdict p{ color:var(--muted); font-size:.95rem; }
+  .verdict p:first-of-type{ color:var(--paper); }
+
+  .evidence td.what{ white-space:nowrap; }
+  .tag{ display:inline-block; font-family:var(--display); font-size:.55rem; letter-spacing:.14em;
+    text-transform:uppercase; padding:2px 8px; border-radius:999px; border:1px solid var(--line); }
+  .tag.win{ color:#4ade80; border-color:rgba(74,222,128,.4); }
+  .tag.cost{ color:#fbbf24; border-color:rgba(251,191,36,.4); }
+
+  footer{ padding-top:30px; font-size:.78rem; color:var(--muted);
+    display:flex; gap:18px; flex-wrap:wrap; justify-content:space-between; }
+  @media (max-width:700px){
+    .row{ grid-template-columns:1fr; gap:2px; }
+    .evidence td.what{ white-space:normal; }
+  }
+  @media print{ body{ background:#fff; color:#111 } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <span class="label">Three roads · Week 4 · Choose your stack with AI</span>
+    <h1>How I decided what to build this with</h1>
+    <p class="sub">I gave AI my four constraints, made it lay out three options from simplest to most
+      powerful, pressure-tested the front-runner, and picked one myself. Then I built it — so the
+      last section is what the decision actually cost me, measured rather than guessed.</p>
+  </header>
+
+  <!-- ============ 00 CONSTRAINTS ============ -->
+  <section>
+    <div class="sec-head"><span class="n">00</span><h2>The four constraints I gave it</h2></div>
+    <div class="cons">
+      <div class="con">
+        <span class="k">1 · Budget</span>
+        <p><strong>Free only.</strong> No hosting bill, no paid API tier, no domain purchase yet. I'm
+          a student in Karachi funding my own degree — a recurring cost would kill the project.</p>
+      </div>
+      <div class="con">
+        <span class="k">2 · Honest skill level</span>
+        <p>Comfortable with <strong>Python, HTML, CSS, JavaScript, PHP, Flutter, FastAPI, Laravel</strong>.
+          I have <strong>never shipped a React or Next.js app</strong>, and I'd be learning the
+          framework and the content at the same time. Git and the command line are fine.</p>
+      </div>
+      <div class="con">
+        <span class="k">3 · What it must do</span>
+        <p>One-page argument with 8 ordered sections, 6 projects, 17 verifiable certifications, and
+          a personal agent that answers questions about me. Full sitemap and content map:
+          <a href="plan.html">the through-line</a>.</p>
+      </div>
+      <div class="con">
+        <span class="k">4 · How the work must show</span>
+        <p><strong>Interactive 3D</strong> (the hero and the agent are the portfolio),
+          <strong>outbound verification links</strong> for credentials, <strong>screenshots</strong>
+          for projects later, and short reading — not long-form blogging.</p>
+      </div>
+      <div class="con">
+        <span class="k">Dynamic yet?</span>
+        <p><strong>No.</strong> Nothing needs a database, logins, or server-side rendering. The agent
+          answers from a knowledge base I write by hand. Deliberately answered before choosing, so I
+          wouldn't buy a backend I don't need.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 01 THREE ROADS ============ -->
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2>Three roads, simplest to most powerful</h2></div>
+
+    <!-- ROAD A -->
+    <div class="opt chosen">
+      <header>
+        <span class="road">Road A · simplest</span>
+        <h3>Hand-built static site + Three.js, on GitHub Pages</h3>
+        <span class="badge pick">Chosen</span>
+      </header>
+      <div class="rows">
+        <div class="row"><span class="k">How I'd build</span><span class="v">Plain HTML, CSS and vanilla JS. Three.js as an ES module through an import map. No framework, no bundler, no npm install, no build step. Four hand-written pages.</span></div>
+        <div class="row"><span class="k">Free host</span><span class="v">GitHub Pages, straight off the <code>main</code> branch. Deploy = <code>git push</code>.</span></div>
+        <div class="row"><span class="k">Backend?</span><span class="v">None. The agent is keyword-and-phrase retrieval over a knowledge base in a JS file.</span></div>
+        <div class="row"><span class="k">Real trade-off</span><span class="v bad">No components, so shared markup — nav, footer, head — is duplicated in every page and must be edited four times. No CMS: a new case study means copying an HTML file. That is the price, and it is paid in my time, not in money or in a broken deploy.</span></div>
+      </div>
+    </div>
+
+    <!-- ROAD B -->
+    <div class="opt">
+      <header>
+        <span class="road">Road B · middle</span>
+        <h3>Astro (or Next.js static export) + Netlify or Vercel</h3>
+        <span class="badge">Not chosen</span>
+      </header>
+      <div class="rows">
+        <div class="row"><span class="k">How I'd build</span><span class="v">Components for nav and footer, Markdown files for case studies, a layout system, `npm run build` to static HTML. Three.js still runs client-side.</span></div>
+        <div class="row"><span class="k">Free host</span><span class="v">Netlify, Vercel or Cloudflare Pages free tier, with preview deploys per branch.</span></div>
+        <div class="row"><span class="k">Backend?</span><span class="v">Still none, but serverless functions are one file away if I ever need them.</span></div>
+        <div class="row"><span class="k">Real trade-off</span><span class="v bad">A toolchain I've never run becomes a dependency of my portfolio being online. Node version mismatches, a broken lockfile or an Astro major version can take the site down at exactly the wrong moment, and I'd be debugging a build system instead of writing content. Real benefit — no duplicated nav — but bought with a risk I can't yet diagnose quickly.</span></div>
+      </div>
+    </div>
+
+    <!-- ROAD C -->
+    <div class="opt">
+      <header>
+        <span class="road">Road C · most powerful</span>
+        <h3>Next.js + serverless API routes + a real LLM + Postgres</h3>
+        <span class="badge no">Not chosen</span>
+      </header>
+      <div class="rows">
+        <div class="row"><span class="k">How I'd build</span><span class="v">React components, API routes proxying an LLM so the agent answers anything, Neon Postgres for a contact form and analytics, maybe auth for a private area.</span></div>
+        <div class="row"><span class="k">Free host</span><span class="v">Vercel hobby tier plus Neon free tier — free at my traffic, but both have quotas and both can suspend.</span></div>
+        <div class="row"><span class="k">Backend?</span><span class="v">Yes, unavoidably. An API key cannot sit in client code, so a proxy is mandatory.</span></div>
+        <div class="row"><span class="k">Real trade-off</span><span class="v bad">Every extra part is a thing that can break while I'm asleep, and an LLM-backed agent can hallucinate about me — the exact failure my claim says I avoid. It also introduces a cost cliff: free until someone spams the endpoint. I'd be maintaining infrastructure to gain answers I can already write by hand.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 PRESSURE TEST ============ -->
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2>Pressure-testing the front-runner</h2></div>
+
+    <div class="q">
+      <h3>What breaks if I pick the simplest?</h3>
+      <p>Repetition breaks first. Shared markup lives in four files, so a nav change is four edits and
+        one of them will eventually be forgotten. Second, there's no image pipeline — I have to resize
+        and compress screenshots myself. Neither of those takes the site down; both cost me minutes.
+        Nothing in Road A can make the URL stop working, which is the failure I actually fear.</p>
+    </div>
+
+    <div class="q">
+      <h3>What do I maintain if I pick the most powerful?</h3>
+      <p>A Node version, a dependency tree with security advisories, a build that must keep passing, an
+        API key with a spend limit, a database that sleeps on the free tier, and a rate limiter so one
+        bored visitor can't drain the quota. That's a system, and I'd be its only on-call engineer
+        during exam weeks.</p>
+    </div>
+
+    <div class="q">
+      <h3>Can I finish in two weeks?</h3>
+      <p>Road A: yes — I already know every language involved, so time goes into content and design.
+        Road B: probably, minus a few days lost to learning the toolchain. Road C: no. I'd spend the
+        two weeks on plumbing and ship a thin site with an impressive architecture and nothing in it.</p>
+    </div>
+
+    <div class="q">
+      <h3>Does it show my work the way it needs to be shown?</h3>
+      <p>This was the deciding question. My work is <strong>interactive 3D and a live agent</strong> —
+        both run in the browser, so a static host serves them perfectly. Certifications need outbound
+        links, which cost nothing. Project screenshots need <code>&lt;img&gt;</code> tags. Nothing I
+        must display requires a server. If my portfolio were a photo gallery or a blog with 50 posts,
+        my answer would be Road B.</p>
+    </div>
+  </section>
+
+  <!-- ============ 03 DECISION ============ -->
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2>My decision, in my own words</h2></div>
+    <div class="verdict">
+      <p><strong>I chose Road A: a hand-built static site with Three.js, hosted free on GitHub Pages.</strong></p>
+      <p>I picked it because the thing I'm proudest of — a 3D companion that answers questions about me
+        without an API key — is a browser thing, not a server thing. Adding a backend would not have
+        made it better; it would have added something to break and a key to leak.</p>
+      <p><strong>Can I maintain this?</strong> Yes, and that is the honest reason I chose it over Astro.
+        There is no dependency to update, no build to fail, no Node version to match. If I don't touch
+        this site for six months it will still be online, and when I come back the only skill I need is
+        HTML. I've watched classmates lose projects to a broken build they couldn't debug, and I did not
+        want my own portfolio to be that fragile.</p>
+      <p><strong>Does it show my work well?</strong> Yes — better than Road C would have. The 3D scene
+        and the agent both run client-side, so a static host is not a compromise for them, it's the
+        natural home. The one thing it can't do is generate answers beyond my knowledge base, and that
+        limit is the point: my agent says "I don't have that" instead of inventing something, which is
+        exactly what my one-line claim promises.</p>
+      <p><strong>Why not Road B:</strong> it solves a problem I don't have yet. I have four pages. When
+        I have twelve and I'm copy-pasting a nav for the fifth time, Astro becomes the right answer —
+        and because my site is plain HTML and CSS, migrating into it will be easy.
+        <strong>Why not Road C:</strong> it trades my time for capability I don't need, and it would
+        make my agent less trustworthy, not more.</p>
+      <p><strong>Do I need a backend? Not yet.</strong> The trigger that would change my mind: needing
+        per-user data, or a contact form that stores submissions, or an agent that answers beyond what
+        I wrote. None of those is true today, so buying a backend now would be paying maintenance for a
+        feature I don't have.</p>
+    </div>
+  </section>
+
+  <!-- ============ 04 EVIDENCE ============ -->
+  <section>
+    <div class="sec-head"><span class="n">04</span><h2>What the decision actually cost — after building it</h2></div>
+    <p class="sub" style="margin-top:0">The advantage of writing this after shipping: these aren't
+      predictions.</p>
+    <table class="evidence">
+      <thead><tr><th>Outcome</th><th>What happened</th></tr></thead>
+      <tbody>
+        <tr><td class="what"><span class="tag win">Held up</span> Deploy speed</td>
+            <td class="why">18 commits, every one live in roughly 30 seconds via <code>git push</code>. No build ever failed, because there is no build.</td></tr>
+        <tr><td class="what"><span class="tag win">Held up</span> No keys, no bills</td>
+            <td class="why">The agent runs entirely client-side. Nothing to rotate, nothing to rate-limit, nothing to pay. Total hosting cost to date: zero.</td></tr>
+        <tr><td class="what"><span class="tag win">Held up</span> 3D was free to add</td>
+            <td class="why">Three.js loaded as an ES module through an import map — no bundler config, which on Road B would have been my first real fight.</td></tr>
+        <tr><td class="what"><span class="tag cost">Bit me</span> The CDN</td>
+            <td class="why">Loading Three.js from unpkg cost ~1 MB on every visit and made the site slow on a Pakistani mobile connection. Fixed by vendoring the library into the repo — a five-minute fix precisely <em>because</em> there was no build step to fight.</td></tr>
+        <tr><td class="what"><span class="tag cost">Bit me</span> Duplicated markup</td>
+            <td class="why">Exactly the predicted trade-off: the nav and head block are copied across four pages. Adding the identity-kit link meant editing several files. Annoying, never dangerous — and the honest reason Road B will win eventually.</td></tr>
+        <tr><td class="what"><span class="tag cost">Bit me</span> No image pipeline</td>
+            <td class="why">I resized and compressed the screenshots myself with a Python script (3.1 MB → 1.0 MB). A framework would have done it automatically.</td></tr>
+      </tbody>
+    </table>
+    <p class="sub" style="margin-top:16px">
+      Net: the two things that bit me cost me minutes and were both fixable without touching
+      infrastructure. Nothing on Road A ever risked the URL going down. That's the trade I'd make again.
+    </p>
+  </section>
+
+  <footer>
+    <span>Farhan Bashir · Karachi, Pakistan</span>
+    <span><a href="./">← Portfolio</a> · <a href="plan.html">Content map</a> ·
+      <a href="brand.html">Identity kit</a> · <a href="images.html">Image audit</a> ·
+      <a href="https://github.com/FarhanRajputFelix/portfolio">Source</a></span>
+  </footer>
+
+</div>
+</body>
+</html>
