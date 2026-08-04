@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Through-Line — Farhan Bashir</title>
+<meta name="description" content="One-line claim, content map and CTA ladder for Farhan Bashir's portfolio." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@200;300;400;600&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
+<meta name="theme-color" content="#060608" />
+<style>
+  :root{
+    --ink:#060608; --paper:#f4f4f6; --main:#8b5cf6; --accent:#22d3ee;
+    --muted:#9d9da8; --faint:#6a6a76; --surface:#0c0c10; --line:rgba(255,255,255,.09);
+    --display:'Space Grotesk',system-ui,sans-serif; --body:'Sora',system-ui,sans-serif;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  body{ margin:0; background:var(--ink); color:var(--paper); font-family:var(--body);
+    font-weight:300; line-height:1.65; -webkit-font-smoothing:antialiased; }
+  a{ color:var(--main); }
+  .wrap{ max-width:1080px; margin:0 auto; padding:clamp(32px,6vw,72px) clamp(20px,5vw,40px) 80px; }
+
+  .label{ font-family:var(--display); font-size:.66rem; font-weight:500;
+    letter-spacing:.28em; text-transform:uppercase; color:var(--muted); }
+  h1{ font-family:var(--display); font-weight:700; letter-spacing:-.04em; text-transform:uppercase;
+    font-size:clamp(1.9rem,5vw,3rem); margin:.2em 0 .3em; }
+  h2{ font-family:var(--display); font-weight:600; letter-spacing:-.02em; font-size:1.2rem; margin:0; }
+  h3{ font-family:var(--display); font-weight:600; font-size:.95rem; margin:0 0 6px; }
+  .sub{ color:var(--muted); max-width:70ch; }
+
+  header.top{ padding-bottom:26px; border-bottom:1px solid var(--line); }
+  section{ padding:38px 0; border-bottom:1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+  .sec-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:18px; }
+  .sec-head .n{ font-family:var(--display); font-size:.72rem; color:var(--main); letter-spacing:.2em; }
+
+  /* the claim */
+  .claim{
+    padding:30px 32px; border:1px solid rgba(139,92,246,.45); border-radius:18px;
+    background:linear-gradient(120deg,rgba(139,92,246,.13),transparent);
+    margin-bottom:18px;
+  }
+  .claim q{ font-family:var(--display); font-weight:700; letter-spacing:-.03em;
+    font-size:clamp(1.4rem,4.2vw,2.4rem); line-height:1.18; quotes:none; display:block; }
+  .claim .why{ margin:14px 0 0; color:var(--muted); font-size:.9rem; max-width:66ch; }
+
+  .action{ display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    padding:18px 22px; border:1px solid var(--line); border-radius:14px;
+    background:var(--surface); }
+  .action b{ font-family:var(--display); font-size:1rem; }
+  .action .pill{ font-family:var(--display); font-size:.6rem; letter-spacing:.18em;
+    text-transform:uppercase; padding:5px 11px; border-radius:999px;
+    border:1px solid rgba(34,211,238,.4); color:var(--accent); }
+
+  table{ width:100%; border-collapse:collapse; font-size:.85rem; }
+  th,td{ text-align:left; padding:10px 11px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th{ font-family:var(--display); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--faint); font-weight:500; }
+  td.n{ font-family:var(--display); color:var(--main); width:34px; }
+  td.what{ color:var(--paper); white-space:nowrap; }
+  td.why{ color:var(--muted); }
+  td.cta{ color:var(--accent); font-family:var(--display); font-size:.78rem; white-space:nowrap; }
+  .lead-tag{ display:inline-block; font-family:var(--display); font-size:.55rem; letter-spacing:.14em;
+    text-transform:uppercase; padding:2px 7px; border-radius:999px; margin-left:6px;
+    border:1px solid rgba(74,222,128,.45); color:#4ade80; }
+
+  .page-card{ padding:22px 24px; border:1px solid var(--line); border-radius:16px;
+    background:var(--surface); margin-bottom:16px; }
+  .page-card > header{ display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
+  .page-card .url{ font-family:var(--display); font-size:.72rem; color:var(--muted); }
+  .status{ font-family:var(--display); font-size:.55rem; letter-spacing:.14em; text-transform:uppercase;
+    padding:3px 8px; border-radius:999px; border:1px solid var(--line); color:var(--muted); }
+  .status.live{ color:#4ade80; border-color:rgba(74,222,128,.4); }
+  .status.planned{ color:#fbbf24; border-color:rgba(251,191,36,.4); }
+
+  /* ladder */
+  .ladder{ display:grid; gap:10px; }
+  .rung{ display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:14px;
+    padding:13px 18px; border:1px solid var(--line); border-radius:12px; background:var(--surface);
+    font-size:.85rem; }
+  .rung .from{ color:var(--paper); }
+  .rung .arrow{ color:var(--main); font-family:var(--display); }
+  .rung .to{ color:var(--muted); text-align:right; }
+  .rung.final{ border-color:rgba(34,211,238,.45);
+    background:linear-gradient(120deg,rgba(34,211,238,.09),transparent); }
+  .rung.final .to{ color:var(--accent); }
+
+  .gather td.what{ white-space:normal; }
+  .pri{ font-family:var(--display); font-size:.55rem; letter-spacing:.14em; text-transform:uppercase;
+    padding:2px 8px; border-radius:999px; border:1px solid var(--line); color:var(--muted); }
+  .pri.p1{ color:#f87171; border-color:rgba(248,113,113,.45); }
+  .pri.p2{ color:#fbbf24; border-color:rgba(251,191,36,.4); }
+  .pri.p3{ color:var(--faint); }
+
+  .opts{ font-size:.85rem; }
+  .opts td:first-child{ font-family:var(--display); color:var(--main); width:34px; }
+  .opts tr.picked td{ color:var(--paper); background:rgba(139,92,246,.09); }
+
+  footer{ padding-top:30px; font-size:.78rem; color:var(--muted);
+    display:flex; gap:18px; flex-wrap:wrap; justify-content:space-between; }
+  @media (max-width:700px){
+    td.what,td.cta{ white-space:normal; }
+    .rung{ grid-template-columns:1fr; gap:4px; }
+    .rung .to{ text-align:left; }
+  }
+  @media print{ body{ background:#fff; color:#111 } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <span class="label">The through-line · Week 3 · Map content &amp; CTAs</span>
+    <h1>Claim, content map, CTA ladder</h1>
+    <p class="sub">What a visitor should remember, what sits on which page in what order, where every
+      page sends them, and what proof I still owe. Written before the next build week so nothing gets
+      built in the wrong place.</p>
+  </header>
+
+  <!-- ============ 00 THE ONE ACTION ============ -->
+  <section>
+    <div class="sec-head"><span class="n">00</span><h2>The one action everything ladders to</h2></div>
+    <div class="action">
+      <span class="pill">Primary action</span>
+      <b>Email me about an AI/ML role, internship or research collaboration.</b>
+    </div>
+    <p class="sub" style="margin-top:14px">
+      Not “follow me”, not “read my blog”. One action, one inbox:
+      <strong>farhanmuhammadbashir@gmail.com</strong>. Every call to action below either performs it
+      or moves someone one step closer to it. That is why the email block is the only element on the
+      site with a filled violet button — nothing else competes for that colour.
+    </p>
+  </section>
+
+  <!-- ============ 01 THE CLAIM ============ -->
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2>One-line claim</h2></div>
+
+    <div class="claim">
+      <q>I build AI that knows its limits — and ships anyway.</q>
+      <p class="why">Chosen because it is the one thing my work actually proves rather than asserts.
+        The agent on my site refuses questions outside its knowledge base instead of inventing an
+        answer; my AQI model reports a real R² instead of a vibe; my hero says “CS student” rather
+        than “AI researcher” because I have no publications yet. The line also survives being said
+        out loud, which is the test I used to cut the other nine.</p>
+    </div>
+
+    <h3 style="margin-top:26px">The ten options, and why this one won</h3>
+    <table class="opts">
+      <tbody>
+        <tr><td>01</td><td class="why">“Computer Science undergraduate passionate about AI, ML and Data Science.” — <em>Rejected: that is a LinkedIn headline, not a claim. Says nothing only I could say.</em></td></tr>
+        <tr><td>02</td><td class="why">“I turn messy real-world data into systems people can trust.” — <em>Rejected: good shape, but “trust” is unproven by a student with no users yet.</em></td></tr>
+        <tr><td>03</td><td class="why">“AI for classrooms, clinics and crises.” — <em>Close. Memorable and true to KIDO / health interest / Crisis Intelligence. Kept as the About sub-line instead.</em></td></tr>
+        <tr><td>04</td><td class="why">“I ship AI products, from the model to the interface.” — <em>Rejected: true but generic; every bootcamp graduate writes this.</em></td></tr>
+        <tr><td>05</td><td class="why">“R² 0.97 on air quality, an AI tutor for kids, an agent that refuses to guess.” — <em>Rejected as a claim, promoted to evidence: it is three facts, not one sentence.</em></td></tr>
+        <tr class="picked"><td>06</td><td class="why"><strong>“I build AI that knows its limits — and ships anyway.”</strong> — <em>Picked. Specific, provable on the page itself, and it says something most portfolios avoid saying.</em></td></tr>
+        <tr><td>07</td><td class="why">“Every claim on this site links to proof.” — <em>Rejected: describes the site, not me. Became the certifications section's job instead.</em></td></tr>
+        <tr><td>08</td><td class="why">“A CS student building AI systems that hold up under scrutiny.” — <em>Rejected: 11 words to say what option 06 says with more edge.</em></td></tr>
+        <tr><td>09</td><td class="why">“Ship first, publish later.” — <em>Rejected: catchy but reads as dismissive of research, which is the opposite of my goal.</em></td></tr>
+        <tr><td>10</td><td class="why">“I make AI useful where it matters most.” — <em>Rejected: “matters most” is a claim about the world, not about my work.</em></td></tr>
+      </tbody>
+    </table>
+    <p class="sub" style="margin-top:14px">
+      Sharpening step: option 06 started as “I build AI that admits what it doesn't know.” “Admits”
+      sounded apologetic, so it became “knows its limits”, and “— and ships anyway” was added so the
+      line ends on capability instead of caution.
+    </p>
+  </section>
+
+  <!-- ============ 02 CONTENT MAP ============ -->
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2>Content map</h2></div>
+
+    <!-- HOME -->
+    <div class="page-card">
+      <header>
+        <h3>Home — the whole argument on one page</h3>
+        <span class="url">/</span>
+        <span class="status live">Live</span>
+      </header>
+      <table>
+        <thead><tr><th>#</th><th>Section</th><th>What it does / which case</th><th>CTA</th></tr></thead>
+        <tbody>
+          <tr><td class="n">1</td><td class="what">Hero</td><td class="why">Name, current role, the claim, and BYTE greeting visitors unprompted. The agent <em>is</em> the proof of the claim, so it appears before any words about it.</td><td class="cta">See my work ↓</td></tr>
+          <tr><td class="n">2</td><td class="what">Ticker</td><td class="why">Stack at a glance for the ten-second skimmer.</td><td class="cta">—</td></tr>
+          <tr><td class="n">3</td><td class="what">About</td><td class="why">Real photo, two paragraphs, four numbers (8 projects · 17 certifications · 15 research areas · 30+ tools).</td><td class="cta">—</td></tr>
+          <tr><td class="n">4</td><td class="what">What I Do</td><td class="why">Four capability rows: ML · Agentic AI &amp; LLMs · Full-stack · Learning &amp; research. Frames the cases before showing them.</td><td class="cta">—</td></tr>
+          <tr><td class="n">5</td><td class="what">Work</td><td class="why"><strong>01 KIDO</strong><span class="lead-tag">Leads</span> — widest scope, full stack, clearest social impact. <strong>02 Air Quality</strong> — the only case with a hard number (R² ≈ 0.97), so it sits second where a skimmer still reaches it. <strong>03 Self-Regulating AI</strong> — research signal. <strong>04 Crisis Intelligence</strong> — works under pressure, in a team. <strong>05 This portfolio + agent</strong>. <strong>06 Laravel / PHP platforms</strong> — least differentiating, last.</td><td class="cta">Ask BYTE about any project</td></tr>
+          <tr><td class="n">6</td><td class="what">Certifications</td><td class="why">17 credentials, each linking to issuer verification or the LinkedIn scan. Answers “is this real?” before anyone asks.</td><td class="cta">Verify ↗</td></tr>
+          <tr><td class="n">7</td><td class="what">Career</td><td class="why">FlyRank AI internship, the hackathon, the degree, achievements, research goals.</td><td class="cta">—</td></tr>
+          <tr><td class="n">8</td><td class="what">Contact</td><td class="why">Photo, email block, LinkedIn, GitHub, location, availability.</td><td class="cta">Write email ↗</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CASE STUDIES -->
+    <div class="page-card">
+      <header>
+        <h3>Case study — KIDO</h3>
+        <span class="url">/case-kido.html</span>
+        <span class="status planned">Planned · needs captures</span>
+      </header>
+      <table>
+        <thead><tr><th>#</th><th>Section</th><th>Content</th><th>CTA</th></tr></thead>
+        <tbody>
+          <tr><td class="n">1</td><td class="what">Problem</td><td class="why">Why adaptive learning for children, and the constraint that shaped everything: it handles kids' data.</td><td class="cta">—</td></tr>
+          <tr><td class="n">2</td><td class="what">What I built</td><td class="why">Flutter client, FastAPI services, PostgreSQL, Redis, OpenAI APIs; adaptive quizzes, AI tutor, analytics, parent and teacher portals.</td><td class="cta">—</td></tr>
+          <tr><td class="n">3</td><td class="what">Screens</td><td class="why">Real captures of the running app — the gap that currently blocks this page.</td><td class="cta">—</td></tr>
+          <tr><td class="n">4</td><td class="what">Hard part</td><td class="why">COPPA-aware architecture: what that forced me to change.</td><td class="cta">—</td></tr>
+          <tr><td class="n">5</td><td class="what">Next</td><td class="why">What I would build with more time.</td><td class="cta">Email me about this project ↗</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="page-card">
+      <header>
+        <h3>Case study — Air Quality Prediction</h3>
+        <span class="url">/case-aqi.html</span>
+        <span class="status planned">Planned · needs notebook + chart</span>
+      </header>
+      <table>
+        <thead><tr><th>#</th><th>Section</th><th>Content</th><th>CTA</th></tr></thead>
+        <tbody>
+          <tr><td class="n">1</td><td class="what">Question</td><td class="why">Can AQI be predicted from available environmental features?</td><td class="cta">—</td></tr>
+          <tr><td class="n">2</td><td class="what">Data &amp; method</td><td class="why">Dataset, features, Random Forest regressor, validation approach.</td><td class="cta">—</td></tr>
+          <tr><td class="n">3</td><td class="what">Result</td><td class="why">R² ≈ 0.97, with the predicted-vs-actual plot as the hero image and an honest note on limitations.</td><td class="cta">Open the notebook ↗</td></tr>
+          <tr><td class="n">4</td><td class="what">What I would fix</td><td class="why">Where the model is weakest and why.</td><td class="cta">Email me ↗</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PROCESS PAGES -->
+    <div class="page-card">
+      <header>
+        <h3>Process pages — the work behind the work</h3>
+        <span class="url">/brand.html · /images.html · /plan.html</span>
+        <span class="status live">Live</span>
+      </header>
+      <table>
+        <thead><tr><th>#</th><th>Page</th><th>Purpose</th><th>CTA</th></tr></thead>
+        <tbody>
+          <tr><td class="n">1</td><td class="what">Identity kit</td><td class="why">Two fonts, four hex codes, the monogram, the style note. Proves the site is a system, not a lucky template.</td><td class="cta">← Back to portfolio</td></tr>
+          <tr><td class="n">2</td><td class="what">Image audit</td><td class="why">What the site needs visually, what I kept, what I killed and why.</td><td class="cta">← Back to portfolio</td></tr>
+          <tr><td class="n">3</td><td class="what">This map</td><td class="why">Claim, content map, CTA ladder, gather list.</td><td class="cta">← Back to portfolio</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 03 CTA LADDER ============ -->
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2>How every CTA ladders to the one action</h2></div>
+    <div class="ladder">
+      <div class="rung"><span class="from">Hero — “See my work”</span><span class="arrow">→</span><span class="to">gets them into the Work section</span></div>
+      <div class="rung"><span class="from">Work — “Ask BYTE about any project”</span><span class="arrow">→</span><span class="to">answers objections without me in the room</span></div>
+      <div class="rung"><span class="from">Case study — “Open the notebook / repo”</span><span class="arrow">→</span><span class="to">converts interest into verified belief</span></div>
+      <div class="rung"><span class="from">Certifications — “Verify ↗”</span><span class="arrow">→</span><span class="to">removes the “is this real?” doubt</span></div>
+      <div class="rung"><span class="from">Process pages — “Back to portfolio”</span><span class="arrow">→</span><span class="to">returns a curious reader to the work</span></div>
+      <div class="rung final"><span class="from">Contact — “Write email ↗”</span><span class="arrow">→</span><span class="to">the one action: an email in my inbox</span></div>
+    </div>
+    <p class="sub" style="margin-top:14px">
+      Rule I am holding myself to: <strong>one filled violet button per screen</strong>. Secondary
+      actions are outlined or plain text, so the eye always finds the step that matters.
+    </p>
+  </section>
+
+  <!-- ============ 04 GATHER LIST ============ -->
+  <section>
+    <div class="sec-head"><span class="n">04</span><h2>Proof I still need to gather</h2></div>
+    <p class="sub" style="margin-top:0">Honest list, so build week isn't blocked by discovering these late.</p>
+    <table class="gather">
+      <thead><tr><th>Priority</th><th>What</th><th>Why it matters / where it goes</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pri p1">P1</span></td><td class="what">KIDO screenshots + a 30-second screen recording</td><td class="why">Blocks the KIDO case study and replaces the gradient placeholder on card 01. My strongest project currently has the weakest evidence.</td></tr>
+        <tr><td><span class="pri p1">P1</span></td><td class="what">AQI notebook, cleaned, plus the predicted-vs-actual plot</td><td class="why">R² ≈ 0.97 is my only hard number and nothing on the site backs it up yet. A public notebook turns a claim into a check.</td></tr>
+        <tr><td><span class="pri p1">P1</span></td><td class="what">Public repo links per project</td><td class="why">Cards and case studies both promise “open the repo”. Several repos are private or unpushed.</td></tr>
+        <tr><td><span class="pri p2">P2</span></td><td class="what">CV as a PDF</td><td class="why">Scholarship and recruiter reviewers expect a download; the site has no CV link at all right now.</td></tr>
+        <tr><td><span class="pri p2">P2</span></td><td class="what">Crisis Intelligence hackathon artefacts</td><td class="why">Submission page, team photo or demo clip — proof the hackathon entry existed beyond my description of it.</td></tr>
+        <tr><td><span class="pri p2">P2</span></td><td class="what">Before/after numbers anywhere I can get them</td><td class="why">Quiz completion, tutor response latency, model training time. Numbers beat adjectives and I have almost none.</td></tr>
+        <tr><td><span class="pri p3">P3</span></td><td class="what">One testimonial</td><td class="why">A line from a supervisor, professor or teammate. Third-party voice carries weight mine can't.</td></tr>
+        <tr><td><span class="pri p3">P3</span></td><td class="what">FlyRank internship output</td><td class="why">Not finished yet. Once the internship completes, the Career section gets a concrete deliverable instead of a description.</td></tr>
+        <tr><td><span class="pri p3">P3</span></td><td class="what">Research proposal PDF</td><td class="why">I list “research proposal author” with nothing to open. Either publish it or drop the line.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    <span>Farhan Bashir · Karachi, Pakistan</span>
+    <span><a href="./">← Portfolio</a> · <a href="brand.html">Identity kit</a> ·
+      <a href="images.html">Image audit</a> ·
+      <a href="https://github.com/FarhanRajputFelix/portfolio">Source</a></span>
+  </footer>
+
+</div>
+</body>
+</html>
