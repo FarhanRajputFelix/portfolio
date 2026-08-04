@@ -644,6 +644,10 @@ body.asking .char-bubble::after{      /* tail, pointing right at the bot */
 /* ==========================================================
    CONTACT
    ========================================================== */
+/* the same real photograph, centred above the contact heading */
+.contact-avatar{ width:104px; height:104px; margin:0 auto 22px; }
+.contact-avatar img{ box-shadow:0 16px 40px rgba(0,0,0,.6); }
+
 .contact-lead{ max-width:520px; margin:0 auto 34px; text-align:center; color:var(--text-dim); }
 .mail-hero{
   display:flex; align-items:center; justify-content:center; gap:20px; flex-wrap:wrap;
