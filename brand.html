@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Identity Kit — Farhan Bashir</title>
+<meta name="description" content="Visual identity kit for Farhan Bashir: type, palette, logo and style note." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@200;300;400;600&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
+<meta name="theme-color" content="#060608" />
+<style>
+  :root{
+    --ink:#060608; --paper:#f4f4f6; --main:#8b5cf6; --accent:#22d3ee;
+    --muted:#9d9da8; --surface:#0c0c10; --line:rgba(255,255,255,.09);
+    --display:'Space Grotesk',system-ui,sans-serif;
+    --body:'Sora',system-ui,sans-serif;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  body{
+    margin:0; background:var(--ink); color:var(--paper);
+    font-family:var(--body); font-weight:300; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:inherit; }
+  .wrap{ max-width:1000px; margin:0 auto; padding:clamp(32px,6vw,72px) clamp(20px,5vw,40px) 80px; }
+
+  .label{
+    font-family:var(--display); font-size:.66rem; font-weight:500;
+    letter-spacing:.28em; text-transform:uppercase; color:var(--muted);
+  }
+  h1{ font-family:var(--display); font-weight:700; letter-spacing:-.04em;
+      font-size:clamp(2.2rem,6vw,3.6rem); margin:.2em 0 .1em; text-transform:uppercase; }
+  h2{ font-family:var(--display); font-weight:600; letter-spacing:-.02em;
+      font-size:1.25rem; margin:0 0 4px; }
+  .sub{ color:var(--muted); max-width:62ch; margin:0; }
+
+  header.top{ display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+    padding-bottom:28px; border-bottom:1px solid var(--line); }
+  header.top img{ width:64px; height:64px; border-radius:16px; }
+
+  section{ padding:40px 0; border-bottom:1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+  .sec-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:24px; }
+  .sec-head .n{ font-family:var(--display); font-size:.72rem; color:var(--main); letter-spacing:.2em; }
+
+  /* ---- type ---- */
+  .type-row{ display:grid; grid-template-columns:1fr; gap:18px; }
+  .type-card{ padding:24px 26px; border:1px solid var(--line); border-radius:16px; background:var(--surface); }
+  .type-card .meta{ display:flex; gap:14px; flex-wrap:wrap; align-items:baseline;
+    margin-bottom:14px; }
+  .type-card .name{ font-family:var(--display); font-weight:600; font-size:1.05rem; }
+  .type-card .use{ font-size:.8rem; color:var(--muted); }
+  .spec-display{ font-family:var(--display); font-weight:700; text-transform:uppercase;
+    letter-spacing:-.04em; font-size:clamp(1.8rem,6vw,3rem); line-height:1.05; }
+  .spec-body{ font-family:var(--body); font-size:1rem; color:#d8d8e0; max-width:60ch; }
+  .glyphs{ font-family:var(--display); letter-spacing:.06em; color:var(--muted);
+    font-size:.92rem; margin-top:12px; word-break:break-word; }
+  .weights{ display:flex; gap:16px; flex-wrap:wrap; margin-top:12px; font-size:.82rem; color:var(--muted); }
+
+  /* ---- palette ---- */
+  .swatches{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; }
+  .sw{ border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--surface); }
+  .sw .chip{ height:96px; }
+  .sw .info{ padding:12px 14px; }
+  .sw .nm{ font-family:var(--display); font-weight:600; font-size:.9rem; }
+  .sw .hex{ font-family:var(--display); font-size:.76rem; letter-spacing:.1em; color:var(--muted); }
+  .sw .role{ font-size:.72rem; color:var(--muted); margin-top:4px; }
+  .neutrals{ margin-top:14px; font-size:.8rem; color:var(--muted); }
+
+  /* ---- logo ---- */
+  .logo-row{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; align-items:stretch; }
+  .logo-box{ border:1px solid var(--line); border-radius:16px; background:var(--surface);
+    display:grid; place-items:center; gap:12px; padding:26px; text-align:center; }
+  .logo-box.light{ background:var(--paper); }
+  .logo-box img{ width:76px; height:76px; }
+  .logo-box .cap{ font-size:.74rem; color:var(--muted); }
+  .logo-box.light .cap{ color:#55555f; }
+  .logo-box img.word{ width:min(100%,220px); height:auto; }
+  .logo-box.light img.word{ filter:invert(1); }
+  .sizes{ display:flex; align-items:flex-end; gap:16px; justify-content:center; }
+  .sizes img{ image-rendering:auto; }
+
+  /* ---- style note ---- */
+  .note{ padding:22px 24px; border:1px solid rgba(139,92,246,.4); border-radius:16px;
+    background:linear-gradient(120deg,rgba(139,92,246,.1),transparent); }
+  .note p{ margin:0 0 8px; font-size:.98rem; }
+  .note p:last-child{ margin:0; }
+  .note b{ font-family:var(--display); font-weight:600; }
+  .copyable{ font-family:var(--display); font-size:.84rem; letter-spacing:.02em;
+    background:#000; border:1px solid var(--line); border-radius:12px;
+    padding:16px 18px; margin-top:16px; white-space:pre-wrap; color:#cfcfda; }
+
+  footer{ padding-top:32px; font-size:.78rem; color:var(--muted);
+    display:flex; gap:18px; flex-wrap:wrap; justify-content:space-between; }
+  footer a{ color:var(--main); }
+
+  @media (min-width:760px){
+    .type-row{ grid-template-columns:1fr 1fr; }
+  }
+  @media print{
+    body{ background:#fff; color:#111; }
+    .sw, .type-card, .logo-box, .note, .copyable{ background:#fff; border-color:#ddd; color:#111; }
+    footer a{ color:#333; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <img src="assets/brand/logo.svg" alt="FB monogram" />
+    <div>
+      <span class="label">Identity kit</span>
+      <h1>Farhan Bashir</h1>
+      <p class="sub">The handful of decisions every page of my portfolio inherits — two typefaces,
+        four colours, one mark. Written down so the build stays consistent.</p>
+    </div>
+  </header>
+
+  <!-- ================= TYPE ================= -->
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2>Type — two fonts</h2></div>
+    <div class="type-row">
+
+      <div class="type-card">
+        <div class="meta">
+          <span class="name">Space Grotesk</span>
+          <span class="use">Headings, labels, numbers, the mark</span>
+        </div>
+        <div class="spec-display">Farhan Bashir</div>
+        <div class="glyphs">ABCDEFGHIJKLM NOPQRSTUVWXYZ 0123456789</div>
+        <div class="weights"><span>400 Regular</span><span>500 Medium</span><span>600 Semibold</span><span>700 Bold</span></div>
+      </div>
+
+      <div class="type-card">
+        <div class="meta">
+          <span class="name">Sora</span>
+          <span class="use">Body copy, long-form paragraphs</span>
+        </div>
+        <p class="spec-body">I build intelligent systems for education, healthcare, crisis response
+          and sustainability. Sora carries the reading weight — light, wide-set and quiet, so
+          paragraphs stay comfortable at small sizes while the headings do the shouting.</p>
+        <div class="weights"><span>200 ExtraLight</span><span>300 Light</span><span>400 Regular</span><span>600 Semibold</span></div>
+      </div>
+
+    </div>
+    <p class="sub" style="margin-top:16px">
+      Both are free on Google Fonts. Small uppercase labels are Space Grotesk at
+      <b>0.28em</b> letter-spacing rather than a third typeface — the tracking does the work a
+      mono font used to do.
+    </p>
+  </section>
+
+  <!-- ================= PALETTE ================= -->
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2>Palette — four colours</h2></div>
+    <div class="swatches">
+
+      <div class="sw">
+        <div class="chip" style="background:#060608"></div>
+        <div class="info">
+          <div class="nm">Ink</div>
+          <div class="hex">#060608</div>
+          <div class="role">Background · near-black</div>
+        </div>
+      </div>
+
+      <div class="sw">
+        <div class="chip" style="background:#f4f4f6"></div>
+        <div class="info">
+          <div class="nm">Paper</div>
+          <div class="hex">#F4F4F6</div>
+          <div class="role">Text · near-white</div>
+        </div>
+      </div>
+
+      <div class="sw">
+        <div class="chip" style="background:#8b5cf6"></div>
+        <div class="info">
+          <div class="nm">Violet</div>
+          <div class="hex">#8B5CF6</div>
+          <div class="role">Main · links, mark, focus</div>
+        </div>
+      </div>
+
+      <div class="sw">
+        <div class="chip" style="background:#22d3ee"></div>
+        <div class="info">
+          <div class="nm">Signal</div>
+          <div class="hex">#22D3EE</div>
+          <div class="role">Accent · the agent's face only</div>
+        </div>
+      </div>
+
+    </div>
+    <p class="neutrals">
+      Two supporting neutrals carry secondary text and card surfaces:
+      <b style="color:#9d9da8">#9D9DA8</b> muted text ·
+      <b style="color:#c9c9d4">#0C0C10</b> surface.
+      Violet appears in two tints for gradients only — <b style="color:#7c5cff">#7C5CFF</b> and
+      <b style="color:#a78bfa">#A78BFA</b>. Nothing else gets a colour, which is what keeps the
+      work louder than the page.
+    </p>
+  </section>
+
+  <!-- ================= LOGO ================= -->
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2>Mark — FB monogram</h2></div>
+    <div class="logo-row">
+      <div class="logo-box">
+        <img src="assets/brand/logo.svg" alt="FB monogram on violet" />
+        <span class="cap">Primary · on dark</span>
+      </div>
+      <div class="logo-box light">
+        <img src="assets/brand/logo.svg" alt="FB monogram on light" />
+        <span class="cap">On light</span>
+      </div>
+      <div class="logo-box">
+        <img class="word" src="assets/brand/wordmark.svg" alt="Farhan Bashir wordmark" />
+        <span class="cap">Wordmark · Space Grotesk Bold</span>
+      </div>
+      <div class="logo-box">
+        <div class="sizes">
+          <img src="assets/brand/icon-32.png" width="16" height="16" alt="16px" />
+          <img src="assets/brand/icon-32.png" width="32" height="32" alt="32px" />
+          <img src="assets/brand/icon-180.png" width="56" height="56" alt="56px" />
+        </div>
+        <span class="cap">Favicon at 16 / 32 / 56px</span>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:16px">
+      My initials set in Space Grotesk Bold, drawn from the real typeface outlines so the icon
+      never falls back to a system font, on a rounded violet tile. It survives 16px, which is the
+      only test a favicon has to pass.
+    </p>
+  </section>
+
+  <!-- ================= STYLE NOTE ================= -->
+  <section>
+    <div class="sec-head"><span class="n">04</span><h2>Style note</h2></div>
+    <div class="note">
+      <p><b>Type:</b> Space Grotesk (headings, labels) + Sora (body). <b>Palette:</b> ink #060608,
+        paper #F4F4F6, violet #8B5CF6, signal cyan #22D3EE.</p>
+      <p><b>Mood:</b> a quiet, near-black engineering lab — heavy uppercase headings, generous space,
+        and colour used only to point at things, so the projects are the loudest thing on the page.</p>
+    </div>
+
+    <div class="copyable">Style note — Farhan Bashir portfolio
+Fonts: Space Grotesk (headings, labels, numbers) + Sora (body). No third font; small caps labels are Space Grotesk at 0.28em tracking.
+Palette: #060608 ink (bg) · #F4F4F6 paper (text) · #8B5CF6 violet (main) · #22D3EE cyan (accent, agent only). Neutrals #9D9DA8 text-muted, #0C0C10 surface.
+Mood: quiet near-black engineering lab. Heavy uppercase display type, generous whitespace, colour only where it points at something. The work is the loudest thing on the page.</div>
+  </section>
+
+  <footer>
+    <span>Farhan Bashir · Karachi, Pakistan</span>
+    <span><a href="./">← Back to portfolio</a> · <a href="https://github.com/FarhanRajputFelix/portfolio">Source</a></span>
+  </footer>
+
+</div>
+</body>
+</html>

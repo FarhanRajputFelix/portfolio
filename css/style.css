@@ -23,7 +23,7 @@
   --ease:        cubic-bezier(.22,.61,.36,1);
   --ease-out:    cubic-bezier(.16,1,.3,1);
   --display:     'Space Grotesk','Sora',system-ui,sans-serif;
-  --mono:        'JetBrains Mono',monospace;
+  --mono:        'Space Grotesk','Sora',system-ui,sans-serif;  /* label face = heading face */
 }
 
 *,*::before,*::after{ box-sizing:border-box; }
@@ -587,7 +587,7 @@ body.asking .char-bubble::after{      /* tail, pointing right at the bot */
   display:flex; align-items:center; justify-content:space-between; gap:10px;
   margin-top:6px; padding-top:12px; border-top:1px solid var(--line);
 }
-.cert-foot em{ font-family:var(--mono); font-size:.6rem; letter-spacing:.06em;
+.cert-foot em{ font-family:var(--mono); font-size:.6rem; letter-spacing:.12em;
   font-style:normal; color:var(--text-faint); word-break:break-all; }
 .cert-foot b{ font-family:var(--mono); font-size:.6rem; letter-spacing:.1em;
   font-weight:500; color:var(--text-dim); white-space:nowrap;
