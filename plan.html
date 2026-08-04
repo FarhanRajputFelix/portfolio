@@ -63,6 +63,12 @@
   td.what{ color:var(--paper); white-space:nowrap; }
   td.why{ color:var(--muted); }
   td.cta{ color:var(--accent); font-family:var(--display); font-size:.78rem; white-space:nowrap; }
+  td.cta a{ color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(34,211,238,.35); }
+  td.cta a:hover{ border-bottom-color:var(--accent); }
+  td.cta.soon{ color:var(--faint); white-space:normal; }
+  td.cta.soon em{ display:block; font-style:normal; font-size:.68rem; color:var(--faint); opacity:.8; }
+  .rung .from a{ color:inherit; text-decoration:none; border-bottom:1px solid rgba(255,255,255,.18); }
+  .rung .from a:hover{ border-bottom-color:var(--main); }
   .lead-tag{ display:inline-block; font-family:var(--display); font-size:.55rem; letter-spacing:.14em;
     text-transform:uppercase; padding:2px 7px; border-radius:999px; margin-left:6px;
     border:1px solid rgba(74,222,128,.45); color:#4ade80; }
@@ -184,14 +190,14 @@
       <table>
         <thead><tr><th>#</th><th>Section</th><th>What it does / which case</th><th>CTA</th></tr></thead>
         <tbody>
-          <tr><td class="n">1</td><td class="what">Hero</td><td class="why">Name, current role, the claim, and BYTE greeting visitors unprompted. The agent <em>is</em> the proof of the claim, so it appears before any words about it.</td><td class="cta">See my work ↓</td></tr>
+          <tr><td class="n">1</td><td class="what">Hero</td><td class="why">Name, current role, the claim, and BYTE greeting visitors unprompted. The agent <em>is</em> the proof of the claim, so it appears before any words about it.</td><td class="cta"><a href="./#projects">See my work ↓</a></td></tr>
           <tr><td class="n">2</td><td class="what">Ticker</td><td class="why">Stack at a glance for the ten-second skimmer.</td><td class="cta">—</td></tr>
           <tr><td class="n">3</td><td class="what">About</td><td class="why">Real photo, two paragraphs, four numbers (8 projects · 17 certifications · 15 research areas · 30+ tools).</td><td class="cta">—</td></tr>
           <tr><td class="n">4</td><td class="what">What I Do</td><td class="why">Four capability rows: ML · Agentic AI &amp; LLMs · Full-stack · Learning &amp; research. Frames the cases before showing them.</td><td class="cta">—</td></tr>
-          <tr><td class="n">5</td><td class="what">Work</td><td class="why"><strong>01 KIDO</strong><span class="lead-tag">Leads</span> — widest scope, full stack, clearest social impact. <strong>02 Air Quality</strong> — the only case with a hard number (R² ≈ 0.97), so it sits second where a skimmer still reaches it. <strong>03 Self-Regulating AI</strong> — research signal. <strong>04 Crisis Intelligence</strong> — works under pressure, in a team. <strong>05 This portfolio + agent</strong>. <strong>06 Laravel / PHP platforms</strong> — least differentiating, last.</td><td class="cta">Ask BYTE about any project</td></tr>
-          <tr><td class="n">6</td><td class="what">Certifications</td><td class="why">17 credentials, each linking to issuer verification or the LinkedIn scan. Answers “is this real?” before anyone asks.</td><td class="cta">Verify ↗</td></tr>
+          <tr><td class="n">5</td><td class="what">Work</td><td class="why"><strong>01 KIDO</strong><span class="lead-tag">Leads</span> — widest scope, full stack, clearest social impact. <strong>02 Air Quality</strong> — the only case with a hard number (R² ≈ 0.97), so it sits second where a skimmer still reaches it. <strong>03 Self-Regulating AI</strong> — research signal. <strong>04 Crisis Intelligence</strong> — works under pressure, in a team. <strong>05 This portfolio + agent</strong>. <strong>06 Laravel / PHP platforms</strong> — least differentiating, last.</td><td class="cta"><a href="./#hero">Ask BYTE ↗</a></td></tr>
+          <tr><td class="n">6</td><td class="what">Certifications</td><td class="why">17 credentials, each linking to issuer verification or the LinkedIn scan. Answers “is this real?” before anyone asks.</td><td class="cta"><a href="https://verify.skilljar.com/c/mcahqkoh8fza" target="_blank" rel="noopener">Verify ↗</a></td></tr>
           <tr><td class="n">7</td><td class="what">Career</td><td class="why">FlyRank AI internship, the hackathon, the degree, achievements, research goals.</td><td class="cta">—</td></tr>
-          <tr><td class="n">8</td><td class="what">Contact</td><td class="why">Photo, email block, LinkedIn, GitHub, location, availability.</td><td class="cta">Write email ↗</td></tr>
+          <tr><td class="n">8</td><td class="what">Contact</td><td class="why">Photo, email block, LinkedIn, GitHub, location, availability.</td><td class="cta"><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=farhanmuhammadbashir@gmail.com" target="_blank" rel="noopener">Write email ↗</a></td></tr>
         </tbody>
       </table>
     </div>
@@ -210,7 +216,7 @@
           <tr><td class="n">2</td><td class="what">What I built</td><td class="why">Flutter client, FastAPI services, PostgreSQL, Redis, OpenAI APIs; adaptive quizzes, AI tutor, analytics, parent and teacher portals.</td><td class="cta">—</td></tr>
           <tr><td class="n">3</td><td class="what">Screens</td><td class="why">Real captures of the running app — the gap that currently blocks this page.</td><td class="cta">—</td></tr>
           <tr><td class="n">4</td><td class="what">Hard part</td><td class="why">COPPA-aware architecture: what that forced me to change.</td><td class="cta">—</td></tr>
-          <tr><td class="n">5</td><td class="what">Next</td><td class="why">What I would build with more time.</td><td class="cta">Email me about this project ↗</td></tr>
+          <tr><td class="n">5</td><td class="what">Next</td><td class="why">What I would build with more time.</td><td class="cta soon">Email me about this project ↗ <em>(page not built)</em></td></tr>
         </tbody>
       </table>
     </div>
@@ -226,8 +232,8 @@
         <tbody>
           <tr><td class="n">1</td><td class="what">Question</td><td class="why">Can AQI be predicted from available environmental features?</td><td class="cta">—</td></tr>
           <tr><td class="n">2</td><td class="what">Data &amp; method</td><td class="why">Dataset, features, Random Forest regressor, validation approach.</td><td class="cta">—</td></tr>
-          <tr><td class="n">3</td><td class="what">Result</td><td class="why">R² ≈ 0.97, with the predicted-vs-actual plot as the hero image and an honest note on limitations.</td><td class="cta">Open the notebook ↗</td></tr>
-          <tr><td class="n">4</td><td class="what">What I would fix</td><td class="why">Where the model is weakest and why.</td><td class="cta">Email me ↗</td></tr>
+          <tr><td class="n">3</td><td class="what">Result</td><td class="why">R² ≈ 0.97, with the predicted-vs-actual plot as the hero image and an honest note on limitations.</td><td class="cta soon">Open the notebook ↗ <em>(repo not public yet)</em></td></tr>
+          <tr><td class="n">4</td><td class="what">What I would fix</td><td class="why">Where the model is weakest and why.</td><td class="cta"><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=farhanmuhammadbashir@gmail.com" target="_blank" rel="noopener">Email me ↗</a></td></tr>
         </tbody>
       </table>
     </div>
@@ -242,9 +248,9 @@
       <table>
         <thead><tr><th>#</th><th>Page</th><th>Purpose</th><th>CTA</th></tr></thead>
         <tbody>
-          <tr><td class="n">1</td><td class="what">Identity kit</td><td class="why">Two fonts, four hex codes, the monogram, the style note. Proves the site is a system, not a lucky template.</td><td class="cta">← Back to portfolio</td></tr>
-          <tr><td class="n">2</td><td class="what">Image audit</td><td class="why">What the site needs visually, what I kept, what I killed and why.</td><td class="cta">← Back to portfolio</td></tr>
-          <tr><td class="n">3</td><td class="what">This map</td><td class="why">Claim, content map, CTA ladder, gather list.</td><td class="cta">← Back to portfolio</td></tr>
+          <tr><td class="n">1</td><td class="what">Identity kit</td><td class="why">Two fonts, four hex codes, the monogram, the style note. Proves the site is a system, not a lucky template.</td><td class="cta"><a href="./">← Back to portfolio</a></td></tr>
+          <tr><td class="n">2</td><td class="what">Image audit</td><td class="why">What the site needs visually, what I kept, what I killed and why.</td><td class="cta"><a href="./">← Back to portfolio</a></td></tr>
+          <tr><td class="n">3</td><td class="what">This map</td><td class="why">Claim, content map, CTA ladder, gather list.</td><td class="cta"><a href="./">← Back to portfolio</a></td></tr>
         </tbody>
       </table>
     </div>
@@ -254,12 +260,12 @@
   <section>
     <div class="sec-head"><span class="n">03</span><h2>How every CTA ladders to the one action</h2></div>
     <div class="ladder">
-      <div class="rung"><span class="from">Hero — “See my work”</span><span class="arrow">→</span><span class="to">gets them into the Work section</span></div>
+      <div class="rung"><span class="from"><a href="./#projects">Hero — “See my work”</a></span><span class="arrow">→</span><span class="to">gets them into the Work section</span></div>
       <div class="rung"><span class="from">Work — “Ask BYTE about any project”</span><span class="arrow">→</span><span class="to">answers objections without me in the room</span></div>
       <div class="rung"><span class="from">Case study — “Open the notebook / repo”</span><span class="arrow">→</span><span class="to">converts interest into verified belief</span></div>
-      <div class="rung"><span class="from">Certifications — “Verify ↗”</span><span class="arrow">→</span><span class="to">removes the “is this real?” doubt</span></div>
+      <div class="rung"><span class="from"><a href="./#certs">Certifications — “Verify ↗”</a></span><span class="arrow">→</span><span class="to">removes the “is this real?” doubt</span></div>
       <div class="rung"><span class="from">Process pages — “Back to portfolio”</span><span class="arrow">→</span><span class="to">returns a curious reader to the work</span></div>
-      <div class="rung final"><span class="from">Contact — “Write email ↗”</span><span class="arrow">→</span><span class="to">the one action: an email in my inbox</span></div>
+      <div class="rung final"><span class="from"><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=farhanmuhammadbashir@gmail.com" target="_blank" rel="noopener">Contact — “Write email ↗”</a></span><span class="arrow">→</span><span class="to">the one action: an email in my inbox</span></div>
     </div>
     <p class="sub" style="margin-top:14px">
       Rule I am holding myself to: <strong>one filled violet button per screen</strong>. Secondary
