@@ -10,3 +10,7 @@ desktop.ini
 
 # Logs
 *.log
+
+# Private knowledge file for the outreach pipeline — real GPA, transcript figures,
+# passport and referee details. Attached to the Claude Project locally, never published.
+pipeline/private/

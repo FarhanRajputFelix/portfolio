@@ -99,9 +99,9 @@
       into a tailored email, CV tweaks and a fit assessment — with a built-in audit step that refuses
       to let any claim through unless my own knowledge base supports it.</p>
     <p class="sub" style="font-size:.88rem">Built and run on 5 August 2026 against five genuinely open
-      postings. It caught 5 overstatements, deleted 1 unsupported claim, killed 1 application before a
-      word was written — and turned out to be <strong>slower</strong> than doing it by hand. §04 says
-      so plainly.</p>
+      postings. It caught 5 overstatements, deleted 1 unsupported claim, killed 2 applications before a
+      word was written — and turned out to be <strong>slower</strong> than doing it by hand. §04 says so
+      plainly, and §06 retracts a claim I got wrong about my own evidence file.</p>
   </header>
 
   <!-- ============ 00 WHY THIS PIPELINE ============ -->
@@ -418,18 +418,23 @@ VERIFY BY HAND: (the one fact I must confirm before sending)
       <tbody>
         <tr>
           <td class="what">Factual defects surviving into the final email</td>
-          <td class="what">3 in one email</td>
+          <td class="what">2 in one email <span class="why">(3 claimed originally — one retracted, see §06)</span></td>
           <td class="what">0 across four emails</td>
         </tr>
         <tr>
-          <td class="what">Worst defect</td>
-          <td class="why">"comfortable with … PyTorch" — a skill I do not have, typed unprompted in under five minutes because it sits next to TensorFlow in my head</td>
-          <td class="why">scope inflation on one phrase, caught and rewritten by step 4</td>
+          <td class="what">Wrong metric</td>
+          <td class="why">"97% accuracy" — an accuracy claim for a regression model. The real figures are R² = 0.9746 and MAE 3.13 µg/m³, and an ML reviewer catches the difference immediately</td>
+          <td class="why">the R² figure quoted exactly in all four emails</td>
         </tr>
         <tr>
-          <td class="what">Wrong metric</td>
-          <td class="why">"97% accuracy" — an accuracy claim for a regression model. R² ≈ 0.97 is a different statement, and an ML reviewer catches it immediately</td>
-          <td class="why">R² = 0.97 quoted exactly in all four emails</td>
+          <td class="what">Unsupported interpretation</td>
+          <td class="why">"essentially an alignment problem" — a claim about my own prototype, asserted as fact, with no benchmark behind it</td>
+          <td class="why">"prototype" hedged correctly in every draft that mentioned it</td>
+        </tr>
+        <tr>
+          <td class="what">The honest gap</td>
+          <td class="why">hidden — even though SPAR explicitly states research experience is not required, so admitting it costs nothing</td>
+          <td class="why">volunteered in all four emails, in the reader's own vocabulary</td>
         </tr>
         <tr>
           <td class="what">Ineligible applications begun</td>
@@ -545,6 +550,67 @@ VERIFY BY HAND: (the one fact I must confirm before sending)
         "I'm preparing transcripts…" about three documents that don't exist</li>
       <li>The fit score has been read, not just seen: are the failed rows documents, or qualifications?</li>
     </ul>
+  </section>
+
+  <!-- ============ 06 ADDENDUM ============ -->
+  <section>
+    <div class="sec-head"><span class="n">06</span><h2>Addendum — the evidence file was the weakest link</h2></div>
+
+    <div class="notice">
+      <b>A retraction, kept in place rather than edited away</b>
+      <p>Hours after the five runs, I supplied my real CV and academic standing. Both invalidated
+        specific outputs above. <strong>The runs are not edited</strong> — they are a timestamped
+        record of what the pipeline produced from the files as they existed, and rewriting them to
+        look correct in hindsight would destroy the only thing that makes them evidence. Full detail:
+        <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/pipeline/runs/06-ADDENDUM-cv-corrections.md">runs/06-ADDENDUM-cv-corrections.md</a>.</p>
+    </div>
+
+    <div class="fail">
+      <h3>Retracted: the manual baseline's "PyTorch" defect<span class="sev high">My error</span></h3>
+      <p>§04 originally reported three factual defects in the hand-written baseline, the worst being
+        "comfortable with … PyTorch — a skill I do not have". <strong>PyTorch is genuinely mine</strong>
+        — it is in the AUREXIS tech stack and in my CV's skills section. I had built the knowledge file
+        from my <em>website</em>, which lists TensorFlow and never mentions PyTorch, then treated my own
+        reconstruction as authoritative and called a true statement a lie. Two of the three defects
+        stand: "97% accuracy" for a regression model (the real figures are R² = 0.9746, MAE
+        3.13 µg/m³) and "essentially an alignment problem" as an unsupported interpretation.</p>
+      <p style="margin-top:8px">The error ran in the dangerous direction. A knowledge file that wrongly
+        <em>denies</em> a real skill makes the pipeline argue its owner out of jobs he is qualified for,
+        with all the confidence of a rule that says "output NO EVIDENCE".</p>
+    </div>
+
+    <div class="fail">
+      <h3>9 · The knowledge file was never audited against its source documents<span class="sev high">High</span></h3>
+      <p>Failure point 5 anticipated files going <em>stale</em>. This is worse: the file was wrong on
+        the day it was written, because it was reconstructed from a secondary source while the primary
+        source sat unread. Every step inherited the error with total confidence, and step 4 structurally
+        cannot catch it — the audit compares the draft against the evidence map, never the evidence map
+        against reality. <strong>The auditor had no auditor.</strong>
+        <strong>Human check: before a batch of applications, diff the knowledge files against the
+        actual CV line by line. Where two sources disagree, resolve it or record the conflict — never
+        let one silently win.</strong></p>
+    </div>
+
+    <div class="fail">
+      <h3>The contradiction no pipeline can resolve<span class="sev high">Open</span></h3>
+      <p>My CV and my website describe KIDO with two disjoint stacks — TypeScript/Kotlin/Node.js versus
+        Flutter/FastAPI/PostgreSQL/Redis. Run 5's draft told Mistral the second version, which, if the
+        CV is right, is a false statement sent to an employer who can open the public repo and check.
+        One of my own two documents is wrong and only I know which. Same class of problem: TensorFlow
+        (site) vs PyTorch (CV), and Crisis Intelligence appearing on the site but not the CV.
+        <code>cv-facts.md</code> now forbids any specific claim about KIDO's stack until I fix it.</p>
+    </div>
+
+    <div class="fail">
+      <h3>Run 3 resolved: KAUST is now a skip<span class="sev med">Closed</span></h3>
+      <p>Run 3 refused to guess my CGPA, marked the 3.5/4 gate <code>NO EVIDENCE</code>, and named that
+        one number in its VERIFY BY HAND line as the fact that decided everything. Checked: it does not
+        meet the threshold, so <strong>run 3's verdict changes from "apply with caveat" to skip</strong>.
+        The number itself stays in a gitignored private file — this page is assignment evidence, and
+        academic standing belongs in an application that asks for it, not on a portfolio. Two of five
+        postings are now correctly abandoned; SPAR, which requires no GPA, no transcript and no
+        publications, remains the strongest of the five.</p>
+    </div>
   </section>
 
   <footer>
