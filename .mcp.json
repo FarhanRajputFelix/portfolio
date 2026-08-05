@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "outreach": {
+      "command": "node",
+      "args": ["mcp/outreach-server.mjs"]
+    }
+  }
+}

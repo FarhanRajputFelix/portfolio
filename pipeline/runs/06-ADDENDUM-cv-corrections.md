@@ -38,14 +38,15 @@ evidence file itself was never audited against the source document. **The audito
 ## 2. The CGPA resolves run 3 — KAUST is now a definite skip
 
 The cumulative and most-recent-semester GPAs are recorded in `private/cv-private.md`, which is
-gitignored and deliberately not published. The figures themselves are not repeated here.
+gitignored and deliberately not published. The figures themselves are **not repeated here** — see the
+redaction note at the end of this file.
 
 Run 3 marked KAUST's "minimum GPA 3.5/4" as `NO EVIDENCE` and called it *apply with caveat*, with the
 VERIFY BY HAND line naming the CGPA as the one fact that decided everything. It did decide it:
 
 > **The cumulative GPA is below the 3.5/4 minimum, so run 3's verdict changes from "apply with
-> caveat" to SKIP.** This is a screening gate
-> applied before a human reads the file, so no amount of project evidence compensates.
+> caveat" to SKIP.** This is a screening gate applied before a human reads the file, so no amount of
+> project evidence compensates.
 
 That is the pipeline working exactly as designed — it refused to guess, named the deciding fact, and
 the fact killed the application. Two of five postings are now correctly abandoned.
@@ -94,3 +95,22 @@ audits the draft against the evidence map — never the evidence map against rea
 actual CV, line by line. Where two sources disagree, resolve it or record the conflict — never let one
 of them silently win. The pipeline is exactly as honest as its evidence file, and nothing inside the
 pipeline can tell you the evidence file is lying.
+
+---
+
+## 6. Redaction note — added 5 August 2026
+
+This file originally quoted the cumulative and most-recent-semester GPA figures directly, in the same
+session that established the rule that those numbers stay in the gitignored private file. They have
+been removed from the body above; the verdict (below the 3.5/4 threshold → skip) is stated without
+them, which is all any reader needs.
+
+**The figures remain in this repository's git history**, in the commit that first added this file.
+Removing them from history requires a rewrite and a force push — a destructive, outward-facing
+operation, so it is Farhan's call rather than something to do quietly.
+
+Recording it here because it is the same class of failure as failure point 9 in
+[workflow.html](../../workflow.html): a rule was written down and then not applied to the very file
+that wrote it. A pre-publish check that greps for the private figures across *untracked as well as
+tracked* files would have caught it — `git grep` only searches tracked files, which is exactly why
+the first check came back clean.

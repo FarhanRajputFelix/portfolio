@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Agents, Workflows and MCP — Farhan Bashir</title>
+<meta name="description" content="What an agent actually is, what MCP actually is, and what my FL-04 pipeline would need to become an agent — with a working MCP server to prove it." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@200;300;400;600&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
+<meta name="theme-color" content="#060608" />
+<style>
+  :root{
+    --ink:#060608; --paper:#f4f4f6; --main:#8b5cf6; --accent:#22d3ee;
+    --muted:#9d9da8; --faint:#6a6a76; --surface:#0c0c10; --line:rgba(255,255,255,.09);
+    --display:'Space Grotesk',system-ui,sans-serif; --body:'Sora',system-ui,sans-serif;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  body{ margin:0; background:var(--ink); color:var(--paper); font-family:var(--body);
+    font-weight:300; line-height:1.65; -webkit-font-smoothing:antialiased; }
+  a{ color:var(--main); }
+  .wrap{ max-width:1080px; margin:0 auto; padding:clamp(32px,6vw,72px) clamp(20px,5vw,40px) 80px; }
+
+  .label{ font-family:var(--display); font-size:.66rem; font-weight:500;
+    letter-spacing:.28em; text-transform:uppercase; color:var(--muted); }
+  h1{ font-family:var(--display); font-weight:700; letter-spacing:-.04em; text-transform:uppercase;
+    font-size:clamp(1.8rem,4.6vw,2.8rem); margin:.2em 0 .3em; }
+  h2{ font-family:var(--display); font-weight:600; letter-spacing:-.02em; font-size:1.2rem; margin:0; }
+  h3{ font-family:var(--display); font-weight:600; font-size:.98rem; margin:0 0 8px; }
+  p{ max-width:74ch; }
+  .sub{ color:var(--muted); max-width:74ch; }
+  strong{ color:var(--paper); font-weight:600; }
+  em{ color:var(--paper); font-style:italic; }
+  code{ font-family:var(--display); font-size:.86em; color:var(--accent); }
+
+  header.top{ padding-bottom:26px; border-bottom:1px solid var(--line); }
+  section{ padding:38px 0; border-bottom:1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+  .sec-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:18px; }
+  .sec-head .n{ font-family:var(--display); font-size:.72rem; color:var(--main); letter-spacing:.2em; }
+
+  pre{ margin:14px 0 0; padding:16px 18px; border:1px solid var(--line); border-radius:12px;
+    background:#000; color:#cfcfda; font-family:var(--display); font-size:.78rem;
+    line-height:1.6; white-space:pre; overflow-x:auto; }
+
+  table{ width:100%; border-collapse:collapse; font-size:.84rem; }
+  .scroll{ overflow-x:auto; }
+  th,td{ text-align:left; padding:10px 11px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th{ font-family:var(--display); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--faint); font-weight:500; }
+  td.what{ color:var(--paper); }
+  td.why{ color:var(--muted); }
+
+  .card{ padding:18px 20px; border:1px solid var(--line); border-radius:14px;
+    background:var(--surface); margin-bottom:12px; }
+  .card p{ margin:0; color:var(--muted); font-size:.9rem; }
+  .card p + p{ margin-top:8px; }
+
+  .verdict{ padding:18px 22px; border:1px solid rgba(139,92,246,.42); border-radius:14px;
+    background:linear-gradient(120deg,rgba(139,92,246,.09),transparent); margin:20px 0; }
+  .verdict b{ font-family:var(--display); color:var(--main); letter-spacing:.04em; }
+  .verdict p{ margin:6px 0 0; color:var(--muted); font-size:.92rem; }
+
+  .tag{ font-family:var(--display); font-size:.55rem; letter-spacing:.14em; text-transform:uppercase;
+    padding:2px 8px; border-radius:999px; border:1px solid var(--line); margin-left:8px;
+    color:var(--accent); border-color:rgba(34,211,238,.4); }
+
+  footer{ padding-top:30px; font-size:.78rem; color:var(--muted);
+    display:flex; gap:18px; flex-wrap:wrap; justify-content:space-between; }
+  @media print{ body{ background:#fff; color:#111 } pre{ background:#f6f6f8; color:#111 } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <span class="label">Agent concepts &amp; MCP basics · FL-05 · Week 4</span>
+    <h1>My pipeline is a workflow, not an agent</h1>
+    <p class="sub">And the honest reason is that I wrote the order of the steps. Below: the
+      distinction, where my FL-04 build sits, what MCP is, and the one upgrade that would move it
+      across the line.</p>
+  </header>
+
+  <!-- ============ 01 WORKFLOW VS AGENT ============ -->
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2>Workflow or agent — who decides the next step?</h2></div>
+
+    <p class="sub" style="margin-top:0">Anthropic's <a href="https://www.anthropic.com/engineering/building-effective-agents">Building
+      Effective Agents</a> draws the line in one place, and it isn't capability or cleverness. A
+      <strong>workflow</strong> is a system where models and tools are orchestrated through
+      <em>predefined code paths</em>. An <strong>agent</strong> is a system where the model
+      <em>dynamically directs its own process and tool usage</em>, keeping control over how it
+      reaches the goal. Both are "agentic systems"; the difference is who owns the control flow.</p>
+
+    <p class="sub">So the test is one question: <strong>at each step, does the sequence come from the
+      author or the model?</strong> If I can draw the flowchart before the task starts, it's a
+      workflow — however many steps, however smart each one. If the step count can't be known in
+      advance because the model decides what comes next from what it just learned, that's an
+      agent.</p>
+
+    <p class="sub">The essay is blunt about the trade: agents buy performance with latency and cost,
+      so find the simplest thing that works — sometimes that means no agent at all. Handing over
+      control is a cost, not a prize.</p>
+  </section>
+
+  <!-- ============ 02 CLASSIFYING FL-04 ============ -->
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2>Classifying my FL-04 build</h2></div>
+
+    <p class="sub" style="margin-top:0">My <a href="workflow.html">Opportunity → outreach pack</a>
+      pipeline runs five steps: gather, evidence map, draft, adversarial audit in an isolated chat,
+      format.</p>
+
+    <div class="verdict">
+      <b>Verdict: a workflow — specifically prompt chaining with a gate.</b>
+      <p>Each step's output is the next step's input, in an order I fixed before any posting existed.
+        The model never selects a step. <em>I</em> carry text between the five prompts by hand.</p>
+    </div>
+
+    <p class="sub">Two details look like agency and are not. First, step 2 can emit
+      <code>CALL: skip</code> and stop the run — which killed the DAAD WISE application in 38
+      seconds. That is real decision-making, but it is a <strong>conditional inside a path I
+      predefined</strong>: I decided in advance that a skip verdict halts the chain. A branch I wrote
+      is still my branch.</p>
+
+    <p class="sub">Second, step 4 runs in a deliberately fresh chat so the auditor can't be persuaded
+      by the reasoning that produced the draft — and that isolation is only achievable
+      <em>because</em> I control the path. A model directing its own process would carry its context
+      forward, which is exactly what the audit exists to prevent. Here, being a workflow is the
+      feature.</p>
+  </section>
+
+  <!-- ============ 03 WHAT MCP IS ============ -->
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2>What MCP is</h2></div>
+
+    <p class="sub" style="margin-top:0">The <a href="https://modelcontextprotocol.io/">Model Context
+      Protocol</a> is an open standard for connecting AI applications to outside systems — the docs
+      call it <em>a USB-C port for AI applications</em>. Before it, every integration was bespoke;
+      now you build a server once and any compliant client can use it.</p>
+
+    <p class="sub">The shape is client–server. A <strong>host</strong> (Claude Desktop, Claude Code,
+      VS Code) spawns one <strong>client</strong> per <strong>server</strong>, each holding a
+      dedicated connection. Underneath it's JSON-RPC 2.0 over either stdio for local processes or
+      streamable HTTP for remote ones. A server exposes three primitives, and what makes them
+      distinct isn't format — it's <strong>who is in control</strong>:</p>
+
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Primitive</th><th>Controlled by</th><th>What it's for</th><th>In my server</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="what"><strong>Tools</strong></td>
+          <td class="what">the <strong>model</strong></td>
+          <td class="why">Executable functions the model invokes to take action — API calls, file writes, queries. Discovered with <code>tools/list</code>, run with <code>tools/call</code>.</td>
+          <td class="why"><code>fetch_posting</code>, <code>check_gpa_gate</code>, <code>log_run</code></td>
+        </tr>
+        <tr>
+          <td class="what"><strong>Resources</strong></td>
+          <td class="what">the <strong>application</strong></td>
+          <td class="why">Data that provides context — file contents, records, API responses. The host decides what to attach; the model doesn't fetch them at will.</td>
+          <td class="why">both knowledge files and all 7 run transcripts, under <code>outreach://</code></td>
+        </tr>
+        <tr>
+          <td class="what"><strong>Prompts</strong></td>
+          <td class="what">the <strong>user</strong></td>
+          <td class="why">Reusable templates a human picks deliberately — the slash-command menu.</td>
+          <td class="why">my five pipeline steps, <code>step1_gather</code> … <code>step5_pack</code></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p class="sub">That control split is the part worth memorising. "MCP gives Claude tools" is the
+      marketing summary and it misses two thirds of the protocol.</p>
+  </section>
+
+  <!-- ============ 04 THE SERVER ============ -->
+  <section>
+    <div class="sec-head"><span class="n">04</span><h2>The server I built, and three things chat can't do</h2></div>
+
+    <p class="sub" style="margin-top:0">I wrote <code>outreach-mcp</code> — zero dependencies, stdio
+      transport, raw JSON-RPC, all three primitives:
+      <a href="https://github.com/FarhanRajputFelix/portfolio/tree/main/mcp">mcp/</a>. Full protocol
+      transcript:
+      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/mcp/evidence/transcript.txt">evidence/transcript.txt</a>.</p>
+
+    <div class="card">
+      <h3>1 · Fetch a live posting<span class="tag">network I/O</span></h3>
+      <p><code>fetch_posting</code> pulled <code>https://sparai.org/</code> — HTTP 200,
+        <strong>358,124 bytes of HTML</strong> stripped to 12,931 characters, carrying the live
+        deadline ("Apply by August 18") and "230+ mentors for Fall 2026". A chat window cannot open a
+        socket; without this the posting gets pasted by hand.</p>
+    </div>
+
+    <div class="card">
+      <h3>2 · Answer a GPA gate without disclosing the GPA<span class="tag">private local file</span></h3>
+      <p><code>check_gpa_gate</code> reads <code>pipeline/private/cv-private.md</code> — gitignored,
+        never published. Against KAUST VSRP's stated 3.5/4 minimum it returned
+        <strong><code>VERDICT: FAIL</code></strong> → skip; against a 2.5/4 threshold,
+        <code>VERDICT: PASS</code>.</p>
+      <p><strong>Neither response contains the number.</strong> The tool returns the decision and
+        keeps the CGPA on the machine — which is the whole argument for a tool over a paste. Pasting
+        the file into a chat would disclose it permanently to get the same one-bit answer.</p>
+    </div>
+
+    <div class="card">
+      <h3>3 · Write state that outlives the conversation<span class="tag">persistence</span></h3>
+      <p><code>log_run</code> appends to <code>pipeline/runs/INDEX.md</code>, creating it on first
+        call. Running the client twice appended row 1, then row 2 — <strong>state surviving across
+        separate processes</strong>, which conversation history cannot do.</p>
+    </div>
+
+    <p class="sub">Two implementation notes. The current spec revision (<code>2026-07-28</code>) is
+      stateless and discovers via <code>server/discover</code>, while most shipping clients still send
+      the older <code>initialize</code> — my server answers both. And because a resource URI is
+      model-supplied input, every read is canonicalised and rejected if it escapes the project
+      root.</p>
+  </section>
+
+  <!-- ============ 05 THE UPGRADE ============ -->
+  <section>
+    <div class="sec-head"><span class="n">05</span><h2>The one upgrade that would make it an agent</h2></div>
+
+    <p class="sub" style="margin-top:0"><strong>Replace my hand-carried five-step sequence with a
+      single loop that has a stop condition, and let the model choose which tool to call next.</strong></p>
+
+    <p class="sub">Concretely: one prompt stating the goal — <em>produce a send-ready outreach pack,
+      or a justified skip</em> — the three tools, the knowledge files as resources, and a loop that
+      keeps returning tool results to the model until it emits the pack. Nobody writes the order.
+      Given a posting with a GPA minimum, the model calls <code>fetch_posting</code>, notices the
+      threshold, calls <code>check_gpa_gate</code> unprompted, gets <code>FAIL</code>, logs a skip and
+      stops — three calls I never sequenced. Given a posting with no GPA gate it never makes that call
+      at all. <strong>The step count stops being knowable in advance</strong>, which is precisely the
+      line from §01.</p>
+
+    <p class="sub">The MCP server is the prerequisite: that loop is only possible once the steps exist
+      as callable capabilities rather than prompts I copy between windows. And I'd pay for it — the
+      audit's isolation is a property of the path, so an agent managing its own context would need
+      that enforced as a tool boundary instead. Worth doing at twenty postings a week. At five, the
+      workflow is still the right call.</p>
+  </section>
+
+  <footer>
+    <span>Farhan Bashir · Karachi, Pakistan</span>
+    <span><a href="./">← Portfolio</a> · <a href="workflow.html">FL-04 workflow</a> ·
+      <a href="https://github.com/FarhanRajputFelix/portfolio/tree/main/mcp">Server source</a></span>
+  </footer>
+
+</div>
+</body>
+</html>

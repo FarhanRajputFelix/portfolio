@@ -1,0 +1,180 @@
+
+══════════════════════════════════════════════════════════════════════════
+HANDSHAKE — capability negotiation
+══════════════════════════════════════════════════════════════════════════
+
+→ REQUEST  {"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2026-07-28","capabilities":{},"_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientInfo":{"name":"fl05-test-client","version":"1.0.0"},"io.modelcontextprotocol/clientCapabilities":{}}}}
+[outreach-mcp] ready — repo root C:\Users\Laptronics.co\OneDrive\Desktop\CAPSTON
+← initialize
+{
+  "protocolVersion": "2026-07-28",
+  "capabilities": {
+    "tools": {
+      "listChanged": false
+    },
+    "resources": {},
+    "prompts": {}
+  },
+  "serverInfo": {
+    "name": "outreach-mcp",
+    "version": "1.0.0"
+  },
+  "instructions": "Tools for the Opportunity -> outreach pack pipeline. fetch_posting pulls a live posting; check_gpa_gate answers GPA minimums without exposing the GPA; log_run persists a run. Read the knowledge files as resources before mapping evidence."
+}
+
+→ REQUEST  {"jsonrpc":"2.0","id":2,"method":"server/discover","params":{"_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientInfo":{"name":"fl05-test-client","version":"1.0.0"},"io.modelcontextprotocol/clientCapabilities":{}}}}
+[outreach-mcp] notification: notifications/initialized
+← server/discover
+{
+  "resultType": "complete",
+  "supportedVersions": [
+    "2026-07-28",
+    "2025-06-18",
+    "2024-11-05"
+  ],
+  "capabilities": {
+    "tools": {
+      "listChanged": false
+    },
+    "resources": {},
+    "prompts": {}
+  },
+  "_meta": {
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "outreach-mcp",
+      "version": "1.0.0"
+    }
+  },
+  "ttlMs": 3600000,
+  "cacheScope": "public"
+}
+
+══════════════════════════════════════════════════════════════════════════
+DISCOVERY — all three primitives
+══════════════════════════════════════════════════════════════════════════
+
+→ REQUEST  {"jsonrpc":"2.0","id":3,"method":"tools/list","params":{"_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientInfo":{"name":"fl05-test-client","version":"1.0.0"},"io.modelcontextprotocol/clientCapabilities":{}}}}
+← tools/list — 3 tools:
+    • fetch_posting — Fetch a live posting
+    • check_gpa_gate — Check a GPA gate without revealing the GPA
+    • log_run — Append a run to the pipeline index
+
+→ REQUEST  {"jsonrpc":"2.0","id":4,"method":"resources/list","params":{"_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientInfo":{"name":"fl05-test-client","version":"1.0.0"},"io.modelcontextprotocol/clientCapabilities":{}}}}
+← resources/list — 9 resources:
+    • outreach://knowledge/cv-facts
+    • outreach://knowledge/project-brief
+    • outreach://runs/00-MANUAL-BASELINE
+    • outreach://runs/06-ADDENDUM-cv-corrections
+    • outreach://runs/run-01-spar
+    • outreach://runs/run-02-mitacs
+    • outreach://runs/run-03-kaust
+    • outreach://runs/run-04-daad-wise
+    • outreach://runs/run-05-COLD-mistral
+
+→ REQUEST  {"jsonrpc":"2.0","id":5,"method":"prompts/list","params":{"_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientInfo":{"name":"fl05-test-client","version":"1.0.0"},"io.modelcontextprotocol/clientCapabilities":{}}}}
+← prompts/list — 5 prompts:
+    • step1_gather — Step 1 — GATHER
+    • step2_evidence_map — Step 2 — EVIDENCE MAP
+    • step3_draft — Step 3 — DRAFT
+    • step4_audit — Step 4 — ADVERSARIAL AUDIT (run in a fresh chat)
+    • step5_pack — Step 5 — PACK
+
+══════════════════════════════════════════════════════════════════════════
+TASK 1 — fetch a live posting from the web  (needs network I/O)
+══════════════════════════════════════════════════════════════════════════
+
+→ REQUEST  {"jsonrpc":"2.0","id":6,"method":"tools/call","params":{"name":"fetch_posting","arguments":{"url":"https://sparai.org/","max_chars":1200},"_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientInfo":{"name":"fl05-test-client","version":"1.0.0"},"io.modelcontextprotocol/clientCapabilities":{}}}}
+← tools/call fetch_posting
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "FETCHED: https://sparai.org/\nHTTP: 200 OK\nBYTES OF HTML: 358124\nCHARS OF TEXT: 12931 (clipped to 1200)\n--- POSTING TEXT ---\nSPAR - Research Program for AI Risks Fall 2026 mentee applications are open! Apply to research projects by August 18. Apply now \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nSPAR\n \n \nFor Mentors\n \nProjects\n \nAdvice for applying\n \nResearch Library\n \n \n \n \nContact us\n \nApply as a mentee\n \n Open main menu \n \n \n \nFor Mentors\n \nProjects\n \nAdvice for applying\n \nResearch Library\n \nContact us\n \nApply as a mentee\n \n \n \nResearch program for AI risks\n\n \nConnecting rising talent\n\nwith expertise to tackle risks from AI\n\n \nWe're a part-time, remote research fellowship that enables aspiring AI safety and policy researchers to work on impactful research projects with professionals in the field.\n\n \nApply as a mentee\n \nBrowse projects\n \n \nMentee applications are open for Fall 2026! Apply by\n August 18.\n \n \n \n \n \n Meet our 230+ mentors for Fall 2026\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n"
+    }
+  ]
+}
+
+══════════════════════════════════════════════════════════════════════════
+TASK 2 — evaluate a GPA gate from a gitignored private file
+══════════════════════════════════════════════════════════════════════════
+
+→ REQUEST  {"jsonrpc":"2.0","id":7,"method":"tools/call","params":{"name":"check_gpa_gate","arguments":{"threshold":3.5,"scale":4,"programme":"KAUST VSRP"},"_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientInfo":{"name":"fl05-test-client","version":"1.0.0"},"io.modelcontextprotocol/clientCapabilities":{}}}}
+← tools/call check_gpa_gate  (KAUST VSRP, 3.5/4)
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "GATE: KAUST VSRP requires 3.5/4\nVERDICT: FAIL\nCALL: SKIP — a GPA gate is screened before a human reads the application, so no project evidence compensates\nSOURCE: pipeline/private/cv-private.md (gitignored, never published)\nDISCLOSURE: the CGPA itself is deliberately not returned. This tool answers the question without moving the number off the machine."
+    }
+  ]
+}
+
+→ REQUEST  {"jsonrpc":"2.0","id":8,"method":"tools/call","params":{"name":"check_gpa_gate","arguments":{"threshold":2.5,"scale":4,"programme":"Hypothetical 2.5 minimum"},"_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientInfo":{"name":"fl05-test-client","version":"1.0.0"},"io.modelcontextprotocol/clientCapabilities":{}}}}
+← tools/call check_gpa_gate  (a 2.5/4 programme, for contrast)
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "GATE: Hypothetical 2.5 minimum requires 2.5/4\nVERDICT: PASS\nCALL: the GPA gate is clear — continue the pipeline\nSOURCE: pipeline/private/cv-private.md (gitignored, never published)\nDISCLOSURE: the CGPA itself is deliberately not returned. This tool answers the question without moving the number off the machine."
+    }
+  ]
+}
+
+══════════════════════════════════════════════════════════════════════════
+TASK 3 — persist a run to disk  (survives the session)
+══════════════════════════════════════════════════════════════════════════
+
+→ REQUEST  {"jsonrpc":"2.0","id":9,"method":"tools/call","params":{"name":"log_run","arguments":{"programme":"KAUST VSRP","fit_score":"4/10","call":"skip","verify_by_hand":"none — the GPA gate settled it","source_url":"https://admissions.kaust.edu.sa/study/internships"},"_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientInfo":{"name":"fl05-test-client","version":"1.0.0"},"io.modelcontextprotocol/clientCapabilities":{}}}}
+← tools/call log_run
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "LOGGED row 1 to pipeline/runs/INDEX.md\nprogramme: KAUST VSRP\ncall: skip\nfit: 4/10\nThe index now holds 1 run. This survives the session — it is a file on disk, not conversation history."
+    }
+  ]
+}
+
+══════════════════════════════════════════════════════════════════════════
+RESOURCE READ — application-controlled context
+══════════════════════════════════════════════════════════════════════════
+
+→ REQUEST  {"jsonrpc":"2.0","id":10,"method":"resources/read","params":{"uri":"outreach://knowledge/cv-facts","_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientInfo":{"name":"fl05-test-client","version":"1.0.0"},"io.modelcontextprotocol/clientCapabilities":{}}}}
+← resources/read outreach://knowledge/cv-facts
+    mimeType: text/markdown
+    chars: 16039
+    first line: # CV facts — Farhan Muhammad Bashir
+
+══════════════════════════════════════════════════════════════════════════
+PROMPT GET — user-controlled template
+══════════════════════════════════════════════════════════════════════════
+
+→ REQUEST  {"jsonrpc":"2.0","id":11,"method":"prompts/get","params":{"name":"step1_gather","arguments":{"posting":"(posting text would be injected here)"},"_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientInfo":{"name":"fl05-test-client","version":"1.0.0"},"io.modelcontextprotocol/clientCapabilities":{}}}}
+← prompts/get step1_gather
+    STEP 1 of 5 — GATHER.
+    Here is a posting. Extract, in this exact format:
+    
+    DEADLINE: (date or "not stated")
+    CONTACT: (name/email or "not stated")
+    REPEATED KEYWORDS: (the 3 phrases the posting uses most)
+    REQUIREMENTS:
+    1. [must-have|nice-to-have] requirement, in the posting's own words
+    2. ...
+    
+    Do not comment on my fit yet. Do not invent requirements that are not written.
+    
+    POSTING:
+    (posting text would be injected here)
+
+══════════════════════════════════════════════════════════════════════════
+ERROR HANDLING — unknown method returns -32601, not a crash
+══════════════════════════════════════════════════════════════════════════
+
+→ REQUEST  {"jsonrpc":"2.0","id":12,"method":"bogus/method","params":{"_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientInfo":{"name":"fl05-test-client","version":"1.0.0"},"io.modelcontextprotocol/clientCapabilities":{}}}}
+← bogus/method
+{
+  "code": -32601,
+  "message": "Method not found: bogus/method"
+}
+
+✓ all checks completed
