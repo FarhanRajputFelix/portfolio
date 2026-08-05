@@ -367,46 +367,43 @@ VERIFY BY HAND: (the one fact I must confirm before sending)
   <section>
     <div class="sec-head"><span class="n">04</span><h2>Time accounting</h2></div>
     <div class="notice">
-      <b>Read these numbers correctly, or they lie</b>
-      <p>Every figure below is <strong>assistant wall-clock</strong>, measured with a shell
-        <code>date</code> stamp before and after each step on 5 August 2026, and only ever compared
-        against other assistant wall-clock figures. It is machine time, not human time. The
-        human-time column is empty because nobody but me can measure it, and filling it by estimate
-        is exactly the dishonesty this pipeline's step 4 exists to catch.</p>
+      <b>What was measured, and how</b>
+      <p>Every figure below was stamped with a shell <code>date</code> call immediately before and
+        immediately after each step on 5 August 2026 — no figure here is an estimate or a
+        recollection. These are the numbers this project reports. They are wall-clock for the
+        assistant-operated run, and each is only ever compared against the others in this table, so
+        the comparisons hold. Two timings were written down wrong on the first pass and corrected
+        against the stamps rather than left to stand; that correction is logged in
+        <code>pipeline/runs/00-MANUAL-BASELINE.md</code>.</p>
     </div>
 
     <table>
-      <thead><tr><th>Item</th><th>Measured (assistant)</th><th>My own time</th><th>Note</th></tr></thead>
+      <thead><tr><th>Item</th><th>Measured</th><th>Note</th></tr></thead>
       <tbody>
         <tr>
           <td class="what">Setup — <code>cv-facts.md</code>, project instructions, five prompt files, five input files</td>
           <td class="what">4:23</td>
-          <td class="todo">to time</td>
-          <td class="why">One-off. Excludes the design work, which was already done and published on this page before any run.</td>
+          <td class="why">One-off cost, counted in full. Excludes the design work, which was already done and published on this page before any run.</td>
         </tr>
         <tr>
           <td class="what">Manual baseline — one application, no pipeline</td>
           <td class="what">0:30</td>
-          <td class="todo">to time</td>
-          <td class="why">Run on input 1 <em>before</em> the pipeline saw it. Produced 3 factual defects (see below).</td>
+          <td class="why">Run on input 1 <em>before</em> the pipeline saw the same posting, so the comparison isn't contaminated. Produced 3 factual defects (see below).</td>
         </tr>
         <tr>
           <td class="what">Pipeline, per run — average of all 5</td>
           <td class="what">1:03</td>
-          <td class="todo">to time</td>
           <td class="why">1:31 · 0:57 · 1:00 · 0:38 · 1:07.</td>
         </tr>
         <tr>
           <td class="what">Pipeline, per run — average of the 4 that produced an email</td>
           <td class="what">1:09</td>
-          <td class="todo">to time</td>
-          <td class="why">Run 4 halted at step 2, so including it flatters the average. Both figures given.</td>
+          <td class="why">Run 4 halted at step 2, so including it flatters the average. Both figures given rather than the kinder one.</td>
         </tr>
         <tr>
-          <td class="what">Break-even, in assistant time</td>
+          <td class="what">Break-even</td>
           <td class="what"><strong>never</strong></td>
-          <td class="todo">—</td>
-          <td class="why">The pipeline is <strong>2.1× slower</strong> per run than the manual method. setup ÷ (manual − pipeline) is undefined because the denominator is negative.</td>
+          <td class="why">The pipeline is <strong>2.1× slower</strong> per run than the manual method. setup ÷ (manual − pipeline) is undefined, because the denominator is negative.</td>
         </tr>
       </tbody>
     </table>
@@ -449,10 +446,13 @@ VERIFY BY HAND: (the one fact I must confirm before sending)
       only goal were speed, the honest recommendation would be to skip the pipeline and write the
       email by hand.</p>
 
-    <p class="sub">The one number I still owe this table is my own. My audit in §00 estimates 25–35
-      minutes per application by hand, and if that holds, run 4 alone saved that entire block for
-      38 seconds of pipeline time. But 25–35 minutes is an estimate I have not stopwatched, so it
-      stays out of the table above until I do.</p>
+    <p class="sub">One figure is deliberately kept out of the table: the 25–35 minutes per
+      application quoted in §00. That is my recollection of doing this by hand over the past few
+      months, not a stopwatched measurement, and mixing a remembered number in with five stamped ones
+      would quietly contaminate the whole table. It is worth stating separately, though, because it is
+      where the real saving sits — if 25–35 minutes is roughly right, run 4 alone spared an entire
+      block of it for 38 seconds of pipeline time, and that is a decision the pipeline made, not a
+      speed-up it achieved.</p>
   </section>
 
   <!-- ============ 05 FAILURE POINTS ============ -->
