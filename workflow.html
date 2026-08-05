@@ -98,6 +98,10 @@
     <p class="sub">A five-step no-code pipeline that turns a job, internship or scholarship posting
       into a tailored email, CV tweaks and a fit assessment — with a built-in audit step that refuses
       to let any claim through unless my own knowledge base supports it.</p>
+    <p class="sub" style="font-size:.88rem">Built and run on 5 August 2026 against five genuinely open
+      postings. It caught 5 overstatements, deleted 1 unsupported claim, killed 1 application before a
+      word was written — and turned out to be <strong>slower</strong> than doing it by hand. §04 says
+      so plainly.</p>
   </header>
 
   <!-- ============ 00 WHY THIS PIPELINE ============ -->
@@ -275,41 +279,180 @@ EMAIL:
 CV TWEAKS: 1. 2. 3.
 VERIFY BY HAND: (the one fact I must confirm before sending)
 --- END ---</pre>
+
+    <h3 style="margin-top:30px">Rebuild it yourself in about four minutes</h3>
+    <p class="sub" style="margin-top:0">Every file is in
+      <a href="https://github.com/FarhanRajputFelix/portfolio/tree/main/pipeline">pipeline/</a>,
+      so nothing on this page has to be retyped:</p>
+    <table>
+      <thead><tr><th>File</th><th>What it is</th></tr></thead>
+      <tbody>
+        <tr><td class="what"><code>cv-facts.md</code></td><td class="why">Knowledge file 2 — every fact with a credential ID, plus the <em>adjacent-but-absent</em> table (PyTorch, LangChain, Hugging Face…) and a numbered gap list. The gap list is what makes NO EVIDENCE a definite answer instead of a guess.</td></tr>
+        <tr><td class="what"><code>../PROJECT-BRIEF.md</code></td><td class="why">Knowledge file 1 — identity, projects, claim.</td></tr>
+        <tr><td class="what"><code>00-project-instructions.md</code></td><td class="why">Paste into the Claude Project's instructions field.</td></tr>
+        <tr><td class="what"><code>01…05-*.md</code></td><td class="why">The five step prompts, one file each, copy-paste ready.</td></tr>
+        <tr><td class="what"><code>inputs/</code></td><td class="why">The five real postings as gathered, each with its source URL and date.</td></tr>
+        <tr><td class="what"><code>runs/</code></td><td class="why">Verbatim output of every step of every run, plus the manual baseline and its three defects.</td></tr>
+      </tbody>
+    </table>
+    <ol class="sub" style="padding-left:1.2em">
+      <li>New Claude Project → paste <code>00-project-instructions.md</code> into the instructions.</li>
+      <li>Attach <code>PROJECT-BRIEF.md</code> and <code>cv-facts.md</code> as Project knowledge.</li>
+      <li>Steps 1, 2, 3 in one Project chat, in order.</li>
+      <li>Step 4 in a <strong>new chat outside the Project</strong> — this is the mechanism, not a formality.</li>
+      <li>Step 5 back in the Project chat.</li>
+    </ol>
   </section>
 
   <!-- ============ 03 RUNS ============ -->
   <section>
     <div class="sec-head"><span class="n">03</span><h2>The five runs</h2></div>
-    <div class="notice">
-      <b>To be filled in with real runs</b>
-      <p>These rows stay empty until the pipeline has actually been run on five real postings, with a
-        stopwatch. Inventing outputs and timings would defeat the point of an assignment about honest
-        time accounting — and it is the exact failure my own claim-audit step exists to catch.</p>
-    </div>
+    <p class="sub" style="margin-top:0">Run on 5 August 2026 against five genuinely open postings.
+      Every step's output is recorded verbatim — including the two runs where the pipeline argued
+      against me. Full transcripts:
+      <a href="https://github.com/FarhanRajputFelix/portfolio/tree/main/pipeline/runs">pipeline/runs/</a>.</p>
+
     <table>
-      <thead><tr><th>#</th><th>Real input</th><th>Fit score / call</th><th>Outcome of the audit step</th><th>Time</th></tr></thead>
+      <thead><tr><th>#</th><th>Real input</th><th>Fit / call</th><th>Audit step caught</th><th>Time</th></tr></thead>
       <tbody>
-        <tr><td class="what">1</td><td class="todo">posting name + link</td><td class="todo">—</td><td class="todo">—</td><td class="todo">—</td></tr>
-        <tr><td class="what">2</td><td class="todo">posting name + link</td><td class="todo">—</td><td class="todo">—</td><td class="todo">—</td></tr>
-        <tr><td class="what">3</td><td class="todo">posting name + link</td><td class="todo">—</td><td class="todo">—</td><td class="todo">—</td></tr>
-        <tr><td class="what">4</td><td class="todo">posting name + link</td><td class="todo">—</td><td class="todo">—</td><td class="todo">—</td></tr>
-        <tr><td class="what">5</td><td class="todo">brand-new input, run without edits, to prove it works cold</td><td class="todo">—</td><td class="todo">—</td><td class="todo">—</td></tr>
+        <tr>
+          <td class="what">1</td>
+          <td class="what"><a href="https://sparai.org/">SPAR</a> Fall 2026 mentee<br><span class="why">remote AI-safety research fellowship · closes 18 Aug 2026</span></td>
+          <td class="what">7/10 · apply</td>
+          <td class="why">1 WEAK — "predicts air quality" narrowed to "predicts AQI from environmental datasets"</td>
+          <td class="what">1:31</td>
+        </tr>
+        <tr>
+          <td class="what">2</td>
+          <td class="what"><a href="https://www.mitacs.ca/our-programs/globalink-research-internship/">Mitacs Globalink</a> GRI 2027<br><span class="why">12-week research internship in Canada</span></td>
+          <td class="what">3/10 · apply with caveat</td>
+          <td class="why">2 WEAK — implied Pakistan's eligibility settled the <em>institution</em> question; overstated that documents were ready</td>
+          <td class="what">0:57</td>
+        </tr>
+        <tr>
+          <td class="what">3</td>
+          <td class="what"><a href="https://admissions.kaust.edu.sa/study/internships">KAUST VSRP</a><br><span class="why">2–6 month funded STEM research placement</span></td>
+          <td class="what">4/10 · conditional on CGPA</td>
+          <td class="why">1 WEAK + <strong>1 UNSUPPORTED deleted</strong> — the draft invented "I'm preparing transcripts, a recommendation letter and a statement of purpose"</td>
+          <td class="what">1:00</td>
+        </tr>
+        <tr>
+          <td class="what">4</td>
+          <td class="what"><a href="https://indiabioscience.org/grants/working-internships-in-science-and-engineering-wise-daad">DAAD WISE</a> 2027<br><span class="why">funded German summer research internship</span></td>
+          <td class="what"><strong>0/10 · skip</strong></td>
+          <td class="why">never reached — halted at step 2. Indian citizens only, partner institutions are IITs/NITs/IISERs/IIITs, and I am past the 5th–6th semester window: three independent disqualifiers</td>
+          <td class="what">0:38</td>
+        </tr>
+        <tr>
+          <td class="what">5</td>
+          <td class="what"><strong>COLD RUN</strong> — <a href="https://www.welcometothejungle.com/en/companies/mistral-ai/jobs/applied-ai-engineer-paris-internship_paris">Mistral AI</a>, Applied AI / Forward Deployed ML Engineer, Paris<br><span class="why">commercial engineering role — a different posting shape from all four above. Chosen after the prompts were frozen; zero edits, zero retries.</span></td>
+          <td class="what">3/10 · apply with caveat</td>
+          <td class="why">1 WEAK — "where the explaining-to-non-technical-users came from" corrected to "built for non-technical users". Step 2 also refused to claim "tier 1 engineering school".</td>
+          <td class="what">1:07</td>
+        </tr>
       </tbody>
     </table>
+
+    <div class="notice" style="margin-top:22px;margin-bottom:0">
+      <b>The two runs that justify the pipeline</b>
+      <p><strong>Run 4</strong> produced no email at all — the most valuable output of the five.
+        <strong>Run 3</strong> is where the adversarial audit deleted a whole sentence rather than
+        softening it: the draft step claimed three documents were being prepared when none exist,
+        because it read well. Neither the Project instructions nor the draft prompt forbade claims
+        about <em>process</em> — only about skills and credentials. That gap is now failure point 6.</p>
+    </div>
   </section>
 
   <!-- ============ 04 TIME ============ -->
   <section>
     <div class="sec-head"><span class="n">04</span><h2>Time accounting</h2></div>
+    <div class="notice">
+      <b>Read these numbers correctly, or they lie</b>
+      <p>Every figure below is <strong>assistant wall-clock</strong>, measured with a shell
+        <code>date</code> stamp before and after each step on 5 August 2026, and only ever compared
+        against other assistant wall-clock figures. It is machine time, not human time. The
+        human-time column is empty because nobody but me can measure it, and filling it by estimate
+        is exactly the dishonesty this pipeline's step 4 exists to catch.</p>
+    </div>
+
     <table>
-      <thead><tr><th>Item</th><th>Measured</th><th>Note</th></tr></thead>
+      <thead><tr><th>Item</th><th>Measured (assistant)</th><th>My own time</th><th>Note</th></tr></thead>
       <tbody>
-        <tr><td class="what">Setup — writing knowledge files, instructions and five prompts</td><td class="todo">—</td><td class="why">Counted honestly as a one-off cost. Paid back only after several runs.</td></tr>
-        <tr><td class="what">Manual baseline — one application done by hand, start to finish</td><td class="todo">—</td><td class="why">Timed first, before using the pipeline, so the comparison is fair.</td></tr>
-        <tr><td class="what">Pipeline, per run (average of 5)</td><td class="todo">—</td><td class="why">Includes my own reading and editing, not just model time.</td></tr>
-        <tr><td class="what">Break-even point</td><td class="todo">—</td><td class="why">setup ÷ (manual − pipeline) = runs needed before it pays for itself.</td></tr>
+        <tr>
+          <td class="what">Setup — <code>cv-facts.md</code>, project instructions, five prompt files, five input files</td>
+          <td class="what">4:23</td>
+          <td class="todo">to time</td>
+          <td class="why">One-off. Excludes the design work, which was already done and published on this page before any run.</td>
+        </tr>
+        <tr>
+          <td class="what">Manual baseline — one application, no pipeline</td>
+          <td class="what">0:30</td>
+          <td class="todo">to time</td>
+          <td class="why">Run on input 1 <em>before</em> the pipeline saw it. Produced 3 factual defects (see below).</td>
+        </tr>
+        <tr>
+          <td class="what">Pipeline, per run — average of all 5</td>
+          <td class="what">1:03</td>
+          <td class="todo">to time</td>
+          <td class="why">1:31 · 0:57 · 1:00 · 0:38 · 1:07.</td>
+        </tr>
+        <tr>
+          <td class="what">Pipeline, per run — average of the 4 that produced an email</td>
+          <td class="what">1:09</td>
+          <td class="todo">to time</td>
+          <td class="why">Run 4 halted at step 2, so including it flatters the average. Both figures given.</td>
+        </tr>
+        <tr>
+          <td class="what">Break-even, in assistant time</td>
+          <td class="what"><strong>never</strong></td>
+          <td class="todo">—</td>
+          <td class="why">The pipeline is <strong>2.1× slower</strong> per run than the manual method. setup ÷ (manual − pipeline) is undefined because the denominator is negative.</td>
+        </tr>
       </tbody>
     </table>
+
+    <h3 style="margin-top:28px">So what does it actually buy, if not machine time?</h3>
+    <p class="sub" style="margin-top:0">This is the honest answer, and it is not the answer the
+      assignment brief predicts. Five steps cost more than one step; that was always going to be true.
+      What the extra 33 seconds per run buys is measured in errors and in avoided work:</p>
+
+    <table style="margin-top:8px">
+      <thead><tr><th>Measure</th><th>Manual</th><th>Pipeline</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="what">Factual defects surviving into the final email</td>
+          <td class="what">3 in one email</td>
+          <td class="what">0 across four emails</td>
+        </tr>
+        <tr>
+          <td class="what">Worst defect</td>
+          <td class="why">"comfortable with … PyTorch" — a skill I do not have, typed unprompted in under five minutes because it sits next to TensorFlow in my head</td>
+          <td class="why">scope inflation on one phrase, caught and rewritten by step 4</td>
+        </tr>
+        <tr>
+          <td class="what">Wrong metric</td>
+          <td class="why">"97% accuracy" — an accuracy claim for a regression model. R² ≈ 0.97 is a different statement, and an ML reviewer catches it immediately</td>
+          <td class="why">R² = 0.97 quoted exactly in all four emails</td>
+        </tr>
+        <tr>
+          <td class="what">Ineligible applications begun</td>
+          <td class="why">DAAD WISE reads as a fit until you reach the citizenship line, which sits <em>below</em> the funding details on most pages promoting it</td>
+          <td class="what">stopped at 0:38, before any writing</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="sub">The defensible claim is therefore <strong>not</strong> "this saves me hours". It is:
+      <strong>the pipeline costs about twice the machine time per application and returns three fewer
+      factual errors, plus one application in five correctly abandoned before it is written.</strong>
+      For an application whose whole purpose is to be believed, that trade is worth making. If the
+      only goal were speed, the honest recommendation would be to skip the pipeline and write the
+      email by hand.</p>
+
+    <p class="sub">The one number I still owe this table is my own. My audit in §00 estimates 25–35
+      minutes per application by hand, and if that holds, run 4 alone saved that entire block for
+      38 seconds of pipeline time. But 25–35 minutes is an estimate I have not stopwatched, so it
+      stays out of the table above until I do.</p>
   </section>
 
   <!-- ============ 05 FAILURE POINTS ============ -->
@@ -351,6 +494,46 @@ VERIFY BY HAND: (the one fact I must confirm before sending)
         <strong>Human check: update the knowledge files before a batch of applications.</strong></p>
     </div>
 
+    <p class="sub" style="margin-top:26px"><strong>The five above were predicted at design time. The
+      three below were found by actually running it</strong> — which is the argument for the five runs
+      being real rather than imagined.</p>
+
+    <div class="fail">
+      <h3>6 · The rules governed claims about skills, not claims about <em>process</em><span class="sev high">High</span></h3>
+      <p>Found in run 3. The draft step wrote "I'm preparing transcripts, a recommendation letter and
+        a statement of purpose now" when all three were marked NO EVIDENCE and none existed. Every
+        hard rule in the Project instructions is about skills, results, dates and credentials — none
+        of them covers a sentence about what I am currently doing, so the sentence slipped through as
+        the most natural-sounding thing to write. Only the fresh-chat audit killed it.
+        <strong>Human check: read the final email for any present-continuous verb about your own
+        activity, and confirm each one is actually happening.</strong> The permanent fix is a sixth
+        hard rule forbidding claims about work in progress; it is not yet added, because changing the
+        instructions would invalidate these five runs.</p>
+    </div>
+
+    <div class="fail">
+      <h3>7 · NO EVIDENCE is the wrong answer to a question about preference<span class="sev med">Medium</span></h3>
+      <p>Found in the cold run. Mistral asks whether the candidate is "open to CIFRE programs" — a
+        question about future intent. Step 2 dutifully returned NO EVIDENCE, which is technically
+        correct and completely useless: no knowledge file can ever contain the answer, because it is a
+        decision, not a fact. The evidence map has only three labels and none of them means "you
+        simply have to choose".
+        <strong>Human check: scan the NO EVIDENCE rows and separate the ones that are gaps from the
+        ones that are just decisions waiting on you.</strong></p>
+    </div>
+
+    <div class="fail">
+      <h3>8 · The fit score conflates missing paperwork with missing ability<span class="sev high">High</span></h3>
+      <p>The most misleading behaviour found, and the one most likely to cost me a real opportunity.
+        Mitacs scored 3/10 and KAUST 4/10 — but read the maps and almost every failed must-have is a
+        transcript, a referee, a passport scan or a GPA the file doesn't hold. Not one is a capability
+        I lack. Because must-haves are counted equally, an application blocked only by admin looks
+        identical to one I am genuinely unqualified for, and a low number is exactly the excuse to not
+        apply. Contrast run 4, which is a true 0/10: no document closes a citizenship gate.
+        <strong>Human check: never act on the fit score alone. Read whether the failed rows are
+        documents (get them) or qualifications (skip it).</strong></p>
+    </div>
+
     <h3 style="margin-top:26px">Pre-send checklist (never skipped)</h3>
     <ul class="check">
       <li>Every number in the email matches the source file exactly</li>
@@ -358,6 +541,9 @@ VERIFY BY HAND: (the one fact I must confirm before sending)
       <li>Deadline confirmed on the original posting, not from the extraction</li>
       <li>No sentence claims a title I don't hold (researcher, engineer, expert)</li>
       <li>The stated gap is one I am genuinely closing, and the way I describe closing it is true</li>
+      <li>No sentence claims work in progress that isn't in progress — added after run 3 wrote
+        "I'm preparing transcripts…" about three documents that don't exist</li>
+      <li>The fit score has been read, not just seen: are the failed rows documents, or qualifications?</li>
     </ul>
   </section>
 
