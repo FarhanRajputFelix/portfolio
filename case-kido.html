@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KIDO — a safe, agentic-AI learning ecosystem for children — Farhan Bashir</title>
+<meta name="description" content="Eleven cooperating AI agents, verifiable parental consent, and a live deployed platform — plus what it still cannot prove." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@200;300;400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/case.css" />
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
+<meta name="theme-color" content="#060608" />
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="subnav" aria-label="Site sections">
+    <a class="home" href="./">← Farhan Bashir</a>
+    <a href="case-aqi.html">Air Quality</a>
+    <a href="case-kido.html" aria-current="page">KIDO</a>
+    <a href="case-aurexis.html">AUREXIS</a>
+    <a href="plan.html">Plan</a>
+    <a href="brand.html">Brand</a>
+    <a href="images.html">Images</a>
+    <a href="stack.html">Stack</a>
+    <a href="workflow.html">Workflow</a>
+    <a href="mcp.html">MCP</a>
+    <a href="ugly.html">Still ugly</a>
+  </nav>
+
+  <header class="top">
+    <span class="label">Case study 02 · Agentic AI · EdTech · Apr–May 2026</span>
+    <h1>KIDO — a learning platform that answers to the parent</h1>
+    <p class="sub">Most children's apps optimise for screen time. KIDO optimises for learning outcomes
+      and child safety, with eleven cooperating agents behind it and a consent gate in front of every
+      social action. It is live, deployed and installable.</p>
+
+    <div class="stats">
+      <div class="stat"><b>11</b><span>cooperating AI agents</span></div>
+      <div class="stat"><b>5</b><span>architecture layers</span></div>
+      <div class="stat accent"><b>Live</b><span>web · PWA · signed Android APK</span></div>
+    </div>
+
+    <div class="pills">
+      <span>Next.js 15</span><span>React 19</span><span>TypeScript</span><span>Tailwind v4</span>
+      <span>Prisma ORM</span><span>PostgreSQL (Neon)</span><span>NextAuth v5</span>
+      <span>Groq llama-3.3-70b</span><span>Gemini 2.0-flash</span><span>Vercel</span><span>PWA</span>
+    </div>
+
+    <a class="cta" href="https://kido-orcin.vercel.app">Open the live demo ↗</a>
+    <p class="sub" style="font-size:.8rem;margin-top:10px">Demo login:
+      <code>parent@kido.com</code> / <code>password123</code></p>
+  </header>
+
+  <!-- ============ 01 ============ -->
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2>The problem</h2></div>
+    <p class="sub" style="margin-top:0">Two things are usually in tension in children's software. A
+      platform can be <em>personalised</em> — which means collecting behavioural data and letting an
+      AI act on it — or it can be <em>safe</em>, which usually means locking everything down until it
+      is inert. Products tend to pick one and quietly compromise the other.</p>
+    <p class="sub">KIDO's premise is that the tension is a design problem, not a law: an AI system can
+      be genuinely capable <strong>and</strong> aligned with what a parent has actually agreed to,
+      provided consent is a gate in the code rather than a checkbox in a settings screen.</p>
+  </section>
+
+  <!-- ============ 02 ============ -->
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2>The agent engine — the part that isn't a chatbot wrapper</h2></div>
+    <p class="sub" style="margin-top:0">On each learning event the platform runs an autonomous
+      reasoning loop following the <strong>ReAct</strong> pattern. Three things make it a system
+      rather than a prompt:</p>
+
+    <div class="card">
+      <h3>Tool-calling</h3>
+      <p>Agents read the database, call the model, update XP and level, and raise parent alerts. They
+        take actions with consequences, not just produce text.</p>
+    </div>
+    <div class="card">
+      <h3>Planning</h3>
+      <p>An orchestrator decides which of the eleven agents run for a given event, and they share a
+        common context rather than each starting cold.</p>
+    </div>
+    <div class="card">
+      <h3>Reflection, and a floor under failure</h3>
+      <p>A <strong>Contradiction-Detection</strong> agent catches conflicting signals between agents.
+        A <strong>Fallback-Recovery</strong> agent guarantees a safe result when the AI fails. The
+        model chain degrades deliberately — Groq (Llama-3.3) → Gemini → curated content banks — so a
+        provider outage produces worse content, never a broken experience for a child.</p>
+    </div>
+
+    <p class="sub">Every run persists as an <strong>explainable agent trace</strong>. That was the
+      design decision I would defend hardest: if an AI is going to tell a parent something about their
+      child, the parent's right to ask <em>why</em> has to be answerable from stored evidence, not
+      reconstructed after the fact.</p>
+  </section>
+
+  <!-- ============ 03 ============ -->
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2>Safety, as enforced code</h2></div>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Control</th><th>How it actually works</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="what">Verifiable Parental Consent</td>
+          <td class="why">A child cannot add a friend or join a classroom until a parent explicitly approves it. The consent is the gate, not a notification after the fact.</td>
+        </tr>
+        <tr>
+          <td class="what">Server-side authorisation guard</td>
+          <td class="why">A single <code>getAccessibleChild()</code> check on every child-scoped API. Cross-account access returns <strong>403</strong>. One gate, one place to audit — rather than a permission check copy-pasted into thirty handlers.</td>
+        </tr>
+        <tr>
+          <td class="what">Age-gated content</td>
+          <td class="why">Children only see age-appropriate material, including in the video library.</td>
+        </tr>
+        <tr>
+          <td class="what">Data minimisation</td>
+          <td class="why">Only learning data is stored. No ads, no third-party trackers.</td>
+        </tr>
+        <tr>
+          <td class="what">Auth</td>
+          <td class="why">JWT sessions, bcrypt-hashed passwords, role-based access across child / parent / teacher / admin.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="sub">The single-guard pattern is the one I would point at in an interview. The common
+      failure in multi-role apps is not a missing check — it is thirty checks that drift apart until
+      one of them is wrong.</p>
+  </section>
+
+  <!-- ============ 04 ============ -->
+  <section>
+    <div class="sec-head"><span class="n">04</span><h2>What it does</h2></div>
+    <p class="sub" style="margin-top:0">AI tutor that explains step by step and never simply hands
+      over the answer · AI-generated adaptive quizzes that scale to the child's level · word, story and
+      maths games · an age-gated video library · XP, levels, streaks, badges and leaderboards ·
+      teacher classrooms with join codes, AI quiz generation and progress analytics · tailored
+      dashboards for child, parent, teacher and admin.</p>
+  </section>
+
+  <!-- ============ 05 ============ -->
+  <section>
+    <div class="sec-head"><span class="n">05</span><h2>What I cannot prove</h2></div>
+    <div class="honest">
+      <b>Shipped is not the same as validated</b>
+      <p><strong>No learning-outcome evidence.</strong> KIDO is built to improve learning outcomes.
+        I have no study, no A/B test and no before/after data showing that it does. The architecture
+        is a hypothesis about how to help children learn; it has not been tested against one.</p>
+      <p><strong>No real users at scale.</strong> It is deployed and installable, with demo accounts.
+        There is no user base, no retention curve and no uptime record to point at.</p>
+      <p><strong>The agents are evaluated by inspection.</strong> The traces make each run explainable,
+        but there is no benchmark scoring whether the eleven agents make <em>good</em> decisions —
+        only that they made explicable ones.</p>
+      <p><strong>Built with AI assistance.</strong> The repository's contributor list shows two: me and
+        Claude. Saying so costs nothing and makes the rest of this page easier to trust.</p>
+    </div>
+  </section>
+
+  <!-- ============ 06 ============ -->
+  <section>
+    <div class="sec-head"><span class="n">06</span><h2>A correction worth leaving visible</h2></div>
+    <p class="sub" style="margin-top:0">Until August 2026 this site described KIDO as
+      <em>Flutter, FastAPI, PostgreSQL, Redis, Python and OpenAI APIs</em>. That was wrong. The real
+      stack is Next.js and TypeScript with Prisma, Neon Postgres, Groq and Gemini. The Flutter claim
+      traced to a real early commit that was later reverted to keep only the Next.js project, and the
+      rest was simply stale.</p>
+    <p class="sub">I found it by reading my own repository instead of trusting my own summary of it —
+      the same lesson recorded as failure point 9 on the
+      <a href="workflow.html">workflow page</a>. A public repo makes a wrong stack claim trivially
+      checkable, which is a good reason to keep the repo public and the claim accurate.</p>
+    <div class="links">
+      <a href="https://github.com/FarhanRajputFelix/KIDO">Repository ↗</a>
+      <a href="https://kido-orcin.vercel.app">Live demo ↗</a>
+      <a href="mailto:farhanmuhammadbashir@gmail.com">Ask me about it ↗</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>Farhan Bashir · Karachi, Pakistan</span>
+    <span><a href="case-aqi.html">← Air Quality</a> · <a href="case-aurexis.html">AUREXIS →</a></span>
+  </footer>
+
+</div>
+</body>
+</html>

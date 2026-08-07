@@ -1,0 +1,81 @@
+/* Shared styling for the case-study pages (case-*.html).
+   One file, three pages — so a change to the look happens in one place.
+   Same four colours and two fonts as the rest of the site. */
+
+:root{
+  --ink:#060608; --paper:#f4f4f6; --main:#8b5cf6; --accent:#22d3ee;
+  --muted:#9d9da8; --faint:#6a6a76; --surface:#0c0c10; --line:rgba(255,255,255,.09);
+  --display:'Space Grotesk',system-ui,sans-serif; --body:'Sora',system-ui,sans-serif;
+}
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--ink); color:var(--paper); font-family:var(--body);
+  font-weight:300; line-height:1.65; -webkit-font-smoothing:antialiased; }
+a{ color:var(--main); }
+.wrap{ max-width:1000px; margin:0 auto; padding:clamp(28px,5vw,64px) clamp(20px,5vw,40px) 80px; }
+
+/* sub-navigation shared by every non-home page */
+.subnav{ display:flex; flex-wrap:wrap; gap:6px 18px; padding-bottom:20px;
+  border-bottom:1px solid var(--line); margin-bottom:26px;
+  font-family:var(--display); font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; }
+.subnav a{ color:var(--muted); text-decoration:none; }
+.subnav a:hover,.subnav a[aria-current="page"]{ color:var(--main); }
+.subnav .home{ color:var(--paper); }
+
+.label{ font-family:var(--display); font-size:.66rem; font-weight:500;
+  letter-spacing:.28em; text-transform:uppercase; color:var(--muted); }
+h1{ font-family:var(--display); font-weight:700; letter-spacing:-.04em; text-transform:uppercase;
+  font-size:clamp(1.8rem,4.6vw,2.8rem); margin:.2em 0 .3em; }
+h2{ font-family:var(--display); font-weight:600; letter-spacing:-.02em; font-size:1.2rem; margin:0; }
+h3{ font-family:var(--display); font-weight:600; font-size:.98rem; margin:0 0 8px; }
+p{ max-width:74ch; }
+.sub{ color:var(--muted); max-width:74ch; }
+strong{ color:var(--paper); font-weight:600; }
+em{ color:var(--paper); font-style:italic; }
+code{ font-family:var(--display); font-size:.86em; color:var(--accent); }
+
+header.top{ padding-bottom:24px; border-bottom:1px solid var(--line); }
+section{ padding:34px 0; border-bottom:1px solid var(--line); }
+section:last-of-type{ border-bottom:none; }
+.sec-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:16px; }
+.sec-head .n{ font-family:var(--display); font-size:.72rem; color:var(--main); letter-spacing:.2em; }
+
+/* the number strip under the title */
+.stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-top:22px; }
+.stat{ padding:16px 18px; border:1px solid var(--line); border-radius:14px; background:var(--surface); }
+.stat b{ display:block; font-family:var(--display); font-size:1.5rem; font-weight:700;
+  letter-spacing:-.02em; color:var(--main); }
+.stat span{ font-size:.76rem; color:var(--muted); }
+.stat.accent b{ color:var(--accent); }
+
+.pills{ display:flex; flex-wrap:wrap; gap:7px; margin-top:14px; }
+.pills span{ font-family:var(--display); font-size:.66rem; letter-spacing:.08em;
+  padding:5px 11px; border:1px solid var(--line); border-radius:999px; color:var(--muted); }
+
+table{ width:100%; border-collapse:collapse; font-size:.84rem; }
+.scroll{ overflow-x:auto; }
+th,td{ text-align:left; padding:10px 11px; border-bottom:1px solid var(--line); vertical-align:top; }
+th{ font-family:var(--display); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--faint); font-weight:500; }
+td.what{ color:var(--paper); }
+td.why{ color:var(--muted); }
+
+.card{ padding:18px 20px; border:1px solid var(--line); border-radius:14px;
+  background:var(--surface); margin-bottom:12px; }
+.card p{ margin:0; color:var(--muted); font-size:.9rem; }
+.card p + p{ margin-top:8px; }
+
+/* the honesty box — every case study has one */
+.honest{ padding:18px 22px; border:1px solid rgba(251,191,36,.4); border-radius:14px;
+  background:linear-gradient(120deg,rgba(251,191,36,.06),transparent); margin:18px 0; }
+.honest b{ font-family:var(--display); color:#fbbf24; }
+.honest p{ margin:6px 0 0; color:var(--muted); font-size:.9rem; }
+.honest p + p{ margin-top:8px; }
+
+.cta{ display:inline-block; margin-top:8px; padding:11px 20px; border-radius:999px;
+  background:var(--main); color:#fff; text-decoration:none; font-family:var(--display);
+  font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+.links{ display:flex; flex-wrap:wrap; gap:14px; margin-top:14px; font-size:.84rem; }
+
+footer{ padding-top:28px; font-size:.78rem; color:var(--muted);
+  display:flex; gap:18px; flex-wrap:wrap; justify-content:space-between; }
+@media print{ body{ background:#fff; color:#111 } }

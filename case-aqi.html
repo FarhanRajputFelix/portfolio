@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Air Quality ML — predicting PM2.5 from the IQAir 2025 report — Farhan Bashir</title>
+<meta name="description" content="A Random Forest that predicts regional PM2.5 at R² ≈ 0.97 — and an honest account of what that number does not mean." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@200;300;400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/case.css" />
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
+<meta name="theme-color" content="#060608" />
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="subnav" aria-label="Site sections">
+    <a class="home" href="./">← Farhan Bashir</a>
+    <a href="case-aqi.html" aria-current="page">Air Quality</a>
+    <a href="case-kido.html">KIDO</a>
+    <a href="case-aurexis.html">AUREXIS</a>
+    <a href="plan.html">Plan</a>
+    <a href="brand.html">Brand</a>
+    <a href="images.html">Images</a>
+    <a href="stack.html">Stack</a>
+    <a href="workflow.html">Workflow</a>
+    <a href="mcp.html">MCP</a>
+    <a href="ugly.html">Still ugly</a>
+  </nav>
+
+  <header class="top">
+    <span class="label">Case study 01 · Environmental ML · May 2026</span>
+    <h1>Predicting PM2.5 from the IQAir 2025 report</h1>
+    <p class="sub">A Random Forest regressor that explains about 97% of the variance in regional
+      PM2.5 concentrations — and a straight account of the three reasons that number is smaller than
+      it looks.</p>
+
+    <div class="stats">
+      <div class="stat"><b>R² ≈ 0.97</b><span>Random Forest, on held-out data</span></div>
+      <div class="stat"><b>2</b><span>ensemble families compared</span></div>
+      <div class="stat accent"><b>2025</b><span>reporting cycle — and only that one</span></div>
+    </div>
+
+    <div class="pills">
+      <span>Python</span><span>scikit-learn</span><span>Random Forest</span>
+      <span>Gradient Boosting</span><span>Pandas</span><span>NumPy</span>
+    </div>
+  </header>
+
+  <!-- ============ 01 ============ -->
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2>The question</h2></div>
+    <p class="sub" style="margin-top:0">Air quality is measured well in some places and barely at all
+      in others. Karachi, where I live, sits in a region that appears in global rankings mostly as a
+      warning. The practical question behind this project: <strong>given the environmental variables a
+      region does report, how well can you predict its PM2.5 concentration?</strong></p>
+    <p class="sub">PM2.5 is the fraction worth predicting — particles under 2.5 micrometres, small
+      enough to reach deep into the lungs, and the measure most air-quality health guidance is built
+      around.</p>
+  </section>
+
+  <!-- ============ 02 ============ -->
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2>Data and method</h2></div>
+
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Decision</th><th>What I did</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="what">Dataset</td>
+          <td class="why">IQAir <em>2025 World Air Quality Report</em>, released March 2026 — global monitoring data for the 2025–2026 cycle.</td>
+          <td class="why">Published, citable, and covers regions that rarely appear in cleaner academic datasets.</td>
+        </tr>
+        <tr>
+          <td class="what">Framing</td>
+          <td class="why">Regression on a continuous PM2.5 target, not classification into AQI bands.</td>
+          <td class="why">Bands throw away information, and the band boundaries are policy choices rather than physical ones.</td>
+        </tr>
+        <tr>
+          <td class="what">Models</td>
+          <td class="why">A comparative framework across two ensemble families — <strong>Random Forest</strong> and <strong>Gradient Boosting</strong>.</td>
+          <td class="why">Both handle non-linear, mixed-scale tabular features without heavy preprocessing. Comparing two is how you learn whether the result is the method or the data.</td>
+        </tr>
+        <tr>
+          <td class="what">Structure</td>
+          <td class="why">Separate training, prediction and diagnostic pipelines; dependencies pinned in <code>requirements.txt</code> under a virtualenv.</td>
+          <td class="why">So a reader can rerun the training without rerunning my exploration.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- ============ 03 ============ -->
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2>Result</h2></div>
+    <p class="sub" style="margin-top:0">The Random Forest reached <strong>R² ≈ 0.97</strong>. In plain
+      terms: across the regions in the dataset, the model accounts for about 97% of the variation in
+      PM2.5.</p>
+
+    <div class="honest">
+      <b>What R² ≈ 0.97 is not</b>
+      <p>It is <strong>not</strong> "97% accuracy". Accuracy is a classification metric and this is a
+        regression — there is no notion of a prediction being right or wrong here, only near or far.
+        I have written "97% accuracy" myself in a hurried draft, and it is the kind of error a
+        reviewer in this field spots instantly.</p>
+      <p>It is also not a claim about causation, and not a promise the model travels. Both of those
+        get their own section below, because they are the honest limits of the work.</p>
+    </div>
+  </section>
+
+  <!-- ============ 04 ============ -->
+  <section>
+    <div class="sec-head"><span class="n">04</span><h2>What I would not claim</h2></div>
+    <p class="sub" style="margin-top:0">Three limitations, all of them documented in the repository
+      rather than discovered by a reviewer:</p>
+
+    <div class="card">
+      <h3>Correlation, not causality</h3>
+      <p>A high R² means the model learned patterns that co-occur with high PM2.5. It does not mean
+        those variables <em>cause</em> the pollution. Nothing here supports a policy recommendation of
+        the form "change X and PM2.5 falls" — that needs a causal design this project does not have.</p>
+    </div>
+
+    <div class="card">
+      <h3>The accuracy is unevenly distributed</h3>
+      <p>Predictive robustness concentrates in densely monitored regions — South Asia, Europe, North
+        America. Those places have the monitoring stations, so they dominate the data the model
+        learned from. For a sparsely monitored region the honest expectation is materially worse than
+        R² ≈ 0.97, and the headline figure hides that.</p>
+    </div>
+
+    <div class="card">
+      <h3>It is specialised to one reporting cycle</h3>
+      <p>The findings belong to the 2025 cycle. Monitoring coverage changes year to year, and so does
+        which regions are represented at all. This is a snapshot model, not a forecaster.</p>
+    </div>
+  </section>
+
+  <!-- ============ 05 ============ -->
+  <section>
+    <div class="sec-head"><span class="n">05</span><h2>Where the record disagrees with itself</h2></div>
+    <div class="honest">
+      <b>Two claims on my CV that this repository does not support</b>
+      <p>My Europass CV states <code>MAE = 3.13 µg/m³</code> and says the model "served real-time
+        inferences through a modular FastAPI framework". <strong>The repository documents neither.</strong>
+        It reports R² ≈ 0.97 and describes local execution through Python scripts — there is no MAE
+        figure and no serving layer in it.</p>
+      <p>Both may well be true of work I did and never wrote down. But until the repo shows them,
+        the repo is what a reader can check, so this page claims only R² ≈ 0.97. Fixing that mismatch
+        — either by publishing the serving code and the MAE, or by correcting the CV — is on the
+        <a href="ugly.html">still-ugly list</a>.</p>
+    </div>
+    <p class="sub">I am putting this on the page rather than quietly picking the flattering version,
+      because the entire <a href="workflow.html">outreach pipeline</a> I built exists to catch exactly
+      this class of drift between what I claim and what I can show. It would be strange to run that
+      pipeline on job postings and not on my own portfolio.</p>
+  </section>
+
+  <!-- ============ 06 ============ -->
+  <section>
+    <div class="sec-head"><span class="n">06</span><h2>What I would do next</h2></div>
+    <p class="sub" style="margin-top:0">In order of what would most improve the work:</p>
+    <ol class="sub">
+      <li><strong>Publish a predicted-vs-actual plot.</strong> One scatter with the diagonal shows
+        where the model fails in a way R² cannot.</li>
+      <li><strong>Report MAE and RMSE alongside R².</strong> R² is a proportion of variance; error in
+        µg/m³ is what a person can reason about.</li>
+      <li><strong>Hold out a region, not a random sample.</strong> Random splits let neighbouring rows
+        leak into each other. Holding out an entire region tests the thing I actually care about —
+        does it generalise to somewhere it has not seen?</li>
+      <li><strong>Publish the Gradient Boosting comparison.</strong> The framework compares two
+        families; only one number is written down.</li>
+    </ol>
+    <div class="links">
+      <a href="https://github.com/FarhanRajputFelix/Air-Quality-Prediction">Repository ↗</a>
+      <a href="mailto:farhanmuhammadbashir@gmail.com">Ask me about it ↗</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>Farhan Bashir · Karachi, Pakistan</span>
+    <span><a href="./">← Portfolio</a> · <a href="case-kido.html">KIDO →</a></span>
+  </footer>
+
+</div>
+</body>
+</html>

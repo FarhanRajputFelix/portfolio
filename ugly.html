@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Still ugly — what I know is rough — Farhan Bashir</title>
+<meta name="description" content="The honest defect list for this portfolio, kept public and kept current." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@200;300;400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/case.css" />
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
+<meta name="theme-color" content="#060608" />
+<style>
+  .sev{ font-family:var(--display); font-size:.55rem; letter-spacing:.14em; text-transform:uppercase;
+    padding:2px 8px; border-radius:999px; border:1px solid var(--line); margin-left:8px; }
+  .sev.high{ color:#f87171; border-color:rgba(248,113,113,.45); }
+  .sev.med{ color:#fbbf24; border-color:rgba(251,191,36,.4); }
+  .sev.low{ color:var(--muted); }
+  .card h3{ color:var(--paper); display:flex; align-items:center; flex-wrap:wrap; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="subnav" aria-label="Site sections">
+    <a class="home" href="./">← Farhan Bashir</a>
+    <a href="case-aqi.html">Air Quality</a>
+    <a href="case-kido.html">KIDO</a>
+    <a href="case-aurexis.html">AUREXIS</a>
+    <a href="plan.html">Plan</a>
+    <a href="brand.html">Brand</a>
+    <a href="images.html">Images</a>
+    <a href="stack.html">Stack</a>
+    <a href="workflow.html">Workflow</a>
+    <a href="mcp.html">MCP</a>
+    <a href="ugly.html" aria-current="page">Still ugly</a>
+  </nav>
+
+  <header class="top">
+    <span class="label">Still ugly · Week 5 · shipped 5 August 2026</span>
+    <h1>What I already know is rough</h1>
+    <p class="sub">This site went live before it was finished, on purpose. A private portfolio helps
+      nobody. Below is everything I can already see wrong with it — written by me, before anyone else
+      had to point it out.</p>
+    <p class="sub">Keeping this page public is a small bet: a reviewer who finds a flaw I have already
+      named learns something different about me than one who finds a flaw I was hoping they would
+      miss.</p>
+  </header>
+
+  <!-- ============ CONTENT ============ -->
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2>Content and evidence</h2></div>
+
+    <div class="card">
+      <h3>Two claims on my CV that my own repos don't support<span class="sev high">High</span></h3>
+      <p>My CV states <code>MAE = 3.13 µg/m³</code> for the air quality model and says it "served
+        real-time inferences through a modular FastAPI framework". The repository documents neither —
+        only R² ≈ 0.97, executed locally. My CV also lists PyTorch in the AUREXIS stack, while that
+        repo states plainly that it is <strong>rule-based, not neural networks</strong>.</p>
+      <p>Either the work exists and I never published it, or the CV drifted. Until I resolve it, the
+        <a href="case-aqi.html">case study</a> claims only what the repo shows. Fixing the CV is the
+        single most important item on this page, because it is the one that could mislead somebody.</p>
+    </div>
+
+    <div class="card">
+      <h3>Three projects on the homepage still have no case study<span class="sev med">Medium</span></h3>
+      <p>Self-Regulating AI, Crisis Intelligence and the Laravel builds are summary cards only. Crisis
+        Intelligence isn't on my CV at all, and the Laravel projects have no links — I need to decide
+        whether they earn a page or should come off the grid.</p>
+    </div>
+
+    <div class="card">
+      <h3>No screenshots of anything running<span class="sev high">High</span></h3>
+      <p>Three case studies, zero images of the actual products. KIDO has a live demo you can open,
+        which partly covers it, but AUREXIS's web console and the air-quality diagnostics exist only
+        as description. A predicted-vs-actual plot for the AQI model would be the single
+        highest-value image on the site.</p>
+    </div>
+
+    <div class="card">
+      <h3>No CV to download<span class="sev med">Medium</span></h3>
+      <p>A Europass CV exists but isn't linked here, and it needs the corrections above first. Every
+        reviewer expects a PDF and there isn't one.</p>
+    </div>
+
+    <div class="card">
+      <h3>Nothing peer-reviewed<span class="sev low">Known</span></h3>
+      <p>No publications, no preprints. I describe research interests and build research prototypes;
+        that is a different thing and the site should never blur it.</p>
+    </div>
+  </section>
+
+  <!-- ============ BUILD ============ -->
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2>The build itself</h2></div>
+
+    <div class="card">
+      <h3>The homepage duplicates its own CSS<span class="sev med">Medium</span></h3>
+      <p>Every process page inlines a near-identical <code>&lt;style&gt;</code> block. The three case
+        studies share <code>css/case.css</code>, which is the right pattern — the older pages predate
+        that decision and were never migrated. Changing a colour today means editing six files.</p>
+    </div>
+
+    <div class="card">
+      <h3>Until today, the homepage linked to nothing<span class="sev high">Fixed today</span></h3>
+      <p>Six process pages were live but orphaned — reachable only by typing the URL. The nav pointed
+        exclusively at anchors on the homepage itself. It is fixed now, but it survived several weeks
+        of me looking at the site daily, which says something about how easily you stop seeing your
+        own front door.</p>
+    </div>
+
+    <div class="card">
+      <h3>The 3D scene is heavy and unmeasured<span class="sev med">Medium</span></h3>
+      <p>A ~3,200-particle field plus six meshes, with a reduced count under 760px. I have never run
+        Lighthouse on it or tested it on a mid-range Android over a slow connection — which is what a
+        lot of my actual audience in Karachi would use. I do not know my load time. That is the gap.</p>
+    </div>
+
+    <div class="card">
+      <h3>Accessibility is assumed, not verified<span class="sev med">Medium</span></h3>
+      <p><code>prefers-reduced-motion</code> is respected, ARIA labels exist, Esc closes overlays. But
+        I have not run an audit, tested with a screen reader, or checked contrast ratios on the muted
+        grey text — which I suspect is the failure.</p>
+    </div>
+
+    <div class="card">
+      <h3>BYTE has a 19-entry vocabulary<span class="sev low">Known</span></h3>
+      <p>The agent refuses what it doesn't know instead of inventing — which is the point — but it hits
+        that wall fast. It knows nothing about the three new case studies or the MCP work.</p>
+    </div>
+
+    <div class="card">
+      <h3>Everything is hand-tested<span class="sev low">Known</span></h3>
+      <p>No tests, no CI, no link checker. Every page is verified by me opening it. That is how the
+        homepage managed to link to nothing for weeks.</p>
+    </div>
+  </section>
+
+  <!-- ============ WRITING ============ -->
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2>Writing and design</h2></div>
+
+    <div class="card">
+      <h3>Long pages, no summaries<span class="sev med">Medium</span></h3>
+      <p>The workflow page in particular is very long. There is no TL;DR at the top of anything, and a
+        reviewer with four minutes gets no help finding the part worth reading.</p>
+    </div>
+
+    <div class="card">
+      <h3>The process pages outweigh the work<span class="sev med">Medium</span></h3>
+      <p>Brand, images, plan, stack, workflow, MCP, and this page: seven pages about <em>how</em> I
+        work versus three about what I built. That ratio is backwards for someone with no publications
+        — the work should be the loudest thing here.</p>
+    </div>
+
+    <div class="card">
+      <h3>Placeholder-ish visuals on the work grid<span class="sev low">Known</span></h3>
+      <p>The project cards use coloured gradient covers rather than real imagery, because I don't have
+        screenshots yet. It reads as intentional; it is actually a gap.</p>
+    </div>
+  </section>
+
+  <!-- ============ WHAT IT ISN'T ============ -->
+  <section>
+    <div class="sec-head"><span class="n">04</span><h2>Two things I decided not to fix</h2></div>
+    <p class="sub" style="margin-top:0">Not every rough edge is a defect, and pretending otherwise
+      makes this list less useful.</p>
+    <div class="card">
+      <h3>Shipping before polish</h3>
+      <p>Deliberate. The brief for this week was to get a real URL working and put it in front of a
+        real person, rather than spend another week refining privately. That is the correct trade and
+        I would make it again.</p>
+    </div>
+    <div class="card">
+      <h3>No framework</h3>
+      <p>Static HTML, CSS and vanilla JS on GitHub Pages — no build step, no backend, no API keys. It
+        means I can explain every line of this site, which is the actual requirement. A React rewrite
+        would look more modern and teach me less.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Farhan Bashir · Karachi, Pakistan · last updated 5 August 2026</span>
+    <span><a href="./">← Portfolio</a> · <a href="workflow.html">Workflow</a></span>
+  </footer>
+
+</div>
+</body>
+</html>

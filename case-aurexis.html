@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AUREXIS — a survival habitat architecture for when everything fails — Farhan Bashir</title>
+<meta name="description" content="Five agents under a Meta-Arbitrator, validated across 10,000 Monte Carlo trials — and a careful line between what is built and what is only designed." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@200;300;400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/case.css" />
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
+<meta name="theme-color" content="#060608" />
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="subnav" aria-label="Site sections">
+    <a class="home" href="./">← Farhan Bashir</a>
+    <a href="case-aqi.html">Air Quality</a>
+    <a href="case-kido.html">KIDO</a>
+    <a href="case-aurexis.html" aria-current="page">AUREXIS</a>
+    <a href="plan.html">Plan</a>
+    <a href="brand.html">Brand</a>
+    <a href="images.html">Images</a>
+    <a href="stack.html">Stack</a>
+    <a href="workflow.html">Workflow</a>
+    <a href="mcp.html">MCP</a>
+    <a href="ugly.html">Still ugly</a>
+  </nav>
+
+  <header class="top">
+    <span class="label">Case study 03 · Multi-agent systems · Since May 2024</span>
+    <h1>AUREXIS — keeping someone alive when the systems don't</h1>
+    <p class="sub">A software-defined survival habitat architecture for humanity's most extreme
+      frontiers — sub-orbital habitats, deep-sea stations, disaster zones. Five specialised agents
+      under a Meta-Arbitrator, built around the assumption that the occupant may be unconscious,
+      panicking, or unable to operate anything at all.</p>
+
+    <div class="stats">
+      <div class="stat"><b>15.0% → 55.8%</b><span>simulated survival rate (+40.8 pp)</span></div>
+      <div class="stat"><b>4.9 → 7.8 hrs</b><span>mean survival time</span></div>
+      <div class="stat"><b>10,000</b><span>Monte Carlo trials, seed 2026</span></div>
+      <div class="stat accent"><b>1.45×</b><span>resource isolation duration</span></div>
+    </div>
+
+    <div class="pills">
+      <span>Python</span><span>FastAPI</span><span>Gradio 4.44.1</span>
+      <span>Rule-based multi-agent</span><span>WebSocket</span><span>Docker</span>
+      <span>Web Speech API</span>
+    </div>
+  </header>
+
+  <!-- ============ 01 ============ -->
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2>The premise: assume the human cannot help</h2></div>
+    <p class="sub" style="margin-top:0">Most safety software assumes an operator who reads the alert
+      and acts. In the environments AUREXIS targets, that assumption is exactly the one that fails
+      first — the occupant may be hypoxic, injured, asleep or panicking.</p>
+    <p class="sub">So the organising idea is the <strong>Zero-Interaction Protocol</strong>: survival
+      should not depend on anyone pressing anything. The system is designed to keep an occupant alive
+      through the window in which they can contribute nothing.</p>
+  </section>
+
+  <!-- ============ 02 ============ -->
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2>Five agents, one arbitrator</h2></div>
+    <p class="sub" style="margin-top:0">Five specialised agents coordinate through a Meta-Arbitrator
+      (<code>aurexis_orchestrator.py</code>) that resolves them by priority — because in an emergency
+      the agents genuinely conflict, and something has to decide.</p>
+
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Agent</th><th>Module</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td class="what">Environment · ER-AI</td><td class="why"><code>world_model.py</code></td><td class="why">Detects threats across 10 categories via thresholds.</td></tr>
+        <tr><td class="what">Resource · RM-AI</td><td class="why"><code>ration_planner.py</code></td><td class="why">Dynamic rationing with activity scaling and 15% water recycling.</td></tr>
+        <tr><td class="what">Health · HH-AI</td><td class="why"><code>vitals.py</code></td><td class="why">Monitors heart rate and SpO₂ with threshold alerts.</td></tr>
+        <tr><td class="what">Psychology · PW-AI</td><td class="why"><code>panic_detection.py</code></td><td class="why">Scores panic from keywords, volume, speech rate and heart rate.</td></tr>
+        <tr><td class="what">Emergency · ED-AI</td><td class="why"><code>distress_ai.py</code></td><td class="why">Autonomous escalation and evacuation logic.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p class="sub">The conflict the arbitrator exists for is real: the Resource agent wants to ration
+      oxygen, the Health agent sees SpO₂ falling, and the Psychology agent reads rising panic — which
+      itself raises oxygen consumption. Three correct local decisions that contradict each other. A
+      priority ordering is a blunt resolution, but it is explicit and inspectable, which matters more
+      here than being clever.</p>
+
+    <div class="honest">
+      <b>It is rule-based, and that is deliberate</b>
+      <p>These agents are <strong>thresholds and rules, not neural networks</strong>. For life-critical
+        logic that is a feature: the behaviour is auditable, deterministic and explainable to someone
+        deciding whether to trust it. Physics-informed neural networks and reinforcement learning are
+        listed as future work, not as something already in place.</p>
+    </div>
+  </section>
+
+  <!-- ============ 03 ============ -->
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2>Built, versus designed</h2></div>
+    <p class="sub" style="margin-top:0">This is the distinction I care most about getting right on
+      this page, because "designed" and "working" are easy to blur in an ambitious project.</p>
+
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Implemented and running</th><th>Simulated or designed only</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="what">Live web console over REST + WebSocket</td>
+          <td class="why">Satellite / beacon RF relay — <strong>simulated</strong>, no real modem</td>
+        </tr>
+        <tr>
+          <td class="what">Monte Carlo simulation engine, 10,000 trials</td>
+          <td class="why">FPGA Hardware Safety Layer — <strong>designed only</strong>, never built</td>
+        </tr>
+        <tr>
+          <td class="what">Intent Reasoner, 25-intent classifier</td>
+          <td class="why">Physics-informed neural networks — future work</td>
+        </tr>
+        <tr>
+          <td class="what">Air-gap security core</td>
+          <td class="why">Reinforcement learning — future work</td>
+        </tr>
+        <tr>
+          <td class="what">Real emergency phone alerts via ntfy.sh</td>
+          <td class="why">Raspberry Pi hardware deployment — planned</td>
+        </tr>
+        <tr>
+          <td class="what">Docker deployment</td>
+          <td class="why">—</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- ============ 04 ============ -->
+  <section>
+    <div class="sec-head"><span class="n">04</span><h2>The numbers, and what they are worth</h2></div>
+    <p class="sub" style="margin-top:0">Across 10,000 Monte Carlo trials with seed 2026 for
+      reproducibility, against a baseline with no coordinating system:</p>
+
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Measure</th><th>Baseline</th><th>AUREXIS</th><th>Delta</th></tr></thead>
+      <tbody>
+        <tr><td class="what">Survival rate</td><td class="why">15.0%</td><td class="what">55.8%</td><td class="what">+40.8 pp</td></tr>
+        <tr><td class="what">Mean survival time</td><td class="why">4.9 hrs</td><td class="what">7.8 hrs</td><td class="what">+2.9 hrs</td></tr>
+        <tr><td class="what">Resource isolation duration</td><td class="why">static rationing</td><td class="what">1.45×</td><td class="what">longer</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="honest">
+      <b>These are simulation results, and the simulation is mine</b>
+      <p>The +40.8 percentage point improvement is measured <strong>inside a model I wrote</strong>,
+        against a baseline I also defined. It is evidence that the coordination logic beats no
+        coordination <em>under my assumptions about how a habitat fails</em> — not evidence that
+        anyone would survive a real hull breach.</p>
+      <p>The honest reading: the number tells you the architecture is internally coherent and worth
+        continuing. It tells you nothing about physical reality until the hardware exists and someone
+        tests it. Seed 2026 is fixed so the figures reproduce — reproducible is not the same as
+        validated.</p>
+    </div>
+  </section>
+
+  <!-- ============ 05 ============ -->
+  <section>
+    <div class="sec-head"><span class="n">05</span><h2>Where it goes</h2></div>
+    <p class="sub" style="margin-top:0">The gap between this and real research is an external
+      validator. Next, in order: build the FPGA safety layer so the hardware override stops being a
+      diagram; deploy to a Raspberry Pi and run the agents against real sensors; and get the failure
+      model itself reviewed by someone who works on life-support systems, because that model is the
+      single assumption every number above rests on.</p>
+    <p class="sub">It evolved from an earlier C-language prototype (MESP) and is under active
+      development as a research prototype.</p>
+    <div class="links">
+      <a href="https://github.com/FarhanRajputFelix/aurexis-core">Repository ↗</a>
+      <a href="mailto:farhanmuhammadbashir@gmail.com">Ask me about it ↗</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>Farhan Bashir · Karachi, Pakistan</span>
+    <span><a href="case-kido.html">← KIDO</a> · <a href="./">Portfolio →</a></span>
+  </footer>
+
+</div>
+</body>
+</html>

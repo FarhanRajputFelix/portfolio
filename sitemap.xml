@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Sitemap for farhanrajputfelix.github.io/portfolio
+  Every page listed here is reachable from the homepage navigation:
+  cases from the WORK section, process pages from the PROCESS section.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://farhanrajputfelix.github.io/portfolio/</loc>
+    <lastmod>2026-08-05</lastmod>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Case studies -->
+  <url>
+    <loc>https://farhanrajputfelix.github.io/portfolio/case-aqi.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://farhanrajputfelix.github.io/portfolio/case-kido.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://farhanrajputfelix.github.io/portfolio/case-aurexis.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Process -->
+  <url>
+    <loc>https://farhanrajputfelix.github.io/portfolio/workflow.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://farhanrajputfelix.github.io/portfolio/mcp.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://farhanrajputfelix.github.io/portfolio/ugly.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://farhanrajputfelix.github.io/portfolio/plan.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://farhanrajputfelix.github.io/portfolio/brand.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://farhanrajputfelix.github.io/portfolio/stack.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://farhanrajputfelix.github.io/portfolio/images.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>

@@ -68,14 +68,16 @@ and it must never be described as software work.
 
 ## 4. Projects, with the one number each is allowed to claim
 
-**Source of truth: the Europass CV (dated 5 Aug 2026), which overrides the website wherever the two
-disagree.** They disagree in several places — see §4b. Dates below are the CV's.
+**Source of truth, in strict order: (1) the public repository README, (2) the Europass CV, (3) the
+website.** Updated 5 Aug 2026 after reading the actual repos — which contradicted *both* the CV and
+the site in places. A repo is the only source a reviewer can independently check, so it wins. See
+§4b for every disagreement found.
 
 | Project | What it is | Stack (per CV) | Hard number |
 |---|---|---|---|
-| **AUREXIS** — Autonomous Ultra-Resilient Emergency & eXigency Interface System · 25/05/2024 – current | Research prototype: software-defined survival habitat architecture for extreme environments (space, deep-sea, disaster zones), evolved from an earlier C prototype (MESP). Zero-Interaction Protocol — a *proposed* hardware-enforced safety model with an air-gapped core for life-critical actuators and an FPGA-based Hardware Safety Layer. Priority-driven Meta-Arbitrator orchestrating 5 specialised agents (Environment, Resource, Health, Psychology, Emergency). | Python, NumPy, Pandas, **PyTorch**, scikit-learn, Docker, Raspberry Pi (planned), HTML/JS/CSS | **27 technical design documents**; core safety logic validated by Monte Carlo stress-testing *in local development*. Hardware integration, deployment and FPGA field-testing are **planned, not done** — say so. |
-| **Air Quality ML System** · 01/05/2026 – 30/05/2026 | End-to-end ML pipeline on the IQAir 2025 World Air Quality Report predicting regional **PM2.5** concentrations. Compared ensemble architectures, deployed a Random Forest. Serves real-time inference through FastAPI. | Python, FastAPI, Joblib, ensemble learning | **R² = 0.9746** and **MAE = 3.13 µg/m³** — quote both exactly. Never "97% accuracy": it is a regression, and accuracy is not its metric. |
-| **KIDO** — Agentic AI Learning Ecosystem for Children · 14/04/2026 – 10/05/2026 | Open-source multi-agent EdTech framework of **11 collaborative AI agents** adaptively scaling learning parameters to children's engagement and cognitive stress. AI tutor, parent/teacher analytics dashboards, child-safety protocols preventing unauthorised external connections. | **TypeScript, Kotlin, Node.js** | 11 agents. No before/after learning metrics. |
+| **AUREXIS** — Autonomous Ultra-Resilient Emergency & eXigency Interface System · 25/05/2024 – current | Research prototype: software-defined survival habitat architecture for extreme environments. Zero-Interaction Protocol. Priority-driven Meta-Arbitrator (`aurexis_orchestrator.py`) over 5 agents: Environment (10 threat categories), Resource (rationing, 15% water recycling), Health (HR/SpO₂), Psychology (panic scoring), Emergency (escalation). **Implemented:** live web console (REST + WebSocket), Monte Carlo engine, 25-intent Intent Reasoner, air-gap core, real phone alerts via ntfy.sh, Docker. **Designed only:** FPGA safety layer, RF relay (simulated), Raspberry Pi deployment, PINNs/RL. | Python, FastAPI, Gradio 4.44.1, **rule-based multi-agent — explicitly *not* neural networks**, Web Speech API | Simulated: survival **15.0% → 55.8% (+40.8 pp)**, mean survival **4.9 → 7.8 hrs**, resource isolation **1.45×**, over **10,000 Monte Carlo trials** (seed 2026). Always say "simulated, against my own baseline". |
+| **Air Quality ML System** · 01/05/2026 – 30/05/2026 | End-to-end ML pipeline on the IQAir *2025 World Air Quality Report* (released March 2026) predicting regional **PM2.5**. Comparative framework across Random Forest and Gradient Boosting. | Python, scikit-learn, ensemble learning | **R² ≈ 0.97** — the only metric the repo documents. Never "97% accuracy": regression, not classification. Repo-stated limits: correlation ≠ causality; robustness concentrated in densely monitored regions; specific to the 2025 cycle. |
+| **KIDO** — A Safe, Agentic-AI Learning Ecosystem for Children · 14/04/2026 – 10/05/2026 | Production-grade EdTech platform, **live and installable** (web, PWA, signed Android APK). **11 cooperating agents** on a ReAct loop with tool-calling, an orchestrator, a Contradiction-Detection agent and a Fallback-Recovery agent; every run persists an explainable trace. Model chain degrades Groq → Gemini → curated banks. Verifiable Parental Consent gates all social actions; single `getAccessibleChild()` server-side guard returns 403 on cross-account access; age-gated content; JWT + bcrypt + RBAC. MIT licensed. | **Next.js 15, React 19, TypeScript, Tailwind v4, Prisma ORM, PostgreSQL (Neon), NextAuth v5, Groq llama-3.3-70b, Gemini 2.0-flash, Vercel, PWA** | 11 agents; 5 architecture layers. **No learning-outcome study, no user base, no uptime figures.** Live demo: kido-orcin.vercel.app |
 | **Self-Regulating AI** · 30/01/2026 – 10/02/2026 | Biologically inspired autonomous agent using a continuous homeostatic feedback loop for dynamic hyperparameter adaptation; treats high loss as environment-induced stress and self-tunes under non-stationary drift. | Python, ML | none — no benchmark result recorded |
 | **3D portfolio + BYTE agent** (FlyRank capstone) | Three.js portfolio with an embedded retrieval agent answering from a 19-entry local knowledge base, no API key, no backend; refuses out-of-scope questions. | Three.js, vanilla JS/CSS, GitHub Pages | 19 KB entries; ~3,200-particle field |
 
@@ -88,12 +90,13 @@ disagree.** They disagree in several places — see §4b. Dates below are the CV
 Do not paper over these. Until Farhan reconciles them, treat the CV as correct and **do not state the
 website's version of any row below**:
 
-| Item | Website says | CV says | Ruling |
-|---|---|---|---|
-| KIDO stack | Flutter, FastAPI, PostgreSQL, Redis, Python, OpenAI APIs | TypeScript, Kotlin, Node.js | **Unresolved and serious.** These are disjoint stacks. Say nothing specific about KIDO's stack until Farhan confirms which is true. |
-| Deep-learning framework | TensorFlow | PyTorch | **PyTorch is evidenced** (AUREXIS stack + skills list). TensorFlow appears only on the site and is **not** on the CV — treat TensorFlow as unverified. |
-| AQI figure | R² ≈ 0.97, "environmental datasets" | R² = 0.9746, MAE 3.13 µg/m³, PM2.5 from IQAir 2025 | Use the CV's precise pair. |
-| AQI deployment | notebook result | served via FastAPI | Served. This materially strengthens any MLOps requirement. |
+| Item | Website said | CV says | **Repo says (authoritative)** | Ruling |
+|---|---|---|---|---|
+| KIDO stack | Flutter, FastAPI, PostgreSQL, Redis, Python, OpenAI APIs | TypeScript, Kotlin, Node.js | **Next.js 15, React 19, TypeScript, Prisma, PostgreSQL (Neon), Groq, Gemini** | **Resolved — both earlier sources were wrong.** No FastAPI, no Redis, no OpenAI APIs, no Python. The Flutter claim traces to a real early commit later reverted to "keep only the Next.js project". Site corrected 5 Aug 2026; **the CV still needs fixing.** |
+| Deep-learning framework | TensorFlow | PyTorch (skills + AUREXIS stack) | AUREXIS is "rule-based… **not neural networks**"; no PyTorch in its stack | **Both unverified.** TensorFlow appears only on the site; PyTorch is claimed on the CV but contradicted by the one repo that supposedly used it. Output `NO EVIDENCE` for either until a repo shows one. |
+| AQI metrics | R² ≈ 0.97 | R² = 0.9746 **and MAE = 3.13 µg/m³** | **R² ≈ 0.97 only — no MAE stated** | Claim R² ≈ 0.97. The MAE is uncorroborated; do not use it. |
+| AQI deployment | notebook result | "served real-time inferences through a modular FastAPI framework" | **no deployment documented** — local execution via Python scripts | **The CV overstates this.** Do not claim a serving layer. My earlier "correction" that upgraded this to SUPPORTED was itself wrong. |
+| AUREXIS maturity | absent from site | prototype, "core modules tested locally" | live web console, Monte Carlo engine, air-gap core, real phone alerts, Docker — **more built than the CV implies** | The CV *understates* it. Use the repo's implemented/planned split. |
 | Crisis Intelligence (Google AI Seekho hackathon) | listed as a project | **absent from the CV** | Site-only. Do not lead with it; ask Farhan whether it belongs. |
 | Laravel builds (canteen, job portal, CMS) | listed as shipped | Laravel/MySQL in skills, projects not listed | Skills yes, specific builds unverified. |
 | Certification count | 17 credentials, 10 from Anthropic | 5 listed; **no Anthropic certificates at all** | The Anthropic certs are verifiable via skilljar (§6) but are missing from the CV — a gap in the CV, not in the facts. |
@@ -130,7 +133,9 @@ for one, output `NO EVIDENCE`; do not offer the neighbour as if it counted:
 | Spark / Hadoop / big-data pipelines | Not evidenced. |
 | R / MATLAB / Julia / Scala / Go / Rust | Not evidenced. |
 | React / Vue / Angular / Next.js | Not evidenced. TypeScript **is** evidenced (KIDO); the frameworks are not. |
-| TensorFlow | **Website only, absent from the CV.** Do not claim it. PyTorch is the evidenced framework. |
+| TensorFlow | Website only, absent from the CV and from every repo. Do not claim it. |
+| PyTorch | Claimed on the CV, but the AUREXIS repo it is attributed to states the system is rule-based and *not* neural networks. **Unverified — do not claim it** until a repo demonstrates it. |
+| Any deep-learning framework at all | No repo evidences one. The ML work is scikit-learn ensembles (Random Forest, Gradient Boosting). That is real ML and worth stating plainly; it is not deep learning. |
 | Kaggle competition placement | Data science coursework at NED Academy. No placement or medal. |
 | CI/CD at scale | No production pipeline evidenced. |
 | FPGA / hardware engineering | AUREXIS's FPGA safety layer is **designed and planned**, never built. Never imply hardware was delivered. |
