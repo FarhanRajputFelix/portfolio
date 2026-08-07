@@ -104,9 +104,12 @@
     </div>
 
     <div class="card">
-      <h3>Until today, the homepage linked to nothing<span class="sev high">Fixed today</span></h3>
-      <p>Six process pages were live but orphaned — reachable only by typing the URL. The nav pointed
-        exclusively at anchors on the homepage itself. It is fixed now, but it survived the site's
+      <h3>The homepage didn't link to a single other page<span class="sev high">Fixed today</span></h3>
+      <p>Six process pages were live and returning 200, but orphaned. The nav worked fine — every link
+        in it was an <code>#anchor</code> that scrolled down the same page. Out of every href in
+        <code>index.html</code>, exactly <strong>zero</strong> pointed at another page of mine, so
+        there was no sequence of clicks that reached them. Nothing was broken, which is why it was
+        invisible: a broken link shows a 404, a missing one shows nothing at all. It is fixed now, but it survived the site's
         entire first week — live since 1 August, found on the 7th — with me opening that page most
         days. Which says something about how quickly you stop seeing your own front door.</p>
     </div>
@@ -133,8 +136,8 @@
 
     <div class="card">
       <h3>Everything is hand-tested<span class="sev low">Known</span></h3>
-      <p>Every page used to be verified by me opening it, which is how the homepage managed to link to
-        nothing for six days. There is now a link checker
+      <p>Every page used to be verified by me opening it, which is how the homepage went six days without
+        linking to any of them. There is now a link checker
         (<code>tools/check-links.py</code>) that fails if any href is dead, any page is unreachable
         from the homepage, or the sitemap disagrees with the files on disk. Still no CI to run it
         automatically, and still no tests for anything else.</p>
