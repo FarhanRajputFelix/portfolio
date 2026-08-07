@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fix log — what was broken on a phone — Farhan Bashir</title>
+<meta name="description" content="Two reviewers found the same mobile layout bug. What was broken, what I changed, and the numbers before and after." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@200;300;400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/case.css" />
+<link rel="canonical" href="https://farhanbashir.netlify.app/fixes.html" />
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
+<meta name="theme-color" content="#060608" />
+<style>
+  .fix{ padding:18px 20px; border:1px solid var(--line); border-radius:14px;
+    background:var(--surface); margin-bottom:12px; }
+  .fix h3{ color:var(--paper); margin-bottom:8px; }
+  .fix dl{ margin:0; display:grid; grid-template-columns:auto 1fr; gap:5px 14px; font-size:.87rem; }
+  .fix dt{ font-family:var(--display); font-size:.57rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--faint); padding-top:4px; }
+  .fix dd{ margin:0; color:var(--muted); }
+  .quote{ padding:16px 20px; border-left:3px solid var(--accent); margin:14px 0;
+    background:linear-gradient(90deg,rgba(34,211,238,.07),transparent); }
+  .quote p{ margin:0; color:var(--paper); font-size:.94rem; }
+  .quote cite{ display:block; margin-top:8px; font-style:normal; font-size:.78rem; color:var(--muted); }
+  .num{ font-family:var(--display); color:var(--accent); }
+  @media (max-width:640px){ .fix dl{ grid-template-columns:1fr; } .fix dt{ padding-top:9px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="subnav" aria-label="Site sections">
+    <a class="home" href="./">← Farhan Bashir</a>
+    <a href="cv.html">CV</a>
+    <a href="case-aqi.html">Air Quality</a>
+    <a href="case-kido.html">KIDO</a>
+    <a href="case-aurexis.html">AUREXIS</a>
+    <a href="workflow.html">Workflow</a>
+    <a href="agent.html">Agent spec</a>
+    <a href="dns.html">DNS</a>
+    <a href="learned.html">Explain it</a>
+    <a href="fixes.html" aria-current="page">Fix log</a>
+    <a href="ugly.html">Still ugly</a>
+  </nav>
+
+  <header class="top">
+    <span class="label">Fix log · Open it on your phone · Week 7</span>
+    <h1>Two people found the same bug before I did</h1>
+    <p class="sub">I posted the portfolio and asked what confused people. Two reviewers, independently,
+      reported the same mobile layout failure — and I had a screenshot of it on my own phone that I'd
+      looked at without seeing the problem.</p>
+  </header>
+
+  <div class="tldr">
+    <b>If you read one thing</b>
+    <p>BYTE, the 3D robot, is <code>position:fixed</code> at the middle of the screen. On phones the
+      hero's role text flowed <strong>underneath it</strong> — "CS STUDENT" and "AI ENTHUSIAST" were
+      legible <em>through</em> the robot.</p>
+    <p>Also fixed: a contrast ratio of <span class="num">3.79:1</span> that fails WCAG AA, tap targets
+      under 44px, and every image loading without reserved space.</p>
+  </div>
+
+  <!-- ============ 01 THE REPORTS ============ -->
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2>What they said</h2></div>
+
+    <div class="quote">
+      <p>"The robotic character has layout issues in mobile view. Functionality is solid overall, though
+        some UI elements need refinement. All core features work as expected."</p>
+      <cite>— Muhammad Abdullah, BSCS student and web developer</cite>
+    </div>
+
+    <div class="quote">
+      <p>"The main thing that confused me was how the information was structured. A bit more clarity and
+        context would make it easier to understand."</p>
+      <cite>— Syed Waleed Hussain, CS'27 at FAST NUCES, ML intern at FlyRank.ai</cite>
+    </div>
+
+    <p class="sub">Two people, two different problems, neither of them the thing I'd have guessed. What
+      makes the first one worth recording is that <strong>I had already seen it and not registered
+      it</strong> — I'd opened the site on my own phone and screenshotted the hero with the text
+      visibly cutting through the robot. I looked straight past it, because I knew what the page was
+      supposed to look like.</p>
+  </section>
+
+  <!-- ============ 02 THE FIXES ============ -->
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2>What was broken, and what changed</h2></div>
+
+    <div class="fix">
+      <h3>1 · The robot sat on top of the hero text</h3>
+      <dl>
+        <dt>Broken</dt>
+        <dd><code>.char-stage</code> is <code>position:fixed</code> with
+          <code>translate(50vw, 52vh)</code> — pinned to the centre of the viewport. On phones the hero
+          collapses to one column and the role text flows straight through that spot. Nothing reserved
+          space for the robot, because a fixed-position element is removed from the layout entirely: the
+          text had no way to know it was there.</dd>
+        <dt>Fixed</dt>
+        <dd>On screens under 900px the robot now sits <em>above</em> the name, and the hero's top padding
+          is <strong>derived from the same two values</strong> as the robot's position and size:
+          <code>padding-top: calc(var(--char-top) + var(--char-mobile) + 22px)</code>.</dd>
+        <dt>Why that way</dt>
+        <dd>My first instinct was to nudge the robot until it looked right on my phone — which fixes one
+          screen and leaves every other size to chance. Deriving the padding from the same variables
+          means the text starts exactly 22px below the robot's bottom edge at <em>any</em> viewport
+          height. There is no value of screen size that reintroduces the overlap. Verified arithmetically
+          at 360, 390, 412, 430 and 768px wide.</dd>
+      </dl>
+    </div>
+
+    <div class="fix">
+      <h3>2 · A contrast ratio that fails accessibility standards</h3>
+      <dl>
+        <dt>Broken</dt>
+        <dd><code>--text-faint: #6a6a76</code> against the <code>#060608</code> background is
+          <span class="num">3.79:1</span>. WCAG AA requires <span class="num">4.5:1</span> for normal
+          text. It was used on every label, timestamp and meta line on the site.</dd>
+        <dt>Fixed</dt>
+        <dd><code>#82828d</code> — <span class="num">5.33:1</span>. Passes with margin, and is still
+          visibly quieter than the secondary text at 7.54:1, so the hierarchy survives.</dd>
+        <dt>How I found it</dt>
+        <dd>Computed it, rather than looked at it. I wrote the WCAG relative-luminance formula out and
+          ran every colour in the palette through it. "Looks a bit dim" is not a measurement, and I
+          could not have eyeballed the difference between 3.79 and 4.5.</dd>
+      </dl>
+    </div>
+
+    <div class="fix">
+      <h3>3 · Tap targets smaller than a fingertip</h3>
+      <dl>
+        <dt>Broken</dt>
+        <dd>The nav toggle, BYTE's tool row, the side-rail social icons and the case-study links had no
+          minimum size — several rendered under 44px, the smallest reliably tappable area.</dd>
+        <dt>Fixed</dt>
+        <dd><code>min-height:44px</code> on all of them inside a <code>@media (pointer:coarse)</code>
+          block, so it applies to touch devices only and doesn't bloat the desktop layout.</dd>
+      </dl>
+    </div>
+
+    <div class="fix">
+      <h3>4 · Every image shoved the page around as it loaded</h3>
+      <dl>
+        <dt>Broken</dt>
+        <dd>No <code>width</code>/<code>height</code> on any image. The browser can't reserve space for
+          something whose size it doesn't know, so each one appearing pushed everything below it down —
+          worst on a phone on a slow connection, which is exactly my own audience in Karachi.</dd>
+        <dt>Fixed</dt>
+        <dd>Real pixel dimensions written onto all 18 images, read from the files rather than guessed,
+          plus <code>loading="lazy"</code> and <code>decoding="async"</code> on the ones that lacked
+          them.</dd>
+      </dl>
+    </div>
+
+    <div class="fix">
+      <h3>5 · One oversized image</h3>
+      <dl>
+        <dt>Broken</dt>
+        <dd><code>10-identity-kit.jpg</code> — 1200×2600, <span class="num">270 KB</span> — for a
+          screenshot that never renders wider than a few hundred pixels.</dd>
+        <dt>Fixed</dt>
+        <dd>Re-encoded at quality 78, progressive: <span class="num">217 KB</span>, 20% smaller with no
+          visible difference at display size.</dd>
+        <dt>Honest note</dt>
+        <dd>20% is a modest win and it is still the heaviest asset on the site. Converting the captures
+          to WebP would roughly halve the lot again. Not done — it is on the
+          <a href="ugly.html">still-ugly list</a> rather than quietly omitted from this log.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ 03 LINKS ============ -->
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2>Every link, checked</h2></div>
+    <p class="sub" style="margin-top:0">Run with <code>tools/check-links.py</code>, which verifies three
+      things: every relative link resolves to a file that exists, every page is reachable by clicking
+      from the homepage, and <code>sitemap.xml</code> matches what is actually on disk.</p>
+
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Check</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td class="what">Pages</td><td class="why">16</td></tr>
+        <tr><td class="what">Broken internal links</td><td class="why">0</td></tr>
+        <tr><td class="what">Orphaned pages (live but unreachable)</td><td class="why">0</td></tr>
+        <tr><td class="what">Sitemap disagreements</td><td class="why">0, both directions</td></tr>
+        <tr><td class="what">External links — demos and repos</td><td class="why">KIDO live demo, four GitHub repos, five credential verify links, LinkedIn, Coursera, cal.com booking — all resolving</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- ============ 04 WHAT I LEARNED ============ -->
+  <section>
+    <div class="sec-head"><span class="n">04</span><h2>The lesson worth keeping</h2></div>
+    <p class="sub" style="margin-top:0"><strong>I had the evidence and could not see it.</strong> The
+      screenshot on my phone showed the text cutting through the robot. I'd looked at it, and my brain
+      supplied the layout I intended instead of the one that was there. Two strangers glanced at the
+      same page and named it in seconds.</p>
+    <p class="sub">This is the second time in two weeks the same thing has happened. My homepage linked
+      to no other page for six days while I opened it daily. Then this. The pattern isn't carelessness —
+      it's that <strong>familiarity destroys your ability to see your own work</strong>, and no amount of
+      re-reading fixes it. Only two things do: someone else's eyes, and a measurement. The contrast bug
+      needed the formula because I genuinely cannot tell 3.79 from 4.5 by looking.</p>
+  </section>
+
+  <footer>
+    <span>Farhan Bashir · Karachi, Pakistan · 8 August 2026</span>
+    <span><a href="./">← Portfolio</a> · <a href="ugly.html">Still ugly</a> ·
+      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/tools/check-links.py">The link checker</a></span>
+  </footer>
+
+</div>
+</body>
+</html>

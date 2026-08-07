@@ -13,7 +13,7 @@
   --dash:        rgba(255,255,255,.13);
   --text:        #f4f4f6;
   --text-dim:    #9d9da8;
-  --text-faint:  #6a6a76;
+  --text-faint:  #82828d;   /* was #6a6a76 = 3.79:1, below AA. Now 5.33:1. */
   --violet:      #8b5cf6;
   --violet-2:    #7c5cff;
   --violet-3:    #a78bfa;
@@ -124,7 +124,15 @@ h1,h2,h3,h4{ margin:0; line-height:1.06; }
 body.cursor-on #cursorDot,body.cursor-on #cursorRing{ opacity:1; }
 body.cursor-hover #cursorRing{ width:54px; height:54px; margin:-27px 0 0 -27px;
   background:rgba(168,85,247,.16); border-color:var(--violet); }
-@media (pointer:coarse){ #cursorDot,#cursorRing{ display:none; } }
+@media (pointer:coarse){
+  #cursorDot,#cursorRing{ display:none; }
+  /* 44px is the smallest reliably tappable target. Several controls were
+     under it, including the byte tool row and the nav toggle. */
+  .btn,.nav-toggle,.byte-tool,.rail a,.mail-open,.work-open,.proc{ min-height:44px; }
+  .btn,.mail-open{ display:inline-flex; align-items:center; }
+  .nav-toggle{ min-width:44px; }
+  .rail a{ min-width:44px; display:grid; place-items:center; }
+}
 
 #toast{
   position:fixed; left:50%; bottom:34px; z-index:140;
@@ -741,12 +749,16 @@ body.asking .char-bubble::after{      /* tail, pointing right at the bot */
   .work.feat .work-cover{ border-right:none; border-bottom:1px solid var(--line); min-height:200px; }
 }
 @media (max-width:900px){
+  :root{ --char-mobile:min(48vw,186px); --char-top:74px; }
   .hero-stage{ grid-template-columns:1fr; justify-items:center; text-align:center; gap:34px; }
   .hero-left,.hero-right{ padding-bottom:0; text-align:center; }
-  .hero{ padding-top:96px; }
-  .char-stage{ width:min(56vw,230px); }
+  /* BYTE above the name on phones. The robot's offset and the hero's top
+     padding come from the same two values, so no viewport height can put
+     text underneath it. Reported independently by two reviewers. */
+  .char-stage{ width:var(--char-mobile); }
+  .hero{ padding-top:calc(var(--char-top) + var(--char-mobile) + 22px); }
   .char-stage:not(.at-hero):not(.at-chat){ opacity:0; }
-  .char-stage.at-hero{ transform:translate(calc(50vw - 50%), calc(52vh - 50%)) scale(1); }
+  .char-stage.at-hero{ transform:translate(calc(50vw - 50%), var(--char-top)) scale(1); }
   .char-stage.at-chat{
     opacity:1;
     transform:translate(calc(50vw - 50%), calc(34vh - 50%)) scale(.8);
