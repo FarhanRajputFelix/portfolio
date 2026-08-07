@@ -854,3 +854,39 @@ body.asking .char-bubble::after{      /* tail, pointing right at the bot */
   .proc:hover{ transform:none; }
   .proc:hover::after{ transform:none; }
 }
+
+/* ==========================================================
+   Hero claim + receipts row
+   Added Week 7 after a design crit: the reviewer got "AI intern,
+   CS student, lots going on" in ten seconds and never found the
+   claim, then said the honest process writing was the actual
+   differentiator but was "filed under Process instead of stated
+   on the hero". So the claim is now the headline and the three
+   pages that evidence it sit directly beneath it.
+   ========================================================== */
+
+.claim-line{
+  color:var(--violet-3);
+  -webkit-text-fill-color:var(--violet-3);
+}
+
+.receipts{
+  display:flex; flex-wrap:wrap; align-items:center; gap:8px 18px;
+  margin:0 0 18px; font-family:var(--mono); font-size:.7rem; letter-spacing:.04em;
+}
+.receipts-lead{
+  color:var(--text-faint); letter-spacing:.18em; text-transform:uppercase; font-size:.6rem;
+}
+.receipts a{
+  color:var(--text-dim); text-decoration:none;
+  border-bottom:1px solid rgba(139,92,246,.35); padding-bottom:2px;
+  transition:color .3s cubic-bezier(.16,1,.3,1), border-color .3s cubic-bezier(.16,1,.3,1);
+}
+.receipts a:hover{ color:var(--text); border-bottom-color:var(--violet); }
+.receipts a em{ color:var(--violet-3); font-style:italic; }
+
+@media (max-width:760px){
+  .receipts{ flex-direction:column; align-items:flex-start; gap:9px; margin-bottom:16px; }
+  .receipts a{ font-size:.72rem; }
+}
+@media (prefers-reduced-motion:reduce){ .receipts a{ transition:none; } }

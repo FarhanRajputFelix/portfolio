@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Survive the crit — the review, the sort, the fixes — Farhan Bashir</title>
+<meta name="description" content="A design reviewer could not tell what I do in ten seconds. What they said, how I sorted it, and what changed on the live site." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@200;300;400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/case.css" />
+<link rel="canonical" href="https://farhanbashir.netlify.app/crit.html" />
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
+<meta name="theme-color" content="#060608" />
+<style>
+  .q{ padding:16px 20px; border-left:3px solid var(--accent); margin:14px 0;
+    background:linear-gradient(90deg,rgba(34,211,238,.07),transparent); }
+  .q p{ margin:0; color:var(--paper); font-size:.93rem; }
+  .q p + p{ margin-top:9px; }
+  .q b{ font-family:var(--display); color:var(--accent); font-size:.62rem;
+    letter-spacing:.18em; text-transform:uppercase; display:block; margin-bottom:8px; }
+  .must{ padding:18px 20px; border:1px solid rgba(248,113,113,.4); border-radius:14px;
+    background:linear-gradient(120deg,rgba(248,113,113,.05),transparent); margin-bottom:12px; }
+  .must h3{ color:var(--paper); margin-bottom:8px; }
+  .later{ padding:16px 20px; border:1px solid var(--line); border-radius:14px;
+    background:var(--surface); margin-bottom:10px; }
+  .later h3{ color:var(--muted); margin-bottom:6px; font-weight:500; }
+  .must dl,.later dl{ margin:0; display:grid; grid-template-columns:auto 1fr; gap:5px 14px; font-size:.87rem; }
+  .must dt,.later dt{ font-family:var(--display); font-size:.57rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--faint); padding-top:4px; }
+  .must dd,.later dd{ margin:0; color:var(--muted); }
+  .done{ font-family:var(--display); font-size:.55rem; letter-spacing:.14em; text-transform:uppercase;
+    padding:2px 8px; border-radius:999px; margin-left:8px; color:#4ade80;
+    border:1px solid rgba(74,222,128,.45); }
+  .score{ font-family:var(--display); font-size:.55rem; letter-spacing:.14em; text-transform:uppercase;
+    padding:2px 8px; border-radius:999px; margin-left:8px; }
+  .hit{ color:#4ade80; border:1px solid rgba(74,222,128,.4); }
+  .miss{ color:#f87171; border:1px solid rgba(248,113,113,.45); }
+  .wrong{ color:#fbbf24; border:1px solid rgba(251,191,36,.45); }
+  @media (max-width:640px){ .must dl,.later dl{ grid-template-columns:1fr; } .must dt,.later dt{ padding-top:9px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="subnav" aria-label="Site sections">
+    <a class="home" href="./">← Farhan Bashir</a>
+    <a href="cv.html">CV</a>
+    <a href="case-aqi.html">Air Quality</a>
+    <a href="case-kido.html">KIDO</a>
+    <a href="case-aurexis.html">AUREXIS</a>
+    <a href="workflow.html">Workflow</a>
+    <a href="agent.html">Agent spec</a>
+    <a href="learned.html">Explain it</a>
+    <a href="crit.html" aria-current="page">The crit</a>
+    <a href="fixes.html">Fix log</a>
+    <a href="ugly.html">Still ugly</a>
+  </nav>
+
+  <header class="top">
+    <span class="label">Survive the crit · Week 7</span>
+    <h1>Nobody could tell what I do</h1>
+    <p class="sub">I gave a reviewer my proof statement — <em>"I build AI that knows its limits — and
+      ships anyway"</em> — and asked two questions before anything else: in ten seconds, what do I do,
+      and would you believe I'm good at it. The answer to the first was no.</p>
+  </header>
+
+  <div class="tldr">
+    <b>If you read one thing</b>
+    <p>The reviewer's verdict: <strong>"the site has the receipts for your claim, they're just filed
+      under Process instead of stated on the hero."</strong> My homepage sold "diligent student"; my
+      deep pages sold "engineer who knows what breaks."</p>
+    <p>Five must-fixes, all live. The claim is now the headline, the hedging is gone, the proof sits in
+      the hero, the primary button finally performs the one action the site exists for — and a wall of
+      zeroes that could greet a recruiter mid-load is fixed.</p>
+  </div>
+
+  <!-- ============ 01 THE ASK ============ -->
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2>What I asked, and why in that order</h2></div>
+    <p class="sub" style="margin-top:0">Two questions, deliberately before any detailed look:
+      <strong>"In ten seconds on the homepage, what do I do?"</strong> and <strong>"Would you believe
+      I'm good at it?"</strong> Once somebody starts examining a site properly they can no longer give
+      you a ten-second reaction — that first impression is the one thing you cannot get back, and it is
+      the only test of whether a claim actually lands.</p>
+    <p class="sub">I also handed over the proof statement and the one action the site is supposed to
+      produce (an email about a role or research collaboration), so the reviewer could judge the page
+      against its actual job rather than against their taste.</p>
+    <p class="sub"><strong>I committed a prediction to git first</strong>
+      (<a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/crit/PREDICTION.md">crit/PREDICTION.md</a>,
+      commit <code>5a86659</code>), before sending the link. A prediction made after the feedback is
+      worthless. Scored in §04, including the one I got badly wrong.</p>
+  </section>
+
+  <!-- ============ 02 THE FEEDBACK ============ -->
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2>The feedback, unedited</h2></div>
+
+    <div class="q">
+      <b>Q1 · In ten seconds, what do I do?</b>
+      <p>"Honestly, the first thing I register is 'AI intern, CS student, lots going on' — not 'builds AI
+        that knows its limits and ships anyway.' The hero says 'AI enthusiast · ML engineer in progress'
+        and 'AI Intern @ FlyRank AI — open to work.' That's a job title and a status, not a claim. The
+        tagline you're going for isn't anywhere near the fold. I have to go dig for it (I only found the
+        <em>spirit</em> of it in your Process section — 'shipped rough,' 'still ugly,' the fix log). Ten
+        seconds gets me 'student portfolio,' not your one claim."</p>
+    </div>
+
+    <div class="q">
+      <b>Q2 · Would you believe I'm good at it?</b>
+      <p>"Closer to 'yes, believable' than 'no' — but not because of the hero, because of the
+        <em>evidence buried below it</em>: the honest defect list, the fix log with a real bug, the 'one
+        line I didn't understand' post, the decision-stack writeup. That stuff is genuinely rare and it's
+        what actually proves 'knows its limits' — not a sentence, a paper trail. Problem: it's positioned
+        as page 8 of 12, not the pitch. You're hiding your best asset behind your résumé."</p>
+    </div>
+
+    <div class="q">
+      <b>Everything else, unfiltered</b>
+      <p>"The four zeroes ('0 Projects shipped / 0 Certifications / 0 Research areas / 0 Tools') — I
+        assume that's an unloaded counter animation, but if a recruiter lands mid-load or with JS
+        hiccuping, that's a wall of zeroes as their first impression. High risk for a homepage."</p>
+      <p>"'AI enthusiast · ML engineer in progress' reads junior and hedgy — the opposite of the confident
+        claim you told me you want."</p>
+      <p>"CTA is 'See my work / My CV / Book a call' — none of those is 'email me about a role.' You said
+        the site should produce one action (an email), but the primary buttons don't say that anywhere
+        near as directly as the case-study links do."</p>
+      <p>"17 certifications up top-of-fold-adjacent is a lot of badge-flexing before you've earned the
+        claim. Cert walls read as 'trying to prove I'm qualified,' not 'I ship.'"</p>
+      <p>"The self-aware writing is the actual differentiator here — better than any AI/ML portfolio I've
+        seen from a student. But it's process documentation, sitting in a submenu, not the hook."</p>
+      <p><strong>"Bottom line: the site has the receipts for your claim, they're just filed under
+        'Process' instead of stated on the hero. Right now the homepage sells 'diligent student,' and the
+        deep pages sell 'engineer who knows what breaks.' Flip that."</strong></p>
+    </div>
+
+    <p class="sub">I replied "noted, thank you" and nothing else until I had sorted it. The temptation to
+      explain that the claim <em>is</em> on the site — on <code>plan.html</code> — was strong, and it
+      would have been the wrong instinct. A claim on a page nobody opens is not on the site.</p>
+  </section>
+
+  <!-- ============ 03 THE SORT ============ -->
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2>Must-fix</h2></div>
+    <p class="sub" style="margin-top:0">Sorting rule I used: it is a must-fix if it makes the page
+      confusing, breaks something, damages the one action, or stops the proof statement from landing.
+      Everything else waits.</p>
+
+    <div class="must">
+      <h3>1 · The claim wasn't on the homepage<span class="done">Fixed</span></h3>
+      <dl>
+        <dt>Why must</dt><dd>The proof statement is the page's entire job, and it lived only on <code>plan.html</code> — an internal content-map page a visitor has no reason to open. My own content map said the hero should carry it. It never did.</dd>
+        <dt>Changed</dt><dd>The hero headline is now the claim itself: <strong>"I build / AI THAT KNOWS / ITS LIMITS / — and ships anyway."</strong> It replaced "Currently a / CS STUDENT / AI INTERN", which said what I am rather than what I make.</dd>
+      </dl>
+    </div>
+
+    <div class="must">
+      <h3>2 · "AI enthusiast · ML engineer in progress"<span class="done">Fixed</span></h3>
+      <dl>
+        <dt>Why must</dt><dd>Read as "junior and hedgy — the opposite of the confident claim you want". <em>Enthusiast</em> is what you call someone with no evidence; I have a live 11-agent platform, a 10,000-trial simulation and a working MCP server. <em>In progress</em> hedged a claim I can simply make.</dd>
+        <dt>Changed</dt><dd>Deleted. The line under the claim is now just "— and ships anyway." Role and status moved to a single quiet badge: "CS undergraduate · AI Intern @ FlyRank AI · open to work". Still honest, no longer the headline.</dd>
+      </dl>
+    </div>
+
+    <div class="must">
+      <h3>3 · A wall of zeroes<span class="done">Fixed</span></h3>
+      <dl>
+        <dt>Why must</dt><dd>Genuinely broken, and I missed it entirely. The markup shipped <code>&gt;0&lt;</code> and JavaScript animated it up on scroll — so any visitor whose JS was slow, blocked, or whose observer hadn't fired read <strong>"0 Projects shipped · 0 Certifications"</strong>. The worst possible first impression, caused by a decoration.</dd>
+        <dt>Changed</dt><dd>The HTML now ships the real numbers. The script sets the value to zero only at the moment it knows it can animate it back up, so a broken-JS visitor sees the truth instead of nothing.</dd>
+      </dl>
+    </div>
+
+    <div class="must">
+      <h3>4 · No button performed the one action<span class="done">Fixed</span></h3>
+      <dl>
+        <dt>Why must</dt><dd>The site exists to produce one action — an email about a role — and offered four buttons of equal weight, none of which said so. Four equal choices is the same as no recommendation.</dd>
+        <dt>Changed</dt><dd>The primary button is now <strong>"Email me about a role"</strong>, opening a compose window with the subject pre-filled. See my work, My CV and Book a call are demoted to secondary.</dd>
+      </dl>
+    </div>
+
+    <div class="must">
+      <h3>5 · The proof was filed under Process<span class="done">Fixed</span></h3>
+      <dl>
+        <dt>Why must</dt><dd>The strongest sentence in the review: the honesty writing is "better than any AI/ML portfolio I've seen from a student" but was "page 8 of 12, not the pitch." A claim about knowing your limits is worthless as a sentence and convincing as a paper trail — and the paper trail was hidden.</dd>
+        <dt>Changed</dt><dd>A <em>Proof, not adjectives</em> row now sits in the hero, directly under the claim, linking the three pages that actually evidence it: <a href="ugly.html">everything wrong with this site</a>, <a href="fixes.html">a bug two reviewers found before I did</a>, and <a href="workflow.html">a workflow I measured as slower</a>. Each headline states a weakness, because that is the claim.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ NICE TO HAVE ============ -->
+  <section>
+    <div class="sec-head"><span class="n">04</span><h2>Nice-to-have</h2></div>
+
+    <div class="later">
+      <h3>The certification wall reads as badge-flexing</h3>
+      <dl>
+        <dt>Why later</dt><dd>Fair, and I partly disagree — 17 individually verifiable credentials, 10 from Anthropic, is real signal for someone with no publications. The problem is <em>weight</em>, not existence: they currently compete with the work. That is a layout decision needing more thought than a crit-week patch, and getting it wrong loses genuine evidence.</dd>
+        <dt>Plan</dt><dd>Collapse to a count with a link, below the case studies rather than beside them. Not done.</dd>
+      </dl>
+    </div>
+
+    <div class="later">
+      <h3>Still no screenshots of anything running</h3>
+      <dl>
+        <dt>Why later</dt><dd>Not raised in this review, but it was already on my <a href="ugly.html">still-ugly list</a> and it would strengthen every case study. It needs capture and compression work, not a text edit.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ 05 PREDICTION SCORED ============ -->
+  <section>
+    <div class="sec-head"><span class="n">05</span><h2>My prediction, scored</h2></div>
+    <p class="sub" style="margin-top:0">Committed before sending the link. A high hit rate would not be
+      a good result — if a reviewer only tells you what you already knew, you picked the wrong reviewer.</p>
+
+    <div class="scroll">
+    <table>
+      <thead><tr><th>I predicted</th><th>What happened</th><th></th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="what">They'll describe my identity, not my capability</td>
+          <td class="why">Almost verbatim: "AI intern, CS student, lots going on"</td>
+          <td><span class="score hit">Hit</span></td>
+        </tr>
+        <tr>
+          <td class="what">A qualified yes, aimed at the hero not the work</td>
+          <td class="why">Exactly that — believable "because of the evidence buried below it"</td>
+          <td><span class="score hit">Hit</span></td>
+        </tr>
+        <tr>
+          <td class="what">"Enthusiast" and "in progress" get flagged</td>
+          <td class="why">Both, quoted, called "junior and hedgy"</td>
+          <td><span class="score hit">Hit</span></td>
+        </tr>
+        <tr>
+          <td class="what">The one action is buried under four equal CTAs</td>
+          <td class="why">Raised independently</td>
+          <td><span class="score hit">Hit</span></td>
+        </tr>
+        <tr>
+          <td class="what">The certification wall is too prominent</td>
+          <td class="why">"Badge-flexing before you've earned the claim"</td>
+          <td><span class="score hit">Hit</span></td>
+        </tr>
+        <tr>
+          <td class="what">Too many process pages relative to case studies</td>
+          <td class="why"><strong>Inverted.</strong> They called the process writing my best asset and the ratio irrelevant — the problem was <em>position</em>, not quantity. I thought I had too much of the thing that is actually the strongest thing I have.</td>
+          <td><span class="score wrong">Wrong</span></td>
+        </tr>
+        <tr>
+          <td class="what">The 3D scene might read as decoration blocking the message</td>
+          <td class="why">Never mentioned. My "most likely wrong about" was simply not an issue for this reviewer.</td>
+          <td><span class="score wrong">Wrong</span></td>
+        </tr>
+        <tr>
+          <td class="what">— nothing —</td>
+          <td class="why"><strong>The four zeroes.</strong> A homepage that can greet a recruiter with "0 Projects shipped" if JavaScript stalls. I have read that markup dozens of times.</td>
+          <td><span class="score miss">Miss</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="honest">
+      <b>What the misses actually teach</b>
+      <p>Five hits are worth very little: those were problems I could already see and had chosen not to
+        fix, which is a discipline failure rather than a blindness one.</p>
+      <p>The two <em>wrongs</em> are the valuable part. I had catalogued my honest process writing as
+        <strong>excess</strong> — "seven process pages against three case studies is the wrong ratio",
+        in my own words on my own ugly list. The reviewer says it is the single best thing on the site.
+        I was one edit away from deleting my strongest asset for being too plentiful.</p>
+      <p>And the miss is the third time in two weeks that someone else found something in seconds that
+        I had looked straight at: six orphaned pages, a robot sitting on my own hero text, and now a
+        row of zeroes. The pattern is not carelessness. It is that I read the page I intended instead
+        of the page that renders, and no amount of re-reading fixes that.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Farhan Bashir · Karachi, Pakistan · 8 August 2026</span>
+    <span><a href="./">← Portfolio</a> · <a href="fixes.html">Fix log</a> ·
+      <a href="ugly.html">Still ugly</a></span>
+  </footer>
+
+</div>
+</body>
+</html>

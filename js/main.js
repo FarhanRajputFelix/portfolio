@@ -236,6 +236,11 @@
       const dur = 1400;
       const start = performance.now();
 
+      // The markup ships the real number so that a visitor whose JS is slow,
+      // blocked or mid-load reads "17 Certifications" rather than "0". We only
+      // drop it to zero here, at the moment we know we can animate it back up.
+      el.textContent = '0';
+
       (function step(now) {
         const p = Math.min(1, (now - start) / dur);
         const eased = 1 - Math.pow(1 - p, 3);
