@@ -890,3 +890,64 @@ body.asking .char-bubble::after{      /* tail, pointing right at the bot */
   .receipts a{ font-size:.72rem; }
 }
 @media (prefers-reduced-motion:reduce){ .receipts a{ transition:none; } }
+
+/* ==========================================================
+   Contact form — the one dynamic feature (Netlify Forms)
+   Week 8. No JS of mine: the browser does the POST natively,
+   Netlify catches it and emails me.
+   ========================================================== */
+
+.contact-form{
+  max-width:640px; margin:26px auto 0; padding:26px 28px 28px;
+  border:1px solid var(--line); border-radius:20px; background:var(--bg-2);
+  display:grid; gap:16px;
+}
+.cf-lead{
+  margin:0; font-family:var(--mono); font-size:.66rem; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--text-faint);
+}
+.cf-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.cf-field{ display:grid; gap:7px; }
+.cf-field label{
+  font-family:var(--mono); font-size:.62rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--text-dim);
+}
+.cf-field input,
+.cf-field select,
+.cf-field textarea{
+  width:100%; padding:13px 15px; min-height:46px;
+  font-family:var(--body); font-size:.95rem; color:var(--text);
+  background:rgba(255,255,255,.03); border:1px solid var(--line); border-radius:12px;
+  transition:border-color .3s cubic-bezier(.16,1,.3,1), background .3s cubic-bezier(.16,1,.3,1);
+}
+.cf-field textarea{ resize:vertical; line-height:1.6; }
+.cf-field input::placeholder,
+.cf-field textarea::placeholder{ color:var(--text-faint); }
+.cf-field input:focus-visible,
+.cf-field select:focus-visible,
+.cf-field textarea:focus-visible{
+  outline:none; border-color:var(--violet); background:rgba(139,92,246,.06);
+}
+/* the browser's own validation, only after a failed submit attempt */
+.cf-field input:user-invalid,
+.cf-field textarea:user-invalid{ border-color:rgba(248,113,113,.6); }
+
+.cf-submit{ justify-self:start; margin-top:4px; }
+.cf-note{ margin:0; font-size:.78rem; color:var(--text-faint); line-height:1.6; }
+
+/* The honeypot. Not display:none - some bots skip hidden inputs, and screen
+   readers should ignore it rather than be told to leave a field empty. Kept in
+   the layout, moved out of sight, and taken out of the tab order. */
+.cf-hp{
+  position:absolute; width:1px; height:1px; overflow:hidden;
+  clip-path:inset(50%); white-space:nowrap; margin:-1px; padding:0; border:0;
+}
+
+@media (max-width:640px){
+  .contact-form{ padding:22px 20px 24px; border-radius:16px; }
+  .cf-row{ grid-template-columns:1fr; }
+  .cf-submit{ justify-self:stretch; justify-content:center; }
+}
+@media (prefers-reduced-motion:reduce){
+  .cf-field input,.cf-field select,.cf-field textarea{ transition:none; }
+}

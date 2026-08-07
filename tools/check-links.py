@@ -27,6 +27,12 @@ os.chdir(ROOT)
 
 SKIP = ("http://", "https://", "mailto:", "#", "//", "tel:", "data:")
 
+# Pages that are deliberately not linked from anywhere. thanks.html is a form
+# success page: you only arrive by submitting the form, it is noindex, and it
+# is not in the sitemap. Listing it here keeps the orphan check strict for
+# everything else rather than weakening the rule to accommodate one file.
+INTENTIONALLY_UNLINKED = {"thanks.html"}
+
 
 def main() -> int:
     pages = sorted(glob.glob("*.html"))
@@ -56,7 +62,7 @@ def main() -> int:
             if target.endswith(".html") and target not in seen:
                 seen.add(target)
                 queue.append(target)
-    orphans = [p for p in pages if p not in seen]
+    orphans = [p for p in pages if p not in seen and p not in INTENTIONALLY_UNLINKED]
 
     # Sitemap agreement, both directions.
     missing_from_sitemap, dead_in_sitemap = [], []
@@ -64,7 +70,7 @@ def main() -> int:
         sitemap = io.open("sitemap.xml", encoding="utf-8").read()
         listed = {x or "index.html" for x in re.findall(r"<loc>https?://[^/]+/(?:portfolio/)?([^<]*)</loc>", sitemap)}
         dead_in_sitemap = sorted(x for x in listed if not os.path.exists(x))
-        missing_from_sitemap = sorted(set(pages) - listed)
+        missing_from_sitemap = sorted(set(pages) - listed - INTENTIONALLY_UNLINKED)
 
     print(f"pages checked            {len(pages)}")
     print(f"broken links             {len(broken)}")

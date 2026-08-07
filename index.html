@@ -726,6 +726,69 @@
       </span>
     </div>
 
+
+    <!-- ============ CONTACT FORM (Netlify Forms) ============
+         The one dynamic feature on this site. data-netlify="true" is what
+         makes it work: at deploy time Netlify parses the built HTML, finds
+         this attribute, and creates a backend endpoint for the form. There is
+         no server of mine anywhere in this.
+
+         netlify-honeypot names a field real people never see. Bots fill in
+         every field they find, so anything arriving with bot-field filled is
+         discarded before it reaches me - spam filtering with no captcha.
+
+         The form only functions on the Netlify host. On the GitHub Pages copy
+         the markup renders but there is no endpoint behind it, because Pages
+         serves files and nothing else. Documented rather than hidden.
+    ============================================================ -->
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+          action="/thanks.html" class="contact-form" data-anim="fade">
+      <p class="cf-lead">Or send it from here &mdash; it reaches the same inbox.</p>
+
+      <p class="cf-hp" aria-hidden="true">
+        <label>Leave this field empty
+          <input name="bot-field" tabindex="-1" autocomplete="off" />
+        </label>
+      </p>
+
+      <div class="cf-row">
+        <div class="cf-field">
+          <label for="cf-name">Your name</label>
+          <input id="cf-name" name="name" type="text" required autocomplete="name"
+                 placeholder="Ada Lovelace" />
+        </div>
+        <div class="cf-field">
+          <label for="cf-email">Your email</label>
+          <input id="cf-email" name="email" type="email" required autocomplete="email"
+                 placeholder="you@company.com" />
+        </div>
+      </div>
+
+      <div class="cf-field">
+        <label for="cf-reason">What is this about?</label>
+        <select id="cf-reason" name="reason">
+          <option>An AI/ML role or internship</option>
+          <option>A research collaboration</option>
+          <option>Graduate study or a reference</option>
+          <option>Feedback on something I built</option>
+          <option>Something else</option>
+        </select>
+      </div>
+
+      <div class="cf-field">
+        <label for="cf-message">Message</label>
+        <textarea id="cf-message" name="message" rows="5" required
+                  placeholder="A sentence or two is plenty."></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary cf-submit" data-magnetic>
+        <span>Send message</span>
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4Z"/></svg>
+      </button>
+      <p class="cf-note">Goes straight to my inbox. No newsletter, no tracking, nothing stored
+        anywhere but Netlify's form log and my email.</p>
+    </form>
+
     <div class="contact-grid">
       <a class="contact-card" href="https://www.linkedin.com/in/farhan-rajput/" target="_blank" rel="noopener" data-anim="rise">
         <span class="cc-art" aria-hidden="true">
