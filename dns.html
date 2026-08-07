@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@200;300;400;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/case.css" />
+<link rel="canonical" href="https://farhanbashir.netlify.app/dns.html" />
 <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
 <link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
 <meta name="theme-color" content="#060608" />
@@ -58,7 +59,7 @@
     <b>If you read one thing</b>
     <p>DNS is a phone book for the internet. A <strong>CNAME</strong> record is a forwarding entry in
       that book: it says "this name is an alias for that other name — go look that one up instead."</p>
-    <p>Mine will say <code>farhan.flyrank.ai</code> → <code>farhanrajputfelix.github.io</code>. Nothing
+    <p>Mine will say <code>farhan.flyrank.ai</code> → <code>farhanbashir.netlify.app</code>. Nothing
       about my site changes. <strong>A custom domain is a pointer, not a migration.</strong></p>
   </div>
 
@@ -66,7 +67,7 @@
   <section>
     <div class="sec-head"><span class="n">01</span><h2>The idea, without jargon</h2></div>
     <p class="sub" style="margin-top:0">Computers on the internet find each other by number, not by
-      name. My site actually lives at an address like <code>185.199.108.153</code>. Nobody wants to
+      name. My site actually lives at an address like <code>75.2.60.5</code>. Nobody wants to
       remember that, so DNS — the Domain Name System — exists to translate the name a human types into
       the number a machine needs.</p>
     <p class="sub">The useful mental model is a very large, very fast phone book, split into sections
@@ -88,13 +89,13 @@
         <tr>
           <td class="what"><strong>A</strong></td>
           <td class="why">"This name <em>is</em> this numeric address." The final answer.</td>
-          <td class="why"><code>example.com → 185.199.108.153</code></td>
+          <td class="why"><code>example.com → 75.2.60.5</code></td>
         </tr>
         <tr>
           <td class="what"><strong>CNAME</strong></td>
           <td class="why">"This name is an <em>alias</em> for another name. Stop asking about me; go and
             look that one up instead." Short for <em>Canonical Name</em>.</td>
-          <td class="why"><code>farhan.flyrank.ai → farhanrajputfelix.github.io</code></td>
+          <td class="why"><code>farhan.flyrank.ai → farhanbashir.netlify.app</code></td>
         </tr>
       </tbody>
     </table>
@@ -102,20 +103,27 @@
 
     <p class="sub"><strong>Mine will be a CNAME</strong>, and here is exactly what it will hold:</p>
 <pre>Type:   CNAME
-Name:   farhan            (the subdomain label, inside the flyrank.ai zone)
-Value:  farhanrajputfelix.github.io.
-TTL:    3600              (seconds — how long resolvers may cache the answer)</pre>
+Name:   farhan                    (the subdomain label, inside the flyrank.ai zone)
+Value:  farhanbashir.netlify.app. (my host's name — the trailing dot makes it absolute)
+TTL:    3600                      (seconds — how long resolvers may cache the answer)</pre>
+
+    <p class="sub">The value depends on <em>which</em> host answers for the domain, and I run two. My
+      canonical host is Netlify, so the value is <code>farhanbashir.netlify.app</code>. If I attached
+      the subdomain to my GitHub Pages copy instead, the value would be
+      <code>farhanrajputfelix.github.io</code> — the user site, never the
+      <code>/portfolio</code> path, because DNS knows nothing about paths. It maps names to
+      addresses and stops there.</p>
 
     <p class="sub">The value is my <strong>host's</strong> name, not my own site's URL and not an IP
-      address. That distinction is the whole point of using a CNAME: GitHub can change which servers
-      serve my pages, and their IP addresses can change with them, and my record keeps working because
-      it points at a <em>name</em> that GitHub keeps current. If I hardcoded an A record with today's IP
-      and they renumbered tomorrow, my site would go dark and I'd have no warning.</p>
+      address. That distinction is the whole point of using a CNAME: Netlify serves from an anycast
+      network and can change which machines answer at any time, and my record keeps working because it
+      points at a <em>name</em> they keep current. If I hardcoded an A record with today's IP and they
+      renumbered tomorrow, my site would go dark and I'd get no warning.</p>
 
-    <p class="sub">Note the trailing dot in <code>farhanrajputfelix.github.io.</code> — it marks the
+    <p class="sub">Note the trailing dot in <code>farhanbashir.netlify.app.</code> — it marks the
       name as absolute. Some DNS interfaces add it for you; some treat a missing dot as "relative to
       this zone" and would silently create
-      <code>farhanrajputfelix.github.io.flyrank.ai</code>, which resolves to nothing. Worth checking
+      <code>farhanbashir.netlify.app.flyrank.ai</code>, which resolves to nothing. Worth checking
       rather than assuming.</p>
 
     <div class="honest">
@@ -164,14 +172,14 @@ TTL:    3600              (seconds — how long resolvers may cache the answer)<
         <h3>flyrank.ai's nameservers return my CNAME</h3>
         <p>These are authoritative — the actual source of truth for the zone. This is where the record
           FlyRank Ops created lives. They answer: <em>"farhan.flyrank.ai is an alias for
-          farhanrajputfelix.github.io."</em></p>
+          farhanbashir.netlify.app."</em></p>
         <p>Note what they did <strong>not</strong> return: an IP address. The question isn't answered
           yet, it's been redirected.</p>
       </li>
       <li>
         <h3>The resolver starts over on the new name</h3>
-        <p>It now looks up <code>farhanrajputfelix.github.io</code>, walking the same path — root, then
-          <code>.io</code>, then GitHub's nameservers — until it gets <strong>A</strong> records with
+        <p>It now looks up <code>farhanbashir.netlify.app</code>, walking the same path — root, then
+          <code>.app</code>, then Netlify's nameservers — until it gets <strong>A</strong> records with
           real IP addresses. This second lookup is the cost of a CNAME, and it's why a chain of aliases
           pointing at aliases makes a site slower.</p>
       </li>
@@ -197,13 +205,19 @@ TTL:    3600              (seconds — how long resolvers may cache the answer)<
   <!-- ============ 04 CERT ============ -->
   <section>
     <div class="sec-head"><span class="n">04</span><h2>Where the padlock comes from</h2></div>
-    <p class="sub" style="margin-top:0">I don't buy or install a certificate. Both GitHub Pages and
-      Netlify request one automatically from Let's Encrypt, free, using a protocol called ACME.</p>
+    <p class="sub" style="margin-top:0">I don't buy or install a certificate. Netlify requests one
+      automatically from Let's Encrypt, free, using a protocol called ACME. GitHub Pages does the same
+      for its copy.</p>
     <p class="sub">The certificate authority has to verify I actually control the name before it will
       certify it, so it issues a <strong>challenge</strong>: it asks the host to serve a specific value
       at a specific path under <code>farhan.flyrank.ai</code>, then fetches that URL itself. Only
       someone who controls where the name points can pass, which is why the certificate cannot be
       requested until the CNAME resolves.</p>
+    <p class="sub">One detail specific to my host: <code>.app</code> is on the HSTS preload list, which
+      means browsers refuse to load <em>any</em> <code>.app</code> address over plain HTTP before a
+      request is even sent. So <code>farhanbashir.netlify.app</code> could never have been served
+      insecurely, whatever I configured.</p>
+
     <p class="sub">Hence the correct order, and the reason the padlock is often missing for a few
       minutes: <strong>record first, then domain added at the host, then certificate.</strong> A
       certificate error right after setup usually means the challenge ran before DNS had settled, and
@@ -220,10 +234,11 @@ TTL:    3600              (seconds — how long resolvers may cache the answer)<
       <li>Verify it resolves from my machine: <code>nslookup farhan.flyrank.ai</code> — I expect to see
         the alias, then GitHub's addresses. If it returns nothing, stop and wait; don't start changing
         settings</li>
-      <li>Add <code>farhan.flyrank.ai</code> as a custom domain in the host's settings
-        (GitHub: repo → Settings → Pages → Custom domain; Netlify: Domain management → Add domain)</li>
-      <li>Confirm the <code>CNAME</code> file appears in the repo root — GitHub commits it for me, and
-        deleting it later would silently break the domain</li>
+      <li>Add <code>farhan.flyrank.ai</code> in Netlify: Site configuration → Domain management →
+        Add a domain. Netlify will detect the CNAME already exists and verify it</li>
+      <li>Update the <code>rel="canonical"</code> tag on all 14 pages and the URLs in
+        <code>sitemap.xml</code> to the new host, then re-run <code>tools/check-links.py</code> —
+        otherwise every page still tells search engines the Netlify name is the real one</li>
       <li>Wait for the certificate. Tick "Enforce HTTPS" once it's available, not before</li>
       <li>Open <code>https://farhan.flyrank.ai</code> in a private window while logged out, and check
         the padlock and the certificate's name</li>
@@ -241,8 +256,8 @@ TTL:    3600              (seconds — how long resolvers may cache the answer)<
       <p><strong>Forcing HTTPS too early.</strong> Enforcing it before the certificate is issued makes
         the site unreachable rather than merely unencrypted.</p>
       <p><strong>Pointing the CNAME at the wrong thing.</strong> The value is my host's name
-        (<code>farhanrajputfelix.github.io</code>), not the full URL of my site, not the
-        <code>/portfolio</code> path, and not an IP address I looked up today.</p>
+        (<code>farhanbashir.netlify.app</code>), not <code>https://</code> in front of it, not a path
+        after it, and not an IP address I looked up today.</p>
     </div>
   </section>
 

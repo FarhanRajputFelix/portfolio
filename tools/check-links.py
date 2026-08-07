@@ -62,7 +62,7 @@ def main() -> int:
     missing_from_sitemap, dead_in_sitemap = [], []
     if os.path.exists("sitemap.xml"):
         sitemap = io.open("sitemap.xml", encoding="utf-8").read()
-        listed = {x or "index.html" for x in re.findall(r"portfolio/([^<]*)</loc>", sitemap)}
+        listed = {x or "index.html" for x in re.findall(r"<loc>https?://[^/]+/(?:portfolio/)?([^<]*)</loc>", sitemap)}
         dead_in_sitemap = sorted(x for x in listed if not os.path.exists(x))
         missing_from_sitemap = sorted(set(pages) - listed)
 
