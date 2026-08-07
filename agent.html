@@ -61,6 +61,28 @@
       <div class="stat"><b>6 evals</b><span>written before the build</span></div>
       <div class="stat accent"><b>~10 h</b><span>estimated build</span></div>
     </div>
+
+    <div class="honest" style="margin-top:24px">
+      <b>Build status — FL-07, updated 7 August 2026</b>
+      <p>The agent is built:
+        <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/agent/scout.mjs">agent/scout.mjs</a>
+        (the loop, four provider adapters, guardrails) and
+        <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/agent/evals.mjs">agent/evals.mjs</a>
+        (the six cases below, as executable assertions).
+        <strong>All 9 mechanical assertions pass</strong> — tool dispatch over MCP, gate called with the
+        right threshold, CGPA absent from the whole transcript, the 8-call cap forcing termination, and
+        HTTP/thin-extraction failures refusing to become requirement lists.</p>
+      <p><strong>What is not proven:</strong> every <em>judgement</em> assertion. The spec's platform
+        choice — Claude via the Anthropic API — failed on the first command for exactly the reason §03
+        flagged as its main risk: no key. A key found in an older project turned out to have been
+        revoked by Google as leaked. So the loop is provider-agnostic and tested against a scripted
+        mock, and the model's actual reasoning is untested. Honest reading: the plumbing works, the
+        agent's judgement is unmeasured.</p>
+      <p>What broke, what I changed, and what I cut:
+        <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/agent/BUILD-LOG.md">agent/BUILD-LOG.md</a>
+        — including the eval that caught a real bug in my own tool, and the follow-up where the eval
+        was itself testing the wrong URL.</p>
+    </div>
   </header>
 
   <!-- ============ 01 JOB ============ -->

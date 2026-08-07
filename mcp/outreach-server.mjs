@@ -130,6 +130,23 @@ async function callTool(name, args = {}) {
       });
       const html = await res.text();
 
+      // A 404 or 500 still returns a body, and an error page is usually long
+      // enough to look like a successful extraction. Caught by eval E6.
+      if (!res.ok) {
+        return {
+          isError: true,
+          content: [
+            {
+              type: "text",
+              text:
+                `FETCH FAILED — HTTP ${res.status} ${res.statusText} for ${res.url}\n` +
+                `The response body is an error page, not a posting. Do not extract requirements ` +
+                `from it and do not infer any. Ask the user for a working URL or the posting text.`,
+            },
+          ],
+        };
+      }
+
       const text = html
         .replace(/<script[\s\S]*?<\/script>/gi, " ")
         .replace(/<style[\s\S]*?<\/style>/gi, " ")
