@@ -186,12 +186,34 @@ async function postJson(url, body, headers = {}, attempt = 0) {
   // Free tiers rate-limit by tokens per minute, and a multi-turn loop re-sends
   // the whole prompt every turn, so 429 is expected rather than exceptional.
   // The provider tells us how long to wait; honour it instead of failing the run.
-  if (res.status === 429 && attempt < 3) {
+  if (res.status === 429) {
     const msg = json?.error?.message ?? "";
-    const secs = Math.min(65, Math.ceil(parseFloat(msg.match(/try again in ([\d.]+)s/i)?.[1] ?? "20")) + 2);
-    process.stderr.write(`  … rate-limited, waiting ${secs}s (attempt ${attempt + 1}/3)\n`);
-    await new Promise((r) => setTimeout(r, secs * 1000));
-    return postJson(url, body, headers, attempt + 1);
+
+    // Parse the whole duration, not just its seconds component. "15m24s" was
+    // being read as 24 seconds, so a daily limit burned three pointless retries.
+    const h = parseFloat(msg.match(/(\d+)h/i)?.[1] ?? "0");
+    const m = parseFloat(msg.match(/(\d+)m(?!s)/i)?.[1] ?? "0");
+    const s = parseFloat(msg.match(/([\d.]+)s/i)?.[1] ?? "0");
+    const waitSecs = h * 3600 + m * 60 + s;
+
+    // A per-DAY cap will not clear by waiting inside a run. Fail fast and say
+    // what to do, rather than sleeping and then failing anyway.
+    const perDay = /per day|\bTPD\b|tokens per day/i.test(msg);
+    if (perDay || waitSecs > 120) {
+      throw new Error(
+        `rate limit is not retryable in-run (wait ~${Math.round(waitSecs / 60)} min).\n` +
+          `  ${msg.split(".")[0]}.\n` +
+          `  Fix: switch to a model with its own daily budget, e.g.\n` +
+          `    SCOUT_MODEL=openai/gpt-oss-120b node agent/scout.mjs <url>`
+      );
+    }
+
+    if (attempt < 3) {
+      const secs = Math.ceil(waitSecs || 20) + 2;
+      process.stderr.write(`  … rate-limited, waiting ${secs}s (attempt ${attempt + 1}/3)\n`);
+      await new Promise((r) => setTimeout(r, secs * 1000));
+      return postJson(url, body, headers, attempt + 1);
+    }
   }
 
   // Groq/llama sometimes narrates a decision *not* to call a tool as prose, and
@@ -275,7 +297,10 @@ const providers = {
 
   /* ---------------- Groq (OpenAI-compatible) ---------------- */
   groq: {
-    model: (env) => env.SCOUT_MODEL || "llama-3.3-70b-versatile",
+    // gpt-oss-120b follows negative instructions ("do not call this tool unless…")
+    // far more reliably than llama-3.3-70b, which rambled and invented a fit
+    // score. Override with SCOUT_MODEL if its daily budget runs out.
+    model: (env) => env.SCOUT_MODEL || "openai/gpt-oss-120b",
     async chat({ env, system, history, tools }) {
       const json = await postJson(
         "https://api.groq.com/openai/v1/chat/completions",

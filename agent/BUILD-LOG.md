@@ -298,3 +298,59 @@ The honest summary: **the agent works, and the evals caught it doing the single 
 damaging thing it could do** — rejecting a good opportunity for a requirement that did not
 exist. It no longer does that. E3 to E6 remain unverified against a live model, and saying
 otherwise would be the exact overclaim this whole project keeps tripping over.
+
+---
+
+## 13. The model was the bottleneck, not the loop
+
+Running it repeatedly surfaced two more things.
+
+**The daily cap, and a bug in my own retry.** Groq's free tier caps tokens *per day*
+(100,000) as well as per minute. After a handful of runs: `Used 96169`. Worse, my retry
+parsed `try again in 15m24.479999999s` with a seconds-only regex, read it as **24 seconds**,
+and burned three pointless retries before failing. Fixed: parse hours/minutes/seconds
+properly, and **fail fast on a per-day limit** with the actual remedy in the message —
+sleeping inside a run cannot clear a daily quota.
+
+**llama-3.3-70b was the source of the bad output.** Even after the tool-restraint fix it
+rambled, mangled its own reasoning ("The posting requires a GPA minimum of at least 3.0 is
+not mentioned in the text"), invented a fit score of 8/10 with no derivation, and truncated
+its own `verify_by_hand` argument mid-word. The loop was fine; the model was weak at
+following negative instructions.
+
+Switched the Groq default to **`openai/gpt-oss-120b`**, which has its own daily budget and
+follows "do not call this tool unless…" reliably. Same prompt, same tools, same loop:
+
+```
+→ tool  fetch_posting({"url":"https://sparapi.org/"})     ← model's own typo
+← result Error: fetch failed
+→ tool  fetch_posting({"url":"https://sparai.org/"})      ← it corrected itself
+model   **Verdict:** apply   **Fit score:** 8/10
+        [structured evidence citing AUREXIS, Self-Regulating AI, the R² ≈ 0.97
+         air-quality model and KIDO, plus what to highlight in the application]
+→ tool  log_run({... "verify_by_hand":"Confirm the application deadline is
+        August 18, 2026" ...})
+```
+
+Two things worth noting there. It **did not call the GPA gate** — the §10 fix holds on a
+different model, so the fix was in the instructions rather than a quirk of one model. And it
+recovered from its own bad URL without being told to, which is the loop earning its keep:
+a chain would have failed at that step.
+
+**Still imperfect:** the 8/10 fit score is asserted, not derived from counting must-haves as
+the spec requires, and no eval checks that yet. Recorded as open rather than described as
+working.
+
+### Model choice, honestly
+
+| | llama-3.3-70b-versatile | openai/gpt-oss-120b |
+|---|---|---|
+| Respects "do not call unless…" | after the fix, with rambling | cleanly |
+| Output structure | prose, mangled sentences, truncated args | structured, cites specific evidence |
+| Invented a fit score | yes (8/10, no derivation) | yes (8/10, no derivation) |
+| Recovered from a bad URL | not observed | yes |
+
+The lesson I did not expect from FL-07: **the agent's quality was gated by model choice more
+than by anything I wrote.** The loop, the tools and the guardrails behaved identically across
+both; what changed was whether the model could follow a negative instruction without
+narrating its way around it. Worth remembering before blaming a prompt.

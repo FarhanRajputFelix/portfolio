@@ -6,6 +6,5 @@ run, so the history survives across sessions instead of living in a chat transcr
 | # | Programme | Fit | Call | Verify by hand | Source |
 |---|---|---|---|---|---|
 | 1 | KAUST VSRP | 4/10 | skip | none — the GPA gate settled it | https://admissions.kaust.edu.sa/study/internships |
-| 2 | KAUST VSRP | 4/10 | skip | none — the GPA gate settled it | https://admissions.kaust.edu.sa/study/internships |
-| 3 | SPAR | NO EVIDENCE | skip | GPA requirement | https://sparai.org/ |
-| 4 | KAUST VSRP | N/A | skip | Minimum GPA: 3.5/4 as stated on the website | https://admissions.kaust.edu.sa/study/internships |
+| 2 | SPAR | 8/10 | apply | SPAR research experience and guidance | https://sparai.org/ |
+| 3 | SPAR – Research Program for AI Risks (Fall 2026) | 8/10 | apply | Confirm the application deadline is August 18, 2026 | https://sparai.org/ |
