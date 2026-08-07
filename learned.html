@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Explain it like you built it — one line I didn't understand — Farhan Bashir</title>
+<meta name="description" content="Why my link checker has an `if target not in seen` line — explained in plain words, after I traced the loop on paper myself." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@200;300;400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/case.css" />
+<link rel="canonical" href="https://farhanbashir.netlify.app/learned.html" />
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
+<meta name="theme-color" content="#060608" />
+<style>
+  .mine{ font-size:1rem; line-height:1.78; }
+  .mine p{ max-width:70ch; color:var(--paper); }
+  .mine p + p{ margin-top:1.1em; }
+  .whose{ font-family:var(--display); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--faint); padding:12px 0 0; border-top:1px solid var(--line); margin-top:30px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="subnav" aria-label="Site sections">
+    <a class="home" href="./">← Farhan Bashir</a>
+    <a href="cv.html">CV</a>
+    <a href="case-aqi.html">Air Quality</a>
+    <a href="case-kido.html">KIDO</a>
+    <a href="case-aurexis.html">AUREXIS</a>
+    <a href="workflow.html">Workflow</a>
+    <a href="mcp.html">MCP</a>
+    <a href="agent.html">Agent spec</a>
+    <a href="dns.html">DNS</a>
+    <a href="learned.html" aria-current="page">Explain it</a>
+    <a href="ugly.html">Still ugly</a>
+  </nav>
+
+  <header class="top">
+    <span class="label">Explain it like you built it · Week 6</span>
+    <h1>Why my link checker has an <code>if target not in seen</code> line</h1>
+    <p class="sub">One line, in <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/tools/check-links.py">tools/check-links.py</a>.
+      I picked it because I genuinely didn't understand it. When I was told my homepage "didn't link to
+      a single other page", my first thought was that the navigation must be broken — it wasn't. Every
+      link worked; they were all anchors pointing at the same page. Six pages were live and returning
+      200 with no route to them from the homepage.</p>
+  </header>
+
+  <!-- ================================================================
+       Everything below this line is Farhan's own writing, published as
+       written. The only change from the first draft was the title: it
+       originally said "cache check", and a visited set in a graph walk is
+       not a cache — it prevents revisiting rather than saving work.
+       ================================================================ -->
+  <section>
+    <div class="mine">
+      <p>I thought this line was just there to avoid errors. It's not — it's the whole reason the code
+        works at all.</p>
+
+      <p>Here's what I misunderstood: I assumed "checking if I've seen something" and "checking if
+        something exists" were the same operation. They're not. A page can exist on disk and still
+        never be seen by the walk, because "seen" only means one thing here: something already found a
+        path to it.</p>
+
+      <p>The way I finally got it was thinking about it like retracing your steps in a maze. You don't
+        re-walk a hallway you've already marked with chalk — not because the hallway disappeared, but
+        because you already know where it leads. Without marking it, you'd walk the same loop forever.
+        The <code>seen</code> set is the chalk.</p>
+
+      <p>What clicked for me: I kept asking "why does it need a list of visited pages, why not just
+        check each page as I hit it?" The answer is that pages link to each other in circles. Page A
+        links to B, B links back to A. Without memory of where you've been, you'd bounce between them
+        infinitely and never finish. The moment I traced that loop on paper myself, it stopped being
+        abstract.</p>
+
+      <p>If I were explaining this to someone building their first site: don't trust that a thing
+        "exists" means a visitor can find it. Existing and being reachable are two different claims,
+        and most bugs like this hide in that gap.</p>
+    </div>
+
+    <p class="whose">Written by Farhan Bashir, 8 August 2026 — after tracing the loop on paper.
+      Published as written.</p>
+  </section>
+
+  <footer>
+    <span>Farhan Bashir · Karachi, Pakistan</span>
+    <span><a href="./">← Portfolio</a> · <a href="ugly.html">Still ugly</a> ·
+      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/tools/check-links.py">The code itself</a></span>
+  </footer>
+
+</div>
+</body>
+</html>
