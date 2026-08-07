@@ -70,6 +70,12 @@
   footer{ padding-top:30px; font-size:.78rem; color:var(--muted);
     display:flex; gap:18px; flex-wrap:wrap; justify-content:space-between; }
   @media print{ body{ background:#fff; color:#111 } pre{ background:#f6f6f8; color:#111 } }
+  .tldr{ padding:16px 20px; margin:22px 0 0; border-left:3px solid var(--main);
+    border-radius:0 12px 12px 0; background:linear-gradient(90deg,rgba(139,92,246,.09),transparent); }
+  .tldr b{ font-family:var(--display); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--main); display:block; margin-bottom:6px; }
+  .tldr p{ margin:0; color:var(--paper); font-size:.92rem; max-width:74ch; }
+  .tldr p + p{ margin-top:6px; color:var(--muted); font-size:.86rem; }
 </style>
 </head>
 <body>
@@ -82,6 +88,13 @@
       distinction, where my FL-04 build sits, what MCP is, and the one upgrade that would move it
       across the line.</p>
   </header>
+
+  <div class="tldr">
+    <b>If you read one thing</b>
+    <p>My FL-04 pipeline is a <strong>workflow, not an agent</strong> &mdash; because I wrote the order of the steps. An agent decides its own. MCP is what turns those steps into callable tools so the model can choose.</p>
+    <p>The classification argument is &sect;02. The one upgrade that crosses the line is &sect;05.</p>
+  </div>
+
 
   <!-- ============ 01 WORKFLOW VS AGENT ============ -->
   <section>

@@ -87,6 +87,12 @@
     display:flex; gap:18px; flex-wrap:wrap; justify-content:space-between; }
   @media (max-width:700px){ .step{ grid-template-columns:1fr; } }
   @media print{ body{ background:#fff; color:#111 } pre{ background:#f6f6f8; color:#111 } }
+  .tldr{ padding:16px 20px; margin:22px 0 0; border-left:3px solid var(--main);
+    border-radius:0 12px 12px 0; background:linear-gradient(90deg,rgba(139,92,246,.09),transparent); }
+  .tldr b{ font-family:var(--display); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--main); display:block; margin-bottom:6px; }
+  .tldr p{ margin:0; color:var(--paper); font-size:.92rem; max-width:74ch; }
+  .tldr p + p{ margin-top:6px; color:var(--muted); font-size:.86rem; }
 </style>
 </head>
 <body>
@@ -103,6 +109,13 @@
       word was written — and turned out to be <strong>slower</strong> than doing it by hand. §04 says so
       plainly, and §06 retracts a claim I got wrong about my own evidence file.</p>
   </header>
+
+  <div class="tldr">
+    <b>If you read one thing</b>
+    <p>This pipeline is <strong>2.1&times; slower</strong> per application than writing the email by hand, and it never breaks even on time. What it buys is <strong>three fewer factual errors</strong> than the timed manual baseline, and <strong>two of five applications correctly abandoned</strong> before a word was written.</p>
+    <p>Time accounting in &sect;04. The retraction of a claim I got wrong about my own evidence file is &sect;06.</p>
+  </div>
+
 
   <!-- ============ TL;DR ============ -->
   <section style="padding-top:28px">
