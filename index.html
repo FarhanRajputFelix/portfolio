@@ -743,6 +743,11 @@
     ============================================================ -->
     <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field"
           action="/thanks.html" class="contact-form" data-anim="fade">
+      <!-- Netlify normally injects this itself when form detection is on. Written
+           in by hand so the payload names the form regardless, which matters if
+           the form is ever submitted by fetch() instead of the browser. -->
+      <input type="hidden" name="form-name" value="contact" />
+
       <p class="cf-lead">Or send it from here &mdash; it reaches the same inbox.</p>
 
       <p class="cf-hp" aria-hidden="true">
