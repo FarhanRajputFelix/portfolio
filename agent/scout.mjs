@@ -169,7 +169,7 @@ const toolSpecs = {
  * knows how to append its own turn + tool results to the history.
  * ================================================================== */
 
-async function postJson(url, body, headers = {}) {
+async function postJson(url, body, headers = {}, attempt = 0) {
   const res = await fetch(url, {
     method: "POST",
     headers: { "content-type": "application/json", ...headers },
@@ -182,8 +182,59 @@ async function postJson(url, body, headers = {}) {
   } catch {
     throw new Error(`${res.status} non-JSON response: ${text.slice(0, 300)}`);
   }
+
+  // Free tiers rate-limit by tokens per minute, and a multi-turn loop re-sends
+  // the whole prompt every turn, so 429 is expected rather than exceptional.
+  // The provider tells us how long to wait; honour it instead of failing the run.
+  if (res.status === 429 && attempt < 3) {
+    const msg = json?.error?.message ?? "";
+    const secs = Math.min(65, Math.ceil(parseFloat(msg.match(/try again in ([\d.]+)s/i)?.[1] ?? "20")) + 2);
+    process.stderr.write(`  … rate-limited, waiting ${secs}s (attempt ${attempt + 1}/3)\n`);
+    await new Promise((r) => setTimeout(r, secs * 1000));
+    return postJson(url, body, headers, attempt + 1);
+  }
+
+  // Groq/llama sometimes narrates a decision *not* to call a tool as prose, and
+  // the API rejects the turn as `tool_use_failed` rather than returning the text.
+  // The model's output is right there in `failed_generation`, so surface it as a
+  // normal text turn instead of failing the run — but flag it, because a silent
+  // rescue would hide a provider limitation that belongs in the build log.
+  if (res.status === 400 && json?.error?.code === "tool_use_failed") {
+    const salvaged = json.error.failed_generation ?? "";
+    process.stderr.write(`  ! provider could not emit a tool call; salvaging its text output\n`);
+    return { __salvaged: true, choices: [{ message: { role: "assistant", content: salvaged } }] };
+  }
+
   if (!res.ok) throw new Error(`${res.status} ${JSON.stringify(json).slice(0, 400)}`);
   return json;
+}
+
+/**
+ * Keep the system prompt inside a free tier's token budget.
+ *
+ * Dumping cv-facts.md whole costs ~4k tokens per turn, and the loop pays it on
+ * every turn. Sections are scored by how much they matter to a go/no-go
+ * decision — the gap list and the adjacent-but-absent table are the whole point
+ * of the file, so they go in first and the prose goes in last.
+ */
+function condense(markdown, budget) {
+  if (markdown.length <= budget) return markdown;
+  const sections = markdown.split(/\n(?=## )/);
+  const priority = (s) =>
+    /adjacent|gap list|deliberate gap|skills|contradict|disagree|one-liners/i.test(s) ? 0
+    : /project|experience|certification|education/i.test(s) ? 1
+    : 2;
+  const ordered = [...sections].sort((a, b) => priority(a) - priority(b));
+  const kept = [];
+  let used = 0;
+  for (const s of ordered) {
+    if (used + s.length > budget) continue;
+    kept.push(s);
+    used += s.length;
+  }
+  // restore document order so it still reads like a document
+  kept.sort((a, b) => sections.indexOf(a) - sections.indexOf(b));
+  return kept.join("\n") + `\n\n(Some sections omitted to fit the context budget.)`;
 }
 
 const providers = {
@@ -242,7 +293,7 @@ const providers = {
         name: c.function.name,
         args: safeJson(c.function.arguments),
       }));
-      return { text: msg.content ?? "", toolCalls, raw: msg };
+      return { text: msg.content ?? "", toolCalls, raw: msg, salvaged: Boolean(json.__salvaged) };
     },
     appendAssistant(history, { raw }) {
       history.push(raw);
@@ -358,8 +409,13 @@ Hard rules:
    accuracy.
 3. I am a CS undergraduate with no publications. Never call me a researcher, an
    engineer with industry years, or an expert.
-4. If the posting states a minimum GPA, call check_gpa_gate. Never guess it, and
-   never repeat the number even if you could infer it.
+4. GPA. Call check_gpa_gate ONLY when the posting text contains an explicit
+   numeric minimum (e.g. "minimum GPA 3.5/4", "CGPA of at least 3.0").
+   Before you call it, quote the exact sentence from the posting that states
+   that minimum. If you cannot quote such a sentence, you MUST NOT call the
+   tool: most postings have no GPA requirement, and gating one on an invented
+   threshold would reject an opportunity I am qualified for. Never invent a
+   threshold, never guess my GPA, and never repeat the number.
 5. If any requirement is a hard gate I cannot pass (citizenship, institution
    eligibility, a failed GPA gate), stop. Output the skip verdict and the
    disqualifier. Do not draft an email.
@@ -418,7 +474,14 @@ export async function runScout({ url, postingText, providerName, scenario, quiet
       if (age > 30) stale = Math.round(age);
     } catch {}
 
-    const system = buildSystem({ cvFacts, brief, stale });
+    // Token budget: free tiers cap tokens-per-minute and the loop re-sends the
+    // system prompt every turn, so the knowledge is condensed rather than dumped.
+    const system = buildSystem({
+      cvFacts: condense(cvFacts, 7000),
+      brief: condense(brief, 2200),
+      stale,
+    });
+    log(`[36mcontext[0m   ~${Math.round(system.length / 4)} tokens of system prompt`);
     // A posting can arrive as a URL to fetch, or as text already in hand (a PDF,
     // an email, a JS-rendered page the fetch tool cannot read). Both are real
     // inputs, so the agent accepts both.

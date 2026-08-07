@@ -176,3 +176,125 @@ node agent/scout.mjs https://sparai.org/              # one end-to-end run to re
 Nothing in the spec was cut because it was inconvenient. The one substitution was forced, and the two
 unenforced items are unenforced *and labelled as such*, which is the difference between a gap and a
 misrepresentation.
+
+---
+
+# Part 2 — the live run (same day, once a Groq key existed)
+
+## 8. Three failures before a single token reached a model
+
+None of these were the agent. All three were the key.
+
+1. **No variable name.** The file contained the bare key with no `GROQ_API_KEY=` in
+   front of it, so the loader found nothing and silently fell back to `mock`. The run
+   "succeeded" and did nothing — the worst kind of failure. The loader now infers the
+   variable from the key's own prefix (`gsk_` → Groq, `sk-ant-` → Anthropic, `AIza` → Gemini).
+2. **UTF-16.** PowerShell's `echo x > file` writes UTF-16LE on Windows, so reading as
+   UTF-8 produced mojibake. The loader now sniffs the BOM.
+3. **The key was pasted twice** — 112 characters, two identical 56-character copies
+   concatenated. `401 Invalid API Key`. Diagnosed by counting occurrences of `gsk_`
+   rather than by looking at the key.
+
+Worth noting because "the agent doesn't work" was three times in a row a config problem
+that produced a confident, wrong-looking result.
+
+## 9. Rate limits are a design constraint, not an error
+
+First real run: `429`. Limit 12,000 tokens/minute, **requested 10,961** on a single turn.
+
+The cause was mine: `buildSystem()` dumped both knowledge files whole into the system
+prompt, and an agent loop re-sends that on *every* turn. `cv-facts.md` alone is ~4k
+tokens. One posting fetch at 6,000 characters pushed it over.
+
+Two fixes:
+
+- **`condense()`** scores markdown sections by how much they matter to a go/no-go
+  decision — the gap list and the adjacent-but-absent table first, prose last — and
+  fills a character budget in that order, then restores document order so it still reads
+  as a document. Prompt went from **10,961 → ~2,666 tokens.**
+- **Retry on 429** honouring the wait the provider states in its own error message.
+  A free-tier agent that dies on a rate limit isn't finished.
+
+Posting slice default dropped 6,000 → 2,500 characters as well.
+
+## 10. The failure that mattered: it invented a requirement
+
+First complete end-to-end run, on SPAR:
+
+```
+→ tool  fetch_posting({"max_chars":2500,"url":"https://sparai.org/"})
+→ tool  check_gpa_gate({"programme":"SPAR","threshold":3})
+← result GATE: SPAR requires 3/4   VERDICT: FAIL   CALL: SKIP
+→ tool  log_run({"call":"skip","programme":"SPAR",...})
+model   VERDICT: SKIP   DISQUALIFIER: GPA gate FAIL
+```
+
+**SPAR states no GPA requirement anywhere.** The agent invented a threshold of 3, the
+gate dutifully returned FAIL against it, and the agent rejected the single best-fit
+opportunity I have — eleven days before its deadline.
+
+This is exactly what eval E1 was written to catch: *"Must not: call `check_gpa_gate` —
+nothing in the posting asks for a GPA."* Written before the code existed, and it caught
+the real thing on the first live run. That is the entire argument for pre-build evals.
+
+The root cause was a permissive instruction. Rule 4 said *"If the posting states a
+minimum GPA, call check_gpa_gate"* — which reads as an invitation, and says nothing about
+the far more common case where no GPA is mentioned. Fixed in **both** places that govern
+tool selection:
+
+- **The prompt** now requires quoting the exact sentence stating the minimum *before*
+  calling, and says plainly that most postings have no GPA requirement and gating one on
+  an invented threshold rejects a qualified candidate.
+- **The tool description** in the MCP server gained explicit `WHEN TO CALL` / `WHEN NOT TO
+  CALL` sections. This mattered as much as the prompt — the description is what the model
+  reads when deciding, and mine had only described what the tool *did*.
+
+Result after the fix, on the same posting:
+
+```
+E1  ✓ did not call check_gpa_gate    ✓ fetched the posting    ✓ verdict is apply
+```
+
+And the regression check that the fix hadn't just disabled the gate — KAUST, which really
+does state "Minimum GPA: 3.5/4":
+
+```
+E2  ✓ called check_gpa_gate   ✓ used threshold 3.5   ✓ no CGPA digits anywhere
+    ✓ verdict is skip         ✓ no email drafted            5/5
+```
+
+## 11. A provider limitation, surfaced rather than hidden
+
+Groq returns `400 tool_use_failed` when llama-3.3-70b *narrates* a decision instead of
+emitting a parseable call. The model's actual output was correct —
+
+> "The posting does not mention a GPA requirement, and the check_gpa_gate function is not
+> necessary in this case."
+
+— but the API rejected the turn, so the run died with a 400 while the model was reasoning
+properly. The adapter now salvages `failed_generation` as a normal text turn and sets a
+`salvaged` flag on the trace, so a rescued run is visibly distinguishable from a clean one.
+
+**The cost, stated rather than papered over:** on the salvaged path the loop ends with
+prose, so `log_run` never fires. That is why E1 scores **2/3 mechanical** — the missing
+assertion is "logged the run", and its cause is the provider, not the agent's judgement. I
+could have the harness log the outcome itself and turn that ✗ into a ✓, but bookkeeping
+done by the orchestrator is not the agent deciding to record its work, and labelling it as
+such would be dishonest.
+
+## 12. Where FL-07 actually ends up
+
+| | |
+|---|---|
+| Core job end to end, no hand-editing | **Yes** — fetch → gate → log → verdict, model choosing every step |
+| Live tool/data connection | **Yes** — MCP over stdio; live HTTP fetch; gitignored private file; disk write |
+| Matches the FL-06 spec | Platform substituted (documented, §1); everything else as specified |
+| Build log shows real iteration | Three key failures, a rate-limit redesign, an invented-requirement bug, a provider quirk |
+| E1 | 2/3 mechanical (log_run, provider-caused) · 1/1 judgement |
+| E2 | **5/5** |
+| E3–E6 | Not yet run live. Free-tier rate limits make a full six-case sweep slow; E1 and E2 were prioritised as the two that decide whether the agent is safe to trust. |
+
+The honest summary: **the agent works, and the evals caught it doing the single most
+damaging thing it could do** — rejecting a good opportunity for a requirement that did not
+exist. It no longer does that. E3 to E6 remain unverified against a live model, and saying
+otherwise would be the exact overclaim this whole project keeps tripping over.

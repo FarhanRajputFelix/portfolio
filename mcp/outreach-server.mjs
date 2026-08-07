@@ -67,8 +67,8 @@ const TOOLS = [
         url: { type: "string", description: "The posting URL (http/https)." },
         max_chars: {
           type: "integer",
-          description: "Truncate the extracted text to this many characters (default 6000).",
-          default: 6000,
+          description: "Truncate the extracted text to this many characters (default 2500).",
+          default: 2500,
         },
       },
       required: ["url"],
@@ -80,8 +80,12 @@ const TOOLS = [
     description:
       "Evaluate whether Farhan's cumulative GPA clears a programme's minimum, by reading the " +
       "gitignored private file pipeline/private/cv-private.md. Returns only PASS or FAIL plus the " +
-      "threshold that was tested — never the CGPA itself, so the number stays local. Use this for " +
-      "any posting that states a minimum GPA (e.g. KAUST VSRP requires 3.5/4).",
+      "threshold that was tested — never the CGPA itself, so the number stays local.\n\n" +
+      "WHEN TO CALL: only when the posting states an explicit numeric GPA or CGPA minimum you can " +
+      "quote verbatim (e.g. KAUST VSRP: \"Minimum GPA: 3.5/4\").\n\n" +
+      "WHEN NOT TO CALL: if the posting does not mention a GPA at all. Most do not. Calling this " +
+      "with a threshold you invented will return FAIL and cause a qualified candidate to be " +
+      "rejected for a requirement that does not exist. Never pass a guessed threshold.",
     inputSchema: {
       type: "object",
       properties: {
@@ -121,7 +125,7 @@ async function callTool(name, args = {}) {
   switch (name) {
     /* ---- 1. live network I/O -------------------------------------- */
     case "fetch_posting": {
-      const { url, max_chars = 6000 } = args;
+      const { url, max_chars = 2500 } = args;
       if (!/^https?:\/\//i.test(url || "")) throw new Error("url must start with http:// or https://");
 
       const res = await fetch(url, {

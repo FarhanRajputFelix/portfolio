@@ -63,25 +63,30 @@
     </div>
 
     <div class="honest" style="margin-top:24px">
-      <b>Build status — FL-07, updated 7 August 2026</b>
-      <p>The agent is built:
+      <b>Build status — FL-07, live run completed 7 August 2026</b>
+      <p>Built and <strong>run end to end against a live model</strong> (Groq, llama-3.3-70b):
         <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/agent/scout.mjs">agent/scout.mjs</a>
-        (the loop, four provider adapters, guardrails) and
-        <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/agent/evals.mjs">agent/evals.mjs</a>
-        (the six cases below, as executable assertions).
-        <strong>All 9 mechanical assertions pass</strong> — tool dispatch over MCP, gate called with the
-        right threshold, CGPA absent from the whole transcript, the 8-call cap forcing termination, and
-        HTTP/thin-extraction failures refusing to become requirement lists.</p>
-      <p><strong>What is not proven:</strong> every <em>judgement</em> assertion. The spec's platform
-        choice — Claude via the Anthropic API — failed on the first command for exactly the reason §03
-        flagged as its main risk: no key. A key found in an older project turned out to have been
-        revoked by Google as leaked. So the loop is provider-agnostic and tested against a scripted
-        mock, and the model's actual reasoning is untested. Honest reading: the plumbing works, the
-        agent's judgement is unmeasured.</p>
-      <p>What broke, what I changed, and what I cut:
-        <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/agent/BUILD-LOG.md">agent/BUILD-LOG.md</a>
-        — including the eval that caught a real bug in my own tool, and the follow-up where the eval
-        was itself testing the wrong URL.</p>
+        and
+        <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/agent/evals.mjs">agent/evals.mjs</a>.
+        The model chooses every step: it fetched the posting, decided whether a GPA gate applied,
+        logged the run and issued a verdict, with nobody sequencing it.</p>
+      <p><strong>The eval that earned its keep.</strong> On the first complete live run the agent
+        <em>invented</em> a GPA requirement for SPAR — a programme that states none — called the gate
+        with a threshold of 3, got FAIL, and rejected the best-fit opportunity I have, eleven days
+        before its deadline. Eval E1 was written before the code precisely to catch that, and it did.
+        Fixed by requiring a verbatim quote of any stated minimum before the tool may be called, and by
+        rewriting the tool's own description with explicit <em>when not to call</em> guidance — which
+        mattered as much as the prompt. E1 now passes; <strong>E2 passes 5/5</strong>, confirming the
+        fix didn't simply disable the gate.</p>
+      <p><strong>Not claimable:</strong> E3–E6 have not been run against a live model — free-tier rate
+        limits make a six-case sweep slow, and E1/E2 were prioritised as the two that decide whether
+        the agent is safe to trust. E1 also scores 2/3 mechanical: on runs where Groq rejects a
+        narrated non-call, the loop ends with salvaged prose and <code>log_run</code> never fires. That
+        is the provider, not the judgement, and it is left visible rather than patched over by having
+        the harness log it instead.</p>
+      <p>Everything that broke, in order — three key-handling failures, a rate-limit redesign that cut
+        the prompt from 10,961 to ~2,666 tokens, the invented requirement, and the provider quirk:
+        <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/agent/BUILD-LOG.md">agent/BUILD-LOG.md</a>.</p>
     </div>
   </header>
 
