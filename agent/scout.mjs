@@ -39,11 +39,19 @@ export const MAX_TOOL_CALLS = 8;
 async function loadEnv() {
   const out = { ...process.env };
   const envFile = join(REPO, "pipeline", "private", ".env");
-  if (existsSync(envFile)) {
-    for (const line of (await readFile(envFile, "utf8")).split(/\r?\n/)) {
-      const m = line.match(/^\s*(?:export\s+)?([A-Z0-9_]+)\s*=\s*(.*)$/);
-      if (m) out[m[1]] = m[2].trim().replace(/^["']|["']$/g, "");
-    }
+  if (!existsSync(envFile)) return out;
+
+  // On Windows, `echo x > file` in PowerShell writes UTF-16LE, so reading as
+  // utf8 yields mojibake and every key silently goes missing. Sniff the BOM.
+  const raw = await readFile(envFile);
+  let text;
+  if (raw[0] === 0xff && raw[1] === 0xfe) text = raw.toString("utf16le");
+  else if (raw[0] === 0xfe && raw[1] === 0xff) text = raw.swap16().toString("utf16le");
+  else text = raw.toString("utf8").replace(/^﻿/, "");
+
+  for (const line of text.split(/\r?\n/)) {
+    const m = line.match(/^\s*(?:export\s+)?([A-Z0-9_]+)\s*=\s*(.*)$/);
+    if (m) out[m[1]] = m[2].trim().replace(/^["']|["']$/g, "");
   }
   return out;
 }

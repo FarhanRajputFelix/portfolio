@@ -104,6 +104,26 @@
       plainly, and §06 retracts a claim I got wrong about my own evidence file.</p>
   </header>
 
+  <!-- ============ TL;DR ============ -->
+  <section style="padding-top:28px">
+    <div class="notice" style="border-color:rgba(139,92,246,.42);background:linear-gradient(120deg,rgba(139,92,246,.09),transparent);margin-bottom:0">
+      <b style="color:#8b5cf6">If you read one paragraph, read this</b>
+      <p>I built a five-step pipeline to write my job applications and measured it honestly against
+        doing them by hand. <strong>It is 2.1× slower and never breaks even on time.</strong> What it
+        buys instead: the hand-written baseline I timed shipped two factual errors — including
+        reporting an R² score as "97% accuracy", a different claim entirely — and the pipeline produced
+        none across four emails. It also killed <strong>two of five applications before I wrote a
+        word</strong>, one on citizenship, one on a GPA gate. The saving isn't typing faster; it's not
+        writing the application at all.</p>
+      <p style="margin-top:8px"><strong>Jump to:</strong>
+        <a href="#runs">the five runs</a> ·
+        <a href="#time">the time accounting</a> ·
+        <a href="#fails">where it breaks</a> ·
+        <a href="#addendum">the retraction</a> — where I published a claim about my own evidence file
+        that turned out to be wrong.</p>
+    </div>
+  </section>
+
   <!-- ============ 00 WHY THIS PIPELINE ============ -->
   <section>
     <div class="sec-head"><span class="n">00</span><h2>Why this pipeline, from my audit</h2></div>
@@ -305,7 +325,7 @@ VERIFY BY HAND: (the one fact I must confirm before sending)
   </section>
 
   <!-- ============ 03 RUNS ============ -->
-  <section>
+  <section id="runs">
     <div class="sec-head"><span class="n">03</span><h2>The five runs</h2></div>
     <p class="sub" style="margin-top:0">Run on 5 August 2026 against five genuinely open postings.
       Every step's output is recorded verbatim — including the two runs where the pipeline argued
@@ -364,7 +384,7 @@ VERIFY BY HAND: (the one fact I must confirm before sending)
   </section>
 
   <!-- ============ 04 TIME ============ -->
-  <section>
+  <section id="time">
     <div class="sec-head"><span class="n">04</span><h2>Time accounting</h2></div>
     <div class="notice">
       <b>What was measured, and how</b>
@@ -461,7 +481,7 @@ VERIFY BY HAND: (the one fact I must confirm before sending)
   </section>
 
   <!-- ============ 05 FAILURE POINTS ============ -->
-  <section>
+  <section id="fails">
     <div class="sec-head"><span class="n">05</span><h2>Where it breaks, and what a human must still check</h2></div>
 
     <div class="fail">
@@ -553,7 +573,7 @@ VERIFY BY HAND: (the one fact I must confirm before sending)
   </section>
 
   <!-- ============ 06 ADDENDUM ============ -->
-  <section>
+  <section id="addendum">
     <div class="sec-head"><span class="n">06</span><h2>Addendum — the evidence file was the weakest link</h2></div>
 
     <div class="notice">
