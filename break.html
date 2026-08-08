@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Where it breaks — I tried to break my own site — Farhan Bashir</title>
+<meta name="description" content="I wrote a script to attack my own portfolio: every link, the form with garbage input, double submits, path traversal. What broke, what I fixed, and what I am living with." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@200;300;400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/case.css" />
+<link rel="canonical" href="https://farhanbashir.netlify.app/break.html" />
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
+
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Farhan Bashir" />
+<meta property="og:url" content="https://farhanbashir.netlify.app/break.html" />
+<meta property="og:title" content="Where it breaks" />
+<meta property="og:description" content="I wrote a script to attack my own portfolio. What broke, what I fixed, and what I am living with." />
+<meta property="og:image" content="https://farhanbashir.netlify.app/assets/brand/og-card.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Farhan Bashir — I build AI that knows its limits, and ships anyway." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Where it breaks" />
+<meta name="twitter:description" content="I wrote a script to attack my own portfolio. What broke, what I fixed, and what I am living with." />
+<meta name="twitter:image" content="https://farhanbashir.netlify.app/assets/brand/og-card.png" />
+<meta name="theme-color" content="#060608" />
+<style>
+  .fixed{ padding:18px 20px; border:1px solid rgba(74,222,128,.35); border-radius:14px;
+    background:linear-gradient(120deg,rgba(74,222,128,.05),transparent); margin-bottom:12px; }
+  .known{ padding:18px 20px; border:1px solid rgba(251,191,36,.35); border-radius:14px;
+    background:linear-gradient(120deg,rgba(251,191,36,.05),transparent); margin-bottom:12px; }
+  .fixed h3,.known h3{ color:var(--paper); margin-bottom:8px; }
+  .fixed dl,.known dl{ margin:0; display:grid; grid-template-columns:auto 1fr; gap:5px 14px; font-size:.87rem; }
+  .fixed dt,.known dt{ font-family:var(--display); font-size:.57rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--faint); padding-top:4px; }
+  .fixed dd,.known dd{ margin:0; color:var(--muted); }
+  .tag{ font-family:var(--display); font-size:.55rem; letter-spacing:.14em; text-transform:uppercase;
+    padding:2px 8px; border-radius:999px; margin-left:8px; }
+  .t-fix{ color:#4ade80; border:1px solid rgba(74,222,128,.45); }
+  .t-known{ color:#fbbf24; border:1px solid rgba(251,191,36,.45); }
+  .t-open{ color:#f87171; border:1px solid rgba(248,113,113,.45); }
+  @media (max-width:640px){ .fixed dl,.known dl{ grid-template-columns:1fr; } .fixed dt,.known dt{ padding-top:9px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="subnav" aria-label="Site sections">
+    <a class="home" href="./">← Farhan Bashir</a>
+    <a href="cv.html">CV</a>
+    <a href="case-aqi.html">Air Quality</a>
+    <a href="agent.html">Agent spec</a>
+    <a href="feature.html">The form</a>
+    <a href="crit.html">The crit</a>
+    <a href="break.html" aria-current="page">Where it breaks</a>
+    <a href="fixes.html">Fix log</a>
+    <a href="ugly.html">Still ugly</a>
+  </nav>
+
+  <header class="top">
+    <span class="label">Break your own site · Week 9</span>
+    <h1>I attacked my own portfolio</h1>
+    <p class="sub">Not by clicking around — by writing a script that tries every link, feeds the
+      contact form garbage, submits five times in a row, walks path traversal at the server, and audits
+      the metadata on all nineteen pages.
+      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/tools/break-it.py">tools/break-it.py</a>,
+      run against the live site.</p>
+  </header>
+
+  <div class="tldr">
+    <b>If you read one thing</b>
+    <p>Two real bugs. Every page had <strong>zero social-share metadata</strong>, so pasting my link
+      into LinkedIn rendered a blank rectangle — on a site whose whole job is being shared with people
+      who might hire me. And the contact form <strong>404s on roughly one submission in five</strong>.</p>
+    <p>First run: 24 failures. Now: 0 real ones. The form 404 is Netlify's, not mine, so it has a
+      mitigation and stays on the list rather than being called solved.</p>
+  </div>
+
+  <!-- ============ 01 METHOD ============ -->
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2>What I actually tried</h2></div>
+    <p class="sub" style="margin-top:0">Clicking around finds the bugs you already suspect. A script
+      finds the ones you don't, and it runs again next week for free.</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Attack</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td class="what">Every external link</td><td class="why">Fetches all 40+ off-site URLs concurrently — demos, GitHub repos, all 20 credential verifications, LinkedIn, Coursera, cal.com.</td></tr>
+        <tr><td class="what">Form abuse</td><td class="why">Empty, missing form name, invalid email, blank required fields, a 10,000-character message, <code>&lt;script&gt;alert(1)&lt;/script&gt;</code> as a name, an <code>onerror</code> image payload, Urdu text and emoji.</td></tr>
+        <tr><td class="what">Impatience</td><td class="why">Five submits as fast as the connection allows, then six spaced three seconds apart.</td></tr>
+        <tr><td class="what">Hostile paths</td><td class="why"><code>/admin</code>, <code>/../etc/passwd</code>, <code>/index.html/extra</code>, a page that does not exist.</td></tr>
+        <tr><td class="what">Metadata audit</td><td class="why">Title, description, Open Graph, Twitter card, robots.txt and sitemap, on every page.</td></tr>
+        <tr><td class="what">Weight</td><td class="why">Payload of the HTML plus every render-blocking asset, and time to first byte.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="sub"><strong>First run: 81 passes, 1 warning, 24 failures.</strong></p>
+  </section>
+
+  <!-- ============ 02 FIX NOW ============ -->
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2>Fix now — and fixed</h2></div>
+
+    <div class="fixed">
+      <h3>1 · No social-share metadata on any page<span class="tag t-fix">Fixed</span></h3>
+      <dl>
+        <dt>Broken</dt>
+        <dd>All 19 pages missing Open Graph and Twitter card tags. Pasting my portfolio into LinkedIn,
+          WhatsApp or Slack produced a <strong>blank grey rectangle with a bare URL</strong>. For a site
+          whose entire purpose is being shared with people who might hire me, this was the worst thing
+          on the list — and completely invisible from the site itself.</dd>
+        <dt>Fixed</dt>
+        <dd>Full Open Graph and Twitter metadata on every page, each carrying its own title and
+          description rather than one generic pair. Plus a generated 1200×630 share card that states
+          the claim and carries three pieces of proof, because a card with only a name on it wastes the
+          one impression you get.</dd>
+      </dl>
+    </div>
+
+    <div class="fixed">
+      <h3>2 · robots.txt returned 404<span class="tag t-fix">Fixed</span></h3>
+      <dl>
+        <dt>Broken</dt>
+        <dd>No robots.txt at all. Not fatal — crawlers assume permission — but it meant nothing pointed
+          them at my sitemap, and the form success page was crawlable.</dd>
+        <dt>Fixed</dt>
+        <dd>Written, with <code>/thanks.html</code> disallowed and the sitemap declared. Also added
+          JSON-LD <code>Person</code> schema so a search engine can state who I am rather than infer it
+          from the markup.</dd>
+      </dl>
+    </div>
+
+    <div class="fixed">
+      <h3>3 · The form 404s intermittently<span class="tag t-fix">Mitigated</span></h3>
+      <dl>
+        <dt>Broken</dt>
+        <dd>Netlify's form endpoint returns 404 on <strong>roughly one submission in five</strong>. Not
+          rate limiting — reproduced at three-second spacing with no deploy running:
+          <code>200, 200, 200, 200, 404, 200</code>. A visitor who hits it sees an error page and almost
+          certainly never tries again, so the site silently loses the one action it exists to produce.</dd>
+        <dt>Mitigated</dt>
+        <dd><a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/js/form.js">js/form.js</a>
+          intercepts the submit, posts with <code>fetch</code>, and retries up to three times with
+          backoff. If all three fail it says so and offers my email address rather than dropping the
+          message into a void. It also disables the button while sending, which handles the
+          double-click the same testing found.</dd>
+        <dt>Why "mitigated"</dt>
+        <dd>Because the 404 is still there. It is Netlify's endpoint and I cannot fix it — I can only
+          stop it costing me a message. Calling that "fixed" would be the kind of claim this whole site
+          argues against. It stays on the list below too.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ 03 SURVIVED ============ -->
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2>What survived the attack</h2></div>
+    <p class="sub" style="margin-top:0">Worth recording, because a break-list that only contains
+      failures tells you nothing about what is actually solid.</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Attack</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td class="what">Script injection in name and message</td><td class="why">Accepted and stored as inert text. Nothing renders it back to a browser, so there is no execution path.</td></tr>
+        <tr><td class="what">10,000-character message</td><td class="why">Accepted, no error, no truncation failure.</td></tr>
+        <tr><td class="what">Urdu text and emoji</td><td class="why">Handled correctly end to end.</td></tr>
+        <tr><td class="what">Empty and invalid submissions</td><td class="why">Blocked in the browser by native <code>required</code> and <code>type="email"</code>; accepted harmlessly at the endpoint.</td></tr>
+        <tr><td class="what">POST with no form name</td><td class="why"><strong>404.</strong> The endpoint is not a blanket acceptor — it only answers for the form it knows.</td></tr>
+        <tr><td class="what">Honeypot filled</td><td class="why">Accepted at the edge, never delivered. Bots get no signal they were filtered.</td></tr>
+        <tr><td class="what"><code>/../etc/passwd</code></td><td class="why">400 at the server, before anything of mine runs.</td></tr>
+        <tr><td class="what">All 20 credential verifications</td><td class="why">Every one resolves.</td></tr>
+        <tr><td class="what">Payload</td><td class="why">216 KB across the HTML and nine render-blocking assets — respectable for a page carrying a 3D scene.</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- ============ 04 KNOWN LIMITATIONS ============ -->
+  <section>
+    <div class="sec-head"><span class="n">04</span><h2>Known limitations — named, not hidden</h2></div>
+
+    <div class="known">
+      <h3>The form 404 is still there<span class="tag t-open">Open</span></h3>
+      <p style="margin:0;color:var(--muted);font-size:.88rem">Retries hide it from visitors with
+        JavaScript. Someone with JavaScript disabled still gets a raw 404 roughly one time in five, and
+        the no-JS path is the one I deliberately built the form around. I have no fix for that and will
+        not pretend otherwise.</p>
+    </div>
+
+    <div class="known">
+      <h3>Time to first byte varies 690 ms to 1,275 ms<span class="tag t-known">Known</span></h3>
+      <p style="margin:0;color:var(--muted);font-size:.88rem">Measured twice, minutes apart, from
+        Karachi. That is a cold edge cache on a free tier, and it is the number I would attack next if
+        I were optimising. Not measured with Lighthouse yet — my own
+        <a href="ugly.html">still-ugly list</a> has said the 3D scene is unmeasured for two weeks now,
+        and that remains true.</p>
+    </div>
+
+    <div class="known">
+      <h3>Three external links refuse automated checks<span class="tag t-known">Not a break</span></h3>
+      <p style="margin:0;color:var(--muted);font-size:.88rem">LinkedIn returns <code>999</code>, its
+        well-known anti-scraping code. Welcome to the Jungle returned 403 to my script but
+        <strong>202 with a browser user-agent</strong> — verified, so it works for real visitors.
+        IndiaBioscience returns 403 even with a browser user-agent from here, which I have not resolved;
+        it may be geographic. Recorded as unresolved rather than assumed fine.</p>
+    </div>
+
+    <div class="known">
+      <h3>The form only works on this host<span class="tag t-known">By design</span></h3>
+      <p style="margin:0;color:var(--muted);font-size:.88rem">My GitHub Pages copy renders identical
+        markup with no endpoint behind it. Pages serves files and runs no code.</p>
+    </div>
+
+    <div class="known">
+      <h3>Free tier caps at 100 submissions a month<span class="tag t-known">Known</span></h3>
+      <p style="margin:0;color:var(--muted);font-size:.88rem">Beyond that they stop rather than queue.
+        Fine for a portfolio; a ceiling, not a soft limit.</p>
+    </div>
+  </section>
+
+  <!-- ============ 05 AFTER ============ -->
+  <section>
+    <div class="sec-head"><span class="n">05</span><h2>Before and after</h2></div>
+    <div class="scroll">
+    <table>
+      <thead><tr><th></th><th>First run</th><th>After fixes</th></tr></thead>
+      <tbody>
+        <tr><td class="what">Checks passed</td><td class="why">81</td><td class="what">100</td></tr>
+        <tr><td class="what">Failures</td><td class="why">24</td><td class="what">0 real (3 bot-blocked, verified)</td></tr>
+        <tr><td class="what">Pages with share metadata</td><td class="why">0 of 19</td><td class="what">19 of 19</td></tr>
+        <tr><td class="what">robots.txt</td><td class="why">404</td><td class="what">served</td></tr>
+        <tr><td class="what">Form failure visible to a visitor</td><td class="why">1 in 5</td><td class="what">1 in 125 with JS (three retries)</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="sub"><code>python tools/break-it.py</code> — anyone can re-run it, and it exits non-zero
+      on a real failure, so it can gate a deploy later.</p>
+  </section>
+
+  <footer>
+    <span>Farhan Bashir · Karachi, Pakistan · 8 August 2026</span>
+    <span><a href="./">← Portfolio</a> · <a href="fixes.html">Fix log</a> ·
+      <a href="ugly.html">Still ugly</a></span>
+  </footer>
+
+</div>
+</body>
+</html>
