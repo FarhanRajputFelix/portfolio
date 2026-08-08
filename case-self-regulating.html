@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Self-Regulating AI — Farhan Bashir</title>
+<meta name="description" content="A learning rate that regulates itself under distribution shift — measured against three baselines, with the limitations the repo states." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@300;400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/case.css" />
+<link rel="canonical" href="https://farhanbashir.netlify.app/case-self-regulating.html" />
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
+
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Farhan Bashir" />
+<meta property="og:url" content="https://farhanbashir.netlify.app/case-self-regulating.html" />
+<meta property="og:title" content="Self-Regulating AI" />
+<meta property="og:description" content="A learning rate that regulates itself under distribution shift — measured against three baselines, with the limitations the repo states." />
+<meta property="og:image" content="https://farhanbashir.netlify.app/assets/brand/og-card.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Farhan Bashir — I build AI that knows its limits, and ships anyway." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Self-Regulating AI" />
+<meta name="twitter:description" content="A learning rate that regulates itself under distribution shift — measured against three baselines, with the limitations the repo states." />
+<meta name="twitter:image" content="https://farhanbashir.netlify.app/assets/brand/og-card.png" />
+<meta name="theme-color" content="#060608" />
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="subnav" aria-label="Site sections">
+    <a class="home" href="./">← Farhan Bashir</a>
+    <a href="cv.html">CV</a>
+    <a href="case-aqi.html">Air Quality</a>
+    <a href="case-kido.html">KIDO</a>
+    <a href="case-aurexis.html">AUREXIS</a>
+    <a href="case-self-regulating.html" aria-current="page">Self-Regulating</a>
+    <a href="agent.html">Agent spec</a>
+    <a href="crit.html">The crit</a>
+    <a href="break.html">Where it breaks</a>
+    <a href="ugly.html">Still ugly</a>
+  </nav>
+
+  <header class="top">
+    <span class="label">Case study 04 · Adaptive systems · Feb 2026</span>
+    <h1>Self-Regulating AI</h1>
+    <p class="sub">A learning rate that adjusts itself the way a body regulates temperature &mdash;
+      treating rising error as environment-induced stress rather than waiting for a human to notice
+      and retune. Measured against three baselines under deliberate distribution shift.</p>
+
+    <div class="stats">
+      <div class="stat"><b>4</b><span>methods compared, same task</span></div>
+      <div class="stat"><b>0.435</b><span>best pre-shift MSE across methods</span></div>
+      <div class="stat"><b>3.829</b><span>lowest post-shift peak error</span></div>
+      <div class="stat accent"><b>5D linear</b><span>and only 5D linear &mdash; see &sect;04</span></div>
+    </div>
+
+    <div class="pills">
+      <span>Python 3.9+</span><span>scikit-learn</span><span>Random Forest</span>
+      <span>KS test</span><span>Logistic Regression</span><span>NumPy</span>
+      <span>Docker</span><span>GitHub Actions</span>
+    </div>
+  </header>
+
+  <div class="tldr">
+    <b>If you read one thing</b>
+    <p>A homeostatic regulator that reached <strong>near-best pre-shift performance while keeping
+      the most stable learning-rate behaviour after the shift</strong> &mdash; the stability being the
+      point, not the raw error.</p>
+    <p>It is a <strong>5D linear agent</strong>. The neural-network extension is untested, and the
+      repository says so before I do.</p>
+  </div>
+
+  <!-- ============ BEAT 1 — THE PROBLEM ============ -->
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2>The problem</h2></div>
+    <p class="sub" style="margin-top:0">A model tuned on stationary data degrades when the
+      distribution moves underneath it. The standard answer is a schedule — a fixed learning rate, or
+      step decay on a timetable decided before anyone knew what the data would do.</p>
+    <p class="sub">Both share a flaw: they are open-loop. They respond to the epoch counter, not to
+      the model's own error. So when a shift arrives, the schedule keeps executing a plan made for
+      conditions that no longer exist, and somebody has to notice and intervene.</p>
+    <p class="sub">The question was whether a closed loop does better: can the learning rate read the
+      error signal and regulate itself, the way a body regulates temperature without deciding to?</p>
+  </section>
+
+  <!-- ============ BEAT 2 — WHAT I DID ============ -->
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2>What I did</h2></div>
+    <p class="sub" style="margin-top:0">Two components, and the second is the one I would defend
+      in an interview.</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Decision</th><th>What I did</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="what">Homeostatic regulator</td>
+          <td class="why">The learning rate responds to the error signal continuously, with an
+            exponential decay parameter governing how sharply it reacts.</td>
+          <td class="why">Closed loop rather than open. A schedule cannot know a shift happened; an
+            error signal already contains that information.</td>
+        </tr>
+        <tr>
+          <td class="what">Failure detection ahead of the failure</td>
+          <td class="why">A meta-learning pipeline predicts breakdowns <em>before</em> they cascade,
+            using a KS test for drift detection and logistic regression over the monitored signals.</td>
+          <td class="why">Reacting to a cascade is already too late. The KS test is a two-sample
+            test for "has this distribution moved", which is exactly the question, and it is
+            non-parametric &mdash; no assumption about the shape of the shift.</td>
+        </tr>
+        <tr>
+          <td class="what">Entropy monitoring and a decision engine as separate modules</td>
+          <td class="why">Drift detection, entropy monitoring and the decision engine are distinct
+            components rather than one loop.</td>
+          <td class="why">So a failure can be located. A single loop that does everything gives you
+            one signal: it stopped working.</td>
+        </tr>
+        <tr>
+          <td class="what">Docker and GitHub Actions from the start</td>
+          <td class="why">Containerised, with CI running on the repository.</td>
+          <td class="why">The experiment claims a comparison between four methods. That claim is
+            worth nothing if the run cannot be reproduced by someone else.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- ============ BEAT 3 — WHAT CAME OF IT ============ -->
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2>What came of it</h2></div>
+    <p class="sub" style="margin-top:0">Four methods, one task: 5-dimensional linear regression
+      with a deliberately induced distribution shift partway through.</p>
+
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Measure</th><th>Range across the four methods</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="what">Pre-shift MSE</td>
+          <td class="why">0.435 &ndash; 2.243</td>
+          <td class="why">How well each method learns before anything moves. The regulator lands
+            near the best of these &mdash; it does not pay for its adaptability up front.</td>
+        </tr>
+        <tr>
+          <td class="what">Post-shift peak error</td>
+          <td class="why">3.829 &ndash; 6.542</td>
+          <td class="why">The worst moment after the shift. This is the number that matters: it is
+            how badly a method is caught out before it recovers.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p class="sub">The repository's own summary is the fair one: the regulator is
+      <em>"competitive with or outperforms fixed LR and step decay baselines, especially in recovery
+      stability after distribution shift"</em>, achieving <em>"near-best pre-shift performance while
+      maintaining the most stable LR behavior post-perturbation"</em>.</p>
+
+    <p class="sub"><strong>Stability, not victory.</strong> It is not the lowest error on every
+      measure, and saying it were would be the easy lie. What it does is fail less erratically &mdash;
+      and for a system meant to run without someone watching it, predictable degradation is worth more
+      than a better average.</p>
+
+    <div class="honest">
+      <b>What this does not show — taken from the repository's own limitations section</b>
+      <p><strong>Linear agent only.</strong> The neural-network extension is explicitly untested.
+        Everything above holds for 5D linear regression and nothing has been shown beyond it.</p>
+      <p><strong>The baseline set is incomplete.</strong> It is compared against fixed learning rate
+        and step decay, but not against cosine annealing or warm restarts — two of the schedules a
+        practitioner would actually reach for. That is the comparison that would make or break the
+        claim, and it has not been run.</p>
+      <p><strong>It has a knob.</strong> The exponential decay parameter alpha requires initial
+        tuning, which is mildly awkward for a system whose pitch is that it tunes itself.</p>
+      <p><strong>No convergence guarantees.</strong> Formal guarantees under bounded distribution
+        shift are listed as future work, not results. This is an empirical finding on one synthetic
+        task, not a proof.</p>
+    </div>
+
+    <div class="links">
+      <a href="https://github.com/FarhanRajputFelix/self-regulating-ai">Repository ↗</a>
+      <a href="mailto:farhanmuhammadbashir@gmail.com">Ask me about it ↗</a>
+    </div>
+  </section>
+
+  <a class="flyrank-badge" href="mailto:verify@internship.flyrank.ai?subject=Verification%20request%20%E2%80%94%20Farhan%20Muhammad%20Bashir">
+    <span class="fb-mark" aria-hidden="true">FR</span>
+    <span class="fb-text">
+      <b>FlyRank AI Internship</b>
+      <i>General AI Fluency track · 23 assignments submitted · capstone in review</i>
+    </span>
+    <span class="fb-verify">Verify ↗</span>
+  </a>
+
+  <footer>
+    <span>Farhan Bashir · Karachi, Pakistan</span>
+    <span><a href="./">← Portfolio</a> · <a href="ugly.html">Still ugly</a></span>
+  </footer>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "892aadd45cb448919272f9d8380aee65"}'></script>
+</body>
+</html>

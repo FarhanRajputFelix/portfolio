@@ -93,16 +93,29 @@ absent from my CV, or has no public repo.
 2. **What I did** — a continuous homeostatic feedback loop: treat rising loss as
    environment-induced stress and adapt hyperparameters in response, rather than
    waiting for a scheduled retrain.
-3. **What came of it** — **honestly, no benchmark yet.** The repo records no
-   evaluation. So the beat has to be either "here is the number, measured" after
-   I run one, or "here is what I would need to measure to make a claim". The
-   second is a real answer and better than a borrowed one.
+3. **What came of it** — four methods compared on 5D linear regression under
+   induced distribution shift. Pre-shift MSE 0.435–2.243, post-shift peak error
+   3.829–6.542, with the regulator reaching near-best pre-shift performance and
+   the most stable learning-rate behaviour afterwards.
 
-**That is the actual work:** run one drift experiment and record the result.
-Writing the page without it would produce a fourth case study that describes a
-mechanism and proves nothing, which is exactly what my
-[still-ugly list](https://farhanbashir.netlify.app/ugly.html) already complains
-about.
+> **Correction, 8 August 2026.** This section originally said the repository
+> recorded no evaluation and that running one was the prerequisite. That was
+> wrong — I wrote it from memory instead of opening the README, which is the
+> exact mistake the rule two sections above warns about, made in the document
+> that states the rule. The experiment was already there. **So the case study
+> was written the same day rather than deferred a month**, and it is live at
+> [case-self-regulating.html](https://farhanbashir.netlify.app/case-self-regulating.html).
+
+**Which makes the next piece something else.** See below.
+
+### The actual next piece
+
+**Cosine annealing and warm restarts as baselines for Self-Regulating AI.** The
+repository names this itself: the regulator is compared against fixed learning
+rate and step decay, but not against the two schedules a practitioner would
+actually reach for. Until that comparison exists, the claim rests on beating the
+easy baselines. That experiment is the difference between an interesting result
+and a defensible one.
 
 **Target: by 8 September 2026.**
 
