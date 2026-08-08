@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Make it do something — the contact form, and what a backend is — Farhan Bashir</title>
+<meta name="description" content="One working feature: a contact form on Netlify Forms. What a backend is, what mine does, and how the data flows — in plain words." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@200;300;400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/case.css" />
+<link rel="canonical" href="https://farhanbashir.netlify.app/feature.html" />
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
+<meta name="theme-color" content="#060608" />
+<style>
+  .mine{ font-size:1rem; line-height:1.78; }
+  .mine p{ max-width:70ch; color:var(--paper); }
+  .mine p + p{ margin-top:1.1em; }
+  .mine h3{ margin:1.6em 0 .5em; color:var(--main); font-size:.72rem; letter-spacing:.2em;
+    text-transform:uppercase; }
+  .whose{ font-family:var(--display); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--faint); padding:12px 0 0; border-top:1px solid var(--line); margin-top:30px; }
+  .flow{ list-style:none; padding:0; margin:16px 0 0; counter-reset:f; }
+  .flow li{ counter-increment:f; position:relative; padding:12px 0 12px 42px;
+    border-bottom:1px solid var(--line); color:var(--muted); font-size:.89rem; }
+  .flow li:last-child{ border-bottom:none; }
+  .flow li::before{ content:counter(f); position:absolute; left:0; top:12px; width:26px; height:26px;
+    border-radius:50%; border:1px solid var(--line); display:grid; place-items:center;
+    font-family:var(--display); font-size:.74rem; color:var(--main); }
+  .flow b{ color:var(--paper); }
+  .proof{ font-family:var(--display); font-size:.84rem; }
+  .proof td:first-child{ color:var(--paper); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="subnav" aria-label="Site sections">
+    <a class="home" href="./">← Farhan Bashir</a>
+    <a href="cv.html">CV</a>
+    <a href="case-aqi.html">Air Quality</a>
+    <a href="case-kido.html">KIDO</a>
+    <a href="agent.html">Agent spec</a>
+    <a href="feature.html" aria-current="page">The form</a>
+    <a href="learned.html">Explain it</a>
+    <a href="crit.html">The crit</a>
+    <a href="fixes.html">Fix log</a>
+    <a href="ugly.html">Still ugly</a>
+  </nav>
+
+  <header class="top">
+    <span class="label">Make it do something · Week 8</span>
+    <h1>One feature: a contact form that actually arrives</h1>
+    <p class="sub">The brief asked for exactly one dynamic feature, working end to end on a free tier.
+      This is it &mdash; the form in the <a href="./#contact">contact section</a>. Two test submissions
+      are in my inbox, and the interesting part turned out to be that the HTML was correct for an hour
+      while the feature was completely dead.</p>
+  </header>
+
+  <div class="tldr">
+    <b>If you read one thing</b>
+    <p>I did not build a backend. I added one HTML attribute &mdash;
+      <code>data-netlify="true"</code> &mdash; and rented Netlify's.</p>
+    <p>The form returned <strong>404</strong> for an hour with byte-identical markup, until I enabled a
+      setting. That is the whole lesson: the backend was never in my code.</p>
+  </div>
+
+  <!-- ============ THE EXPLAINER — Farhan's words ============ -->
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2>What a backend is, in plain words</h2></div>
+
+    <div class="mine">
+      <p>A backend is server-side code that runs after a form is submitted &mdash; it receives the data,
+        validates it, stores it somewhere, and decides what happens next (save to a database, send an
+        email, and so on). A plain HTML file can't do any of that, because HTML only <em>describes</em>
+        the structure and content of a page. A description can't execute.</p>
+
+      <p>So without a backend, clicking "Send" has nowhere to go. To be precise about it: there
+        <em>is</em> a server on the other end &mdash; Netlify's, and it answered every request I made.
+        What it lacked was any code registered to run when a submission arrived at that address. That is
+        exactly why my test got a <strong>404 rather than a connection error</strong>: the server was
+        reachable, it just had nothing to hand the data to.</p>
+
+      <h3>What my feature actually does</h3>
+
+      <p>My "feature" doesn't have a backend I built. I didn't write a server, a database, or an email
+        service. What I did was add <code>data-netlify="true"</code> to the form tag, plus a matching
+        <code>name</code> attribute. That one attribute tells Netlify's own infrastructure to treat my
+        form as theirs to handle &mdash; so I'm effectively borrowing Netlify's backend instead of
+        running my own.</p>
+
+      <h3>How the data flows</h3>
+
+      <ol class="flow">
+        <li>A visitor types into the fields and hits <b>Send</b>.</li>
+        <li>The browser does a <b>normal POST</b> to my own page's URL. No JavaScript of mine is
+          involved.</li>
+        <li><b>Netlify's servers intercept that POST</b> and recognise it by the form's
+          <code>name</code>.</li>
+        <li>They check the hidden <b>honeypot field</b> to filter out bots &mdash; a real person never
+          sees it, so anything with it filled in gets dropped.</li>
+        <li>If it's clean, they <b>store the submission and fire an email</b> to me.</li>
+        <li>The browser is <b>redirected to <code>/thanks.html</code></b>.</li>
+      </ol>
+
+      <h3>The detail that taught me the most</h3>
+
+      <p>The form was returning a 404 until I flipped a setting in Netlify &mdash; even though the HTML
+        markup itself never changed between the failing and the working version. That's the tell that
+        the "backend" isn't anything living in my code at all. It's an external service that has to be
+        explicitly told "this form exists, please watch for it". Until you flip that switch, Netlify has
+        no idea your form is there, no matter how correct your HTML is.</p>
+    </div>
+
+    <p class="whose">Written by Farhan Bashir, 8 August 2026. Two corrections taken during editing:
+      I had written that there was "no server listening", when a server was listening and simply had no
+      handler &mdash; which is why the failure was a 404; and I had said HTML describes what a page
+      "looks like", where it describes structure and content, and CSS handles the looks.</p>
+  </section>
+
+  <!-- ============ EVIDENCE ============ -->
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2>Evidence it works</h2></div>
+    <p class="sub" style="margin-top:0">Four POSTs to the live endpoint. The third one is the reason
+      this counts as proof rather than a hopeful guess &mdash; a negative control, to show a 200 means
+      "this specific form is registered" and not "the server says 200 to everything".</p>
+
+    <div class="scroll">
+    <table class="proof">
+      <thead><tr><th>Test</th><th>Result</th><th>What it establishes</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Before enabling detection</td>
+          <td>404</td>
+          <td class="why">The markup alone does nothing. The feature was inert.</td>
+        </tr>
+        <tr>
+          <td><code>form-name=contact</code></td>
+          <td>200</td>
+          <td class="why">Registered and accepting. Two emails arrived in my inbox.</td>
+        </tr>
+        <tr>
+          <td><code>form-name=does-not-exist</code></td>
+          <td>404</td>
+          <td class="why"><strong>Negative control.</strong> The 200 above is specific to my form, not a blanket response.</td>
+        </tr>
+        <tr>
+          <td>Honeypot field filled</td>
+          <td>200, not delivered</td>
+          <td class="why">Accepted at the edge and discarded as spam, so bots get no signal that they were filtered.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="honest">
+      <b>Two honest limits</b>
+      <p><strong>The form only works on this host.</strong> My site is also served from GitHub Pages,
+        where the same markup renders and does nothing, because Pages serves files and runs no code.
+        Same HTML, no backend behind it &mdash; the same lesson as the 404, from a different direction.</p>
+      <p><strong>The free tier caps at 100 submissions a month.</strong> Beyond that, submissions stop
+        rather than queue. Fine for a portfolio; worth knowing it's a ceiling and not a soft limit.</p>
+    </div>
+  </section>
+
+  <!-- ============ BUILD NOTES ============ -->
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2>Choices in the build worth naming</h2></div>
+
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Choice</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="what">No JavaScript</td>
+          <td class="why">The browser's native form POST does the work, so the feature survives a JS error, a blocked script or a slow connection. Everything else on my homepage degrades; this shouldn't.</td>
+        </tr>
+        <tr>
+          <td class="what">Honeypot, not a captcha</td>
+          <td class="why">A captcha makes every human do work to stop some bots. A honeypot makes bots identify themselves and costs humans nothing.</td>
+        </tr>
+        <tr>
+          <td class="what">Hidden with <code>clip-path</code>, not <code>display:none</code></td>
+          <td class="why">Some bots skip <code>display:none</code> inputs, which defeats the trap. It's also removed from the tab order so keyboard and screen-reader users never meet a field asking them to leave it empty.</td>
+        </tr>
+        <tr>
+          <td class="what">Labels bound by <code>id</code>, native validation</td>
+          <td class="why">Real <code>&lt;label for&gt;</code> pairs, <code>required</code>, and <code>type="email"</code>. <code>:user-invalid</code> means error styling appears only after a failed submit, not while someone is mid-typing.</td>
+        </tr>
+        <tr>
+          <td class="what">A real success page</td>
+          <td class="why"><code>/thanks.html</code> confirms delivery and offers a next step, rather than Netlify's generic screen. It's <code>noindex</code> and unlinked, so my link checker needed an explicit exception rather than a loosened rule.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <footer>
+    <span>Farhan Bashir · Karachi, Pakistan · 8 August 2026</span>
+    <span><a href="./#contact">Try the form</a> · <a href="./">← Portfolio</a> ·
+      <a href="ugly.html">Still ugly</a></span>
+  </footer>
+
+</div>
+</body>
+</html>
