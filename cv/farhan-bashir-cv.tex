@@ -1,0 +1,188 @@
+% =============================================================
+% Farhan Muhammad Bashir — CV
+%
+% Built to fix two audits (CV 68/100, LinkedIn 56/100) whose main
+% findings were the same problem stated twice:
+%
+%   * "0 experience entries" — the previous Europass layout was
+%     unparseable, so the FlyRank internship, the most relevant thing
+%     here, scored nothing. Fixed by a plain single-column layout with
+%     standard section headings.
+%   * "0/12 skills related to the track" and "0/4 relevant skills shown
+%     in your work" — skills existed only in a list. Every bullet below
+%     now names the concrete tool or method inside the work itself.
+%   * "Add a truthful number" — every bullet carries one, and every
+%     number is traceable to a public repository.
+%
+% ATS notes: single column, no tables, no text boxes, no graphics, no
+% multi-column packages, standard headings. Everything is selectable
+% text. Compiles with pdfLaTeX on Overleaf with no extra packages.
+%
+% Every claim here was checked against the repository READMEs on
+% 8 Aug 2026. Do not add a claim the repo does not support — see
+% pipeline/cv-facts.md, which ranks sources: repo > CV > website.
+% =============================================================
+
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{accent}{HTML}{1F4E79}
+
+% Tighter, quieter section rules
+\titleformat{\section}
+  {\large\bfseries\color{accent}}{}{0em}{}[\vspace{-0.7em}\rule{\textwidth}{0.6pt}]
+\titlespacing*{\section}{0pt}{1.0em}{0.5em}
+
+\setlist[itemize]{leftmargin=1.1em, topsep=0.15em, itemsep=0.12em, parsep=0pt}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+% Role heading: title on the left, dates hard right
+\newcommand{\role}[4]{%
+  \textbf{#1} \hfill \textbf{#3}\\
+  \textit{#2} \hfill \textit{#4}\\[0.2em]
+}
+
+% Project heading: name, stack, and a link
+\newcommand{\project}[3]{%
+  \textbf{#1} \; | \; \small #2 \hfill \small #3\\[0.15em]
+}
+
+\begin{document}
+
+% ============================ HEADER ============================
+\begin{center}
+  {\LARGE\bfseries Farhan Muhammad Bashir}\\[0.35em]
+  {\large AI / Machine Learning Engineer --- Agentic Systems}\\[0.45em]
+  \small
+  Karachi, Pakistan (remote-friendly) \;$\cdot$\;
+  \href{mailto:farhanmuhammadbashir@gmail.com}{farhanmuhammadbashir@gmail.com}
+  % Add your phone here if the application asks for one:
+  % \;$\cdot$\; +92 XXX XXXXXXX
+  \\[0.2em]
+  \href{https://farhanbashir.netlify.app}{farhanbashir.netlify.app} \;$\cdot$\;
+  \href{https://github.com/FarhanRajputFelix}{github.com/FarhanRajputFelix} \;$\cdot$\;
+  \href{https://www.linkedin.com/in/farhan-rajput/}{linkedin.com/in/farhan-rajput}
+\end{center}
+
+\vspace{0.3em}
+
+% ============================ SUMMARY ============================
+\section{Summary}
+Computer Science undergraduate building multi-agent systems and applied machine learning in
+\textbf{Python} and \textbf{TypeScript}. I ship systems that state their own limits: an
+\textbf{MCP} server and agent loop evaluated against test cases written before the code, a
+regression model published with the three reasons its R\textsuperscript{2} overstates itself, and a
+public defect list for my own portfolio. Every project below links to a public repository.
+Seeking AI/ML engineering, research or internship roles.
+
+% ============================ EXPERIENCE ============================
+\section{Experience}
+
+\role{Artificial Intelligence Intern}{FlyRank AI --- Remote}{Jul 2026 -- Present}{General AI Fluency track}
+\begin{itemize}
+  \item Built a zero-dependency \textbf{Model Context Protocol} server in \textbf{Node.js}
+        (JSON-RPC 2.0 over stdio) exposing all three MCP primitives --- tools, resources and prompts
+        --- and an \textbf{agent loop} on top of it that selects its own tool sequence.
+  \item Wrote \textbf{6 evaluation cases before writing the agent}; the suite passes \textbf{9/9}
+        mechanical assertions and caught a regression where a token-budget optimisation silently
+        truncated a posting past its stated GPA requirement, causing a wrong recommendation.
+  \item Designed guardrails structurally rather than by instruction: no send capability exists, a
+        gate tool returns \textbf{PASS/FAIL without exposing the underlying value}, and the loop is
+        capped at 8 tool calls.
+  \item Measured an LLM workflow honestly against a manual baseline and reported it as
+        \textbf{2.1$\times$ slower}; its real value was \textbf{3 fewer factual errors} and
+        \textbf{2 of 5 applications correctly abandoned} before any work was done.
+  \item Wrote \textbf{Python} tooling for the deployed site --- a reachability checker and a
+        break-testing suite covering link integrity, form abuse, injection payloads, security
+        headers and payload weight; first run surfaced \textbf{24 failures}, now \textbf{0}.
+  \item Completed \textbf{23 assignments}; currently \textbf{ranked \#1 of 209} on the track.
+\end{itemize}
+
+\role{Retail Sales Manager}{Bashir Communication --- Karachi}{Jun 2019 -- Jul 2021}{Non-technical}
+\begin{itemize}
+  \item Ran sales operations, inventory and team training for two years; day-to-day work was
+        explaining technical products to non-technical customers.
+\end{itemize}
+
+% ============================ PROJECTS ============================
+\section{Projects}
+
+\project{AUREXIS --- multi-agent survival architecture}{Python, FastAPI, Gradio, rule-based multi-agent, Docker}{\href{https://github.com/FarhanRajputFelix/aurexis-core}{github.com/.../aurexis-core}}
+\begin{itemize}
+  \item \textbf{5 specialised agents} under a priority-driven Meta-Arbitrator resolving genuine
+        conflicts between resource rationing, vital signs and occupant panic.
+  \item Simulated survival \textbf{15.0\% $\rightarrow$ 55.8\%} and mean survival
+        \textbf{4.9 $\rightarrow$ 7.8 hrs} across \textbf{10,000 Monte Carlo trials}
+        (fixed seed, reproducible). Results are from my own model against my own baseline.
+  \item Deliberately rule-based, not neural, so life-critical logic stays auditable and
+        deterministic. FPGA safety layer is designed, not built.
+\end{itemize}
+
+\project{KIDO --- agentic-AI learning platform}{Next.js 15, React 19, TypeScript, Prisma, PostgreSQL, Groq, Gemini}{\href{https://kido-orcin.vercel.app}{live demo} $\cdot$ \href{https://github.com/FarhanRajputFelix/KIDO}{repo}}
+\begin{itemize}
+  \item \textbf{11 cooperating agents} on a \textbf{ReAct} loop with tool-calling, an orchestrator,
+        a contradiction-detection agent and a fallback-recovery agent; every run persists an
+        explainable trace.
+  \item Model chain degrades \textbf{Groq $\rightarrow$ Gemini $\rightarrow$ curated banks}, so a
+        provider outage produces worse content rather than a broken session.
+  \item Enforced child safety in code: a \textbf{single server-side authorisation guard} returns 403
+        on cross-account access, and social actions require verifiable parental consent.
+        Live as web, PWA and signed Android APK. No learning-outcome study yet.
+\end{itemize}
+
+\project{Air Quality ML System}{Python, scikit-learn, Random Forest, gradient boosting}{\href{https://github.com/FarhanRajputFelix/Air-Quality-Prediction}{github.com/.../Air-Quality-Prediction}}
+\begin{itemize}
+  \item Predicted regional \textbf{PM2.5} from the IQAir 2025 World Air Quality Report, comparing
+        two ensemble families; best model \textbf{R\textsuperscript{2} $\approx$ 0.97} on held-out data.
+  \item Published the limitations with the result: correlation is not causation, accuracy
+        concentrates in densely monitored regions, and the findings are specific to one reporting
+        cycle.
+\end{itemize}
+
+\project{Self-Regulating AI}{Python, scikit-learn, KS test, Docker, GitHub Actions}{\href{https://github.com/FarhanRajputFelix/self-regulating-ai}{github.com/.../self-regulating-ai}}
+\begin{itemize}
+  \item Homeostatic regulator adjusting learning rate from the error signal, with drift detection
+        via a \textbf{Kolmogorov--Smirnov test} feeding a meta-learning failure predictor.
+  \item Compared \textbf{4 methods} on 5D regression under induced distribution shift: pre-shift MSE
+        \textbf{0.435--2.243}, post-shift peak \textbf{3.829--6.542}. Near-best pre-shift accuracy
+        with the most stable recovery. Linear agent only; neural extension untested.
+\end{itemize}
+
+% ============================ SKILLS ============================
+\section{Skills}
+\textbf{Languages:} Python, TypeScript, JavaScript, C/C++, Java, Kotlin, SQL, PHP \\
+\textbf{ML / AI:} scikit-learn, ensemble methods (Random Forest, gradient boosting), model
+evaluation, drift detection, multi-agent systems, ReAct tool-calling loops, LLM integration
+(Groq, Gemini), \textbf{Model Context Protocol}, evaluation-driven development, responsible AI \\
+\textbf{Web \& backend:} Next.js, React, Node.js, FastAPI, Laravel, REST APIs, Three.js \\
+\textbf{Data \& infra:} PostgreSQL, Prisma, MySQL, Docker, AWS, GitHub Actions, Vercel, Netlify \\
+\textbf{Tools:} Git, Linux, VS Code, Jupyter, Postman
+
+% ============================ CERTIFICATIONS ============================
+\section{Certifications}
+\textbf{Anthropic Academy --- all 20 courses, every credential individually verifiable} (2026).
+Developer track: Model Context Protocol (Introduction and Advanced), Claude Code 101 and In Action,
+subagents, agent skills, Claude API, Platform, Amazon Bedrock, Google Cloud. \\
+\textbf{Google:} AI Specialization, 5-course series (2025) $\cdot$ Foundations of Cybersecurity (2024) \\
+\textbf{AWS:} Academy Graduate --- Cloud Foundations (2026) \\
+\textbf{Open Doors International Olympiad:} High Achievement Diplomas in Applied Mathematics \& AI
+and in Engineering \& Technology, from a pool of 146,000+ applicants (2026) \\
+\textbf{NED University (PITP):} Certified Data Science $\cdot$ Cyber Security \& Ethical Hacking (2025)
+
+% ============================ EDUCATION ============================
+\section{Education}
+\role{BS Computer Science}{SZABIST University --- Karachi, Pakistan}{Sep 2023 -- 2027 (expected)}{}
+\vspace{-0.6em}
+Coursework: data structures \& algorithms, design \& analysis of algorithms, artificial intelligence,
+operating systems, compiler construction, database systems, computer networks, theory of computation,
+linear algebra, probability \& statistics.
+
+\end{document}
