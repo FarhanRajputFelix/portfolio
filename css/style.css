@@ -1011,3 +1011,11 @@ body.asking .char-bubble::after{      /* tail, pointing right at the bot */
   .cert-table td.why{ white-space:normal; }
   .cert-all-note{ padding:0 16px; }
 }
+
+/* Error surfaced by js/form.js when Netlify's endpoint refuses a submission
+   even after retries. Only ever visible if all three attempts fail. */
+.cf-error{
+  margin:0; padding:12px 15px; border-radius:12px;
+  border:1px solid rgba(248,113,113,.45); background:rgba(248,113,113,.07);
+  color:#fca5a5; font-size:.85rem; line-height:1.6;
+}
