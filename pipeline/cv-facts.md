@@ -144,7 +144,7 @@ for one, output `NO EVIDENCE`; do not offer the neighbour as if it counted:
 
 ## 6. Certifications — 27 credentials, IDs for verification
 
-**Anthropic Academy — all 20, the complete catalogue. 19 carry a direct issuer verification ID; every course name and date below was read off the certificate itself, not transcribed from a list.**
+**Anthropic Academy — all 20, the complete catalogue. all 20 carry a direct issuer verification ID; every course name and date below was read off the certificate itself, not transcribed from a list.**
 
 | Certificate | Credential ID | Verify |
 |---|---|---|
@@ -167,7 +167,7 @@ for one, output `NO EVIDENCE`; do not offer the neighbour as if it counted:
 | AI Fluency for students | `8fnmks5gy5hw` | verify.skilljar.com/c/8fnmks5gy5hw |
 | AI Fluency for educators | `exjgrf263gfk` | verify.skilljar.com/c/exjgrf263gfk |
 | AI Fluency for Small Businesses | `thva6dfqzgg6` | verify.skilljar.com/c/thva6dfqzgg6 |
-| AI Fluency for nonprofits | **ID not recorded** | on LinkedIn only — say so rather than implying it is verifiable |
+| AI Fluency for nonprofits | `k9f7w2jnxm9h` | verify.skilljar.com/c/k9f7w2jnxm9h |
 
 **Others**
 
