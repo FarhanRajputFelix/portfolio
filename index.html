@@ -13,6 +13,22 @@
 <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
 <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/icon-32.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
+
+<!-- Social share. Without these, pasting a link into LinkedIn or WhatsApp
+     renders a blank rectangle - which is what it did until Week 9. -->
+<meta property="og:type" content="profile" />
+<meta property="og:site_name" content="Farhan Bashir" />
+<meta property="og:url" content="https://farhanbashir.netlify.app/" />
+<meta property="og:title" content="Farhan Bashir" />
+<meta property="og:description" content="Portfolio of Farhan Bashir — Computer Science student at SZABIST, AI Intern at FlyRank AI, building AI for social impact." />
+<meta property="og:image" content="https://farhanbashir.netlify.app/assets/brand/og-card.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Farhan Bashir — I build AI that knows its limits, and ships anyway." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Farhan Bashir" />
+<meta name="twitter:description" content="Portfolio of Farhan Bashir — Computer Science student at SZABIST, AI Intern at FlyRank AI, building AI for social impact." />
+<meta name="twitter:image" content="https://farhanbashir.netlify.app/assets/brand/og-card.png" />
 <meta name="theme-color" content="#060608" />
 <script type="importmap">
 {
@@ -20,6 +36,28 @@
     "three": "./vendor/three.module.min.js",
     "three/addons/": "./vendor/addons/"
   }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Farhan Muhammad Bashir",
+  "alternateName": "Farhan Bashir",
+  "url": "https://farhanbashir.netlify.app/",
+  "image": "https://farhanbashir.netlify.app/assets/brand/og-card.png",
+  "jobTitle": "Artificial Intelligence Intern",
+  "worksFor": { "@type": "Organization", "name": "FlyRank AI" },
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "SZABIST University, Karachi" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Karachi", "addressCountry": "PK" },
+  "email": "mailto:farhanmuhammadbashir@gmail.com",
+  "description": "Computer Science undergraduate building multi-agent systems and applied machine learning. Author of an MCP server and an agent loop evaluated against pre-written test cases.",
+  "knowsAbout": ["Model Context Protocol", "AI agents", "Machine learning", "Multi-agent systems", "Python", "TypeScript"],
+  "sameAs": [
+    "https://github.com/FarhanRajputFelix",
+    "https://www.linkedin.com/in/farhan-rajput/"
+  ]
 }
 </script>
 </head>

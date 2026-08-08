@@ -1,0 +1,8 @@
+# Everything here is meant to be found.
+User-agent: *
+Allow: /
+
+# The form success page is only reachable by submitting the form.
+Disallow: /thanks.html
+
+Sitemap: https://farhanbashir.netlify.app/sitemap.xml
