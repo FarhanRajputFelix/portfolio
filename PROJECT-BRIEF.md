@@ -68,7 +68,7 @@ than "AI researcher" because there are no publications yet.
 | 3 | About | Real photo, two paragraphs, four numbers | — |
 | 4 | What I Do | ML · Agentic AI & LLMs · Full-stack · Learning & research | — |
 | 5 | Work | 01 KIDO (leads) · 02 Air Quality R²≈0.97 · 03 Self-Regulating AI · 04 Crisis Intelligence · 05 This capstone · 06 Laravel/PHP | Ask BYTE |
-| 6 | Certifications | 17 credentials, each linking to proof | Verify ↗ |
+| 6 | Certifications | 27 credentials (20 Anthropic, full catalogue), each linking to proof | Verify ↗ |
 | 7 | Career | Internship, hackathon, degree, achievements, goals | — |
 | 8 | Contact | Photo, email block, links, location, availability | **Write email ↗** |
 

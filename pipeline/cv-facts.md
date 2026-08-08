@@ -99,7 +99,7 @@ website's version of any row below**:
 | AUREXIS maturity | absent from site | prototype, "core modules tested locally" | live web console, Monte Carlo engine, air-gap core, real phone alerts, Docker — **more built than the CV implies** | The CV *understates* it. Use the repo's implemented/planned split. |
 | Crisis Intelligence (Google AI Seekho hackathon) | listed as a project | **absent from the CV** | Site-only. Do not lead with it; ask Farhan whether it belongs. |
 | Laravel builds (canteen, job portal, CMS) | listed as shipped | Laravel/MySQL in skills, projects not listed | Skills yes, specific builds unverified. |
-| Certification count | 17 credentials, 10 from Anthropic | 5 listed; **no Anthropic certificates at all** | The Anthropic certs are verifiable via skilljar (§6) but are missing from the CV — a gap in the CV, not in the facts. |
+| Certification count | 27 credentials, **all 20** Anthropic Academy courses (updated 8 Aug 2026) | 5 listed; **no Anthropic certificates at all** | The Anthropic certs are verifiable via skilljar (§6) but are missing from the CV — a gap in the CV, not in the facts, and now a 20-certificate gap rather than a 10. |
 
 ---
 
@@ -142,9 +142,9 @@ for one, output `NO EVIDENCE`; do not offer the neighbour as if it counted:
 
 ---
 
-## 6. Certifications — 17 credentials, IDs for verification
+## 6. Certifications — 27 credentials, IDs for verification
 
-**Anthropic Academy (10 total; 5 with verify links, 5 more on LinkedIn)**
+**Anthropic Academy — all 20, the complete catalogue (5 with verify links, 15 more on LinkedIn)**
 
 | Certificate | Credential ID | Verify |
 |---|---|---|
@@ -152,8 +152,9 @@ for one, output `NO EVIDENCE`; do not offer the neighbour as if it counted:
 | AI Fluency for Builders | `zaujx5d969gf` | verify.skilljar.com/c/zaujx5d969gf |
 | AI Capabilities and Limitations | `tbpn7pwtt3wn` | verify.skilljar.com/c/tbpn7pwtt3wn |
 | Introduction to Claude Cowork | `8i64i4zo5aao` | verify.skilljar.com/c/8i64i4zo5aao |
-| Teaching the AI Fluency Framework | `zep7y3v3x8qk` | verify.skilljar.com/c/zep7y3v3x8qk |
-| + 5 more: Claude 101 · AI Fluency for Students / Educators / Nonprofits / Small Businesses | on LinkedIn | linkedin.com/in/farhan-rajput/details/certifications/ |
+| Teaching AI Fluency | `zep7y3v3x8qk` | verify.skilljar.com/c/zep7y3v3x8qk |
+| **Developer track, all Aug 2026 (10):** Introduction to Model Context Protocol · Model Context Protocol: Advanced Topics · Claude Code 101 · Claude Code in Action · Introduction to subagents · Introduction to agent skills · Building with the Claude API · Claude Platform 101 · Claude with Amazon Bedrock · Claude on Google Cloud | IDs not yet recorded | on LinkedIn |
+| **Remaining AI Fluency (5):** Claude 101 · AI Fluency for Students / Educators / Nonprofits / Small Businesses | IDs not yet recorded | on LinkedIn |
 
 **Others**
 
@@ -247,7 +248,11 @@ These are pre-approved because each is traceable to a row above:
   its own hyperparameters under non-stationary drift."
 - "I shipped a 3D portfolio with an embedded agent that refuses questions outside its 19-entry
   knowledge base rather than inventing answers."
-- "I hold 17 credentials including 10 from Anthropic Academy, all individually verifiable."
+- "I hold 27 credentials, including all 20 Anthropic Academy certificates — the complete
+  catalogue, developer track included: MCP introduction and advanced, Claude Code, subagents,
+  agent skills, the Claude API, Bedrock and Google Cloud."
+- "The MCP and subagent certificates are not decoration — I built an MCP server and an agent loop
+  on top of that material, and both are public."
 - "Two Open Doors High Achievement Diplomas — Applied Mathematics & AI, and Engineering & Technology —
   from a pool of 146,000+ international applicants."
 - "My honest gap is publications: I have prototypes and 27 design documents but nothing
