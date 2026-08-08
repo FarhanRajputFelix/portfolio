@@ -144,7 +144,7 @@ for one, output `NO EVIDENCE`; do not offer the neighbour as if it counted:
 
 ## 6. Certifications — 27 credentials, IDs for verification
 
-**Anthropic Academy — all 20, the complete catalogue (5 with verify links, 15 more on LinkedIn)**
+**Anthropic Academy — all 20, the complete catalogue. 19 carry a direct issuer verification ID; every course name and date below was read off the certificate itself, not transcribed from a list.**
 
 | Certificate | Credential ID | Verify |
 |---|---|---|
@@ -153,8 +153,21 @@ for one, output `NO EVIDENCE`; do not offer the neighbour as if it counted:
 | AI Capabilities and Limitations | `tbpn7pwtt3wn` | verify.skilljar.com/c/tbpn7pwtt3wn |
 | Introduction to Claude Cowork | `8i64i4zo5aao` | verify.skilljar.com/c/8i64i4zo5aao |
 | Teaching AI Fluency | `zep7y3v3x8qk` | verify.skilljar.com/c/zep7y3v3x8qk |
-| **Developer track, all Aug 2026 (10):** Introduction to Model Context Protocol · Model Context Protocol: Advanced Topics · Claude Code 101 · Claude Code in Action · Introduction to subagents · Introduction to agent skills · Building with the Claude API · Claude Platform 101 · Claude with Amazon Bedrock · Claude on Google Cloud | IDs not yet recorded | on LinkedIn |
-| **Remaining AI Fluency (5):** Claude 101 · AI Fluency for Students / Educators / Nonprofits / Small Businesses | IDs not yet recorded | on LinkedIn |
+| Introduction to Model Context Protocol | `v49v9oeaetqx` | verify.skilljar.com/c/v49v9oeaetqx |
+| Model Context Protocol: Advanced Topics | `tfvwqaxa44zn` | verify.skilljar.com/c/tfvwqaxa44zn |
+| Claude Code 101 | `393u7ggurxii` | verify.skilljar.com/c/393u7ggurxii |
+| Claude Code in Action | `33qfhhusw6fr` | verify.skilljar.com/c/33qfhhusw6fr |
+| Introduction to subagents | `bb6fhoqm2uxs` | verify.skilljar.com/c/bb6fhoqm2uxs |
+| Introduction to agent skills | `db9rbxsrmcuw` | verify.skilljar.com/c/db9rbxsrmcuw |
+| Building with the Claude API | `mzppdow3moo4` | verify.skilljar.com/c/mzppdow3moo4 |
+| Claude Platform 101 | `ed4eovuvbik6` | verify.skilljar.com/c/ed4eovuvbik6 |
+| Claude with Amazon Bedrock | `igb5hnwrsq6p` | verify.skilljar.com/c/igb5hnwrsq6p |
+| Claude on Google Cloud | `jsnizz48gsnp` | verify.skilljar.com/c/jsnizz48gsnp |
+| Claude 101 | `wariqwg56g4b` | verify.skilljar.com/c/wariqwg56g4b |
+| AI Fluency for students | `8fnmks5gy5hw` | verify.skilljar.com/c/8fnmks5gy5hw |
+| AI Fluency for educators | `exjgrf263gfk` | verify.skilljar.com/c/exjgrf263gfk |
+| AI Fluency for Small Businesses | `thva6dfqzgg6` | verify.skilljar.com/c/thva6dfqzgg6 |
+| AI Fluency for nonprofits | **ID not recorded** | on LinkedIn only — say so rather than implying it is verifiable |
 
 **Others**
 

@@ -951,3 +951,48 @@ body.asking .char-bubble::after{      /* tail, pointing right at the bot */
 @media (prefers-reduced-motion:reduce){
   .cf-field input,.cf-field select,.cf-field textarea{ transition:none; }
 }
+
+/* ==========================================================
+   Full certificate list — collapsed by default.
+   A design crit called the cert wall "badge-flexing before
+   you've earned the claim". The answer isn't fewer credentials,
+   it's less shouting: cards stay compact, and anyone who wants
+   to check all twenty can open the list and verify each one.
+   ========================================================== */
+
+.cert-all{ margin-top:26px; border:1px solid var(--line); border-radius:16px; background:var(--bg-2); }
+.cert-all summary{
+  cursor:pointer; padding:18px 22px; min-height:44px; display:flex; align-items:center; gap:10px;
+  font-family:var(--mono); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--text-dim); list-style:none;
+}
+.cert-all summary::-webkit-details-marker{ display:none; }
+.cert-all summary::before{
+  content:'+'; font-family:var(--display); font-size:1rem; color:var(--violet);
+  width:20px; display:inline-block;
+}
+.cert-all[open] summary::before{ content:'\2212'; }
+.cert-all summary:hover{ color:var(--text); }
+.cert-all-note{
+  margin:0; padding:0 22px; font-size:.82rem; color:var(--text-faint); max-width:70ch; line-height:1.6;
+}
+.cert-table{ width:100%; border-collapse:collapse; font-size:.83rem; margin:14px 0 6px; }
+.cert-table th{
+  text-align:left; padding:10px 22px; font-family:var(--mono); font-size:.58rem;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--text-faint); font-weight:400;
+  border-bottom:1px solid var(--line);
+}
+.cert-table td{ padding:11px 22px; border-bottom:1px solid var(--line); vertical-align:top; }
+.cert-table tr:last-child td{ border-bottom:none; }
+.cert-table td.what{ color:var(--text); }
+.cert-table td.why{ color:var(--text-dim); white-space:nowrap; }
+.cert-table code{ font-family:var(--mono); font-size:.76rem; color:var(--cyan); }
+.cert-table .noid{ color:var(--text-faint); font-style:italic; }
+.cert-table a{ color:var(--violet); text-decoration:none; white-space:nowrap; }
+.cert-table a:hover{ color:var(--violet-3); }
+
+@media (max-width:700px){
+  .cert-table th,.cert-table td{ padding-left:16px; padding-right:16px; }
+  .cert-table td.why{ white-space:normal; }
+  .cert-all-note{ padding:0 16px; }
+}
