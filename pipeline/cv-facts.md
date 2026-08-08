@@ -52,8 +52,11 @@ modern AI workflows and real-world applications. Completed the Anthropic AI Flue
 series during the internship.
 
 **Antigravity Hackathon — Google AI Seekho** · 2026
-Team-built "Crisis Intelligence", an emergency-response tool: AI agents, live maps, Flutter,
-Firebase, Python backend. Built under hackathon time constraints.
+Team-built **SAHARA AI**, "Pakistan's Agentic Urban Crisis Intelligence & Response System" —
+Challenge 3 submission. A 6-agent sequential pipeline (verify → severity → plan → simulate) with
+conditional routing and a fallback-recovery agent when verification confidence is low. FastAPI,
+Flutter/Dart, gemini-1.5-flash, Google ADK v1.34+, Firebase, Docker. Repo: `Anti-gravity-Hackathon`.
+**Under active development — no deployed instance.**
 
 **Retail Sales Manager — Bashir Communication** · Karachi · 21/06/2019 – 21/07/2021
 Sales operations, customer service, team training, inventory and marketing. Non-technical, but it is
@@ -97,7 +100,7 @@ website's version of any row below**:
 | AQI metrics | R² ≈ 0.97 | R² = 0.9746 **and MAE = 3.13 µg/m³** | **R² ≈ 0.97 only — no MAE stated** | Claim R² ≈ 0.97. The MAE is uncorroborated; do not use it. |
 | AQI deployment | notebook result | "served real-time inferences through a modular FastAPI framework" | **no deployment documented** — local execution via Python scripts | **The CV overstates this.** Do not claim a serving layer. My earlier "correction" that upgraded this to SUPPORTED was itself wrong. |
 | AUREXIS maturity | absent from site | prototype, "core modules tested locally" | live web console, Monte Carlo engine, air-gap core, real phone alerts, Docker — **more built than the CV implies** | The CV *understates* it. Use the repo's implemented/planned split. |
-| Crisis Intelligence | listed as a project, vaguely | absent from the CV | **Resolved — it is real and public.** Actual name **SAHARA AI**, "Pakistan's Agentic Urban Crisis Intelligence & Response System", submitted to the Google Antigravity Hackathon Challenge 3. **6-agent sequential pipeline** with conditional routing and a fallback-recovery agent on low verification confidence. FastAPI, Flutter/Dart, gemini-1.5-flash, Google ADK v1.34+, Firebase, Docker, Render. Repo: `Anti-gravity-Hackathon`. **No live demo** — a hackathon submission, not a deployed system. |
+| Crisis Intelligence | listed as a project, vaguely | absent from the CV | **Resolved — it is real and public.** Actual name **SAHARA AI**, "Pakistan's Agentic Urban Crisis Intelligence & Response System", submitted to the Google Antigravity Hackathon Challenge 3. **6-agent sequential pipeline** with conditional routing and a fallback-recovery agent on low verification confidence. FastAPI, Flutter/Dart, gemini-1.5-flash, Google ADK v1.34+, Firebase, Docker, Render. Repo: `Anti-gravity-Hackathon`. **Under active development.** Runs locally via Docker; no deployed instance and no live demo. Never describe it as launched, in production, or serving users — it is a working pipeline, not a running service. |
 | Laravel builds (canteen, job portal, CMS) | listed as shipped | Laravel/MySQL in skills, projects not listed | Skills yes, specific builds unverified. |
 | Certification count | 27 credentials, **all 20** Anthropic Academy courses (updated 8 Aug 2026) | 5 listed; **no Anthropic certificates at all** | The Anthropic certs are verifiable via skilljar (§6) but are missing from the CV — a gap in the CV, not in the facts, and now a 20-certificate gap rather than a 10. |
 
