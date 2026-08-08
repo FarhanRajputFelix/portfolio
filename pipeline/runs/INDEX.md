@@ -10,3 +10,7 @@ run, so the history survives across sessions instead of living in a chat transcr
 | 3 | SPAR – Research Program for AI Risks (Fall 2026) | 8/10 | apply | Confirm the application deadline is August 18, 2026 | https://sparai.org/ |
 | 4 | SPAR – Research Program for AI Risks (Fall 2026) | 7/10 | apply | Confirm the application deadline is still August 18 2026 | https://sparai.org/ |
 | 5 | SPAR - Research Program for AI Risks | 8/10 | apply | Application deadline is August 18 2026 | https://sparai.org/ |
+| 6 | Shepherd's Paws Animal Rescue | — | skip | Confirm the URL is not a job or internship posting. | https://spari.org/ |
+| 7 | KAUST Visiting Student Research Program (VSRP) | 8/10 | apply | Confirm that the VSRP entry requirements do not impose a minimum GPA or citizenship restriction that would affect eligibility. | https://admissions.kaust.edu.sa/study/internships |
+| 8 | KAUST VSRP | — | skip | Minimum GPA: 3.5/4 | https://admissions.kaust.edu.sa/study/internships |
+| 9 | KAUST VSRP | 4/10 | skip | none — the GPA gate settled it | https://admissions.kaust.edu.sa/study/internships |

@@ -354,3 +354,58 @@ The lesson I did not expect from FL-07: **the agent's quality was gated by model
 than by anything I wrote.** The loop, the tools and the guardrails behaved identically across
 both; what changed was whether the model could follow a negative instruction without
 narrating its way around it. Worth remembering before blaming a prompt.
+
+---
+
+## 14. The v2 eval sweep, and the regression it caught
+
+Ran all six cases live against `openai/gpt-oss-120b` on 8 August 2026 — the first full sweep, since
+earlier runs had only reached E1 and E2 before the free tier's daily cap.
+
+**E2 failed.** The agent fetched the KAUST posting and did not call `check_gpa_gate`, which is the
+single behaviour that most justifies this agent existing.
+
+The cause was mine. To get under the rate limit I had cut the posting fetch from 6,000 characters to
+2,500, and KAUST states `Minimum GPA: 3.5/4` *past* that cut. So the agent reasoned — correctly, on
+the text it could see — that the posting named no threshold. Its own output said so:
+
+> "No explicit GPA, citizenship, or institution-eligibility thresholds appear in the posted text, so
+> there is no hard gate you cannot pass."
+
+It even tried fetching an `/entry-requirements` page to double-check, got a 404, and flagged its own
+uncertainty in the verify-by-hand line. The reasoning was sound; the input was truncated.
+
+**A performance optimisation had silently become a correctness failure.** Same shape as the mobile
+fix that pushed BYTE's speech bubble into the navigation bar: a change that is correct in the
+dimension you were thinking about, and wrong in one you were not.
+
+The fix keeps the clip, because the token budget is real, but scans everything beyond it for
+gate-shaped lines — GPA, citizenship, visa, deadline, eligibility — and carries them across:
+
+```
+--- GATE-RELEVANT LINES FOUND BEYOND THE CLIP ---
+- Minimum GPA: 3.5/4
+- Valid Passport with at least 6 months validity
+```
+
+E2 went from 1/3 mechanical to **5/5**.
+
+### Where the numbers actually landed
+
+| Case | Mechanical | Judgement |
+|---|---|---|
+| E1 | 3/3 | 0/1 |
+| E2 | 3/3 | 2/2 |
+| E3 | 2/2 | 3/3 |
+| E4 | — | 1/3 |
+| E5 | — | 1/3 |
+| E6 | 1/1 | 2/3 |
+
+**9/9 mechanical, 9/14 judgement.** The plumbing is solid; the judgement is not, and E4 and E5 are
+where it is weakest — the agent does not reliably return NO EVIDENCE for a skill I lack, which is the
+failure mode the whole knowledge file exists to prevent.
+
+E1's judgement miss is probably the *eval's* fault rather than the agent's: the assertion demands the
+word "apply" and forbids "skip", and the agent used both in a sentence that read correctly. I have
+not rewritten it. Editing an eval after seeing the output is how evals stop meaning anything, and I
+would rather carry a 0/1 I can explain than a 1/1 I arranged.

@@ -169,6 +169,36 @@ async function callTool(name, args = {}) {
         .trim();
 
       const clipped = text.slice(0, max_chars);
+
+      // Clipping to fit a token budget is a performance decision that can
+      // quietly become a correctness one. Eval E2 caught exactly that: KAUST
+      // states "Minimum GPA: 3.5/4" past 2,500 characters, so the agent
+      // reasoned - correctly, on the text it could see - that the posting named
+      // no GPA threshold, and recommended applying to a programme its owner
+      // cannot enter.
+      //
+      // The clip stays, because the token budget is real. But anything beyond
+      // it that looks like a hard gate is scanned for and carried across, so a
+      // truncation can no longer hide a disqualifier.
+      const GATE =
+        /\b(GPA|CGPA|grade point|minimum grade|citizen|nationality|passport|visa|eligib|deadline|semester)\b/i;
+      let carried = "";
+      if (text.length > max_chars) {
+        const beyond = text
+          .slice(max_chars)
+          .split(/\n+/)
+          .map((l) => l.trim())
+          .filter((l) => l.length > 10 && l.length < 300 && GATE.test(l));
+        const unique = [...new Set(beyond)].slice(0, 12);
+        if (unique.length) {
+          carried =
+            `\n--- GATE-RELEVANT LINES FOUND BEYOND THE CLIP ---\n` +
+            `(scanned from the remaining ${text.length - max_chars} characters; ` +
+            `treat these as part of the posting)\n` +
+            unique.map((l) => `- ${l}`).join("\n");
+        }
+      }
+
       return {
         content: [
           {
@@ -177,8 +207,10 @@ async function callTool(name, args = {}) {
               `FETCHED: ${res.url}\n` +
               `HTTP: ${res.status} ${res.statusText}\n` +
               `BYTES OF HTML: ${html.length}\n` +
-              `CHARS OF TEXT: ${text.length}${text.length > max_chars ? ` (clipped to ${max_chars})` : ""}\n` +
-              `--- POSTING TEXT ---\n${clipped}`,
+              `CHARS OF TEXT: ${text.length}${
+                text.length > max_chars ? ` (clipped to ${max_chars}; gate lines carried)` : ""
+              }\n` +
+              `--- POSTING TEXT ---\n${clipped}${carried}`,
           },
         ],
       };
