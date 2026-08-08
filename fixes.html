@@ -115,6 +115,26 @@
     </div>
 
     <div class="fix">
+      <h3>1b · The fix created a new bug, one layer up</h3>
+      <dl>
+        <dt>Broken</dt>
+        <dd>Moving BYTE to the top of the hero worked &mdash; the role text no longer runs through him.
+          But his greeting bubble is positioned <code>bottom:100%</code>, meaning "above the robot",
+          and above the robot is now the fixed navigation bar. The bubble slid under the header and the
+          brand text read straight through it.</dd>
+        <dt>Fixed</dt>
+        <dd>Under 900px the bubble flips to <code>top:100%</code> &mdash; below BYTE, into the empty gap
+          before the name &mdash; and the CSS tail flips with it so it still points at him.</dd>
+        <dt>Why it survived the first pass</dt>
+        <dd>I verified the original fix by arithmetic and it was correct: text starts 22px below the
+          robot at every width. What arithmetic could not tell me is what the robot had been moved
+          <em>into</em>. Only the phone showed that, which is the entire argument for this assignment
+          existing &mdash; "checked on a real phone, not just a resized browser". A resized desktop
+          window would never have shown it either, since BYTE only moves under 900px.</dd>
+      </dl>
+    </div>
+
+    <div class="fix">
       <h3>2 · A contrast ratio that fails accessibility standards</h3>
       <dl>
         <dt>Broken</dt>

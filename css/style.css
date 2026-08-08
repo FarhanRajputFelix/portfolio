@@ -764,6 +764,21 @@ body.asking .char-bubble::after{      /* tail, pointing right at the bot */
     transform:translate(calc(50vw - 50%), calc(34vh - 50%)) scale(.8);
   }
   .char-bubble{ width:82vw; max-width:none; font-size:.76rem; max-height:30vh; }
+
+  /* BYTE's greeting bubble sits above him by default. Now that he lives at the
+     top of the hero on phones, "above" is the fixed nav - the bubble slid under
+     the header and the brand text read straight through it. On mobile the
+     bubble flips below him, into the gap before the name, and the tail flips
+     with it so it still points at the robot. Caught on a real phone; a resized
+     desktop window never showed it, because BYTE only moves up under 900px. */
+  .char-stage.at-hero .char-bubble{
+    bottom:auto; top:100%; margin-bottom:0; margin-top:12px;
+    border-radius:5px 18px 18px 18px;
+  }
+  .char-stage.at-hero .char-bubble::after{
+    top:auto; bottom:100%;
+    border-top-color:transparent; border-bottom-color:rgba(14,11,26,.95);
+  }
   body.asking .char-bubble{
     right:auto; left:50%; top:auto; bottom:calc(100% + 8px);
     width:88vw; max-height:30vh; transform:translate(-50%,6px);
