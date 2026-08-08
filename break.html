@@ -267,6 +267,16 @@
         never touches the honeypot &mdash; I built the attack that defeats my own defence and did not
         notice, because I read its output as "the form accepts input" rather than "the form accepts
         anything from anyone, 100 times, then dies quietly".</p>
+      <p style="margin:8px 0 0;color:var(--muted);font-size:.88rem"><strong>The measured picture is
+        better than the worst case, though.</strong> Across two full break-it runs, the sequential test
+        and the rapid-fire test I sent roughly <strong>30 POSTs</strong> at that endpoint. The dashboard
+        records <strong>8 verified submissions</strong>. About 22 were filtered before they counted &mdash;
+        Netlify's own spam filtering is automatic, which is why there is no toggle to enable, and the
+        "Verified submissions" heading exists precisely because a filtered bucket sits behind it. So junk
+        POSTs do not map one-to-one onto quota the way the worst case assumes.</p>
+      <p style="margin:8px 0 0;color:var(--muted);font-size:.88rem">That lowers the risk. It does not
+        remove it: a script that sends plausible-looking submissions would pass the same filter, and 100
+        of those still ends the month.</p>
       <p style="margin:8px 0 0;color:var(--muted);font-size:.88rem"><strong>Status: partially addressed,
         and honestly so.</strong> Netlify's built-in Akismet spam filtering is the recommended next step
         and is a dashboard setting rather than code. What I cannot do on a free static host is per-IP
@@ -284,9 +294,21 @@
         the notification you receive."</em></p>
       <p style="margin:8px 0 0;color:var(--muted);font-size:.88rem">A precise correction. I checked the
         surface I control and called the payload harmless, when the actual consumer of that data is an
-        inbox I read every day. The injection payloads from the first run are already sitting in that
-        inbox &mdash; the test is to go and look at how they render, which is exactly the check I
-        skipped. <strong>Open until I have looked.</strong></p>
+        inbox I read every day.</p>
+      <p style="margin:8px 0 0;color:var(--muted);font-size:.88rem"><strong>Checked, and the finding did
+        not reproduce &mdash; but not for the reason I would have guessed.</strong> The injection
+        submission never arrived at all. Every other test is in the inbox and renders correctly: the
+        deliberately-empty submissions show empty fields, and the unicode test shows
+        <code>&#1601;&#1585;&#1581;&#1575;&#1606; &#128640;</code> and
+        <code>&#1575;&#1585;&#1583;&#1608; text &#26085;&#26412;&#35486; &#127881;</code> exactly as
+        sent. The one carrying <code>&lt;script&gt;</code> and an <code>onerror</code> payload was
+        filtered before delivery.</p>
+      <p style="margin:8px 0 0;color:var(--muted);font-size:.88rem">So the honest status is <strong>not
+        reproduced, not proven safe</strong>. I cannot demonstrate correct escaping of a payload that
+        was never rendered. What I can say is that no path from that input to my inbox exists today, and
+        that Gmail strips <code>&lt;script&gt;</code> and blocks remote images by default, so two
+        independent layers would have to fail together. Recording it as unresolved-but-unreachable
+        rather than closed, because those are different things.</p>
     </div>
 
     <div class="fixed">
