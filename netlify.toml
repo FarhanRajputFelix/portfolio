@@ -1,0 +1,49 @@
+# Netlify configuration
+#
+# Added Week 9 after a hardening review pointed out that nothing in my
+# break-testing checked response headers. It was right, and the check it
+# prompted found four of the five missing: only HSTS was set.
+#
+# The CSP below is deliberately permissive about inline script and style,
+# because this site has 16 inline <style> blocks, an importmap and a JSON-LD
+# block. Removing those is a refactor, not a header change. What the policy
+# still buys: no script may load from an origin I did not name, the site
+# cannot be framed, and forms cannot post anywhere but back to me.
+
+[build]
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Only Google Fonts is loaded cross-origin. Everything else — Three.js,
+    # all JS, all images — is served from this domain.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
+
+    # Clickjacking: nobody may frame this site. frame-ancestors above is the
+    # modern equivalent; this covers browsers that ignore it.
+    X-Frame-Options = "DENY"
+
+    # Stop browsers second-guessing a declared Content-Type, which is how a
+    # text upload becomes an executable script.
+    X-Content-Type-Options = "nosniff"
+
+    # Send the full URL to my own pages, only the origin to anyone else.
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # BYTE uses the Web Speech API for voice, which needs the microphone.
+    # Everything else this site has no business asking for.
+    Permissions-Policy = "geolocation=(), camera=(), payment=(), usb=(), magnetometer=(), accelerometer=(), microphone=(self)"
+
+# Long cache for fingerprint-stable assets; the HTML stays revalidated so a
+# deploy is visible immediately.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/vendor/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"

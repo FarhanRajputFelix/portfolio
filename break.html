@@ -215,9 +215,11 @@
     </div>
 
     <div class="known">
-      <h3>Free tier caps at 100 submissions a month<span class="tag t-known">Known</span></h3>
-      <p style="margin:0;color:var(--muted);font-size:.88rem">Beyond that they stop rather than queue.
-        Fine for a portfolio; a ceiling, not a soft limit.</p>
+      <h3>Free tier caps at 100 submissions a month<span class="tag t-open">Upgraded &mdash; see below</span></h3>
+      <p style="margin:0;color:var(--muted);font-size:.88rem">I filed this as a mild ceiling. The
+        hardening review reclassified it as a denial-of-service on my only conversion path, and was
+        right: nothing throttles a script POSTing straight past the honeypot. Reasoning and current
+        status in the review section below.</p>
     </div>
   </section>
 
@@ -237,7 +239,84 @@
     </table>
     </div>
     <p class="sub"><code>python tools/break-it.py</code> — anyone can re-run it, and it exits non-zero
-      on a real failure, so it can gate a deploy later.</p>
+      on a real failure, so it can gate a deploy later. It now checks response headers too, which it
+      did not before the review below.</p>
+  </section>
+
+
+  <!-- ============ 06 HARDENING REVIEW ============ -->
+  <section>
+    <div class="sec-head"><span class="n">06</span><h2>The hardening review &mdash; and what it overturned</h2></div>
+    <p class="sub" style="margin-top:0">I sent the list above out for review with one question:
+      <em>what did I miss, and is anything I called a known limitation really a must-fix?</em> Both
+      halves got answered, and the second half is why it was worth asking.</p>
+
+    <div class="known" style="border-color:rgba(34,211,238,.4)">
+      <h3>1 &middot; "That's not a ceiling, that's a denial-of-service"<span class="tag t-open">Upgraded to must-fix</span></h3>
+      <p style="margin:0 0 8px;color:var(--paper);font-size:.9rem">On the 100-submissions-a-month cap,
+        which I had filed as a mild known limitation:</p>
+      <p style="margin:0;color:var(--muted);font-size:.88rem"><em>"Your honeypot only catches bots dumb
+        enough to fill a hidden field. Anything smarter &mdash; or just a scraper hitting the endpoint
+        directly, the way your own break-it.py does &mdash; submits clean, blank-honeypot garbage that
+        counts against your quota. There's nothing between 'form is public' and 'form is exhausted'.
+        Someone sending 100 junk POSTs silently takes your contact form offline for the rest of the
+        month, with zero signal to you. That's not 'a ceiling', that's a denial-of-service on the one
+        conversion path the site has."</em></p>
+      <p style="margin:8px 0 0;color:var(--muted);font-size:.88rem"><strong>They are right, and my own
+        test script is the proof.</strong> <code>break-it.py</code> POSTs straight to the endpoint and
+        never touches the honeypot &mdash; I built the attack that defeats my own defence and did not
+        notice, because I read its output as "the form accepts input" rather than "the form accepts
+        anything from anyone, 100 times, then dies quietly".</p>
+      <p style="margin:8px 0 0;color:var(--muted);font-size:.88rem"><strong>Status: partially addressed,
+        and honestly so.</strong> Netlify's built-in Akismet spam filtering is the recommended next step
+        and is a dashboard setting rather than code. What I cannot do on a free static host is per-IP
+        throttling &mdash; there is no server of mine to throttle at. A determined script can still
+        exhaust the quota. The realistic mitigation is that the email address stays visible beside the
+        form, so the conversion path survives the form dying.</p>
+    </div>
+
+    <div class="known" style="border-color:rgba(34,211,238,.4)">
+      <h3>2 &middot; I tested where payloads <em>don't</em> go, not where they do<span class="tag t-known">Fair hit</span></h3>
+      <p style="margin:0;color:var(--muted);font-size:.88rem"><em>"You confirmed the payloads are stored
+        inert and never reflected back to the public site. But you didn't check the other consumer of
+        that data &mdash; the Netlify submissions dashboard, and the email notification. If either
+        renders the name field as HTML rather than escaping it, an onerror payload could still fire in
+        the notification you receive."</em></p>
+      <p style="margin:8px 0 0;color:var(--muted);font-size:.88rem">A precise correction. I checked the
+        surface I control and called the payload harmless, when the actual consumer of that data is an
+        inbox I read every day. The injection payloads from the first run are already sitting in that
+        inbox &mdash; the test is to go and look at how they render, which is exactly the check I
+        skipped. <strong>Open until I have looked.</strong></p>
+    </div>
+
+    <div class="fixed">
+      <h3>3 &middot; Response headers were never checked<span class="tag t-fix">Fixed</span></h3>
+      <p style="margin:0 0 8px;color:var(--muted);font-size:.88rem"><em>"Nothing in the script checks
+        CSP, X-Frame-Options, X-Content-Type-Options or HSTS. Doesn't mean they're missing &mdash;
+        Netlify sets some sane defaults &mdash; but you never verified it, and it's a two-line curl away
+        from being provable instead of assumed."</em></p>
+      <p style="margin:0;color:var(--muted);font-size:.88rem">Checked, and they were <strong>missing, not
+        merely unverified</strong>. Only HSTS was set; CSP, X-Frame-Options, X-Content-Type-Options,
+        Referrer-Policy and Permissions-Policy were all absent. Added via
+        <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/netlify.toml">netlify.toml</a>,
+        and <code>break-it.py</code> now checks all six, so this can never be assumed again.</p>
+      <p style="margin:8px 0 0;color:var(--muted);font-size:.88rem">The CSP allows inline script and
+        style, because this site has 16 inline <code>&lt;style&gt;</code> blocks, an importmap and a
+        JSON-LD block. Removing those is a refactor, not a header change. What it still buys: no script
+        may load from an origin I did not name, the site cannot be framed, and forms cannot post
+        anywhere but back to me.</p>
+    </div>
+
+    <div class="honest">
+      <b>What the review taught me</b>
+      <p>The two findings I got wrong were <strong>the same mistake in different clothes</strong>: I
+        tested the surface I was thinking about and declared the whole thing safe. The public page does
+        not render the payload &mdash; but the inbox might. The honeypot stops naive bots &mdash; but
+        not the attack tool I wrote myself, sitting in my own repository.</p>
+      <p>Triage was the part I was most confident about and the part that was most wrong. Two of five
+        known limitations were misfiled, and one of them was a quiet denial-of-service on the only
+        conversion path this site has.</p>
+    </div>
   </section>
 
   <footer>

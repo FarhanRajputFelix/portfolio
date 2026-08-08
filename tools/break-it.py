@@ -169,6 +169,36 @@ def check_meta():
          else record("fail", f"{extra} -> HTTP {status}"))
 
 
+# ------------------------------------------------------- 4b. headers
+def check_headers():
+    """Added after a hardening review noted this was never tested. It was
+    right: only HSTS was set, and the other four were missing rather than
+    merely unverified."""
+    print("\n=== 4b. SECURITY RESPONSE HEADERS ===")
+    req = urllib.request.Request(SITE + "/", method="HEAD")
+    req.add_header("User-Agent", UA)
+    try:
+        with urllib.request.urlopen(req, timeout=20, context=CTX) as r:
+            got = {k.lower(): v for k, v in r.headers.items()}
+    except Exception as e:
+        record("fail", f"could not read headers: {e}")
+        return
+
+    wanted = {
+        "strict-transport-security": "HSTS",
+        "content-security-policy": "CSP",
+        "x-frame-options": "clickjacking protection",
+        "x-content-type-options": "MIME-sniffing protection",
+        "referrer-policy": "referrer policy",
+        "permissions-policy": "permissions policy",
+    }
+    for header, label in wanted.items():
+        if header in got:
+            record("ok", f"{label}: {got[header][:64]}")
+        else:
+            record("fail", f"missing {label} ({header})")
+
+
 # ---------------------------------------------------------------- 5. speed
 def check_speed():
     print("\n=== 5. WEIGHT AND SPEED ===")
@@ -201,6 +231,7 @@ if __name__ == "__main__":
     check_form_abuse()
     check_404()
     check_meta()
+    check_headers()
     check_speed()
     print("\n" + "=" * 62)
     print(f"passed: {results['ok']}   warnings: {len(results['warn'])}   failures: {len(results['fail'])}")
