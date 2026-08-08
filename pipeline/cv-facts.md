@@ -58,11 +58,10 @@ conditional routing and a fallback-recovery agent when verification confidence i
 Flutter/Dart, gemini-1.5-flash, Google ADK v1.34+, Firebase, Docker. Repo: `Anti-gravity-Hackathon`.
 **Under active development — no deployed instance.**
 
-**Retail Sales Manager — Bashir Communication** · Karachi · 21/06/2019 – 21/07/2021
-Sales operations, customer service, team training, inventory and marketing. Non-technical, but it is
-**two years of real paid employment** with team-training and customer-facing responsibility — useful
-evidence for any "communicates with non-technical audiences" or "works with customers" requirement,
-and it must never be described as software work.
+**Retail Sales Manager — Bashir Communication** · Karachi · 2019 – 2021
+**Deliberately excluded from the CV and from outreach, at Farhan's instruction (8 Aug 2026).** It was
+filling a gap rather than earning its place. Recorded here only so the pipeline knows the gap is
+accounted for and does not treat 2019–2021 as unexplained — **never surface it in an application.**
 
 - Paid *software/industry* employment: **none** → `NO EVIDENCE`
 - Teaching / TA experience: **none recorded** → `NO EVIDENCE`
