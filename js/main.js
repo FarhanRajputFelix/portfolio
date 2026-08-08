@@ -21,13 +21,31 @@
 
   let progress = 0, retired = false, sceneUp = false;
 
+  /* Largest Contentful Paint was measuring 25% "Poor" in Cloudflare's Core Web
+     Vitals, and this loader was the reason. It used to hold the ceiling at 88%
+     until Three.js (655 KB) reported ready, with a 3,000 ms fallback behind
+     that — so on a slow connection the hero text, which is in the HTML from the
+     first byte, stayed hidden for seconds behind a progress bar filled with
+     Math.random().
+
+     The scene is decoration. It must never gate the content. So the loader now
+     runs on its own clock and retires on a hard deadline; the particle field and
+     BYTE fade in whenever they are ready, which is what .ready already does. */
+  const DEADLINE = 800;
+  const loadT0 = performance.now();
+
   const tick = setInterval(() => {
-    const ceiling = sceneUp ? 100 : 88;
-    progress = Math.min(ceiling, progress + Math.random() * 9 + 3);
+    const elapsed = performance.now() - loadT0;
+    // Track real elapsed time against the deadline rather than inventing a number.
+    progress = Math.min(100, Math.max(progress, (elapsed / DEADLINE) * 100));
     bar.style.width = progress + '%';
     pct.textContent = Math.round(progress);
     if (progress >= 100) { clearInterval(tick); retire(); }
-  }, 110);
+  }, 50);
+
+  // Belt and braces: if the interval is starved by a slow main thread — which is
+  // exactly the situation where LCP is already suffering — retire anyway.
+  setTimeout(retire, DEADLINE + 150);
 
   function retire() {
     if (retired) return;
@@ -46,12 +64,12 @@
         const el = document.querySelector(location.hash);
         if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
       }
-    }, 260);
+    }, 90);   // was 260ms of deliberate delay in front of the content
   }
 
+  // Kept only so the scene can still announce itself; it no longer holds the
+  // loader open, which is the point of the change above.
   document.addEventListener('scene:ready', () => { sceneUp = true; });
-  // never trap the page if the Three.js CDN is blocked
-  setTimeout(() => { sceneUp = true; }, 3000);
   setTimeout(retire, 6500);
 
   /* ==========================================================
