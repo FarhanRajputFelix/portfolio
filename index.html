@@ -899,8 +899,9 @@
         <span>Send message</span>
         <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4Z"/></svg>
       </button>
-      <p class="cf-note">Goes straight to my inbox. No newsletter, no tracking, nothing stored
-        anywhere but Netlify's form log and my email.</p>
+      <p class="cf-note">Goes straight to my inbox. No newsletter, no tracking cookies, nothing stored
+        anywhere but Netlify's form log and my email. Page views are counted by Cloudflare Web
+        Analytics, which sets no cookies and collects nothing personal.</p>
     </form>
 
     <div class="contact-grid">
@@ -955,6 +956,18 @@
 
     <div class="big-name" aria-hidden="true">FARHAN BASHIR</div>
 
+
+    <!-- FlyRank credential. Status is the live one, not an aspiration: the
+         graduate badge unlocks on capstone acceptance and the capstone is in
+         review, so this says so rather than displaying a badge I do not hold. -->
+    <a class="flyrank-badge" href="mailto:verify@internship.flyrank.ai?subject=Verification%20request%20%E2%80%94%20Farhan%20Muhammad%20Bashir">
+      <span class="fb-mark" aria-hidden="true">FR</span>
+      <span class="fb-text">
+        <b>FlyRank AI Internship</b>
+        <i>General AI Fluency track &middot; 22 assignments submitted &middot; capstone in review</i>
+      </span>
+      <span class="fb-verify">Verify &#8599;</span>
+    </a>
     <footer class="foot">
       <span>© <span id="year"></span> Farhan Bashir</span>
       <span>Karachi, Pakistan</span>
@@ -978,5 +991,10 @@
 <script src="js/agent.js"></script>
 <script src="js/main.js"></script>
 <script src="js/form.js" defer></script>
+
+<!-- Cloudflare Web Analytics: cookieless, no personal data, no consent
+     banner needed. Chosen over Google Analytics because the contact form
+     promises no tracking, and GA would have made that sentence false. -->
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "892aadd45cb448919272f9d8380aee65"}'></script>
 </body>
 </html>
