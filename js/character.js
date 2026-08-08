@@ -461,9 +461,23 @@ function boot(canvas) {
     if (running) { prevT = clock.getElapsedTime(); loop(); }
   });
 
-  function loop() {
+  /* Same INP fix as the background scene: cap rendering to 30fps so a tap is
+     not stuck behind a frame. Additionally, on phones BYTE is set to opacity 0
+     outside the hero and chat sections — there is no reason to render a robot
+     nobody can see, so those frames are skipped entirely. */
+  const FRAME_MS = 1000 / 30;
+  let lastFrame = 0;
+  const stageEl = document.getElementById('charStage');
+
+  function loop(ts = 0) {
     if (!running) return;
     requestAnimationFrame(loop);
+
+    if (ts - lastFrame < FRAME_MS) return;
+    lastFrame = ts;
+
+    // Invisible on this viewport? Skip the draw, keep the loop alive.
+    if (stageEl && getComputedStyle(stageEl).opacity === '0') return;
 
     const t = clock.getElapsedTime();
     const dt = Math.min(0.05, t - prevT);

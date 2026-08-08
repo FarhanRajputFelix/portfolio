@@ -180,9 +180,22 @@ document.addEventListener('visibilitychange', () => {
 const clock = new THREE.Clock();
 const posAttr = particleGeo.attributes.position;
 
-function animate() {
+/* Cloudflare reported INP at 100% Poor — every measured interaction was slow.
+   Two independent WebGL loops (this one and the BYTE character) were rendering
+   at the display's full rate, so a tap had to wait behind whichever frame was
+   in flight. A drifting particle field does not need 60fps; capping it to 30
+   halves the main-thread work per second and gives interactions somewhere to
+   land. The cap is on rendering only — clock.getElapsedTime() still drives the
+   motion, so nothing moves at half speed. */
+const FRAME_MS = 1000 / 30;
+let lastFrame = 0;
+
+function animate(now = 0) {
   if (!running) return;
   requestAnimationFrame(animate);
+
+  if (now - lastFrame < FRAME_MS) return;
+  lastFrame = now;
 
   const t = clock.getElapsedTime();
 
