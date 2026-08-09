@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Pull live AI/ML roles from public job feeds into data/jobs.json.
+Pull live job listings from public job feeds into data/jobs.json.
 
 Run daily by .github/workflows/jobs.yml. No API key, no scraping, no paid tier:
 every source below publishes a JSON API or an RSS feed for exactly this use.
@@ -10,6 +10,12 @@ which is both the honest thing and, for Remote OK, a condition of their terms.
   python tools/fetch-jobs.py              # fetch, filter, write data/jobs.json
   python tools/fetch-jobs.py --dry-run    # print what it would write
   python tools/fetch-jobs.py --source remoteok
+
+Every field, not just AI. The first version filtered to AI/ML because that is
+what I was looking for, which made the page useless to everyone else who lands
+on it. Now it keeps everything the feeds carry and tags each listing with a
+field, so a designer, a marketer or an accountant can filter to their own work
+instead of being told there is nothing for them.
 
 What it does NOT do: host applications, judge fit, or promise a listing is
 still open. It is a daily mirror of other people's boards, and a board can
@@ -33,44 +39,66 @@ OUT = ROOT / "data" / "jobs.json"
 
 UA = "Mozilla/5.0 (compatible; farhanbashir-jobs/1.0; +https://farhanbashir.netlify.app)"
 TIMEOUT = 40
-MAX_JOBS = 500          # keeps the committed JSON under ~1 MB so the page loads fast
+MAX_JOBS = 900          # keeps the committed JSON well under 1 MB so the page loads fast
 MAX_AGE_DAYS = 45       # older than this and the listing is usually gone
 
-# ---------------------------------------------------------------- relevance
-# The whole point is AI/ML roles. Feeds tagged "machine-learning" still return
-# pharmacy technicians and payroll specialists, because their own tagging is
-# loose — a board I looked at listed "Pharmacy Technician Refill Calls" under
-# an AI track. So relevance is decided here, on the title first.
-STRONG = re.compile(
-    r"\b(machine learning|deep learning|artificial intelligence|"
-    r"data scien(ce|tist)|research scien(ce|tist)|applied scien(ce|tist)|"
-    r"\bml\b|\bai\b|\bllm\b|\bnlp\b|computer vision|mlops|"
-    r"generative ai|foundation model|reinforcement learning|"
-    r"prompt engineer|ai engineer|ml engineer|research engineer)\b", re.I)
+# ---------------------------------------------------------------- taxonomy
+# One field per listing, decided by the first rule that matches the title, then
+# the source's own tags. Order matters: "Marketing Data Analyst" is a data role
+# before it is a marketing one, so the more specific rule sits higher.
+FIELD_RULES = [
+    ("ai-ml",       r"\b(machine learning|deep learning|artificial intelligence|\bml\b|\bai\b|"
+                    r"\bllm\b|\bnlp\b|computer vision|mlops|generative|foundation model|"
+                    r"reinforcement learning|prompt engineer|research scien|applied scien)\b"),
+    ("data",        r"\b(data scien|data engineer|data analyst|analytics|business intelligence|"
+                    r"\bbi\b|etl|warehouse|database|\bsql\b)\b"),
+    ("security",    r"\b(security|cyber|infosec|penetration test|appsec|soc analyst|compliance engineer)\b"),
+    ("devops",      r"\b(devops|sre|site reliability|infrastructure|platform engineer|cloud engineer|"
+                    r"kubernetes|systems engineer|network engineer)\b"),
+    ("software",    r"\b(software|developer|engineer|programmer|full.?stack|front.?end|back.?end|"
+                    r"mobile|ios|android|web dev|\bqa\b|test engineer|architect)\b"),
+    ("design",      r"\b(design|\bux\b|\bui\b|creative|graphic|brand|illustrat|motion|art director)\b"),
+    ("product",     r"\b(product manager|product owner|product lead|program manager|project manager|"
+                    r"scrum|business analyst)\b"),
+    ("marketing",   r"\b(marketing|\bseo\b|content|copywrit|social media|growth|brand manager|"
+                    r"communications|\bpr\b|editor|writer)\b"),
+    ("sales",       r"\b(sales|account executive|business development|partnerships|revenue|"
+                    r"customer success|account manager)\b"),
+    ("support",     r"\b(support|customer service|help desk|service desk|community manager|moderator)\b"),
+    ("finance",     r"\b(financ|account(ant|ing)|bookkeep|payroll|audit|tax|treasury|controller|"
+                    r"underwrit|actuar)\b"),
+    ("people",      r"\b(recruit|talent|human resources|\bhr\b|people operations|"
+                    r"compensation|benefits|training)\b"),
+    ("operations",  r"\b(operations|logistics|supply chain|procurement|facilities|"
+                    r"administrat|executive assistant|virtual assistant|coordinator)\b"),
+    ("healthcare",  r"\b(nurse|clinical|medical|health|pharmac|physician|therapist|"
+                    r"dental|patient|biotech|life scien)\b"),
+    ("education",   r"\b(teacher|tutor|instructor|curriculum|academic|lecturer|"
+                    r"education|professor|trainer)\b"),
+    ("legal",       r"\b(legal|lawyer|attorney|paralegal|counsel|contract manager|regulatory)\b"),
+    ("research",    r"\b(research|scientist|\bphd\b|laboratory|\br&d\b)\b"),
+]
 
-WEAK = re.compile(r"\b(python|pytorch|tensorflow|data engineer|analytics|neural|model)\b", re.I)
-
-# Titles that match STRONG by accident. "Tax Consultant - LLM" is a law degree.
-EXCLUDE = re.compile(
-    r"\b(tax consultant|pharmacy|nurse|dental|insurance agent|"
-    r"customer service|sales representative|account executive|"
-    r"recruiter|paralegal|medical science liaison|barista|driver)\b", re.I)
+# Rows that are not really a job. Boards carry these and they waste a click.
+JUNK = re.compile(
+    r"^(no current openings|express your interest|general application|"
+    r"don'?t see your role|open application|talent (pool|network)|"
+    r"future opportunit|join our talent|speculative)", re.I)
 
 TAG_RULES = [
     ("llm",       r"\b(llm|large language model|gpt|transformer|prompt)\b"),
     ("nlp",       r"\b(nlp|natural language)\b"),
     ("vision",    r"\b(computer vision|image|visual|perception|multimodal)\b"),
-    ("mlops",     r"\b(mlops|inference|deployment|serving|infrastructure|platform)\b"),
-    ("research",  r"\b(research|scientist|phd|publication)\b"),
-    ("data",      r"\b(data scien|data engineer|analytics|etl|warehouse)\b"),
+    ("mlops",     r"\b(mlops|inference|deployment|serving)\b"),
+    ("remote",    r"\b(remote|anywhere|work from home|distributed)\b"),
     ("robotics",  r"\b(robot|autonomous|self-driving|adas)\b"),
     ("agents",    r"\b(agent|agentic|tool.?call|orchestrat)\b"),
 ]
 
 LEVEL_RULES = [
-    ("internship", r"\b(intern|internship|co-?op)\b"),
-    ("new-grad",   r"\b(new ?grad|graduate|entry.?level|junior|university grad|campus)\b"),
-    ("senior",     r"\b(senior|staff|principal|lead|director|head of|manager)\b"),
+    ("internship", r"\b(intern|internship|co-?op|placement|trainee)\b"),
+    ("new-grad",   r"\b(new ?grad|graduate|entry.?level|junior|university grad|campus|associate)\b"),
+    ("senior",     r"\b(senior|staff|principal|lead|director|head of|manager|vp|chief)\b"),
 ]
 
 
@@ -126,11 +154,14 @@ def clean(s, limit=None):
 
 # ================================================================ adapters
 def from_remoteok():
-    # The bare /api endpoint returns the newest 100 jobs of any kind — of which
-    # zero were AI on the day I checked. Ask for the tags instead of fetching
-    # everything and filtering afterwards.
+    # Bare /api is the newest 100 of any kind; the tag endpoints reach further
+    # back within a speciality. Use both so the mix is broad and current.
     out, data = [], []
-    for tag in ("machine-learning", "ai", "data-science", "nlp", "deep-learning"):
+    raw = get("https://remoteok.com/api")
+    if raw:
+        data += json.loads(raw)
+    for tag in ("machine-learning", "data-science", "design", "marketing",
+                "customer-support", "finance", "sales", "devops", "writing"):
         raw = get(f"https://remoteok.com/api?tag={tag}")
         if raw:
             data += json.loads(raw)
@@ -152,9 +183,10 @@ def from_remoteok():
 def from_remotive():
     out = []
     # search= and category= return different slices, so use both.
-    urls = [f"https://remotive.com/api/remote-jobs?search={t}&limit=100"
-            for t in ("machine+learning", "data+scientist", "ai+engineer", "nlp", "computer+vision")]
-    urls.append("https://remotive.com/api/remote-jobs?category=data")
+    urls = [f"https://remotive.com/api/remote-jobs?category={c}"
+            for c in ("software-dev", "data", "design", "marketing", "sales", "product",
+                      "customer-support", "devops", "finance-legal", "hr", "qa",
+                      "writing", "business", "all-others")]
     for u in urls:
         raw = get(u)
         if not raw:
@@ -173,9 +205,11 @@ def from_remotive():
 
 def from_jobicy():
     out = []
-    urls = [f"https://jobicy.com/api/v2/remote-jobs?count=100&tag={t}"
-            for t in ("machine-learning", "data-science", "artificial-intelligence")]
-    urls.append("https://jobicy.com/api/v2/remote-jobs?count=100&industry=data-science")
+    urls = ["https://jobicy.com/api/v2/remote-jobs?count=100"]
+    urls += [f"https://jobicy.com/api/v2/remote-jobs?count=100&industry={i}"
+             for i in ("data-science", "engineering", "design-multimedia", "marketing",
+                       "business", "supporting", "hr", "copywriting", "seller",
+                       "management", "administration", "accounting-finance")]
     for u in urls:
         raw = get(u)
         if not raw:
@@ -196,7 +230,7 @@ def from_himalayas():
     # The API caps a page at 20 regardless of the limit you ask for, so page
     # through with offset. Asking for 200 silently returned 20.
     out, rows = [], []
-    for offset in range(0, 400, 20):
+    for offset in range(0, 600, 20):
         raw = get(f"https://himalayas.app/jobs/api?limit=20&offset={offset}")
         if not raw:
             break
@@ -219,7 +253,10 @@ def from_himalayas():
 
 def from_weworkremotely():
     out = []
-    for feed in ("remote-programming-jobs", "remote-devops-sysadmin-jobs"):
+    for feed in ("remote-programming-jobs", "remote-devops-sysadmin-jobs",
+                 "remote-design-jobs", "remote-customer-support-jobs",
+                 "remote-marketing-jobs", "remote-product-jobs",
+                 "remote-management-and-finance-jobs", "all-other-remote-jobs"):
         raw = get(f"https://weworkremotely.com/categories/{feed}.rss")
         if not raw:
             continue
@@ -281,24 +318,33 @@ SOURCES = {
 }
 
 # ================================================================ pipeline
-def relevant(j):
-    title = j["title"] or ""
-    if EXCLUDE.search(title):
-        return False
-    if STRONG.search(title):
-        return True
-    # A weak title can still qualify on an explicit tag from the source.
-    tags = " ".join(j.get("raw_tags") or [])
-    return bool(STRONG.search(tags) and WEAK.search(title))
+def keep(j):
+    """
+    Was: an AI/ML-only gate. Now the only thing dropped is a row that is not a
+    job — "NO CURRENT OPENINGS", "Express your interest", talent-pool pages.
+    Filtering by field is the visitor's decision, not mine, so it happens in the
+    browser against the `field` tag rather than here.
+    """
+    title = (j.get("title") or "").strip()
+    return bool(title) and not JUNK.search(title)
 
 
 def enrich(j):
-    hay = f"{j['title']} {' '.join(j.get('raw_tags') or [])} {j.get('blurb','')}"
-    j["tags"] = [name for name, pat in TAG_RULES if re.search(pat, hay, re.I)]
-    j["level"] = next((name for name, pat in LEVEL_RULES if re.search(pat, j["title"], re.I)), "mid")
+    tags_text = " ".join(j.get("raw_tags") or [])
+    title = j["title"]
+    # Title first, then the source's tags. A title is written by the employer;
+    # board tags are frequently wrong — one board filed a pharmacy job under AI.
+    j["field"] = (next((n for n, pat in FIELD_RULES if re.search(pat, title, re.I)), None)
+                  or next((n for n, pat in FIELD_RULES if re.search(pat, tags_text, re.I)), "other"))
+    hay = f"{title} {tags_text} {j.get('blurb','')}"
+    j["tags"] = [n for n, pat in TAG_RULES if re.search(pat, hay, re.I)]
+    j["level"] = next((n for n, pat in LEVEL_RULES if re.search(pat, title, re.I)), "mid")
     sp = (j.get("sponsorship") or "").strip()
     j["sponsorship"] = sp if sp and sp != "Other" else None
+    # blurb exists only to inform the tagging above; shipping it would roughly
+    # double the JSON the browser downloads and nothing renders it.
     j.pop("raw_tags", None)
+    j.pop("blurb", None)
     return j
 
 
@@ -333,7 +379,7 @@ def main():
         all_jobs += got
 
     # filter → dedupe → age → sort
-    kept = [j for j in all_jobs if j.get("url") and j.get("title") and relevant(j)]
+    kept = [j for j in all_jobs if j.get("url") and keep(j)]
     seen, deduped = set(), []
     for j in kept:
         k = key(j)
@@ -372,7 +418,7 @@ def main():
     take_verified = by_useful(verified)[: MAX_JOBS - len(take_feeds)]
     fresh = by_date(take_feeds + take_verified)
 
-    log(f"\n  {len(all_jobs)} fetched → {len(kept)} AI-relevant → {len(deduped)} after dedupe")
+    log(f"\n  {len(all_jobs)} fetched → {len(kept)} real listings → {len(deduped)} after dedupe")
     log(f"  {len(feeds)} from feeds within {MAX_AGE_DAYS} days + "
         f"{len(verified)} confirmed-active → {len(fresh)} published")
     log(f"  levels: {dict(Counter(j['level'] for j in fresh))}")

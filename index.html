@@ -122,6 +122,7 @@
     <a href="#about">ABOUT</a>
     <a href="#doing">WHAT I DO</a>
     <a href="#projects">WORK</a>
+    <a href="#tools">USE THIS</a>
     <a href="#certs">CERTS</a>
     <a href="#process">PROCESS</a>
     <a href="#journey">CAREER</a>
@@ -493,6 +494,43 @@
   </div>
 </section>
 
+<!-- ============ TOOLS ============
+     These are the only two things on this site a stranger can actually use.
+     They sat inside the PROCESS card grid, which buried working software under
+     a heading about how I work. Promoted to their own section and their own
+     nav entry: the live counts come from the same JSON the pages read, so this
+     block cannot claim a number the data does not have.  -->
+<section id="tools" class="section">
+  <span class="glow glow-left"></span>
+  <div class="wrap">
+    <h2 class="display huge sec-title" data-split-words>USE THIS</h2>
+    <p class="sec-note" data-anim="fade">
+      Two working tools, free, no sign-up. One is a live job board that refreshes itself twice a day;
+      the other is a hand-verified list of funded scholarships and research programmes. Built for me,
+      but there is nothing personal in them — if you are job hunting, they are yours.
+    </p>
+
+    <div class="process-grid">
+      <a class="proc" data-anim="rise" href="jobs.html">
+        <span class="proc-kind">Live job board &middot; <span id="jobs-stat">refreshing twice daily</span></span>
+        <h3>Jobs, pulled from the source</h3>
+        <p>Real listings across <strong id="jobs-fields">every field</strong> — software, design,
+           marketing, finance, healthcare, legal, AI and more. A scheduled job calls six public feeds
+           twice a day, removes duplicates and commits the result; the page reads one file. Filter by
+           field, level, and <strong>visa sponsorship</strong> where the source states it.</p>
+      </a>
+      <a class="proc" data-anim="rise" href="opportunities.html">
+        <span class="proc-kind">Funded programmes &middot; <span id="opp-stat">verified by hand</span></span>
+        <h3>Scholarships &amp; research, verified</h3>
+        <p>Funded internships, PhD calls and scholarships with every figure quoted from the
+           programme's own page, plus the link and the date I read it. I checked the ten most-shared
+           entries on LinkedIn: <strong>four were wrong</strong> — including one programme that is not
+           running at all this year.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ PROCESS ============ -->
 <section id="process" class="section">
   <div class="wrap">
@@ -526,22 +564,6 @@
         <h3>DNS walkthrough</h3>
         <p>What a CNAME record is, what mine will hold, and the eight things that happen between
            someone typing my address and my host answering.</p>
-      </a>
-      <a class="proc" data-anim="rise" href="jobs.html">
-        <span class="proc-kind">Live feed &middot; free to use</span>
-        <h3>AI &amp; ML jobs, pulled from the source</h3>
-        <p>Real listings from six public job feeds, refreshed twice a day by a scheduled job — not a
-           list I typed. Filter by level, speciality and, where the source states it,
-           <strong>visa sponsorship</strong>. No API key, no server: a GitHub Action commits the data
-           and the page reads one file.</p>
-      </a>
-      <a class="proc" data-anim="rise" href="opportunities.html">
-        <span class="proc-kind">Tool &middot; free to use</span>
-        <h3>Funded opportunities, verified</h3>
-        <p>Research internships, PhD calls and scholarships in AI and CS — filterable by country,
-           field, level and what's actually funded. Every figure quoted from the programme's own page.
-           I checked the ten most-shared entries: <strong>four were wrong</strong>, and one programme
-           is not running at all this year.</p>
       </a>
       <a class="proc" data-anim="rise" href="agent.html">
         <span class="proc-kind">Agent design · FL-06</span>
@@ -1028,6 +1050,33 @@
 <script src="js/agent.js"></script>
 <script src="js/main.js"></script>
 <script src="js/form.js" defer></script>
+
+<!-- Live counts for the USE THIS section, read from the same files the tool
+     pages read. Written this way so the homepage cannot drift into claiming a
+     number that is no longer true: if the fetch fails the copy simply keeps its
+     static wording rather than showing a stale or invented figure. -->
+<script>
+(function () {
+  const set = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+
+  fetch("data/jobs.json")
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(d => {
+      const fields = new Set(d.jobs.map(j => j.field)).size;
+      set("jobs-stat", `${d.count} listings · refreshed ${d.checked}`);
+      set("jobs-fields", `${fields} fields`);
+    })
+    .catch(() => {});
+
+  fetch("data/opportunities.json")
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(d => {
+      const corrected = d.opportunities.filter(o => o.corrections).length;
+      set("opp-stat", `${d.opportunities.length} programmes · ${corrected} carry a correction`);
+    })
+    .catch(() => {});
+})();
+</script>
 
 <!-- Cloudflare Web Analytics: cookieless, no personal data, no consent
      banner needed. Chosen over Google Analytics because the contact form

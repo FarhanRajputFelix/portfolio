@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Live AI &amp; ML Jobs — refreshed twice daily — Farhan Bashir</title>
-<meta name="description" content="Live AI, ML and data roles pulled twice a day from Remote OK, Remotive, Jobicy, Himalayas, We Work Remotely and SimplifyJobs. Filter by level, tag, location and visa sponsorship. Links straight to the source posting." />
+<title>Live Job Board — every field, refreshed twice daily — Farhan Bashir</title>
+<meta name="description" content="Live job listings across 18 fields — software, design, marketing, finance, healthcare, AI and more — pulled twice a day from six public feeds. Filter by field, level and visa sponsorship. Links straight to the source posting." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@300;400;600&display=swap" rel="stylesheet" />
@@ -15,15 +15,15 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Farhan Bashir" />
 <meta property="og:url" content="https://farhanbashir.netlify.app/jobs.html" />
-<meta property="og:title" content="Live AI &amp; ML Jobs — refreshed twice daily" />
-<meta property="og:description" content="Live AI/ML roles from six public job feeds, refreshed twice a day by a GitHub Action. Filter by level, tag, location and visa sponsorship." />
+<meta property="og:title" content="Live Job Board — every field, refreshed twice daily" />
+<meta property="og:description" content="900 live listings across 18 fields from six public job feeds, refreshed twice a day by a scheduled job. Filter by field, level and visa sponsorship." />
 <meta property="og:image" content="https://farhanbashir.netlify.app/assets/brand/og-card.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content="Farhan Bashir — I build AI that knows its limits, and ships anyway." />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Live AI &amp; ML Jobs — refreshed twice daily" />
-<meta name="twitter:description" content="Live AI/ML roles from six public job feeds, refreshed by a GitHub Action." />
+<meta name="twitter:title" content="Live Job Board — every field, refreshed twice daily" />
+<meta name="twitter:description" content="900 live listings across 18 fields from six public job feeds." />
 <meta name="twitter:image" content="https://farhanbashir.netlify.app/assets/brand/og-card.png" />
 <meta name="theme-color" content="#060608" />
 <style>
@@ -100,6 +100,7 @@
   .t{ font-family:var(--display); font-size:.63rem; letter-spacing:.05em; color:var(--faint);
     border:1px solid var(--line); border-radius:4px; padding:2px 7px; }
   .t.lv{ color:var(--accent); border-color:rgba(34,211,238,.3); }
+  .t.fld{ color:var(--main-2); border-color:rgba(167,139,250,.35); }
   .t.src{ color:var(--muted); }
   .t.sp-yes{ color:var(--green); border-color:rgba(74,222,128,.45); }
   .t.sp-no{ color:var(--red);   border-color:rgba(248,113,113,.4); }
@@ -135,18 +136,20 @@
   </nav>
 
   <header>
-    <p class="label">Live feed · AI, ML and data roles</p>
+    <p class="label">Live feed · every field</p>
     <h1>Jobs, pulled from the source</h1>
     <p class="sub">Real listings from six public job feeds, refreshed twice a day by a scheduled job —
-      not a list I typed. Filter by level, speciality, location and, where the source states it,
-      <strong>visa sponsorship</strong>. Every card links straight to the original posting.</p>
+      not a list I typed. <strong>Every field</strong>, not just tech: software, design, marketing,
+      finance, healthcare, legal, education and more. Filter by field, level and, where the source
+      states it, <strong>visa sponsorship</strong>. Every card links straight to the original.</p>
     <p style="margin-top:14px"><span class="live"><span class="dot"></span><span id="livestamp">loading…</span></span></p>
   </header>
 
   <div class="honest">
     <b>How this works, and what it costs</b>
-    <p>A GitHub Action runs twice a day, calls six public feeds, filters for AI/ML relevance,
-      removes duplicates syndicated across boards, and commits the result. The page you are reading
+    <p>A GitHub Action runs twice a day, calls six public feeds, drops rows that are not really a
+      job, removes duplicates syndicated across boards, tags each listing with a field, and commits
+      the result. The page you are reading
       is static — it loads one JSON file. <strong>No API key, no server, no scraping.</strong>
       Everything is in the open:
       <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/tools/fetch-jobs.py">the fetcher</a>,
@@ -155,6 +158,10 @@
   </div>
 
   <div class="filters">
+    <div class="frow">
+      <span class="flabel">Field</span>
+      <div id="f-field" class="frow" style="flex:1;margin:0;gap:8px"></div>
+    </div>
     <div class="frow">
       <span class="flabel">Level</span>
       <div id="f-level" class="frow" style="flex:1;margin:0;gap:8px"></div>
@@ -187,10 +194,12 @@
     <p><strong>A listing here is not a guarantee it is still open.</strong> This mirrors other
       people's boards twice a day; a role can be filled an hour after it is posted. The date shown
       is when the <em>source</em> published it, not when I checked it.</p>
-    <p><strong>The AI/ML filter is a regex over the title, not a judgement.</strong> It exists because
-      the feeds' own tagging is loose — one board I looked at had "Pharmacy Technician Refill Calls"
-      filed under an AI track. Mine will still let something odd through, and will still miss a good
-      role with an unusual title.</p>
+    <p><strong>The field tag is a regex over the title, not a judgement.</strong> Each listing gets
+      one field from the first rule its title matches, falling back to the source's own tags. It gets
+      things wrong: an "Audio Engineer" lands in software because the word <em>engineer</em> is in the
+      software rule. I use the title first precisely because board tagging is worse — one board filed
+      "Pharmacy Technician Refill Calls" under an AI track. If a field looks thin, search instead of
+      filtering.</p>
     <p><strong>Most listings say nothing about visa sponsorship.</strong> Only one source publishes
       that field at all, and on most of its rows it is blank. Blank means <em>unstated</em>, never
       "yes". Use the <em>Says it sponsors</em> filter to see only the ones that actually answered, and
@@ -216,10 +225,16 @@ const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 const LEVELS = { internship:"Internship", "new-grad":"New grad", mid:"Mid", senior:"Senior" };
+const FIELDS = {
+  "ai-ml":"AI / ML", software:"Software", data:"Data", devops:"DevOps", security:"Security",
+  design:"Design", product:"Product", marketing:"Marketing", sales:"Sales", support:"Support",
+  finance:"Finance", people:"HR / People", operations:"Operations", healthcare:"Healthcare",
+  education:"Education", legal:"Legal", research:"Research", other:"Other"
+};
 const TAGS   = { llm:"LLM", nlp:"NLP", vision:"Vision", mlops:"MLOps",
                  research:"Research", data:"Data", robotics:"Robotics", agents:"Agents" };
 
-const state = { level:new Set(), tag:new Set(), source:new Set(), visa:new Set(), q:"" };
+const state = { field:new Set(), level:new Set(), tag:new Set(), source:new Set(), visa:new Set(), q:"" };
 let DATA = null, shown = [], page = 0;
 const PAGE = 60;
 
@@ -242,6 +257,7 @@ function chipGroup(hostId, key, values, labels, cls) {
 }
 
 function matches(j) {
+  if (state.field.size && !state.field.has(j.field)) return false;
   if (state.level.size && !state.level.has(j.level)) return false;
   if (state.tag.size && !(j.tags || []).some(t => state.tag.has(t))) return false;
   if (state.source.size && !state.source.has(j.source)) return false;
@@ -255,7 +271,7 @@ function matches(j) {
       (j.sponsorship === "Does Not Offer Sponsorship" || j.sponsorship === "U.S. Citizenship is Required")) return false;
 
   if (state.q) {
-    const hay = `${j.title} ${j.company} ${j.location} ${(j.tags||[]).join(" ")}`.toLowerCase();
+    const hay = `${j.title} ${j.company} ${j.location} ${j.field} ${(j.tags||[]).join(" ")}`.toLowerCase();
     if (!hay.includes(state.q)) return false;
   }
   return true;
@@ -288,6 +304,7 @@ function row(j) {
     <span class="jd">${esc(ago(j.posted))}</span>
     <span class="jc">${esc(j.company || "—")}${j.location ? " · " + esc(j.location) : ""}</span>
     <span class="jtags">
+      <span class="t fld">${esc(FIELDS[j.field] || j.field)}</span>
       <span class="t lv">${esc(LEVELS[j.level] || j.level)}</span>
       ${(j.tags||[]).map(t => `<span class="t">${esc(TAGS[t] || t)}</span>`).join("")}
       ${sal ? `<span class="t sal">${esc(sal)}</span>` : ""}
@@ -312,8 +329,10 @@ function render() {
   page = 0;
   const withVisa = shown.filter(j => j.sponsorship === "Offers Sponsorship").length;
   const interns = shown.filter(j => j.level === "internship").length;
+  const fields = new Set(shown.map(j => j.field)).size;
   $("#resultline").textContent =
-    `${shown.length} of ${DATA.count} listings · ${interns} internships · ${withVisa} state that they sponsor a visa`;
+    `${shown.length} of ${DATA.count} listings · ${fields} field${fields === 1 ? "" : "s"} · `
+    + `${interns} internships · ${withVisa} state that they sponsor a visa`;
   paint();
 }
 
@@ -323,13 +342,20 @@ fetch("data/jobs.json")
     DATA = d;
     const uniq = (fn) => [...new Set(d.jobs.flatMap(fn))].filter(Boolean).sort();
 
+    // Order the field chips by volume, so the ones worth clicking come first
+    // and a field with three listings does not sit above one with three hundred.
+    const fieldCounts = d.jobs.reduce((m, j) => (m[j.field] = (m[j.field] || 0) + 1, m), {});
+    const fieldsBySize = Object.keys(fieldCounts).sort((a, b) => fieldCounts[b] - fieldCounts[a]);
+    chipGroup("#f-field",  "field",  fieldsBySize,
+              Object.fromEntries(fieldsBySize.map(f => [f, `${FIELDS[f] || f} ${fieldCounts[f]}`])));
     chipGroup("#f-level",  "level",  ["internship","new-grad","mid","senior"], LEVELS);
     chipGroup("#f-tag",    "tag",    uniq(j => j.tags || []), TAGS);
     chipGroup("#f-source", "source", uniq(j => [j.source]), null);
     chipGroup("#f-visa",   "visa",   ["sponsors","hide-no"],
               { sponsors:"Says it sponsors", "hide-no":"Hide no-sponsorship" }, "good");
 
-    $("#livestamp").textContent = `${d.count} live listings · refreshed ${d.checked}`;
+    $("#livestamp").textContent =
+      `${d.count} live listings across ${new Set(d.jobs.map(j => j.field)).size} fields · refreshed ${d.checked}`;
     $("#attrib").textContent = d.attribution;
     render();
   })
@@ -342,7 +368,7 @@ fetch("data/jobs.json")
 $("#q").addEventListener("input", e => { state.q = e.target.value.trim().toLowerCase(); render(); });
 $("#more").addEventListener("click", () => { page++; paint(); });
 $("#reset").addEventListener("click", () => {
-  for (const k of ["level","tag","source","visa"]) state[k].clear();
+  for (const k of ["field","level","tag","source","visa"]) state[k].clear();
   state.q = ""; $("#q").value = "";
   document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed","false"));
   render();
