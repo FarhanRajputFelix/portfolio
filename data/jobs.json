@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-09T02:35:07+00:00",
+ "generated": "2026-08-09T02:38:18+00:00",
  "checked": "2026-08-09",
  "count": 500,
  "fetched": 5115,
@@ -143,6 +143,59 @@
    "sponsorship": null
   },
   {
+   "title": "AI Product Manager - Agentic Platform (Global) (Remote, Any Location, ES)",
+   "company": "Foundever",
+   "location": "Spain",
+   "url": "https://himalayas.app/companies/foundever/jobs/ai-product-manager-agentic-platform-global-remote-any-location-es-4594832939",
+   "posted": "2026-08-08",
+   "salary_min": null,
+   "salary_max": null,
+   "source": "Himalayas",
+   "source_url": "https://himalayas.app",
+   "blurb": "About Us Foundever™ is a global leader in the customer experience (CX) industry.",
+   "tags": [
+    "mlops",
+    "agents"
+   ],
+   "level": "senior",
+   "sponsorship": null
+  },
+  {
+   "title": "Head of AI - Platform AI",
+   "company": "Zayo Group",
+   "location": "United States",
+   "url": "https://himalayas.app/companies/zayo-group/jobs/head-of-ai-platform-ai",
+   "posted": "2026-08-08",
+   "salary_min": 215000,
+   "salary_max": 245000,
+   "source": "Himalayas",
+   "source_url": "https://himalayas.app",
+   "blurb": "Company DescriptionZayo provides mission-critical bandwidth to the world’s most impactful companies, fueling the innovations that are transforming our society.",
+   "tags": [
+    "mlops"
+   ],
+   "level": "senior",
+   "sponsorship": null
+  },
+  {
+   "title": "AI Adversarial Specialist - Fully Remote | Upto $62/hr",
+   "company": "mercor",
+   "location": "Germany",
+   "url": "https://himalayas.app/companies/mercor/jobs/ai-adversarial-specialist-fully-remote-upto-62-hr-3124539678",
+   "posted": "2026-08-08",
+   "salary_min": 48,
+   "salary_max": 62,
+   "source": "Himalayas",
+   "source_url": "https://himalayas.app",
+   "blurb": "About the jobMercor connects elite creative and technical talent with leading AI research labs.",
+   "tags": [
+    "llm",
+    "research"
+   ],
+   "level": "mid",
+   "sponsorship": null
+  },
+  {
    "title": "Enterprise Client Partner, Enterprise AI",
    "company": "micro1",
    "location": "Remote",
@@ -201,23 +254,6 @@
    "source": "Himalayas",
    "source_url": "https://himalayas.app",
    "blurb": "As a member of the ShipBob Team, you will... • Grow with an Ownership Mindset: We champion continuous learning and innovation.",
-   "tags": [
-    "mlops"
-   ],
-   "level": "senior",
-   "sponsorship": null
-  },
-  {
-   "title": "Head of AI - Platform AI",
-   "company": "Zayo Group",
-   "location": "United States",
-   "url": "https://himalayas.app/companies/zayo-group/jobs/head-of-ai-platform-ai",
-   "posted": "2026-08-08",
-   "salary_min": 215000,
-   "salary_max": 245000,
-   "source": "Himalayas",
-   "source_url": "https://himalayas.app",
-   "blurb": "Company DescriptionZayo provides mission-critical bandwidth to the world’s most impactful companies, fueling the innovations that are transforming our society.",
    "tags": [
     "mlops"
    ],
@@ -7511,7 +7547,7 @@
    "salary_max": null,
    "source": "Remote OK",
    "source_url": "https://remoteok.com",
-   "blurb": "Posted 12:58:07 PM. Job Title: Graduate Data ScientistLocation: Australia (Remote)Employment Type: Full-TimeExperience:â¦See this and similar jobs on LinkedIn. Please mention the word **STATELY** and tag RMTAzLjE1OS43NS4yNw== when applying to show you read th",
+   "blurb": "Posted 12:58:07 PM. Job Title: Graduate Data ScientistLocation: Australia (Remote)Employment Type: Full-TimeExperience:â¦See this and similar jobs on LinkedIn. Please mention the word **STATELY** and tag RMTcyLjE3MS4xMDcuODE= when applying to show you read th",
    "tags": [
     "research"
    ],
@@ -7845,36 +7881,6 @@
     "research"
    ],
    "level": "internship"
-  },
-  {
-   "title": "Newsbreak Venture New Grad - AI Growth Intelligence Engineer",
-   "company": "NewsBreak",
-   "location": "Mountain View, CA",
-   "url": "https://job-boards.greenhouse.io/newsbreak/jobs/4694899006",
-   "posted": "2026-07-07",
-   "salary_min": null,
-   "salary_max": null,
-   "sponsorship": null,
-   "source": "SimplifyJobs / Pitt CSC",
-   "source_url": "https://github.com/SimplifyJobs/New-Grad-Positions",
-   "blurb": "",
-   "tags": [],
-   "level": "new-grad"
-  },
-  {
-   "title": "Machine Learning Engineer",
-   "company": "Quantcast",
-   "location": "SF",
-   "url": "https://jobs.ashbyhq.com/quantcast/2a6d8f0e-e0f3-4114-944b-2736b26072c4/application",
-   "posted": "2026-07-07",
-   "salary_min": null,
-   "salary_max": null,
-   "sponsorship": null,
-   "source": "SimplifyJobs / Pitt CSC",
-   "source_url": "https://github.com/SimplifyJobs/New-Grad-Positions",
-   "blurb": "",
-   "tags": [],
-   "level": "mid"
   },
   {
    "title": "Lead Data Scientist",
