@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Opportunity Scout — console</title>
+<style>
+:root{
+  --bg:#060608; --bg-2:#0c0c10;
+  --surface:rgba(255,255,255,.028); --surface-2:rgba(255,255,255,.055);
+  --line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.17);
+  --text:#f4f4f6; --text-dim:#9d9da8; --text-faint:#82828d;
+  --violet:#8b5cf6; --violet-3:#a78bfa; --cyan:#22d3ee;
+  --green:#4ade80; --amber:#fbbf24; --red:#f87171;
+  --radius:14px;
+  --display:'Space Grotesk','Sora',system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:'Sora',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-weight:300; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+a{color:var(--violet-3)}
+.wrap{max-width:1220px; margin:0 auto; padding:26px 22px 80px}
+
+/* ---------- header ---------- */
+header{display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; margin-bottom:6px}
+h1{font-family:var(--display); font-size:clamp(22px,3vw,30px); font-weight:600; margin:0; letter-spacing:-.02em}
+.sub{color:var(--text-faint); font-size:13px}
+.note{
+  border-left:2px solid var(--violet); background:var(--surface);
+  padding:9px 14px; border-radius:0 8px 8px 0; font-size:12.5px;
+  color:var(--text-dim); margin:16px 0 24px;
+}
+
+/* ---------- layout ---------- */
+.grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); gap:20px; align-items:start}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--radius); padding:18px;
+}
+.panel h2{
+  font-family:var(--display); font-size:11px; font-weight:600; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--text-faint); margin:0 0 14px;
+}
+
+/* ---------- form ---------- */
+label{display:block; font-size:12px; color:var(--text-dim); margin:14px 0 5px}
+label:first-of-type{margin-top:0}
+textarea,input,select{
+  width:100%; background:var(--bg-2); color:var(--text);
+  border:1px solid var(--line-2); border-radius:9px; padding:10px 12px;
+  font:inherit; font-size:13.5px; resize:vertical;
+}
+textarea:focus,input:focus,select:focus{outline:2px solid var(--violet); outline-offset:1px; border-color:transparent}
+.hint{font-size:11.5px; color:var(--text-faint); margin-top:5px}
+button{
+  font:inherit; font-weight:500; cursor:pointer; border-radius:9px;
+  border:1px solid var(--line-2); background:var(--surface-2); color:var(--text);
+  padding:11px 20px; min-height:44px; transition:background .15s;
+}
+button:hover:not(:disabled){background:rgba(255,255,255,.1)}
+button:disabled{opacity:.45; cursor:not-allowed}
+button.go{background:var(--violet); border-color:var(--violet); color:#fff}
+button.go:hover:not(:disabled){background:var(--violet-3)}
+.row{display:flex; gap:9px; align-items:center; margin-top:16px; flex-wrap:wrap}
+
+/* ---------- live stream ---------- */
+#stream{
+  font-family:ui-monospace,'Cascadia Code',Consolas,monospace;
+  font-size:12px; line-height:1.75; max-height:460px; overflow-y:auto;
+  background:var(--bg-2); border:1px solid var(--line); border-radius:10px;
+  padding:14px; min-height:180px;
+}
+#stream .ph{color:var(--text-faint); font-family:var(--display); font-size:12.5px}
+.ev{display:flex; gap:9px; padding:3px 0; animation:in .18s ease-out}
+@keyframes in{from{opacity:0; transform:translateY(3px)}to{opacity:1}}
+.ev .k{flex:0 0 62px; text-align:right; color:var(--text-faint); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; padding-top:2px}
+.ev .v{flex:1; min-width:0; word-break:break-word; white-space:pre-wrap}
+.k-tool{color:var(--violet-3)!important} .k-result{color:var(--cyan)!important}
+.k-model{color:var(--green)!important}  .k-error,.k-cap{color:var(--red)!important}
+.ev.tool .v{color:var(--violet-3)} .ev.result .v{color:var(--text-dim)}
+.ev.model .v{color:var(--text); font-family:'Sora',system-ui,sans-serif; font-size:13px}
+.ev.error .v{color:var(--red)}
+.ev.item .v{color:var(--text); border-top:1px solid var(--line); padding-top:9px; margin-top:6px}
+.pulse{display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--violet); animation:p 1s infinite}
+@keyframes p{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* ---------- filters + table ---------- */
+.chips{display:flex; gap:7px; flex-wrap:wrap; margin-bottom:14px}
+.chip{
+  font-size:11.5px; padding:6px 13px; border-radius:99px; cursor:pointer;
+  border:1px solid var(--line-2); background:transparent; color:var(--text-dim);
+  min-height:auto; font-family:var(--display); letter-spacing:.02em;
+}
+.chip[aria-pressed="true"]{background:var(--violet); border-color:var(--violet); color:#fff}
+table{width:100%; border-collapse:collapse; font-size:13px}
+th{
+  text-align:left; font-family:var(--display); font-size:10px; font-weight:600;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--text-faint);
+  padding:0 10px 9px; border-bottom:1px solid var(--line); cursor:pointer; user-select:none;
+}
+th:hover{color:var(--text-dim)}
+td{padding:11px 10px; border-bottom:1px solid var(--line); vertical-align:top}
+tbody tr:hover{background:var(--surface)}
+.call{font-family:var(--display); font-size:10.5px; font-weight:600; letter-spacing:.09em; text-transform:uppercase; padding:3px 9px; border-radius:5px}
+.call.apply{background:rgba(74,222,128,.14); color:var(--green)}
+.call.skip{background:rgba(248,113,113,.14); color:var(--red)}
+.call.other{background:var(--surface-2); color:var(--text-dim)}
+.tag{font-size:10px; color:var(--text-faint); border:1px solid var(--line-2); border-radius:4px; padding:1px 6px; margin-right:4px; white-space:nowrap; display:inline-block}
+.score{font-variant-numeric:tabular-nums; color:var(--text-dim)}
+.empty{color:var(--text-faint); font-size:13px; padding:26px 10px; text-align:center}
+.count{font-size:11.5px; color:var(--text-faint); margin-top:12px}
+.scroll{overflow-x:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Opportunity Scout</h1>
+    <span class="sub">local console &middot; <span id="provider">checking provider…</span></span>
+  </header>
+
+  <p class="note">
+    This runs on your machine, not on the web. The agent needs a model API key, and a hosted page
+    would have to hand that key to every visitor — so the server stays on localhost and the key stays
+    in the gitignored env file. Everything below is the same agent as
+    <code>node agent/scout.mjs</code>; only the surface changed.
+  </p>
+
+  <div class="grid">
+
+    <!-- ============ left: input + live run ============ -->
+    <div class="panel">
+      <h2>Run</h2>
+
+      <label for="urls">Posting URLs — one per line</label>
+      <textarea id="urls" rows="4" placeholder="https://admissions.kaust.edu.sa/study/internships&#10;https://sparai.org/"></textarea>
+      <p class="hint">Each URL is a separate agent run. They go one at a time so the rate limit holds.</p>
+
+      <label for="paste">…or paste the posting text directly</label>
+      <textarea id="paste" rows="3" placeholder="For pages that block fetching (403) — paste the text and the agent skips fetch_posting."></textarea>
+
+      <div class="row">
+        <button class="go" id="run">Run agent</button>
+        <button id="clear">Clear log</button>
+        <select id="prov" style="width:auto; flex:0 0 auto" title="mock replays a recorded run — no API call, no quota">
+          <option value="">auto (real model)</option>
+          <option value="mock">mock — no API call</option>
+        </select>
+        <span id="status" class="sub"></span>
+      </div>
+
+      <h2 style="margin-top:24px">Live</h2>
+      <div id="stream"><span class="ph">Tool calls appear here as the agent makes them — not after.</span></div>
+    </div>
+
+    <!-- ============ right: history + filters ============ -->
+    <div class="panel">
+      <h2>History <span id="live-dot"></span></h2>
+
+      <div class="chips" id="type-chips"></div>
+      <div class="chips" id="call-chips"></div>
+
+      <label for="q" style="margin-top:0">Search</label>
+      <input id="q" type="search" placeholder="programme, verification note, source…">
+
+      <div class="row" style="margin-top:12px">
+        <label for="minfit" style="margin:0; flex:0 0 auto">Minimum fit</label>
+        <select id="minfit" style="width:auto; flex:0 0 auto">
+          <option value="0">any</option><option value="5">5+</option>
+          <option value="7">7+</option><option value="8">8+</option>
+        </select>
+      </div>
+
+      <div class="scroll" style="margin-top:16px">
+        <table>
+          <thead><tr>
+            <th data-sort="n">#</th>
+            <th data-sort="programme">Programme</th>
+            <th data-sort="score">Fit</th>
+            <th data-sort="call">Call</th>
+            <th>Type</th>
+          </tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <p class="count" id="count"></p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const stream = $("#stream");
+
+/* ================= live run ================= */
+function ev(kind, label, text) {
+  if (stream.querySelector(".ph")) stream.textContent = "";
+  const row = document.createElement("div");
+  row.className = "ev " + kind;
+  const k = document.createElement("span");
+  k.className = "k k-" + kind;
+  k.textContent = label;
+  const v = document.createElement("span");
+  v.className = "v";
+  v.textContent = text;
+  row.append(k, v);
+  stream.append(row);
+  stream.scrollTop = stream.scrollHeight;
+}
+
+let running = false;
+
+async function run() {
+  if (running) return;
+  const urls = $("#urls").value.split(/\n+/).map(s => s.trim()).filter(Boolean);
+  const postingText = $("#paste").value.trim();
+  const provider = $("#prov").value;
+  // The mock provider replays a recorded transcript keyed by scenario, so it
+  // needs one; the URL box is only a label in that mode.
+  const scenario = provider === "mock" ? "gpa-gate" : undefined;
+  if (provider !== "mock" && !urls.length && !postingText) {
+    $("#status").textContent = "Give it a URL or some pasted text first.";
+    return;
+  }
+
+  running = true;
+  $("#run").disabled = true;
+  $("#status").innerHTML = '<span class="pulse"></span> running';
+
+  const res = await fetch("/api/run", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ urls, postingText, provider, scenario }),
+  });
+
+  // Server-sent events, read off the raw body stream. Chunks split mid-event,
+  // so keep a buffer and only parse up to the last complete "\n\n".
+  const reader = res.body.getReader();
+  const dec = new TextDecoder();
+  let buf = "";
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    buf += dec.decode(value, { stream: true });
+    const parts = buf.split("\n\n");
+    buf = parts.pop();
+    for (const p of parts) {
+      const line = p.replace(/^data: /, "");
+      if (!line) continue;
+      try { handle(JSON.parse(line)); } catch {}
+    }
+  }
+
+  running = false;
+  $("#run").disabled = false;
+  $("#status").textContent = "done";
+  loadRuns();
+}
+
+function handle(e) {
+  switch (e.type) {
+    case "queued":
+      ev("item", "queue", `${e.count} posting${e.count === 1 ? "" : "s"}`);
+      break;
+    case "item":
+      ev("item", `${e.index + 1}/${e.total}`, e.url);
+      break;
+    case "start":
+      $("#provider").textContent = `${e.provider} · ${e.model}`;
+      ev("result", "tools", e.tools.join(" · "));
+      break;
+    case "tool":
+      ev("tool", "→ tool", `${e.name}(${JSON.stringify(e.args)})`);
+      break;
+    case "result":
+      ev("result", "← " + (e.isError ? "error" : "ok"), e.text.replace(/\s+/g, " ").slice(0, 260));
+      break;
+    case "model":
+      ev("model", "model", e.text);
+      break;
+    case "cap":
+      ev("cap", "cap", `stopped at the ${e.limit}-tool-call ceiling`);
+      break;
+    case "error":
+      ev("error", "error", e.message);
+      break;
+    case "done":
+      ev("result", "summary", `${e.calls} tool call(s) · stop: ${e.stopReason}`);
+      break;
+  }
+}
+
+$("#run").addEventListener("click", run);
+$("#clear").addEventListener("click", () => {
+  stream.innerHTML = '<span class="ph">Tool calls appear here as the agent makes them — not after.</span>';
+  $("#status").textContent = "";
+});
+
+/* ================= history + filters ================= */
+const TYPES = ["job", "internship", "scholarship", "research", "funding", "assistantship", "other"];
+const CALLS = ["apply", "skip"];
+let runs = [], activeTypes = new Set(), activeCalls = new Set();
+let sortKey = "n", sortDir = -1;
+
+function chips(host, values, active, onToggle) {
+  host.innerHTML = "";
+  for (const v of values) {
+    const b = document.createElement("button");
+    b.className = "chip";
+    b.textContent = v;
+    b.setAttribute("aria-pressed", active.has(v));
+    b.addEventListener("click", () => {
+      active.has(v) ? active.delete(v) : active.add(v);
+      b.setAttribute("aria-pressed", active.has(v));
+      onToggle();
+    });
+    host.append(b);
+  }
+}
+
+function render() {
+  const q = $("#q").value.trim().toLowerCase();
+  const min = Number($("#minfit").value);
+
+  const shown = runs.filter(r => {
+    if (activeTypes.size && !r.types.some(t => activeTypes.has(t))) return false;
+    if (activeCalls.size && !activeCalls.has((r.call || "").toLowerCase())) return false;
+    if (min && !(r.score >= min)) return false;
+    if (q && !`${r.programme} ${r.verify} ${r.source}`.toLowerCase().includes(q)) return false;
+    return true;
+  }).sort((a, b) => {
+    const x = a[sortKey], y = b[sortKey];
+    if (x == null) return 1;
+    if (y == null) return -1;
+    return (typeof x === "number" ? x - y : String(x).localeCompare(String(y))) * sortDir;
+  });
+
+  const tb = $("#rows");
+  tb.innerHTML = "";
+  if (!shown.length) {
+    tb.innerHTML = `<tr><td colspan="5" class="empty">No run matches these filters.</td></tr>`;
+  }
+  for (const r of shown) {
+    const tr = document.createElement("tr");
+    const call = (r.call || "").toLowerCase();
+    const cls = call === "apply" ? "apply" : call === "skip" ? "skip" : "other";
+    tr.innerHTML = `
+      <td class="score">${r.n}</td>
+      <td>${esc(r.programme)}${r.source?.startsWith("http") ? ` <a href="${esc(r.source)}" target="_blank" rel="noopener" title="${esc(r.source)}">↗</a>` : ""}
+          <div class="hint" style="margin-top:3px">${esc(r.verify || "")}</div></td>
+      <td class="score">${esc(r.fit || "—")}</td>
+      <td><span class="call ${cls}">${esc(r.call || "—")}</span></td>
+      <td>${r.types.map(t => `<span class="tag">${t}</span>`).join("")}</td>`;
+    tb.append(tr);
+  }
+  $("#count").textContent = `${shown.length} of ${runs.length} run${runs.length === 1 ? "" : "s"}`;
+}
+
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+async function loadRuns() {
+  runs = await (await fetch("/api/runs")).json();
+  render();
+}
+
+document.querySelectorAll("th[data-sort]").forEach(th => {
+  th.addEventListener("click", () => {
+    const k = th.dataset.sort;
+    sortDir = sortKey === k ? -sortDir : -1;
+    sortKey = k;
+    render();
+  });
+});
+$("#q").addEventListener("input", render);
+$("#minfit").addEventListener("change", render);
+
+chips($("#type-chips"), TYPES, activeTypes, render);
+chips($("#call-chips"), CALLS, activeCalls, render);
+loadRuns();
+</script>
+</body>
+</html>

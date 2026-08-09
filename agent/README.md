@@ -129,6 +129,41 @@ Nobody sequenced those three calls. The model chose them.
 
 ---
 
+## The dashboard
+
+```bash
+node agent/server.mjs      # → http://localhost:4173
+```
+
+Same agent, visible surface. The left panel takes a list of posting URLs and streams
+every tool call as it happens — not a transcript printed at the end. The right panel is
+the run history from `pipeline/runs/INDEX.md`, filterable by opportunity type
+(job / internship / scholarship / research / funding / assistantship), by call
+(apply / skip), by minimum fit score, and by free text.
+
+The `mock — no API call` option in the provider dropdown replays a recorded run, so you
+can demo the whole loop without a key and without spending quota.
+
+**Why it runs on localhost and not on the deployed site.** The agent needs a model API
+key to work at all. A page served from Netlify or GitHub Pages would have to ship that
+key to every visitor's browser, where anyone can read it. A serverless function could
+hide it, but that puts a paid, abusable endpoint on the public internet for a personal
+tool. So: the server runs on your machine, the key stays in the gitignored
+`pipeline/private/.env`, and the browser only ever talks to `localhost`. Nothing binds
+to a public interface.
+
+Two things that follow from that, stated plainly rather than discovered later:
+
+- **It is not a hosted product.** Anyone who wants to run it clones the repo and adds
+  their own key. That is a real limitation, not a temporary one.
+- **The type classifier is a regex, not the model.** `server.mjs` tags each run from
+  keywords in the programme name and the verification note. It is a filter facet, and it
+  is occasionally wrong — a run logged only as `SPAR` with no other text classifies as
+  `other`, because there is genuinely nothing in the row to classify on. Asking the model
+  would cost a call per row and would still not be authoritative.
+
+---
+
 ## Architecture
 
 ```
@@ -241,6 +276,13 @@ Honest ones. None of these are hypothetical.
 7. **It cannot know my calendar, my transcripts or my referees.** By design — it returns NO EVIDENCE
    and asks, rather than guessing dates I'd have to honour.
 8. **Single user.** The knowledge base is my CV. Someone else would replace `cv-facts.md` entirely.
+9. **The dashboard evaluates; it does not discover.** You still supply the URLs. There is no crawler,
+   no job-board API, no saved search that wakes up and finds new postings. The filters operate on runs
+   the agent has already done, not on the open internet. Adding discovery means either paying for a
+   jobs API or scraping boards that forbid it in their terms — I have done neither, so the honest
+   description is "a console for an agent you point at things", not "a job search engine".
+10. **Postings run one at a time.** Serially, on purpose: the free tier rate-limits by tokens per
+    minute and a parallel fan-out would 429 on the second request. Ten URLs is ten sequential runs.
 
 ### What it will never do
 
@@ -266,6 +308,8 @@ is a posting with zero requirements.
 | Path | What it is |
 |---|---|
 | `agent/scout.mjs` | The agent: provider adapters, the loop, the guardrails |
+| `agent/server.mjs` | Localhost dashboard server — SSE stream, run history, type classifier |
+| `agent/ui/index.html` | The dashboard itself. One file, no build step, no framework |
 | `agent/evals.mjs` | The six cases as executable assertions |
 | `agent/BUILD-LOG.md` | What broke, in the order it broke, including the dead ends |
 | `mcp/outreach-server.mjs` | The MCP server — tools, resources, prompts. Zero dependencies |

@@ -117,7 +117,9 @@
   <div class="tldr">
     <b>If you read one thing</b>
     <p>One job: posting URL in, apply / caveat / skip out. Three tools that already exist and are tested, <strong>six eval cases written before the build</strong>, and guardrails enforced by architecture &mdash; the agent has no send capability at all.</p>
-    <p>Build status is in the box below. Evals are &sect;05, guardrails &sect;06, platform justification &sect;07.</p>
+    <p>Build status is in the box below. Evals are &sect;05, guardrails &sect;06, platform justification &sect;07.
+      It also has a live dashboard now &mdash; <a href="#s09">&sect;09</a> covers what that shows and why it
+      runs on localhost rather than here.</p>
   </div>
 
 
@@ -451,6 +453,49 @@ log_run once.</pre>
         equivalent blind spot. If it overruns, the honest response is to record the overrun — the same
         way FL-04 reported that the pipeline was slower than working by hand instead of quietly
         reframing the result.</p>
+    </div>
+  </section>
+
+  <!-- Added after the build. The spec above called for a CLI; a reviewer
+       pointed out that a terminal-only tool is invisible to anyone who
+       doesn't use one, which was a fair hit. This section records the change
+       and its cost rather than editing §07 to pretend it was always the plan. -->
+  <section id="s09">
+    <div class="sec-head"><span class="n">09</span><h2>It has a console now — and why it runs on your machine</h2></div>
+
+    <p class="spec">Section 07 chose a command-line tool, on the grounds that the agent's output is
+      text a human reads before acting. That reasoning still holds, but it missed something: a
+      terminal-only tool cannot be <em>shown</em> to anyone. The run is real, and nobody can see it.
+      So the agent now has a dashboard — <code>node agent/server.mjs</code> → <code>localhost:4173</code>
+      — that streams every tool call as the model makes it, and lets me filter my run history by
+      opportunity type, by apply/skip, and by minimum fit score.</p>
+
+    <p class="spec">It is a surface, not a rewrite. The server imports the same
+      <code>runScout</code> function the CLI calls; the loop, the tools and the guardrails in §06 are
+      untouched. The only change to the agent itself was an optional <code>onEvent</code> callback,
+      so a caller can watch a run happen instead of reading it afterwards.</p>
+
+    <div class="honest">
+      <b>Why it isn't hosted here, where you could just click it</b>
+      <p>The agent needs a model API key to do anything. A page served from this domain would have to
+        ship that key to every visitor's browser, where it is readable by anyone who opens dev tools.
+        A serverless function could hide it — at the cost of putting a paid, abusable endpoint on the
+        public internet for a personal tool.</p>
+      <p>So the server binds to localhost, the key stays in a gitignored file, and the browser never
+        talks to anything but my own machine. The honest cost of that choice: <strong>you cannot try
+        this by clicking a link.</strong> Running it means cloning the repo and adding your own key.
+        That is a real limitation and it is not going away.</p>
+    </div>
+
+    <div class="honest never">
+      <b>What the filters do not do</b>
+      <p>They filter runs the agent has already done. There is no crawler, no job-board API, no saved
+        search that finds new postings on its own — <strong>you still supply the URLs</strong>. Adding
+        discovery means paying for a jobs API or scraping boards whose terms forbid it, and I have
+        done neither.</p>
+      <p>The opportunity-type tags are also a regex over the programme name, not a model judgement. A
+        run logged as bare <code>SPAR</code> classifies as <em>other</em>, because there is nothing in
+        the row to classify on. It is a filter facet, and it is sometimes wrong.</p>
     </div>
   </section>
 

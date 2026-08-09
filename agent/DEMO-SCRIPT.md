@@ -12,22 +12,30 @@ The rubric requires: a live end-to-end run (no slides), clear narration, **one d
 ```bash
 cd "c:/Users/Laptronics.co/OneDrive/Desktop/CAPSTON"
 node agent/evals.mjs --provider mock          # warm-up, confirms nothing is broken
+node agent/server.mjs                         # leave this running; open localhost:4173
 ```
 
-- Terminal font size up to ~16–18pt. Nobody can read 11pt on YouTube.
-- Close other tabs. Full-screen the terminal.
+**Record the dashboard, not the terminal.** A terminal is unreadable at YouTube's bitrate and
+gives a viewer nothing to look at while a rate limit stalls for 30 seconds. The dashboard shows
+the same tool calls, streamed live, at a size people can read. Keep the terminal visible in a
+small second window only for the moment described at 1:00 — proving the dashboard is a surface
+over the same agent, not a different program.
+
+- Browser at ~125% zoom. Close other tabs, hide the bookmarks bar.
 - Have `agent/README.md` open in a second tab for the architecture diagram.
 - **Check your Groq daily budget.** If it's low, use `SCOUT_MODEL=openai/gpt-oss-20b`.
 - Rate-limit waits of 20–40s will happen. **Leave them in and say what they are** — an unedited run
   is what's being graded.
+- Do *not* use the `mock` option on camera. It exists so you can rehearse without spending quota;
+  a graded demo has to be a real run.
 
-Record with OBS (Window Capture → your terminal). Xbox Game Bar will not record a terminal.
+Record with OBS (Window Capture → your browser).
 
 ---
 
 ## 0:00–0:30 · What it is and why
 
-*Show: the terminal, cleared.*
+*Show: the dashboard at `localhost:4173`, log cleared, history table populated.*
 
 > "This is Opportunity Scout. It's an agent that decides whether a job or research programme is worth
 > applying to — and refuses to write the application when it isn't.
@@ -58,11 +66,13 @@ Record with OBS (Window Capture → your terminal). Xbox Game Bar will not recor
 
 ## 1:00–2:00 · Run one: no gate
 
-*Run it. Talk while it works.*
+*Paste `https://sparai.org/` into the URL box. Hit Run agent. Talk while it works.*
 
-```bash
-node agent/scout.mjs https://sparai.org/
-```
+*First, hold on the terminal for three seconds — it prints nothing, because the browser is driving it:*
+
+> "One thing before it runs: this dashboard isn't a re-implementation. It imports the same
+> `runScout` function the command line calls. Every line you're about to see appear is the
+> agent emitting an event, live — not a transcript replayed after the fact."
 
 > "SPAR is a real research fellowship, applications genuinely open. Watch which tools it calls.
 >
@@ -72,7 +82,8 @@ node agent/scout.mjs https://sparai.org/
 
 *When the verdict appears:*
 
-> "Verdict: apply. And it logged the run to disk, so the history survives the session."
+> "Verdict: apply. And it logged the run to disk — watch the history table on the right pick it
+> up. That's a file, not a variable, so the history survives the session."
 
 *If a rate-limit wait appears:*
 
@@ -82,11 +93,9 @@ node agent/scout.mjs https://sparai.org/
 
 ## 2:00–3:15 · Run two: the guardrail
 
-```bash
-node agent/scout.mjs https://admissions.kaust.edu.sa/study/internships
-```
+*Clear the log. Paste `https://admissions.kaust.edu.sa/study/internships`. Run.*
 
-> "Same command, different posting. KAUST states a minimum GPA of 3.5 out of 4."
+> "Same agent, different posting. KAUST states a minimum GPA of 3.5 out of 4."
 
 *When `check_gpa_gate` appears:*
 
@@ -133,12 +142,19 @@ node agent/scout.mjs https://admissions.kaust.edu.sa/study/internships
 > disabled — absent. Sending is the only irreversible thing here, so the guardrail is that the
 > capability doesn't exist. Everything it produces lands in my hands first."
 
+*Optional, if you're under time — click two filter chips on the history table:*
+
+> "And the dashboard runs on localhost, not on my deployed site, for one reason: the agent needs an
+> API key, and a hosted page would have to hand that key to every visitor. So it stays on my
+> machine. The trade is that it isn't a product anyone can just open — which is the honest cost of
+> not leaking a credential."
+
 ---
 
 ## Checklist before uploading
 
 - [ ] 3–5 minutes
-- [ ] Live terminal throughout, no slides
+- [ ] Live run throughout, no slides
 - [ ] **Design decision** stated out loud (the loop vs the chain, ~0:45)
 - [ ] **Limitation** stated out loud (E2 / the clip, ~3:15)
 - [ ] Both runs complete to a verdict on camera

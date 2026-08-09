@@ -468,12 +468,18 @@ ${brief}`;
 /* ================================================================== *
  * The loop
  * ================================================================== */
-export async function runScout({ url, postingText, providerName, scenario, quiet = false } = {}) {
+/**
+ * @param onEvent  optional callback receiving structured events as they happen
+ *                 — {type, ...}. The dashboard uses this to render a run live
+ *                 instead of after the fact. The terminal path is unchanged.
+ */
+export async function runScout({ url, postingText, providerName, scenario, quiet = false, onEvent } = {}) {
   const env = await loadEnv();
   const name = pickProvider(env, providerName);
   const provider = providers[name];
   if (!provider) throw new Error(`unknown provider: ${name}`);
 
+  const emit = (e) => { try { onEvent && onEvent(e); } catch {} };
   const log = quiet ? () => {} : (...a) => console.log(...a);
   const mcp = new McpClient();
   await mcp.start();
@@ -507,6 +513,7 @@ export async function runScout({ url, postingText, providerName, scenario, quiet
       stale,
     });
     log(`[36mcontext[0m   ~${Math.round(system.length / 4)} tokens of system prompt`);
+    emit({ type: "start", provider: name, model: provider.model(env), tools: tools.map(t => t.name), url, tokens: Math.round(system.length / 4) });
     // A posting can arrive as a URL to fetch, or as text already in hand (a PDF,
     // an email, a JS-rendered page the fetch tool cannot read). Both are real
     // inputs, so the agent accepts both.
@@ -527,6 +534,7 @@ export async function runScout({ url, postingText, providerName, scenario, quiet
       const step = await provider.chat({ env, system, history, tools, scenario });
 
       if (step.text && !quiet) log(`\n\x1b[32mmodel\x1b[0m ${step.text}`);
+      if (step.text) emit({ type: "model", text: step.text });
       if (!step.toolCalls.length) {
         trace.text = step.text;
         trace.stopReason = "final";
@@ -535,6 +543,7 @@ export async function runScout({ url, postingText, providerName, scenario, quiet
 
       if (calls + step.toolCalls.length > MAX_TOOL_CALLS) {
         trace.stopReason = "cap";
+        emit({ type: "cap", limit: MAX_TOOL_CALLS });
         log(`\n\x1b[31mSTOPPED\x1b[0m tool-call cap of ${MAX_TOOL_CALLS} reached — forced termination.`);
         break;
       }
@@ -545,6 +554,7 @@ export async function runScout({ url, postingText, providerName, scenario, quiet
       for (const call of step.toolCalls) {
         calls++;
         log(`\x1b[35m→ tool\x1b[0m  ${call.name}(${JSON.stringify(call.args).slice(0, 110)})`);
+        emit({ type: "tool", name: call.name, args: call.args });
         let out = await mcp.callTool(call.name, call.args);
 
         // Guardrail: fetched web text is data, not instruction.
@@ -564,12 +574,14 @@ export async function runScout({ url, postingText, providerName, scenario, quiet
 
         log(`\x1b[34m← result\x1b[0m ${out.text.replace(/\s+/g, " ").slice(0, 130)}…`);
         trace.toolCalls.push({ name: call.name, args: call.args, isError: out.isError });
+        emit({ type: "result", name: call.name, isError: out.isError, text: out.text.slice(0, 400) });
         results.push({ id: call.id, name: call.name, text: out.text });
       }
       provider.appendToolResults(history, results);
     }
 
     trace.calls = calls;
+    emit({ type: "done", calls, stopReason: trace.stopReason, text: trace.text, toolCalls: trace.toolCalls });
     log(`\n\x1b[1msummary\x1b[0m ${calls} tool call(s): ${trace.toolCalls.map((c) => c.name).join(" → ") || "none"}  ·  stop: ${trace.stopReason}`);
     return trace;
   } finally {
