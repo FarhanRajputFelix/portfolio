@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-09T04:40:31+00:00",
+  "generated": "2026-08-09T06:42:10+00:00",
   "checked": "2026-08-09",
   "total": 21,
   "broken": 0,
@@ -14,7 +14,7 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "04a9c152c9930e27",
+      "fingerprint": "8d9dd45833f8dc5b",
       "firstSeen": "2026-08-09",
       "lastChecked": "2026-08-09",
       "changedSinceLastCheck": true
@@ -222,7 +222,7 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "186aca6408a019cf",
+      "fingerprint": "cbc04e704db2c33c",
       "firstSeen": "2026-08-09",
       "lastChecked": "2026-08-09",
       "changedSinceLastCheck": true
