@@ -39,7 +39,7 @@ OUT = ROOT / "data" / "jobs.json"
 
 UA = "Mozilla/5.0 (compatible; farhanbashir-jobs/1.0; +https://farhanbashir.netlify.app)"
 TIMEOUT = 40
-MAX_JOBS = 900          # keeps the committed JSON well under 1 MB so the page loads fast
+MAX_JOBS = 1200          # keeps the committed JSON well under 1 MB so the page loads fast
 MAX_AGE_DAYS = 45       # older than this and the listing is usually gone
 
 # ---------------------------------------------------------------- taxonomy
@@ -93,6 +93,18 @@ TAG_RULES = [
     ("remote",    r"\b(remote|anywhere|work from home|distributed)\b"),
     ("robotics",  r"\b(robot|autonomous|self-driving|adas)\b"),
     ("agents",    r"\b(agent|agentic|tool.?call|orchestrat)\b"),
+]
+
+# What KIND of opportunity this is, which is the facet a visitor actually thinks
+# in: "I want a PhD place" is a different question from "I want a job". Order
+# matters — a "PhD Research Intern" is an internship first.
+TYPE_RULES = [
+    ("internship",  r"\b(intern|internship|co-?op|summer (programme|program|school)|placement|trainee)\b"),
+    ("phd",         r"\b(phd|ph\.d|doctoral|doctorate|studentship|graduate school)\b"),
+    ("scholarship", r"\b(scholarship|fellowship|bursary|stipend award|grant|funded (place|position)|"
+                    r"fully funded|tuition)\b"),
+    ("research",    r"\b(postdoc|post-?doctoral|research (fellow|associate|assistant|scientist|engineer)|"
+                    r"scientist|laboratory|\br&d\b)\b"),
 ]
 
 LEVEL_RULES = [
@@ -312,9 +324,77 @@ def from_simplify():
     return out
 
 
+
+def from_jobrxiv():
+    """
+    jobRxiv — a science job board with ~3,200 live research positions: PhD
+    places, postdocs, research fellows and lab scientists. It runs WordPress
+    and exposes the standard wp/v2 REST API, so this is a documented endpoint
+    rather than anything scraped.
+
+    Regions come back as taxonomy IDs, so the term list is fetched once and
+    used as a lookup instead of leaving every listing without a country.
+    """
+    regions = {}
+    raw = get("https://jobrxiv.org/wp-json/wp/v2/job_listing_region?per_page=100")
+    if raw:
+        for t in json.loads(raw):
+            regions[t["id"]] = t["name"]
+
+    out = []
+    for page in range(1, 7):        # 6 x 100; the whole board is far larger
+        raw = get(f"https://jobrxiv.org/wp-json/wp/v2/job-listings?per_page=100&page={page}")
+        if not raw:
+            break
+        rows = json.loads(raw)
+        if not rows:
+            break
+        for j in rows:
+            meta = j.get("meta") or {}
+            if meta.get("_filled"):          # the board marks closed roles
+                continue
+            locs = [regions.get(r) for r in (j.get("job_listing_region") or [])]
+            out.append(dict(
+                title=clean((j.get("title") or {}).get("rendered")),
+                company=clean(meta.get("_company_name")),
+                location=", ".join([l for l in locs if l]) or "",
+                url=j.get("link"), posted=iso(j.get("date")),
+                raw_tags=["research", "academic"],
+                salary_min=None, salary_max=None,
+                source="jobRxiv", source_url="https://jobrxiv.org",
+                blurb=clean((j.get("excerpt") or {}).get("rendered"), 260)))
+    return out
+
+
+def from_nature():
+    """Nature Careers RSS — academic and industry research posts. Its feed
+    ignores the country parameter and returns the same 20 items either way, so
+    it is fetched once rather than pretending pagination exists."""
+    out = []
+    raw = get("https://www.nature.com/naturecareers/jobsrss/")
+    if not raw:
+        return out
+    for item in re.findall(r"<item>(.*?)</item>", raw, re.S):
+        def tag(name):
+            m = re.search(rf"<{name}[^>]*>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?</{name}>", item, re.S)
+            return clean(m.group(1)) if m else ""
+        title = tag("title")
+        # Nature formats titles as "Employer: Role".
+        company, _, role = title.partition(":")
+        out.append(dict(
+            title=clean(role or title), company=clean(company) if role else "",
+            location="", url=tag("link"), posted=iso(tag("pubDate")),
+            raw_tags=["research", "academic"],
+            salary_min=None, salary_max=None,
+            source="Nature Careers", source_url="https://www.nature.com/naturecareers",
+            blurb=tag("description")[:260]))
+    return out
+
+
 SOURCES = {
     "remoteok": from_remoteok, "remotive": from_remotive, "jobicy": from_jobicy,
     "himalayas": from_himalayas, "weworkremotely": from_weworkremotely, "simplify": from_simplify,
+    "jobrxiv": from_jobrxiv, "nature": from_nature,
 }
 
 # ================================================================ pipeline
@@ -339,6 +419,10 @@ def enrich(j):
     hay = f"{title} {tags_text} {j.get('blurb','')}"
     j["tags"] = [n for n, pat in TAG_RULES if re.search(pat, hay, re.I)]
     j["level"] = next((n for n, pat in LEVEL_RULES if re.search(pat, title, re.I)), "mid")
+    # A hand-verified programme carries its own type; everything else is read
+    # off the title, defaulting to a plain job.
+    j["type"] = j.get("type") or next(
+        (n for n, pat in TYPE_RULES if re.search(pat, title, re.I)), "job")
     sp = (j.get("sponsorship") or "").strip()
     j["sponsorship"] = sp if sp and sp != "Other" else None
     # blurb exists only to inform the tagging above; shipping it would roughly
@@ -416,11 +500,45 @@ def main():
     # at half published 306 of a possible 500 for no reason.
     take_feeds = by_date(feeds)[: MAX_JOBS // 2]
     take_verified = by_useful(verified)[: MAX_JOBS - len(take_feeds)]
-    fresh = by_date(take_feeds + take_verified)
+    picked = take_feeds + take_verified
+
+    # Then give each type a floor, so volume cannot bury the rare categories.
+    # Sorting purely by date published 896 ordinary jobs, 3 PhD places and 2
+    # scholarships — and the rare ones are exactly what somebody opens this page
+    # for. Taking every scarce row instead swung it the other way: internships
+    # are not scarce (SimplifyJobs alone carries 1,256), so they filled all 1,200
+    # slots and the board had no ordinary jobs left at all. Hence quotas, not
+    # "keep everything unusual".
+    QUOTA = {"phd": 200, "scholarship": 200, "research": 250, "internship": 350}
+
+    ranked = by_date(feeds) + by_useful(verified)
+    fresh, seen_urls = [], set()
+
+    def add(j):
+        if j["url"] in seen_urls:
+            return False
+        seen_urls.add(j["url"])
+        fresh.append(j)
+        return True
+
+    for t, cap in QUOTA.items():
+        taken = 0
+        for j in ranked:
+            if taken >= cap:
+                break
+            if j["type"] == t and add(j):
+                taken += 1
+
+    for j in picked:                       # plain jobs fill whatever is left
+        if len(fresh) >= MAX_JOBS:
+            break
+        add(j)
+    fresh = by_date(fresh)
 
     log(f"\n  {len(all_jobs)} fetched → {len(kept)} real listings → {len(deduped)} after dedupe")
     log(f"  {len(feeds)} from feeds within {MAX_AGE_DAYS} days + "
         f"{len(verified)} confirmed-active → {len(fresh)} published")
+    log(f"  types : {dict(Counter(j['type'] for j in fresh))}")
     log(f"  levels: {dict(Counter(j['level'] for j in fresh))}")
     log(f"  with stated sponsorship: {sum(1 for j in fresh if j['sponsorship'])}")
 
@@ -434,7 +552,7 @@ def main():
         "maxAgeDays": MAX_AGE_DAYS,
         "attribution": (
             "Listings are mirrored daily from Remote OK, Remotive, Jobicy, Himalayas, "
-            "We Work Remotely and SimplifyJobs / Pitt CSC. Every card links to the original "
+            "We Work Remotely, SimplifyJobs / Pitt CSC, jobRxiv and Nature Careers. Every card links to the original "
             "posting on its source site. This site does not host applications, does not "
             "represent employers, and cannot confirm a role is still open."
         ),

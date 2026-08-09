@@ -31,7 +31,11 @@ SKIP = ("http://", "https://", "mailto:", "#", "//", "tel:", "data:")
 # success page: you only arrive by submitting the form, it is noindex, and it
 # is not in the sitemap. Listing it here keeps the orphan check strict for
 # everything else rather than weakening the rule to accommodate one file.
-INTENTIONALLY_UNLINKED = {"thanks.html"}
+# thanks.html is a form destination, reached by redirect rather than a link.
+# jobs.html is a retired URL kept as a redirect stub after the job board and the
+# scholarship list were merged into opportunities.html — nothing should link to
+# it, and it is noindex, so it is deliberately absent from the sitemap too.
+INTENTIONALLY_UNLINKED = {"thanks.html", "jobs.html"}
 
 
 def main() -> int:

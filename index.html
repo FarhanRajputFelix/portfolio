@@ -122,7 +122,7 @@
     <a href="#about">ABOUT</a>
     <a href="#doing">WHAT I DO</a>
     <a href="#projects">WORK</a>
-    <a href="#tools">USE THIS</a>
+    <a href="#tools">OPPORTUNITIES</a>
     <a href="#certs">CERTS</a>
     <a href="#process">PROCESS</a>
     <a href="#journey">CAREER</a>
@@ -494,38 +494,43 @@
   </div>
 </section>
 
-<!-- ============ TOOLS ============
-     These are the only two things on this site a stranger can actually use.
-     They sat inside the PROCESS card grid, which buried working software under
-     a heading about how I work. Promoted to their own section and their own
-     nav entry: the live counts come from the same JSON the pages read, so this
-     block cannot claim a number the data does not have.  -->
+<!-- ============ OPPORTUNITIES ============
+     The one thing on this site a stranger can use. It was called "USE THIS",
+     which said nothing about what it is; it is a search listing for jobs,
+     internships, PhD places, research posts and funded scholarships. It was
+     also two separate pages, which made a visitor pick a pipeline before they
+     could ask their actual question. Now one heading, one page.
+     Counts are read from the live data so this block cannot claim a number the
+     files do not contain. -->
 <section id="tools" class="section">
   <span class="glow glow-left"></span>
   <div class="wrap">
-    <h2 class="display huge sec-title" data-split-words>USE THIS</h2>
+    <h2 class="display huge sec-title" data-split-words>OPPORTUNITIES</h2>
     <p class="sec-note" data-anim="fade">
-      Two working tools, free, no sign-up. One is a live job board that refreshes itself twice a day;
-      the other is a hand-verified list of funded scholarships and research programmes. Built for me,
-      but there is nothing personal in them — if you are job hunting, they are yours.
+      A free search listing for <strong>jobs, internships, PhD places, research posts and funded
+      scholarships</strong> &mdash; no sign-up, no account. Most of it refreshes itself twice a day
+      from eight public feeds; a smaller set of major funded programmes is checked by hand, because
+      scholarship providers publish web pages rather than APIs. Built for my own search, but there is
+      nothing personal in it.
     </p>
 
     <div class="process-grid">
-      <a class="proc" data-anim="rise" href="jobs.html">
-        <span class="proc-kind">Live job board &middot; <span id="jobs-stat">refreshing twice daily</span></span>
-        <h3>Jobs, pulled from the source</h3>
-        <p>Real listings across <strong id="jobs-fields">every field</strong> — software, design,
-           marketing, finance, healthcare, legal, AI and more. A scheduled job calls six public feeds
-           twice a day, removes duplicates and commits the result; the page reads one file. Filter by
-           field, level, and <strong>visa sponsorship</strong> where the source states it.</p>
-      </a>
       <a class="proc" data-anim="rise" href="opportunities.html">
-        <span class="proc-kind">Funded programmes &middot; <span id="opp-stat">verified by hand</span></span>
-        <h3>Scholarships &amp; research, verified</h3>
-        <p>Funded internships, PhD calls and scholarships with every figure quoted from the
-           programme's own page, plus the link and the date I read it. I checked the ten most-shared
-           entries on LinkedIn: <strong>four were wrong</strong> — including one programme that is not
-           running at all this year.</p>
+        <span class="proc-kind">Search listing &middot; <span id="opp-stat">refreshed twice daily</span></span>
+        <h3>Find something to apply for</h3>
+        <p>Filter by what you want &mdash; <span id="opp-types">job, internship, PhD, research,
+           scholarship</span> &mdash; then by field (<span id="opp-fields">18 of them</span>: software,
+           design, marketing, finance, healthcare, legal, education, AI and more), by level, and by
+           <strong>visa sponsorship</strong> where the source states it. Every card links straight to
+           the original posting.</p>
+      </a>
+      <a class="proc" data-anim="rise" href="agent.html">
+        <span class="proc-kind">The agent behind it &middot; FL-06 / FL-07</span>
+        <h3>And an agent that says whether to bother</h3>
+        <p>A list tells you what exists; it cannot tell you whether <em>you</em> should apply. That is
+           a separate tool &mdash; an agent that reads a posting against a CV and returns apply,
+           caveat or skip, with six eval cases written before the code. It needs an API key, so it
+           runs on your own machine rather than here.</p>
       </a>
     </div>
   </div>
@@ -1059,22 +1064,17 @@
 (function () {
   const set = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
 
-  fetch("data/jobs.json")
-    .then(r => r.ok ? r.json() : Promise.reject())
-    .then(d => {
-      const fields = new Set(d.jobs.map(j => j.field)).size;
-      set("jobs-stat", `${d.count} listings · refreshed ${d.checked}`);
-      set("jobs-fields", `${fields} fields`);
-    })
-    .catch(() => {});
-
-  fetch("data/opportunities.json")
-    .then(r => r.ok ? r.json() : Promise.reject())
-    .then(d => {
-      const corrected = d.opportunities.filter(o => o.corrections).length;
-      set("opp-stat", `${d.opportunities.length} programmes · ${corrected} carry a correction`);
-    })
-    .catch(() => {});
+  Promise.all([
+    fetch("data/jobs.json").then(r => r.ok ? r.json() : Promise.reject()),
+    fetch("data/opportunities.json").then(r => r.ok ? r.json() : null).catch(() => null)
+  ]).then(([live, programmes]) => {
+    const verified = programmes ? programmes.opportunities.length : 0;
+    const fields = new Set(live.jobs.map(j => j.field)).size;
+    const types = [...new Set(live.jobs.map(j => j.type))];
+    set("opp-stat", `${live.count + verified} openings · refreshed ${live.checked}`);
+    set("opp-fields", `${fields} of them`);
+    if (types.length) set("opp-types", types.join(", "));
+  }).catch(() => {});
 })();
 </script>
 

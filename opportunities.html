@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Funded Opportunities — verified against the source — Farhan Bashir</title>
-<meta name="description" content="Funded research internships, PhD calls and scholarships in AI and CS. Every figure quoted from the programme's own page, with the source link and the date it was checked. Filter by country, field, level, funding and deadline." />
+<title>Opportunities — jobs, internships, PhD places and scholarships — Farhan Bashir</title>
+<meta name="description" content="One searchable list of jobs, internships, PhD places, research posts and funded scholarships. 1,200 live listings refreshed twice a day from eight public feeds, plus hand-verified funded programmes. Filter by what you want, field, level and visa sponsorship." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@300;400;600&display=swap" rel="stylesheet" />
@@ -12,18 +12,18 @@
 <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
 <link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
 
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:site_name" content="Farhan Bashir" />
 <meta property="og:url" content="https://farhanbashir.netlify.app/opportunities.html" />
-<meta property="og:title" content="Funded Opportunities — verified against the source" />
-<meta property="og:description" content="Funded research internships, PhD calls and scholarships in AI and CS. Every figure quoted from the programme's own page. Four entries on the popular lists are wrong — this says which." />
+<meta property="og:title" content="Opportunities — jobs, PhDs and scholarships in one list" />
+<meta property="og:description" content="Jobs, internships, PhD places, research posts and funded scholarships in one searchable list. Refreshed twice a day from eight public feeds." />
 <meta property="og:image" content="https://farhanbashir.netlify.app/assets/brand/og-card.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content="Farhan Bashir — I build AI that knows its limits, and ships anyway." />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Funded Opportunities — verified against the source" />
-<meta name="twitter:description" content="Every figure quoted from the programme's own page, with the date it was checked." />
+<meta name="twitter:title" content="Opportunities — jobs, PhDs and scholarships in one list" />
+<meta name="twitter:description" content="Jobs, internships, PhD places, research posts and funded scholarships in one searchable list." />
 <meta name="twitter:image" content="https://farhanbashir.netlify.app/assets/brand/og-card.png" />
 <meta name="theme-color" content="#060608" />
 <style>
@@ -36,7 +36,7 @@
   }
   *,*::before,*::after{ box-sizing:border-box; }
   body{ margin:0; background:var(--ink); color:var(--paper); font-family:var(--body);
-    font-weight:300; line-height:1.65; -webkit-font-smoothing:antialiased; }
+    font-weight:300; line-height:1.6; -webkit-font-smoothing:antialiased; }
   a{ color:var(--main-2); }
   .wrap{ max-width:1180px; margin:0 auto; padding:clamp(28px,5vw,60px) clamp(18px,5vw,40px) 80px; }
 
@@ -44,10 +44,9 @@
     letter-spacing:.28em; text-transform:uppercase; color:var(--muted); }
   h1{ font-family:var(--display); font-weight:700; letter-spacing:-.04em; text-transform:uppercase;
     font-size:clamp(1.8rem,5vw,2.8rem); margin:.2em 0 .3em; }
-  h2{ font-family:var(--display); font-weight:600; letter-spacing:-.02em; font-size:1.15rem; margin:0 0 10px; }
+  h2{ font-family:var(--display); font-weight:600; font-size:1.1rem; margin:0 0 10px; }
   .sub{ color:var(--muted); max-width:74ch; }
 
-  /* ---------- nav ---------- */
   .subnav{ display:flex; flex-wrap:wrap; gap:6px 16px; font-family:var(--display);
     font-size:.78rem; padding-bottom:20px; border-bottom:1px solid var(--line); margin-bottom:28px; }
   .subnav a{ color:var(--muted); text-decoration:none; }
@@ -55,94 +54,77 @@
   .subnav a[aria-current]{ color:var(--main-2); }
   .subnav .home{ color:var(--paper); font-weight:600; }
 
-  /* ---------- honesty box ---------- */
+  .live{ display:inline-flex; align-items:center; gap:7px; font-family:var(--display);
+    font-size:.72rem; color:var(--green); border:1px solid rgba(74,222,128,.3);
+    background:rgba(74,222,128,.07); border-radius:99px; padding:5px 13px; }
+  .dot{ width:7px; height:7px; border-radius:50%; background:var(--green); animation:p 2s infinite; }
+  @keyframes p{ 0%,100%{opacity:.35} 50%{opacity:1} }
+
   .honest{ border-left:3px solid var(--main); background:var(--surface-2);
-    padding:16px 20px; border-radius:0 10px 10px 0; margin:26px 0; }
-  .honest b{ font-family:var(--display); font-size:.8rem; letter-spacing:.04em; display:block; margin-bottom:6px; }
-  .honest p{ margin:.55em 0; font-size:.92rem; color:var(--muted); }
+    padding:15px 19px; border-radius:0 10px 10px 0; margin:24px 0; }
+  .honest b{ font-family:var(--display); font-size:.79rem; display:block; margin-bottom:6px; }
+  .honest p{ margin:.5em 0; font-size:.9rem; color:var(--muted); }
   .honest.warn{ border-left-color:var(--amber); }
 
-  /* ---------- filters ---------- */
   .filters{ background:var(--surface-2); border:1px solid var(--line);
-    border-radius:14px; padding:18px 20px; margin:26px 0 22px; }
-  .frow{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:14px; }
+    border-radius:14px; padding:17px 19px; margin:24px 0 18px; }
+  .frow{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:12px; }
   .frow:last-child{ margin-bottom:0; }
-  .flabel{ font-family:var(--display); font-size:.62rem; font-weight:600; letter-spacing:.16em;
-    text-transform:uppercase; color:var(--faint); flex:0 0 92px; }
+  .flabel{ font-family:var(--display); font-size:.61rem; font-weight:600; letter-spacing:.15em;
+    text-transform:uppercase; color:var(--faint); flex:0 0 88px; }
   @media(max-width:640px){ .flabel{ flex:0 0 100%; margin-bottom:2px; } }
-  .chip{ font-family:var(--display); font-size:.74rem; padding:7px 14px; border-radius:99px;
+  .chip{ font-family:var(--display); font-size:.73rem; padding:6px 13px; border-radius:99px;
     cursor:pointer; border:1px solid var(--line-2); background:transparent; color:var(--muted);
-    min-height:34px; transition:background .14s,color .14s; }
+    min-height:32px; }
   .chip:hover{ color:var(--paper); }
   .chip[aria-pressed="true"]{ background:var(--main); border-color:var(--main); color:#fff; }
+  .chip.good[aria-pressed="true"]{ background:var(--green); border-color:var(--green); color:#062; }
   #q{ flex:1; min-width:200px; background:var(--ink); color:var(--paper); border:1px solid var(--line-2);
     border-radius:9px; padding:10px 13px; font:inherit; font-size:.9rem; min-height:44px; }
   #q:focus{ outline:2px solid var(--main); outline-offset:1px; }
   .reset{ font-family:var(--display); font-size:.72rem; background:none; border:none;
     color:var(--faint); cursor:pointer; text-decoration:underline; padding:8px; min-height:44px; }
   .reset:hover{ color:var(--paper); }
-  .resultline{ font-family:var(--display); font-size:.78rem; color:var(--faint); margin:0 0 18px; }
+  .resultline{ font-family:var(--display); font-size:.78rem; color:var(--faint); margin:0 0 14px; }
 
-  /* ---------- cards ---------- */
-  .cards{ display:grid; gap:14px; }
-  .card{ background:var(--surface-2); border:1px solid var(--line); border-radius:14px;
-    padding:20px 22px; transition:border-color .15s; }
-  .card:hover{ border-color:var(--line-2); }
-  .chead{ display:flex; gap:12px; align-items:flex-start; flex-wrap:wrap; }
-  .cflag{ font-size:1.5rem; line-height:1.2; }
-  .ctitle{ flex:1; min-width:220px; }
-  .ctitle h3{ font-family:var(--display); font-weight:600; font-size:1.02rem; margin:0 0 2px;
-    letter-spacing:-.01em; }
-  .ctitle h3 a{ color:var(--paper); text-decoration:none; }
-  .ctitle h3 a:hover{ color:var(--main-2); }
-  .corg{ font-size:.83rem; color:var(--faint); }
+  .rows{ display:grid; gap:9px; }
+  .job{ display:grid; grid-template-columns:1fr auto; gap:4px 16px; align-items:start;
+    background:var(--surface-2); border:1px solid var(--line); border-radius:11px;
+    padding:14px 17px; text-decoration:none; color:inherit; }
+  .job:hover{ border-color:var(--line-2); background:rgba(255,255,255,.06); }
+  .jt{ font-family:var(--display); font-weight:600; font-size:.94rem; letter-spacing:-.01em; }
+  .jc{ font-size:.83rem; color:var(--muted); grid-column:1; }
+  .jd{ font-family:var(--display); font-size:.7rem; color:var(--faint); text-align:right;
+    white-space:nowrap; grid-row:1; grid-column:2; }
+  .jtags{ grid-column:1/-1; display:flex; flex-wrap:wrap; gap:5px; margin-top:7px; }
+  .t{ font-family:var(--display); font-size:.63rem; letter-spacing:.05em; color:var(--faint);
+    border:1px solid var(--line); border-radius:4px; padding:2px 7px; }
+  .t.lv{ color:var(--accent); border-color:rgba(34,211,238,.3); }
+  .t.fld{ color:var(--main-2); border-color:rgba(167,139,250,.35); }
+  .t.typ{ color:#fff; background:rgba(139,92,246,.22); border-color:rgba(139,92,246,.5); font-weight:600; }
+  .t.ver{ color:var(--green); border-color:rgba(74,222,128,.5); background:rgba(74,222,128,.08); }
+  .t.gpa{ color:var(--amber); border-color:rgba(251,191,36,.45); }
+  .t.st-open{ color:var(--green); border-color:rgba(74,222,128,.4); }
+  .t.st-closing-soon{ color:var(--amber); border-color:rgba(251,191,36,.5); }
+  .t.st-paused{ color:var(--red); border-color:rgba(248,113,113,.5); }
+  .t.st-opens-later,.t.st-opens-soon,.t.st-check-source{ color:var(--faint); }
+  .jc.note{ color:var(--accent); font-size:.79rem; }
+  .jc.corr{ color:#e8d5a8; font-size:.79rem; background:rgba(251,191,36,.07);
+    border-left:2px solid rgba(251,191,36,.45); padding:5px 9px; margin-top:5px; border-radius:0 5px 5px 0; }
+  .t.src{ color:var(--muted); }
+  .t.sp-yes{ color:var(--green); border-color:rgba(74,222,128,.45); }
+  .t.sp-no{ color:var(--red);   border-color:rgba(248,113,113,.4); }
+  .t.sal{ color:var(--green); border-color:rgba(74,222,128,.3); }
+  .empty{ text-align:center; color:var(--faint); padding:46px 20px; font-size:.92rem; }
+  #more{ display:block; margin:20px auto 0; font-family:var(--display); font-size:.8rem;
+    background:var(--surface-2); border:1px solid var(--line-2); color:var(--paper);
+    border-radius:9px; padding:12px 26px; cursor:pointer; min-height:44px; }
+  #more:hover{ background:rgba(255,255,255,.09); }
 
-  .status{ font-family:var(--display); font-size:.62rem; font-weight:600; letter-spacing:.1em;
-    text-transform:uppercase; padding:4px 10px; border-radius:5px; white-space:nowrap; }
-  .s-open{ background:rgba(74,222,128,.15); color:var(--green); }
-  .s-closing-soon{ background:rgba(251,191,36,.17); color:var(--amber); }
-  .s-opens-soon{ background:rgba(34,211,238,.14); color:var(--accent); }
-  .s-opens-later{ background:rgba(255,255,255,.06); color:var(--muted); }
-  .s-paused{ background:rgba(248,113,113,.16); color:var(--red); }
-  .s-check-source{ background:rgba(255,255,255,.06); color:var(--faint); }
-
-  .meta{ display:flex; flex-wrap:wrap; gap:6px; margin:14px 0 0; }
-  .tag{ font-family:var(--display); font-size:.67rem; color:var(--muted);
-    border:1px solid var(--line); border-radius:5px; padding:3px 9px; }
-  .tag.gpa{ border-color:rgba(251,191,36,.4); color:var(--amber); }
-  .tag.money{ border-color:rgba(74,222,128,.3); color:var(--green); }
-
-  .facts{ margin:14px 0 0; font-size:.88rem; color:var(--muted); }
-  .facts div{ margin:3px 0; }
-  .facts b{ color:var(--paper); font-weight:400; }
-
-  .correction{ margin:14px 0 0; padding:11px 14px; border-radius:8px;
-    background:rgba(251,191,36,.07); border:1px solid rgba(251,191,36,.22);
-    font-size:.86rem; color:#e8d5a8; }
-  .correction b{ font-family:var(--display); font-size:.66rem; letter-spacing:.12em;
-    text-transform:uppercase; color:var(--amber); display:block; margin-bottom:4px; }
-
-  details.ev{ margin:12px 0 0; }
-  details.ev summary{ font-family:var(--display); font-size:.72rem; color:var(--faint);
-    cursor:pointer; padding:6px 0; }
-  details.ev summary:hover{ color:var(--paper); }
-  details.ev blockquote{ margin:8px 0 8px 14px; padding-left:12px; border-left:2px solid var(--line-2);
-    font-size:.84rem; color:var(--muted); font-style:italic; }
-  details.ev blockquote cite{ display:block; font-style:normal; font-size:.74rem; margin-top:4px; }
-
-  .empty{ text-align:center; color:var(--faint); padding:50px 20px; font-size:.92rem; }
-
-  /* ---------- job sources ---------- */
-  .sources{ margin-top:40px; }
-  .srcgrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-top:14px; }
-  .src{ background:var(--surface-2); border:1px solid var(--line); border-radius:11px; padding:15px 17px; }
-  .src a{ font-family:var(--display); font-size:.9rem; font-weight:600; text-decoration:none; }
-  .src p{ margin:5px 0 0; font-size:.83rem; color:var(--faint); }
-
-  footer{ margin-top:56px; padding-top:22px; border-top:1px solid var(--line);
-    display:flex; flex-wrap:wrap; gap:10px 24px; justify-content:space-between;
-    font-size:.8rem; color:var(--faint); }
-  @media(pointer:coarse){ .chip,.reset,a{ min-height:44px; } .chip{ display:inline-flex; align-items:center; } }
+  footer{ margin-top:50px; padding-top:22px; border-top:1px solid var(--line);
+    font-size:.79rem; color:var(--faint); }
+  footer a{ color:var(--muted); }
+  @media(pointer:coarse){ .chip,.reset{ min-height:44px; display:inline-flex; align-items:center; } }
 </style>
 </head>
 <body>
@@ -158,136 +140,135 @@
     <a href="mcp.html">MCP</a>
     <a href="agent.html">Agent spec</a>
     <a href="opportunities.html" aria-current="page">Opportunities</a>
-    <a href="jobs.html">Live jobs</a>
     <a href="plan.html">Plan</a>
     <a href="learned.html">Explain it</a>
   </nav>
 
   <header>
-    <p class="label">Funded opportunities · AI &amp; computer science</p>
-    <h1>Verified against the source</h1>
-    <p class="sub">Research internships, PhD calls and scholarships that pay. Every figure on this page
-      is quoted from the programme's own page, with a link to where I read it and the date I read it.
-      Filter by country, field, level, what's funded, and whether it's actually open.</p>
+    <p class="label">Jobs · internships · PhD · research · scholarships</p>
+    <h1>Opportunities, pulled from the source</h1>
+    <p class="sub">One list: <strong>jobs, internships, PhD places, research posts and funded
+      scholarships</strong>. Most of it refreshes itself twice a day from eight public feeds — not a
+      list I typed. Every field, not just tech: software, design, marketing, finance, healthcare,
+      legal, education and more. Filter by what you actually want, then by field, level and, where
+      the source states it, <strong>visa sponsorship</strong>. Every card links to the original.</p>
+    <p style="margin-top:14px"><span class="live"><span class="dot"></span><span id="livestamp">loading…</span></span></p>
   </header>
 
-  <div class="honest warn">
-    <b>Why this page exists</b>
-    <p>A list of ten of these circulates widely on LinkedIn. I checked all ten against the official
-      pages. <strong>Four were wrong in ways that would waste a real application.</strong> One programme
-      on it is not running at all this year. One is advertised to computer-science students by a
-      department that has no computer-science faculty. One quotes a stipend the university has never
-      published. One omits a minimum GPA that decides eligibility outright.</p>
-    <p>So this page shows the correction next to the entry, in yellow, with the quote that proves it.
-      Believe the quote, not me — and click through before you apply, because programmes change and
-      this page is only as fresh as the date on each card.</p>
+  <div class="honest">
+    <b>How this works, and what it costs</b>
+    <p>A GitHub Action runs twice a day, calls eight public feeds, drops rows that are not really an
+      opening, removes duplicates syndicated across boards, tags each listing with a type and a field,
+      and commits the result. Rare categories get a quota so 500 ordinary jobs cannot bury 50 PhD
+      places. The page you are reading is static — it loads two JSON files.
+      <strong>No API key, no server, no scraping.</strong>
+      Everything is in the open:
+      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/tools/fetch-jobs.py">the fetcher</a>,
+      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/.github/workflows/jobs.yml">the schedule</a>,
+      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/data/jobs.json">the data</a>.</p>
   </div>
 
-  <!-- ================= filters ================= -->
   <div class="filters">
     <div class="frow">
       <span class="flabel">I want</span>
-      <div id="f-type" class="frow" style="flex:1; margin:0; gap:8px"></div>
-    </div>
-    <div class="frow">
-      <span class="flabel">My level</span>
-      <div id="f-level" class="frow" style="flex:1; margin:0; gap:8px"></div>
+      <div id="f-type" class="frow" style="flex:1;margin:0;gap:8px"></div>
     </div>
     <div class="frow">
       <span class="flabel">Field</span>
-      <div id="f-field" class="frow" style="flex:1; margin:0; gap:8px"></div>
+      <div id="f-field" class="frow" style="flex:1;margin:0;gap:8px"></div>
     </div>
     <div class="frow">
-      <span class="flabel">Country</span>
-      <div id="f-country" class="frow" style="flex:1; margin:0; gap:8px"></div>
+      <span class="flabel">Level</span>
+      <div id="f-level" class="frow" style="flex:1;margin:0;gap:8px"></div>
     </div>
     <div class="frow">
-      <span class="flabel">Must fund</span>
-      <div id="f-funding" class="frow" style="flex:1; margin:0; gap:8px"></div>
+      <span class="flabel">Checked</span>
+      <div id="f-verified" class="frow" style="flex:1;margin:0;gap:8px"></div>
     </div>
     <div class="frow">
-      <span class="flabel">Status</span>
-      <div id="f-status" class="frow" style="flex:1; margin:0; gap:8px"></div>
+      <span class="flabel">Source</span>
+      <div id="f-source" class="frow" style="flex:1;margin:0;gap:8px"></div>
+    </div>
+    <div class="frow">
+      <span class="flabel">Visa</span>
+      <div id="f-visa" class="frow" style="flex:1;margin:0;gap:8px"></div>
     </div>
     <div class="frow">
       <span class="flabel">Search</span>
-      <input id="q" type="search" placeholder="programme, university, requirement…" />
-      <button class="reset" id="reset">clear all filters</button>
+      <input id="q" type="search" placeholder="title, company, location…" />
+      <button class="reset" id="reset">clear all</button>
     </div>
   </div>
 
-  <p class="resultline" id="resultline"></p>
-  <div class="cards" id="cards"></div>
+  <p class="resultline" id="resultline">loading listings…</p>
+  <div class="rows" id="rows"></div>
+  <button id="more" hidden>Show more</button>
 
-  <!-- ================= job sources ================= -->
-  <section class="sources">
-    <h2>Looking for a job or a funded PhD, not a summer programme?</h2>
-    <p class="sub">Individual postings churn weekly. A hand-maintained list of them would be stale
-      within days of me writing it, so I am not going to pretend otherwise — here are the boards I
-      would actually send you to.</p>
-    <div class="srcgrid" id="srcgrid"></div>
-  </section>
-
-  <div class="honest">
-    <b>What this page is not</b>
-    <p><strong>It does not search the internet.</strong> It is a hand-verified catalogue of recurring
-      programmes — things with annual cycles and stable URLs, which is exactly the category a list can
-      stay honest about. It does not crawl job boards and it does not claim to be complete.</p>
-    <p><strong>The dates are the weak point.</strong> Deadlines marked "expect the same shape" are
-      inferred from the previous cycle, and I have labelled them that way rather than presenting an
-      inferred date as a fact. A daily job re-checks every source URL and flags any that break; that
-      catches dead links, not silently edited deadlines. Click through before you commit.</p>
-    <p>The judgement of whether <em>you specifically</em> should apply is a separate tool — an
-      <a href="agent.html">agent</a> that reads a posting against a CV and returns apply, caveat or
-      skip. That one needs an API key, so it runs on your own machine rather than here.
-      <a href="https://github.com/FarhanRajputFelix/portfolio/tree/main/agent">Source and setup</a>.</p>
+  <div class="honest warn">
+    <b>Read this before you spend an evening applying</b>
+    <p><strong>A listing here is not a guarantee it is still open.</strong> This mirrors other
+      people's boards twice a day; a role can be filled an hour after it is posted. The date shown
+      is when the <em>source</em> published it, not when I checked it.</p>
+    <p><strong>The field tag is a regex over the title, not a judgement.</strong> Each listing gets
+      one field from the first rule its title matches, falling back to the source's own tags. It gets
+      things wrong: an "Audio Engineer" lands in software because the word <em>engineer</em> is in the
+      software rule. I use the title first precisely because board tagging is worse — one board filed
+      "Pharmacy Technician Refill Calls" under an AI track. If a field looks thin, search instead of
+      filtering.</p>
+    <p><strong>Scholarships are the weak spot, and here is why.</strong> Job boards publish APIs;
+      scholarship providers publish web pages. ETH, KAUST, DAAD and the rest have no feed to read, so
+      nothing can poll them. What you see is the honest split: research posts, PhD places and
+      fellowships come live from jobRxiv and Nature Careers, which do publish feeds, while a small
+      set of major funded programmes is <strong>checked by hand</strong> and marked
+      <span class="t ver">verified</span>. Those carry the quote and the date I read it. A daily job
+      re-checks their links, but a working link is not a current deadline.</p>
+    <p><strong>Most listings say nothing about visa sponsorship.</strong> Only one source publishes
+      that field at all, and on most of its rows it is blank. Blank means <em>unstated</em>, never
+      "yes". Use the <em>Says it sponsors</em> filter to see only the ones that actually answered, and
+      <em>Hide no-sponsorship</em> to drop the ones that have already ruled you out.</p>
+    <p>Want a verdict on whether a specific posting is worth <em>your</em> time rather than a list?
+      That is the <a href="agent.html">agent</a> — it reads a posting against a CV and returns apply,
+      caveat or skip. It needs an API key, so it runs on your own machine.</p>
   </div>
 
   <footer>
-    <span>Farhan Bashir · Karachi, Pakistan · every entry checked <span id="checked-date">—</span></span>
-    <span><a href="./">← Portfolio</a> · <a href="agent.html">The agent</a> ·
-      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/data/opportunities.json">Raw data (JSON)</a></span>
+    <p id="attrib">—</p>
+    <p style="margin-top:12px">
+      <a href="./">← Portfolio</a> ·
+      <a href="opportunities.html">Funded scholarships &amp; research programmes</a> ·
+      <a href="agent.html">The agent</a> ·
+      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/tools/fetch-jobs.py">How it's built</a>
+    </p>
   </footer>
-
 </div>
 
 <script>
-/* Static page, no API key, no backend — it reads one JSON file. That is the whole
-   reason it can be hosted anywhere, unlike the agent it links to. */
-const FIELD_LABELS = {
-  "ai-ml": "AI / ML", "ai-safety": "AI safety", "computer-science": "Computer science",
-  "data-science": "Data science", "security": "Security", "robotics": "Robotics",
-  "systems": "Systems", "algorithms": "Algorithms", "engineering": "Engineering",
-  "physics": "Physics", "chemistry": "Chemistry", "biology": "Biology",
-  "neuroscience": "Neuroscience", "maths": "Maths", "earth-science": "Earth science",
-  "bioengineering": "Bioengineering"
-};
-const TYPE_LABELS = {
-  internship: "Internship", phd: "PhD position", scholarship: "Scholarship",
-  research: "Research programme", assistantship: "Assistantship", funding: "Funding / grant"
-};
-const LEVEL_LABELS = { undergraduate: "Undergraduate", masters: "Master's", phd: "PhD" };
-const FUND_LABELS = {
-  stipend: "Stipend", tuition: "Tuition", housing: "Housing",
-  travel: "Travel", insurance: "Insurance", visa: "Visa"
-};
-const STATUS_LABELS = {
-  open: "Open now", "closing-soon": "Closing soon", "opens-soon": "Opens soon",
-  "opens-later": "Cycle closed", paused: "Not running", "check-source": "Verify at source"
-};
-
-const state = { type:new Set(), level:new Set(), field:new Set(), country:new Set(), funding:new Set(), status:new Set(), q:"" };
-let DATA = null;
-
-const esc = (s) => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
-function chipGroup(hostId, key, values, labels) {
+const LEVELS = { internship:"Internship", "new-grad":"New grad", mid:"Mid", senior:"Senior" };
+const FIELDS = {
+  "ai-ml":"AI / ML", software:"Software", data:"Data", devops:"DevOps", security:"Security",
+  design:"Design", product:"Product", marketing:"Marketing", sales:"Sales", support:"Support",
+  finance:"Finance", people:"HR / People", operations:"Operations", healthcare:"Healthcare",
+  education:"Education", legal:"Legal", research:"Research", other:"Other"
+};
+const TAGS   = { llm:"LLM", nlp:"NLP", vision:"Vision", mlops:"MLOps",
+                 research:"Research", data:"Data", robotics:"Robotics", agents:"Agents" };
+
+const TYPES = { job:"Job", internship:"Internship", phd:"PhD place",
+                research:"Research post", scholarship:"Scholarship / funding" };
+const state = { type:new Set(), field:new Set(), level:new Set(),
+                source:new Set(), visa:new Set(), verified:new Set(), q:"" };
+let DATA = null, shown = [], page = 0;
+const PAGE = 60;
+
+function chipGroup(hostId, key, values, labels, cls) {
   const host = $(hostId);
   host.innerHTML = "";
   for (const v of values) {
     const b = document.createElement("button");
-    b.className = "chip";
+    b.className = "chip" + (cls ? " " + cls : "");
     b.type = "button";
     b.textContent = (labels && labels[v]) || v;
     b.setAttribute("aria-pressed", "false");
@@ -300,125 +281,192 @@ function chipGroup(hostId, key, values, labels) {
   }
 }
 
-/* Multi-select within a facet is OR (a student open to Switzerland or Japan wants
-   both), across facets is AND (an undergraduate internship in Japan). */
-function matches(o) {
-  const s = state;
-  if (s.type.size && !s.type.has(o.type)) return false;
-  if (s.status.size && !s.status.has(o.status)) return false;
-  if (s.level.size && !o.level.some(l => s.level.has(l))) return false;
-  if (s.field.size && !o.fields.some(f => s.field.has(f))) return false;
-  if (s.country.size && !s.country.has(o.country)) return false;
-  if (s.funding.size && ![...s.funding].every(f => o.fundingTags.includes(f))) return false;
-  if (s.q) {
-    const hay = [o.name, o.org, o.country, o.eligibility, o.restrictions, o.corrections,
-                 o.deadlineText, o.gpaRequirement, ...o.fields].join(" ").toLowerCase();
-    if (!hay.includes(s.q)) return false;
+function matches(j) {
+  if (state.type.size && !state.type.has(j.type)) return false;
+  if (state.verified.size && !j.verified) return false;
+  if (state.field.size && !state.field.has(j.field)) return false;
+  if (state.level.size && !state.level.has(j.level)) return false;
+  if (state.source.size && !state.source.has(j.source)) return false;
+
+  // Two different questions, so two separate switches rather than one tri-state.
+  // "Says it sponsors" is a positive claim by the employer; "hide no-sponsorship"
+  // only removes the ones that have explicitly ruled you out, and leaves the
+  // silent majority in — because silence is not a no.
+  if (state.visa.has("sponsors") && j.sponsorship !== "Offers Sponsorship") return false;
+  if (state.visa.has("hide-no") &&
+      (j.sponsorship === "Does Not Offer Sponsorship" || j.sponsorship === "U.S. Citizenship is Required")) return false;
+
+  if (state.q) {
+    const hay = `${j.title} ${j.company} ${j.location} ${j.field} ${j.type} `
+              + `${j.deadlineText || ""} ${(j.tags||[]).join(" ")}`.toLowerCase();
+    if (!hay.includes(state.q)) return false;
   }
   return true;
 }
 
-/* Rank so the things you can act on today come first. */
-const STATUS_RANK = { "closing-soon":0, open:1, "opens-soon":2, "opens-later":3, "check-source":4, paused:5 };
+function ago(d) {
+  if (!d) return "";
+  const days = Math.round((Date.parse(new Date().toISOString().slice(0,10)) - Date.parse(d)) / 86400000);
+  if (days <= 0) return "today";
+  if (days === 1) return "yesterday";
+  if (days < 30) return `${days}d ago`;
+  return `${Math.round(days/30)}mo ago`;
+}
 
-function card(o) {
-  const money = Object.entries(o.funding).filter(([, v]) => v).map(([k]) => k);
-  const facts = [];
-  if (o.funding.stipend) facts.push(`<div><b>Pays</b> — ${esc(o.funding.stipend)}</div>`);
-  if (o.duration)        facts.push(`<div><b>Length</b> — ${esc(o.duration)}</div>`);
-  if (o.deadlineText)    facts.push(`<div><b>Applies</b> — ${esc(o.deadlineText)}</div>`);
-  if (o.eligibility)     facts.push(`<div><b>Who</b> — ${esc(o.eligibility)}</div>`);
-  if (o.restrictions)    facts.push(`<div><b>Watch out</b> — ${esc(o.restrictions)}</div>`);
+function money(j) {
+  const lo = j.salary_min, hi = j.salary_max;
+  if (!lo && !hi) return "";
+  const k = (n) => n >= 1000 ? `$${Math.round(n/1000)}k` : `$${n}`;
+  return lo && hi ? `${k(lo)}–${k(hi)}` : k(lo || hi);
+}
 
-  const tags = [
-    ...o.fundingTags.map(f => `<span class="tag money">${esc(FUND_LABELS[f] || f)}</span>`),
-    ...o.level.map(l => `<span class="tag">${esc(LEVEL_LABELS[l] || l)}</span>`),
-    ...o.fields.slice(0, 4).map(f => `<span class="tag">${esc(FIELD_LABELS[f] || f)}</span>`),
-    o.gpaRequirement ? `<span class="tag gpa">Min GPA ${esc(o.gpaRequirement)}</span>` : ""
-  ].join("");
+function row(j) {
+  const sp = j.sponsorship === "Offers Sponsorship"
+      ? `<span class="t sp-yes">sponsors visa</span>`
+    : (j.sponsorship === "Does Not Offer Sponsorship" || j.sponsorship === "U.S. Citizenship is Required")
+      ? `<span class="t sp-no">${esc(j.sponsorship)}</span>` : "";
+  const sal = money(j);
+  return `<a class="job" href="${esc(j.url)}" target="_blank" rel="noopener">
+    <span class="jt">${esc(j.title)}</span>
+    <span class="jd">${esc(ago(j.posted))}</span>
+    <span class="jc">${esc(j.company || "—")}${j.location ? " · " + esc(j.location) : ""}</span>
+    ${j.deadlineText ? `<span class="jc note">Applies: ${esc(j.deadlineText)}</span>` : ""}
+    ${j.corrections ? `<span class="jc corr">Correction: ${esc(j.corrections)}</span>` : ""}
+    <span class="jtags">
+      <span class="t typ">${esc(TYPES[j.type] || j.type)}</span>
+      ${j.verified ? `<span class="t ver">verified by hand</span>` : ""}
+      ${j.status ? `<span class="t st-${esc(j.status)}">${esc(j.status.replace(/-/g," "))}</span>` : ""}
+      ${j.gpa ? `<span class="t gpa">min GPA ${esc(j.gpa)}</span>` : ""}
+      <span class="t fld">${esc(FIELDS[j.field] || j.field)}</span>
+      <span class="t lv">${esc(LEVELS[j.level] || j.level)}</span>
+      ${(j.tags||[]).map(t => `<span class="t">${esc(TAGS[t] || t)}</span>`).join("")}
+      ${sal ? `<span class="t sal">${esc(sal)}</span>` : ""}
+      ${sp}
+      <span class="t src">via ${esc(j.source)}</span>
+    </span>
+  </a>`;
+}
 
-  const ev = o.evidence.map(e =>
-    `<blockquote>“${esc(e.quote)}”<cite><a href="${esc(e.source)}" target="_blank" rel="noopener">${esc(e.claim)} — source ↗</a></cite></blockquote>`
-  ).join("");
-
-  return `<article class="card">
-    <div class="chead">
-      <span class="cflag" aria-hidden="true">${o.flag}</span>
-      <div class="ctitle">
-        <h3><a href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.name)} ↗</a></h3>
-        <div class="corg">${esc(o.org)} · ${esc(o.country)} · ${esc(TYPE_LABELS[o.type] || o.type)}</div>
-      </div>
-      <span class="status s-${esc(o.status)}">${esc(STATUS_LABELS[o.status] || o.status)}</span>
-    </div>
-    <div class="meta">${tags}</div>
-    <div class="facts">${facts.join("")}</div>
-    ${o.corrections ? `<div class="correction"><b>Correction to the list going around</b>${esc(o.corrections)}</div>` : ""}
-    <details class="ev"><summary>Show the ${o.evidence.length} quote${o.evidence.length===1?"":"s"} this card is built on · checked ${esc(o.checked)}</summary>${ev}</details>
-  </article>`;
+function paint() {
+  const slice = shown.slice(0, (page + 1) * PAGE);
+  $("#rows").innerHTML = slice.length
+    ? slice.map(row).join("")
+    : `<p class="empty">No listing matches all of those at once.<br>Try clearing a filter.</p>`;
+  const left = shown.length - slice.length;
+  $("#more").hidden = left <= 0;
+  $("#more").textContent = `Show ${Math.min(left, PAGE)} more of ${left}`;
 }
 
 function render() {
-  const shown = DATA.opportunities.filter(matches)
-    .sort((a, b) => (STATUS_RANK[a.status] ?? 9) - (STATUS_RANK[b.status] ?? 9)
-                    || String(a.deadline ?? "9").localeCompare(String(b.deadline ?? "9")));
-
-  $("#cards").innerHTML = shown.length
-    ? shown.map(card).join("")
-    : `<p class="empty">Nothing matches all of those at once.<br>Try removing a filter — with 13 entries, narrow combinations run out fast.</p>`;
-
-  const n = DATA.opportunities.length;
-  const funded = shown.filter(o => o.fundingTags.includes("stipend")).length;
+  shown = DATA.jobs.filter(matches);
+  page = 0;
+  const withVisa = shown.filter(j => j.sponsorship === "Offers Sponsorship").length;
+  const interns = shown.filter(j => j.level === "internship").length;
+  const fields = new Set(shown.map(j => j.field)).size;
+  const ver = shown.filter(j => j.verified).length;
   $("#resultline").textContent =
-    `${shown.length} of ${n} shown · ${funded} pay a stipend · sorted by what you can act on soonest`;
+    `${shown.length} of ${DATA.count} · ${fields} field${fields === 1 ? "" : "s"} · `
+    + `${interns} internships · ${ver} hand-verified · ${withVisa} state that they sponsor a visa`;
+  paint();
 }
 
-fetch("data/opportunities.json")
-  .then(r => r.json())
-  .then(d => {
-    DATA = d;
-    const os = d.opportunities;
-    const uniq = (fn) => [...new Set(os.flatMap(fn))].sort();
+/* ------------------------------------------------------------------ *
+ * Two files, one list.
+ *
+ * data/jobs.json          refreshed twice a day by a GitHub Action
+ * data/opportunities.json a small set of major funded programmes checked by
+ *                         hand, because scholarship providers publish web
+ *                         pages and not APIs — there is nothing to poll.
+ *
+ * They are merged into one shape here rather than being shown on two pages,
+ * because a visitor is asking one question ("what can I apply for?") and
+ * should not have to know which pipeline produced the answer. Where they
+ * differ is on the card: a hand-checked row carries a `verified` badge, its
+ * status, and the correction that verifying it turned up.
+ * ------------------------------------------------------------------ */
+const FIELD_FROM_PROGRAMME = {
+  "computer-science":"software", "ai-ml":"ai-ml", "ai-safety":"ai-ml",
+  "data-science":"data", "security":"security", "robotics":"ai-ml",
+  "systems":"software", "algorithms":"software", "engineering":"other",
+  "physics":"research", "chemistry":"research", "biology":"healthcare",
+  "neuroscience":"healthcare", "maths":"research", "earth-science":"research",
+  "bioengineering":"healthcare"
+};
 
-    chipGroup("#f-type",    "type",    uniq(o => [o.type]),        TYPE_LABELS);
-    chipGroup("#f-level",   "level",   ["undergraduate","masters","phd"], LEVEL_LABELS);
-    chipGroup("#f-field",   "field",   uniq(o => o.fields),        FIELD_LABELS);
-    chipGroup("#f-country", "country", uniq(o => [o.country]),     null);
-    chipGroup("#f-funding", "funding", ["stipend","tuition","housing","travel","insurance","visa"], FUND_LABELS);
-    chipGroup("#f-status",  "status",  uniq(o => [o.status]),      STATUS_LABELS);
+function fromProgramme(o) {
+  return {
+    title: o.name,
+    company: o.org,
+    location: o.country,
+    url: o.url,
+    posted: o.checked,
+    // A paused programme is still worth showing — knowing it is not running is
+    // the whole point — so status rides along rather than filtering it out.
+    status: o.status,
+    type: o.type === "internship" ? "internship"
+        : o.type === "phd" ? "phd"
+        : o.type === "research" ? "research" : "scholarship",
+    field: FIELD_FROM_PROGRAMME[(o.fields || [])[0]] || "research",
+    level: (o.level || []).includes("undergraduate") ? "internship" : "mid",
+    tags: o.fundingTags || [],
+    source: "Verified by hand",
+    sponsorship: null, salary_min: null, salary_max: null,
+    verified: true,
+    gpa: o.gpaRequirement || null,
+    deadlineText: o.deadlineText || null,
+    corrections: o.corrections || null
+  };
+}
 
-    $("#srcgrid").innerHTML = d.jobSources.map(s =>
-      `<div class="src"><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)} ↗</a><p>${esc(s.what)}</p></div>`
-    ).join("");
+Promise.all([
+  fetch("data/jobs.json").then(r => r.json()),
+  // The verified set is a bonus, not a dependency: if it fails to load the
+  // page still works, it just loses the hand-checked rows.
+  fetch("data/opportunities.json").then(r => r.ok ? r.json() : null).catch(() => null)
+])
+  .then(([live, programmes]) => {
+    const rows = live.jobs.map(j => ({ ...j, verified: false }));
+    const verifiedRows = programmes ? programmes.opportunities.map(fromProgramme) : [];
+    // Verified rows first — they are the ones somebody checked.
+    DATA = { ...live, jobs: verifiedRows.concat(rows), count: verifiedRows.length + rows.length };
 
-    $("#checked-date").textContent = d.checked;
+    const uniq = (fn) => [...new Set(DATA.jobs.flatMap(fn))].filter(Boolean).sort();
+    const countBy = (key) => DATA.jobs.reduce((m, j) => (m[j[key]] = (m[j[key]] || 0) + 1, m), {});
+
+    const typeCounts = countBy("type");
+    const typesBySize = Object.keys(typeCounts).sort((a, b) => typeCounts[b] - typeCounts[a]);
+    chipGroup("#f-type", "type", typesBySize,
+              Object.fromEntries(typesBySize.map(t => [t, `${TYPES[t] || t} ${typeCounts[t]}`])));
+
+    // Order the field chips by volume, so the ones worth clicking come first
+    // and a field with three listings does not sit above one with three hundred.
+    const fieldCounts = countBy("field");
+    const fieldsBySize = Object.keys(fieldCounts).sort((a, b) => fieldCounts[b] - fieldCounts[a]);
+    chipGroup("#f-field",  "field",  fieldsBySize,
+              Object.fromEntries(fieldsBySize.map(f => [f, `${FIELDS[f] || f} ${fieldCounts[f]}`])));
+    chipGroup("#f-level",  "level",  ["internship","new-grad","mid","senior"], LEVELS);
+    chipGroup("#f-source", "source", uniq(j => [j.source]), null);
+    chipGroup("#f-visa",   "visa",   ["sponsors","hide-no"],
+              { sponsors:"Says it sponsors", "hide-no":"Hide no-sponsorship" }, "good");
+    chipGroup("#f-verified", "verified", ["yes"], { yes:`Hand-verified ${verifiedRows.length}` }, "good");
+
+    $("#livestamp").textContent =
+      `${live.count} live listings + ${verifiedRows.length} verified programmes · refreshed ${live.checked}`;
+    $("#attrib").textContent = live.attribution;
     render();
-    return fetch("data/freshness.json").then(r => r.ok ? r.json() : null);
-  })
-  .then(f => {
-    // Written by a daily GitHub Action. It proves the links resolve — not that
-    // the deadlines behind them are current. The wording says so.
-    if (!f) return;
-    const el = document.createElement("p");
-    el.className = "resultline";
-    el.style.marginTop = "10px";
-    el.innerHTML = `Sources last auto-checked <b>${esc(f.checked)}</b> — `
-      + `${f.total - f.broken}/${f.total} reachable`
-      + (f.broken ? `, <span style="color:var(--red)">${f.broken} broken</span>` : "")
-      + (f.changed ? `, <span style="color:var(--amber)">${f.changed} page(s) changed since the last check</span>` : "")
-      + `. That checks the links resolve, not that the dates on them are still right.`;
-    $("#resultline").after(el);
   })
   .catch(() => {
-    $("#cards").innerHTML = `<p class="empty">The opportunity data failed to load.
-      You can still read it directly:
-      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/data/opportunities.json">opportunities.json</a>.</p>`;
+    $("#resultline").textContent = "";
+    $("#rows").innerHTML = `<p class="empty">The listings failed to load. The raw data is still here:
+      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/data/jobs.json">jobs.json</a>.</p>`;
   });
 
-$("#q").addEventListener("input", (e) => { state.q = e.target.value.trim().toLowerCase(); render(); });
+$("#q").addEventListener("input", e => { state.q = e.target.value.trim().toLowerCase(); render(); });
+$("#more").addEventListener("click", () => { page++; paint(); });
 $("#reset").addEventListener("click", () => {
-  for (const k of ["type","level","field","country","funding","status"]) state[k].clear();
+  for (const k of ["type","field","level","source","visa","verified"]) state[k].clear();
   state.q = ""; $("#q").value = "";
-  document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", "false"));
+  document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed","false"));
   render();
 });
 </script>
