@@ -5,22 +5,25 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:portfolio-next-case-farhanbashir-2026@farhanbashir.netlify.app
-DTSTAMP:20260808T120000Z
+DTSTAMP:20260809T090000Z
 DTSTART:20260908T150000Z
 DTEND:20260908T154500Z
 RRULE:FREQ=MONTHLY;BYMONTHDAY=8
 SUMMARY:Portfolio: add or advance one case study
 LOCATION:https://farhanbashir.netlify.app
-DESCRIPTION:Run the scaffold\, then write the three beats.\n\n  cd portfol
- io\n  python tools/new-case.py --slug case-<name> --title <Title> --nav <
- Nav>\n  python tools/check-links.py\n\nNext up: Self-Regulating AI. The r
- eal work is running one drift experiment so beat 3 has a number instead o
- f a description.\n\nRule: check every claim against the repo README\, not
-  memory. See NEXT-CASE.md and pipeline/cv-facts.md.
+DESCRIPTION:Run the scaffold, then write the three beats.\n\n  cd portfoli
+ o\n  python tools/new-case.py --slug case-<name> --title <Title> --nav <N
+ av>\n  python tools/check-links.py\n\nNext up: the opportunity board (8 f
+ eeds, 2 scheduled jobs, ~1200 listings, client-side eligibility matcher).
+  The real work before writing it: hand-check 30 random listings against w
+ hat the matcher claims, and publish the disagreement rate. Beat 3 needs a
+  number that survived a check, not a row count.\n\nRule: check every clai
+ m against the repo README, not memory. See NEXT-CASE.md and pipeline/cv-f
+ acts.md.
 BEGIN:VALARM
-TRIGGER:-PT30M
+TRIGGER:-P1D
 ACTION:DISPLAY
-DESCRIPTION:Portfolio case study in 30 minutes
+DESCRIPTION:Tomorrow: portfolio case study
 END:VALARM
 END:VEVENT
 END:VCALENDAR

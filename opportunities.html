@@ -66,6 +66,26 @@
   .honest p{ margin:.5em 0; font-size:.9rem; color:var(--muted); }
   .honest.warn{ border-left-color:var(--amber); }
 
+  .profile{ background:linear-gradient(135deg,rgba(139,92,246,.10),rgba(34,211,238,.05));
+    border:1px solid rgba(139,92,246,.32); border-radius:14px; padding:18px 20px; margin:24px 0 0; }
+  .phead{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; }
+  .profile h2{ font-family:var(--display); font-size:1rem; margin:0 0 4px; }
+  .pnote{ font-size:.84rem; color:var(--muted); margin:6px 0 0; max-width:80ch; }
+  .pgrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(168px,1fr)); gap:11px; margin-top:14px; }
+  .pgrid label{ display:flex; flex-direction:column; gap:5px; font-family:var(--display);
+    font-size:.68rem; letter-spacing:.09em; text-transform:uppercase; color:var(--faint); }
+  .pgrid .tiny{ text-transform:none; letter-spacing:0; font-size:.62rem; color:var(--accent); }
+  .pgrid select{ background:var(--ink); color:var(--paper); border:1px solid var(--line-2);
+    border-radius:8px; padding:9px 10px; font:inherit; font-size:.86rem; min-height:42px; }
+  .pgrid select:focus{ outline:2px solid var(--main); outline-offset:1px; }
+
+  .job.blocked{ opacity:.62; }
+  .why{ grid-column:1/-1; margin-top:8px; display:flex; flex-direction:column; gap:4px; }
+  .why span{ font-size:.8rem; padding:5px 10px; border-radius:6px; }
+  .why .no{ color:#ffc9c9; background:rgba(248,113,113,.10); border-left:2px solid rgba(248,113,113,.55); }
+  .why .maybe{ color:#e8d5a8; background:rgba(251,191,36,.08); border-left:2px solid rgba(251,191,36,.5); }
+  .why .ok{ color:#b8f0cd; background:rgba(74,222,128,.08); border-left:2px solid rgba(74,222,128,.5); }
+
   .filters{ background:var(--surface-2); border:1px solid var(--line);
     border-radius:14px; padding:17px 19px; margin:24px 0 18px; }
   .frow{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:12px; }
@@ -168,6 +188,68 @@
       <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/data/jobs.json">the data</a>.</p>
   </div>
 
+
+  <!-- Eligibility matcher. Everything typed here stays in this browser's
+       localStorage and is never sent anywhere — there is no server to send it
+       to. That is the same trade the agent makes with its GPA gate: answer the
+       question without the number leaving the machine. -->
+  <div class="profile" id="profile">
+    <div class="phead">
+      <h2>Only show what I can actually apply for</h2>
+      <button class="reset" id="profile-clear" hidden>forget my profile</button>
+    </div>
+    <p class="pnote">Answer what you like and the list checks each opening against it. Stored in this
+      browser only &mdash; <strong>nothing is sent anywhere</strong>, because there is no server here
+      to send it to. Leave a box on &ldquo;any&rdquo; and that rule is simply not applied.</p>
+
+    <div class="pgrid">
+      <label>Stage
+        <select id="p-level">
+          <option value="">any</option>
+          <option value="undergraduate">Undergraduate</option>
+          <option value="masters">Master's</option>
+          <option value="phd">PhD</option>
+          <option value="graduated">Graduated</option>
+        </select>
+      </label>
+      <label>Years of study completed
+        <select id="p-years">
+          <option value="">any</option>
+          <option value="0">less than 1</option>
+          <option value="1">1</option><option value="2">2</option>
+          <option value="3">3</option><option value="4">4 or more</option>
+        </select>
+      </label>
+      <label>Field
+        <select id="p-field"><option value="">any</option></select>
+      </label>
+      <label>GPA band <span class="tiny">stays on this device</span>
+        <select id="p-gpa">
+          <option value="">prefer not to say</option>
+          <option value="2.0">below 2.5</option>
+          <option value="3.0">2.5 &ndash; 3.0</option>
+          <option value="3.5">3.0 &ndash; 3.5</option>
+          <option value="4.0">3.5 &ndash; 4.0</option>
+        </select>
+      </label>
+      <label>Need visa sponsorship?
+        <select id="p-visa">
+          <option value="">not sure</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </label>
+      <label>Show
+        <select id="p-mode">
+          <option value="all">everything, with reasons</option>
+          <option value="eligible">only what I qualify for</option>
+          <option value="blocked">only what rules me out</option>
+        </select>
+      </label>
+    </div>
+    <p class="pnote" id="p-summary"></p>
+  </div>
+
   <div class="filters">
     <div class="frow">
       <span class="flabel">I want</span>
@@ -215,6 +297,18 @@
       software rule. I use the title first precisely because board tagging is worse — one board filed
       "Pharmacy Technician Refill Calls" under an AI track. If a field looks thin, search instead of
       filtering.</p>
+    <p><strong>The matcher checks stated requirements, and only those.</strong> It reads the profile
+      you filled in against what each posting actually says. A green tick means
+      <em>nothing stated here rules you out</em> — deliberately not "you qualify". Postings are silent
+      about far more than they state, and a tool that turns silence into permission would send you to
+      apply for things you cannot get. Only an explicit, quoted requirement can produce a red cross,
+      which is why most crosses come from the hand-verified rows: those are the ones where somebody
+      read the page.</p>
+    <p><strong>Your profile never leaves this browser.</strong> It is held in localStorage and there is
+      no server here to send it to. The GPA question asks for a band rather than a number, and the band
+      is only ever compared against a stated minimum — the same trade the
+      <a href="agent.html">agent</a> makes, where a tool returns PASS or FAIL and the figure itself
+      never reaches the model. Clearing it removes it.</p>
     <p><strong>Scholarships are the weak spot, and here is why.</strong> Job boards publish APIs;
       scholarship providers publish web pages. ETH, KAUST, DAAD and the rest have no feed to read, so
       nothing can poll them. What you see is the honest split: research posts, PhD places and
@@ -281,7 +375,125 @@ function chipGroup(hostId, key, values, labels, cls) {
   }
 }
 
+
+/* ================================================================== *
+ * Eligibility matcher
+ *
+ * Runs entirely here. The profile lives in localStorage and there is no
+ * server to send it to even if I wanted one — which is the same bargain the
+ * agent's GPA gate makes: answer the question without the number leaving the
+ * machine.
+ *
+ * The framing matters more than the code. A listing with no stated
+ * requirement is reported as "nothing here rules you out", never as "you
+ * qualify" — silence in a posting is not permission, and a matcher that
+ * implies otherwise would send people to apply for things they cannot get.
+ * Only an explicit, quoted requirement can produce a blocker.
+ * ================================================================== */
+const PROFILE_KEY = "fb-opportunity-profile-v1";
+let profile = {};
+
+function loadProfile() {
+  try { profile = JSON.parse(localStorage.getItem(PROFILE_KEY)) || {}; }
+  catch { profile = {}; }
+  for (const [id, key] of PFIELDS) {
+    const el = $(id);
+    if (el && profile[key] != null) el.value = profile[key];
+  }
+  $("#profile-clear").hidden = !Object.values(profile).some(v => v !== "" && v != null);
+}
+
+function saveProfile() {
+  profile = {};
+  for (const [id, key] of PFIELDS) {
+    const el = $(id);
+    if (el && el.value) profile[key] = el.value;
+  }
+  try { localStorage.setItem(PROFILE_KEY, JSON.stringify(profile)); } catch {}
+  $("#profile-clear").hidden = !Object.keys(profile).length;
+  render();
+}
+
+const PFIELDS = [
+  ["#p-level", "level"], ["#p-years", "years"], ["#p-field", "field"],
+  ["#p-gpa", "gpaTop"], ["#p-visa", "needsVisa"], ["#p-mode", "mode"]
+];
+
+const LEVEL_ORDER = { undergraduate: 0, masters: 1, phd: 2, graduated: 1 };
+
+/**
+ * @returns {{blockers: string[], warnings: string[]}}
+ *   blockers  an explicit, stated requirement this profile does not meet
+ *   warnings  something to check, not a refusal
+ */
+function assess(row) {
+  const blockers = [], warnings = [];
+  const r = row.eligibilityRules || {};
+  const years = profile.years === undefined ? null : Number(profile.years);
+  const gpaTop = profile.gpaTop ? Number(profile.gpaTop) : null;
+
+  // --- stated GPA minimum ---------------------------------------------
+  if (r.gpaMin && gpaTop != null) {
+    const need = r.gpaMin / (r.gpaScale || 4);
+    if (gpaTop / 4 < need) {
+      blockers.push(`States a minimum GPA of ${r.gpaMin}/${r.gpaScale || 4}. The band you selected tops out below it.`);
+    } else if ((gpaTop - 0.5) / 4 < need) {
+      warnings.push(`Needs ${r.gpaMin}/${r.gpaScale || 4}. Your band straddles that — check your exact figure.`);
+    }
+  }
+
+  // --- years of study already completed ---------------------------------
+  if (r.minYearsCompleted && years != null && years < r.minYearsCompleted) {
+    blockers.push(`Requires ${r.minYearsCompleted} year${r.minYearsCompleted === 1 ? "" : "s"} of study completed by the start date; you selected ${years}.`);
+  }
+
+  // --- stage --------------------------------------------------------------
+  if (r.excludesPhd && profile.level === "phd") {
+    blockers.push("PhD students are explicitly excluded.");
+  }
+  if (r.minLevel && profile.level && LEVEL_ORDER[profile.level] < LEVEL_ORDER[r.minLevel]) {
+    blockers.push(`Open from ${r.minLevel === "masters" ? "master's" : r.minLevel} level upward.`);
+  }
+  if (r.mustBeEnrolled && profile.level === "graduated") {
+    warnings.push("Asks for current enrolment; confirm whether recent graduates are accepted.");
+  }
+  if (row.level === "senior" && profile.level === "undergraduate") {
+    blockers.push("Advertised as a senior, lead or management role.");
+  }
+
+  // --- visa ---------------------------------------------------------------
+  if (profile.needsVisa === "yes") {
+    if (row.sponsorship === "Does Not Offer Sponsorship") blockers.push("The employer states it does not offer visa sponsorship.");
+    if (row.sponsorship === "U.S. Citizenship is Required") blockers.push("Requires US citizenship.");
+  }
+  if (profile.needsVisa === "yes" && row.sponsorship === "Offers Sponsorship") {
+    // The only positive signal in the whole dataset worth surfacing.
+    warnings.push("SPONSORS_OK");
+  }
+
+  // --- field --------------------------------------------------------------
+  if (r.fieldsAllowed && profile.field && !r.fieldsAllowed.includes(profile.field)) {
+    blockers.push(`Restricted to other disciplines — this programme does not host ${FIELDS[profile.field] || profile.field}.`);
+  }
+
+  // --- is it even running -------------------------------------------------
+  if (row.status === "paused") blockers.push("Not running this year.");
+  if (row.status === "opens-later") warnings.push("Applications are not open yet.");
+  if (row.status === "check-source") warnings.push("Something material could not be verified — check the source page.");
+  if (r.nationalityNote) warnings.push(r.nationalityNote);
+
+  return { blockers, warnings };
+}
+
+const profileActive = () => PFIELDS.some(([, k]) => k !== "mode" && profile[k]);
+
 function matches(j) {
+  const mode = profile.mode || "all";
+  if (profileActive() && mode !== "all") {
+    const blocked = assess(j).blockers.length > 0;
+    if (mode === "eligible" && blocked) return false;
+    if (mode === "blocked" && !blocked) return false;
+  }
   if (state.type.size && !state.type.has(j.type)) return false;
   if (state.verified.size && !j.verified) return false;
   if (state.field.size && !state.field.has(j.field)) return false;
@@ -321,12 +533,28 @@ function money(j) {
 }
 
 function row(j) {
+  // Only explain when a profile exists — otherwise every card grows a box
+  // saying nothing, which is noise.
+  let why = "", blockedCls = "";
+  if (profileActive()) {
+    const { blockers, warnings } = assess(j);
+    blockedCls = blockers.length ? " blocked" : "";
+    const bits = blockers.map(t => `<span class="no">✖ ${esc(t)}</span>`);
+    for (const w of warnings) {
+      bits.push(w === "SPONSORS_OK"
+        ? `<span class="ok">✔ States that it sponsors a visa.</span>`
+        : `<span class="maybe">⚠ ${esc(w)}</span>`);
+    }
+    // The careful wording: nothing found, not "you qualify".
+    if (!bits.length) bits.push(`<span class="ok">✔ Nothing stated here rules you out. That is not the same as qualifying — read the posting.</span>`);
+    why = `<span class="why">${bits.join("")}</span>`;
+  }
   const sp = j.sponsorship === "Offers Sponsorship"
       ? `<span class="t sp-yes">sponsors visa</span>`
     : (j.sponsorship === "Does Not Offer Sponsorship" || j.sponsorship === "U.S. Citizenship is Required")
       ? `<span class="t sp-no">${esc(j.sponsorship)}</span>` : "";
   const sal = money(j);
-  return `<a class="job" href="${esc(j.url)}" target="_blank" rel="noopener">
+  return `<a class="job${blockedCls}" href="${esc(j.url)}" target="_blank" rel="noopener">
     <span class="jt">${esc(j.title)}</span>
     <span class="jd">${esc(ago(j.posted))}</span>
     <span class="jc">${esc(j.company || "—")}${j.location ? " · " + esc(j.location) : ""}</span>
@@ -344,6 +572,7 @@ function row(j) {
       ${sp}
       <span class="t src">via ${esc(j.source)}</span>
     </span>
+    ${why}
   </a>`;
 }
 
@@ -367,6 +596,17 @@ function render() {
   $("#resultline").textContent =
     `${shown.length} of ${DATA.count} · ${fields} field${fields === 1 ? "" : "s"} · `
     + `${interns} internships · ${ver} hand-verified · ${withVisa} state that they sponsor a visa`;
+
+  const sum = $("#p-summary");
+  if (!profileActive()) {
+    sum.textContent = "";
+  } else {
+    const clear = DATA.jobs.filter(j => assess(j).blockers.length === 0).length;
+    const blocked = DATA.count - clear;
+    sum.innerHTML = `Checked against your profile: <strong>${clear}</strong> with nothing stated `
+      + `against you, <strong>${blocked}</strong> ruled out by something the posting says. `
+      + `A clear result means no stated requirement was breached — it is not a promise you will get in.`;
+  }
   paint();
 }
 
@@ -413,6 +653,7 @@ function fromProgramme(o) {
     sponsorship: null, salary_min: null, salary_max: null,
     verified: true,
     gpa: o.gpaRequirement || null,
+    eligibilityRules: o.eligibilityRules || {},
     deadlineText: o.deadlineText || null,
     corrections: o.corrections || null
   };
@@ -450,6 +691,14 @@ Promise.all([
               { sponsors:"Says it sponsors", "hide-no":"Hide no-sponsorship" }, "good");
     chipGroup("#f-verified", "verified", ["yes"], { yes:`Hand-verified ${verifiedRows.length}` }, "good");
 
+    const pf = $("#p-field");
+    for (const f of fieldsBySize) {
+      const opt = document.createElement("option");
+      opt.value = f; opt.textContent = FIELDS[f] || f;
+      pf.append(opt);
+    }
+    loadProfile();
+
     $("#livestamp").textContent =
       `${live.count} live listings + ${verifiedRows.length} verified programmes · refreshed ${live.checked}`;
     $("#attrib").textContent = live.attribution;
@@ -460,6 +709,18 @@ Promise.all([
     $("#rows").innerHTML = `<p class="empty">The listings failed to load. The raw data is still here:
       <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/data/jobs.json">jobs.json</a>.</p>`;
   });
+
+PFIELDS.forEach(([id]) => {
+  const el = $(id);
+  if (el) el.addEventListener("change", saveProfile);
+});
+$("#profile-clear").addEventListener("click", () => {
+  try { localStorage.removeItem(PROFILE_KEY); } catch {}
+  profile = {};
+  PFIELDS.forEach(([id]) => { const el = $(id); if (el) el.value = ""; });
+  $("#profile-clear").hidden = true;
+  render();
+});
 
 $("#q").addEventListener("input", e => { state.q = e.target.value.trim().toLowerCase(); render(); });
 $("#more").addEventListener("click", () => { page++; paint(); });

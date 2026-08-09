@@ -13,7 +13,8 @@
     "  paused       the programme itself is not running",
     "  check-source something material could not be verified from the public page",
     "",
-    "Anything I could not verify is null with a note. Nothing here is inferred."
+    "Anything I could not verify is null with a note. Nothing here is inferred.",
+    "eligibilityRules is a machine-readable restatement of the `eligibility` and `restrictions` prose already on each entry, so the browser can check a visitor's profile against it. It adds no new claim. An absent rule means the programme does not state one — which is not the same as saying you qualify."
   ],
   "checked": "2026-08-09",
   "sourceCount": 13,
@@ -25,11 +26,30 @@
       "country": "Saudi Arabia",
       "flag": "🇸🇦",
       "type": "internship",
-      "level": ["undergraduate", "masters"],
-      "fields": ["computer-science", "ai-ml", "data-science", "engineering", "security"],
+      "level": [
+        "undergraduate",
+        "masters"
+      ],
+      "fields": [
+        "computer-science",
+        "ai-ml",
+        "data-science",
+        "engineering",
+        "security"
+      ],
       "duration": "2–6 months",
-      "funding": { "stipend": "USD $1,000 / month", "housing": "Private bedroom/bathroom", "travel": "Airfare to KAUST and back", "insurance": null, "visa": null },
-      "fundingTags": ["stipend", "housing", "travel"],
+      "funding": {
+        "stipend": "USD $1,000 / month",
+        "housing": "Private bedroom/bathroom",
+        "travel": "Airfare to KAUST and back",
+        "insurance": null,
+        "visa": null
+      },
+      "fundingTags": [
+        "stipend",
+        "housing",
+        "travel"
+      ],
       "deadline": null,
       "deadlineText": "All year round",
       "status": "open",
@@ -38,12 +58,30 @@
       "restrictions": null,
       "url": "https://admissions.kaust.edu.sa/study/internships",
       "evidence": [
-        { "claim": "stipend", "quote": "USD $1000 Monthly Stipend", "source": "https://admissions.kaust.edu.sa/study/internships" },
-        { "claim": "gpa", "quote": "Minimum GPA: 3.5/4", "source": "https://admissions.kaust.edu.sa/study/internships" },
-        { "claim": "deadline", "quote": "All year round", "source": "https://admissions.kaust.edu.sa/study/internships" }
+        {
+          "claim": "stipend",
+          "quote": "USD $1000 Monthly Stipend",
+          "source": "https://admissions.kaust.edu.sa/study/internships"
+        },
+        {
+          "claim": "gpa",
+          "quote": "Minimum GPA: 3.5/4",
+          "source": "https://admissions.kaust.edu.sa/study/internships"
+        },
+        {
+          "claim": "deadline",
+          "quote": "All year round",
+          "source": "https://admissions.kaust.edu.sa/study/internships"
+        }
       ],
       "corrections": "A widely-shared list gives the duration as 3–6 months. The page says 2–6 months. That list also omits the minimum GPA of 3.5/4, which is the single most decisive line on the page.",
-      "checked": "2026-08-09"
+      "checked": "2026-08-09",
+      "eligibilityRules": {
+        "gpaMin": 3.5,
+        "gpaScale": 4,
+        "minYearsCompleted": 2,
+        "excludesPhd": true
+      }
     },
     {
       "id": "oist-ri",
@@ -52,11 +90,31 @@
       "country": "Japan",
       "flag": "🇯🇵",
       "type": "internship",
-      "level": ["undergraduate", "masters"],
-      "fields": ["ai-ml", "computer-science", "physics", "neuroscience", "biology", "maths"],
+      "level": [
+        "undergraduate",
+        "masters"
+      ],
+      "fields": [
+        "ai-ml",
+        "computer-science",
+        "physics",
+        "neuroscience",
+        "biology",
+        "maths"
+      ],
       "duration": "4–6 months",
-      "funding": { "stipend": "JPY 2,400 per working day", "housing": "Furnished accommodation on or off campus, funded by OIST or the research unit", "travel": "One direct round-trip air ticket", "insurance": null, "visa": null },
-      "fundingTags": ["stipend", "housing", "travel"],
+      "funding": {
+        "stipend": "JPY 2,400 per working day",
+        "housing": "Furnished accommodation on or off campus, funded by OIST or the research unit",
+        "travel": "One direct round-trip air ticket",
+        "insurance": null,
+        "visa": null
+      },
+      "fundingTags": [
+        "stipend",
+        "housing",
+        "travel"
+      ],
       "deadline": "2026-09-15",
       "deadlineText": "Four rounds a year: 15 Sep, 15 Nov, 28 Feb, 31 May",
       "status": "open",
@@ -65,12 +123,25 @@
       "restrictions": null,
       "url": "https://www.oist.jp/admissions/research-internship/program-description",
       "evidence": [
-        { "claim": "stipend", "quote": "2,400 JPY per working day", "source": "https://www.oist.jp/admissions/research-internship/program-description" },
-        { "claim": "housing", "quote": "Furnished accommodation on or off campus, funded by OIST or the research unit", "source": "https://www.oist.jp/admissions/research-internship/program-description" },
-        { "claim": "travel", "quote": "One direct round-trip air ticket", "source": "https://www.oist.jp/admissions/research-internship/program-description" }
+        {
+          "claim": "stipend",
+          "quote": "2,400 JPY per working day",
+          "source": "https://www.oist.jp/admissions/research-internship/program-description"
+        },
+        {
+          "claim": "housing",
+          "quote": "Furnished accommodation on or off campus, funded by OIST or the research unit",
+          "source": "https://www.oist.jp/admissions/research-internship/program-description"
+        },
+        {
+          "claim": "travel",
+          "quote": "One direct round-trip air ticket",
+          "source": "https://www.oist.jp/admissions/research-internship/program-description"
+        }
       ],
       "corrections": "A widely-shared list says '2 to 6 months' and 'held twice a year'. OIST states 4–6 months and runs four application rounds a year. If you planned for a 2-month placement you would not be eligible.",
-      "checked": "2026-08-09"
+      "checked": "2026-08-09",
+      "eligibilityRules": {}
     },
     {
       "id": "eth-ssrf",
@@ -79,11 +150,30 @@
       "country": "Switzerland",
       "flag": "🇨🇭",
       "type": "internship",
-      "level": ["undergraduate", "masters"],
-      "fields": ["computer-science", "ai-ml", "security", "robotics", "systems"],
+      "level": [
+        "undergraduate",
+        "masters"
+      ],
+      "fields": [
+        "computer-science",
+        "ai-ml",
+        "security",
+        "robotics",
+        "systems"
+      ],
       "duration": "2 months, approx. 1 July – 31 August",
-      "funding": { "stipend": "CHF 4,000", "housing": "covered by the stipend", "travel": "Travel and visa expenses covered, claimed against receipts", "insurance": null, "visa": "covered" },
-      "fundingTags": ["stipend", "travel", "visa"],
+      "funding": {
+        "stipend": "CHF 4,000",
+        "housing": "covered by the stipend",
+        "travel": "Travel and visa expenses covered, claimed against receipts",
+        "insurance": null,
+        "visa": "covered"
+      },
+      "fundingTags": [
+        "stipend",
+        "travel",
+        "visa"
+      ],
       "deadline": "2026-12-16",
       "deadlineText": "Window ran 1 Nov – 16 Dec for the previous cycle; expect the same shape",
       "status": "opens-later",
@@ -92,12 +182,27 @@
       "restrictions": "Students already enrolled at ETH Zurich are excluded.",
       "url": "https://inf.ethz.ch/studies/summer-research-fellowship.html",
       "evidence": [
-        { "claim": "stipend", "quote": "Fellows will receive a stipend of CHF 4,000 to cover housing and living expenses.", "source": "https://inf.ethz.ch/studies/summer-research-fellowship/how-to-apply.html" },
-        { "claim": "travel", "quote": "Travel and visa expenses will be covered as well. Students can claim the travel costs against receipts at the beginning of the programme.", "source": "https://inf.ethz.ch/studies/summer-research-fellowship/how-to-apply.html" },
-        { "claim": "deadline", "quote": "1st November – 16 December 2025 at 13:00 (Central European Time)", "source": "https://inf.ethz.ch/studies/summer-research-fellowship/how-to-apply.html" }
+        {
+          "claim": "stipend",
+          "quote": "Fellows will receive a stipend of CHF 4,000 to cover housing and living expenses.",
+          "source": "https://inf.ethz.ch/studies/summer-research-fellowship/how-to-apply.html"
+        },
+        {
+          "claim": "travel",
+          "quote": "Travel and visa expenses will be covered as well. Students can claim the travel costs against receipts at the beginning of the programme.",
+          "source": "https://inf.ethz.ch/studies/summer-research-fellowship/how-to-apply.html"
+        },
+        {
+          "claim": "deadline",
+          "quote": "1st November – 16 December 2025 at 13:00 (Central European Time)",
+          "source": "https://inf.ethz.ch/studies/summer-research-fellowship/how-to-apply.html"
+        }
       ],
       "corrections": "A widely-shared list says 'CHF 4,000 monthly allowance'. The page says 'a stipend of CHF 4,000' with no per-month wording, for a two-month fellowship. Treat the total as CHF 4,000 unless ETH tells you otherwise — the difference is CHF 4,000.",
-      "checked": "2026-08-09"
+      "checked": "2026-08-09",
+      "eligibilityRules": {
+        "mustBeEnrolled": true
+      }
     },
     {
       "id": "epfl-e3",
@@ -106,11 +211,29 @@
       "country": "Switzerland",
       "flag": "🇨🇭",
       "type": "internship",
-      "level": ["undergraduate", "masters"],
-      "fields": ["computer-science", "ai-ml", "robotics", "engineering", "bioengineering"],
+      "level": [
+        "undergraduate",
+        "masters"
+      ],
+      "fields": [
+        "computer-science",
+        "ai-ml",
+        "robotics",
+        "engineering",
+        "bioengineering"
+      ],
       "duration": "8–12 weeks during the summer",
-      "funding": { "stipend": "Monthly living allowance — no figure published", "housing": "covered by the allowance", "travel": "Travel costs refunded on request", "insurance": null, "visa": null },
-      "fundingTags": ["stipend", "travel"],
+      "funding": {
+        "stipend": "Monthly living allowance — no figure published",
+        "housing": "covered by the allowance",
+        "travel": "Travel costs refunded on request",
+        "insurance": null,
+        "visa": null
+      },
+      "fundingTags": [
+        "stipend",
+        "travel"
+      ],
       "deadline": null,
       "deadlineText": "Portal opens October 2026 for summer 2027",
       "status": "opens-later",
@@ -119,11 +242,23 @@
       "restrictions": "PhD students excluded.",
       "url": "https://eee.epfl.ch/",
       "evidence": [
-        { "claim": "allowance", "quote": "You will receive a monthly allowance for the entire duration of the internship to cover accomodation and living costs in Switzerland.", "source": "https://eee.epfl.ch/program-at-a-glance/" },
-        { "claim": "duration", "quote": "8 to 12 weeks during the summer months", "source": "https://eee.epfl.ch/program-at-a-glance/" }
+        {
+          "claim": "allowance",
+          "quote": "You will receive a monthly allowance for the entire duration of the internship to cover accomodation and living costs in Switzerland.",
+          "source": "https://eee.epfl.ch/program-at-a-glance/"
+        },
+        {
+          "claim": "duration",
+          "quote": "8 to 12 weeks during the summer months",
+          "source": "https://eee.epfl.ch/program-at-a-glance/"
+        }
       ],
       "corrections": "A widely-shared list gives the stipend as '~CHF 1,800'. EPFL publishes no figure anywhere on the programme pages. Do not budget against that number.",
-      "checked": "2026-08-09"
+      "checked": "2026-08-09",
+      "eligibilityRules": {
+        "minYearsCompleted": 2,
+        "excludesPhd": true
+      }
     },
     {
       "id": "cern-summer",
@@ -132,11 +267,31 @@
       "country": "Switzerland",
       "flag": "🇨🇭",
       "type": "internship",
-      "level": ["undergraduate", "masters"],
-      "fields": ["computer-science", "ai-ml", "data-science", "physics", "engineering", "maths"],
+      "level": [
+        "undergraduate",
+        "masters"
+      ],
+      "fields": [
+        "computer-science",
+        "ai-ml",
+        "data-science",
+        "physics",
+        "engineering",
+        "maths"
+      ],
       "duration": "8–13 weeks",
-      "funding": { "stipend": "CHF 94 per calendar day (net subsistence allowance)", "housing": null, "travel": "Travel expenses to and/or from Geneva, depending on circumstances", "insurance": "CERN health insurance scheme; contribution deducted from the allowance", "visa": null },
-      "fundingTags": ["stipend", "travel", "insurance"],
+      "funding": {
+        "stipend": "CHF 94 per calendar day (net subsistence allowance)",
+        "housing": null,
+        "travel": "Travel expenses to and/or from Geneva, depending on circumstances",
+        "insurance": "CERN health insurance scheme; contribution deducted from the allowance",
+        "visa": null
+      },
+      "fundingTags": [
+        "stipend",
+        "travel",
+        "insurance"
+      ],
       "deadline": "2027-01-31",
       "deadlineText": "Applications close end of January each year — confirm the exact date on careers.cern",
       "status": "opens-later",
@@ -145,12 +300,27 @@
       "restrictions": null,
       "url": "https://careers.cern/summer",
       "evidence": [
-        { "claim": "allowance", "quote": "A 94 CHF per calendar day net subsistence allowance", "source": "https://careers.cern/summer" },
-        { "claim": "eligibility", "quote": "completed at least 6 semesters of full-time university studies in one of these fields", "source": "https://careers.cern/summer" },
-        { "claim": "nationality", "quote": "all nationals are welcome to apply", "source": "https://home.cern/summer-student-programme" }
+        {
+          "claim": "allowance",
+          "quote": "A 94 CHF per calendar day net subsistence allowance",
+          "source": "https://careers.cern/summer"
+        },
+        {
+          "claim": "eligibility",
+          "quote": "completed at least 6 semesters of full-time university studies in one of these fields",
+          "source": "https://careers.cern/summer"
+        },
+        {
+          "claim": "nationality",
+          "quote": "all nationals are welcome to apply",
+          "source": "https://home.cern/summer-student-programme"
+        }
       ],
       "corrections": "A widely-shared list says only 'daily allowance'. The figure is CHF 94 per calendar day, and the health-insurance contribution comes out of it rather than being additional.",
-      "checked": "2026-08-09"
+      "checked": "2026-08-09",
+      "eligibilityRules": {
+        "minYearsCompleted": 3
+      }
     },
     {
       "id": "ista-isternship",
@@ -159,11 +329,30 @@
       "country": "Austria",
       "flag": "🇦🇹",
       "type": "internship",
-      "level": ["undergraduate", "masters"],
-      "fields": ["computer-science", "ai-ml", "data-science", "maths", "physics", "biology"],
+      "level": [
+        "undergraduate",
+        "masters"
+      ],
+      "fields": [
+        "computer-science",
+        "ai-ml",
+        "data-science",
+        "maths",
+        "physics",
+        "biology"
+      ],
       "duration": "2–3 months between 15 May and 15 September",
-      "funding": { "stipend": "EUR 1,150 / month (2025 cycle)", "housing": null, "travel": "Lump sum based on distance travelled", "insurance": null, "visa": "administrative support provided" },
-      "fundingTags": ["stipend", "travel"],
+      "funding": {
+        "stipend": "EUR 1,150 / month (2025 cycle)",
+        "housing": null,
+        "travel": "Lump sum based on distance travelled",
+        "insurance": null,
+        "visa": "administrative support provided"
+      },
+      "fundingTags": [
+        "stipend",
+        "travel"
+      ],
       "deadline": null,
       "deadlineText": "Not running in 2026. 2027 cycle information expected late 2026.",
       "status": "paused",
@@ -172,11 +361,22 @@
       "restrictions": "The programme is suspended for the 2026 cycle.",
       "url": "https://phd.ista.ac.at/isternship/",
       "evidence": [
-        { "claim": "paused", "quote": "The ISTernship program has been paused for the 2026 application cycle, and the program will not be taking place in 2026.", "source": "https://phd.ista.ac.at/isternship/" },
-        { "claim": "stipend", "quote": "In 2025, ISTerns received a monthly fellowship payment of 1.150 Euros to cover basic living expenses.", "source": "https://phd.ista.ac.at/isternship/" }
+        {
+          "claim": "paused",
+          "quote": "The ISTernship program has been paused for the 2026 application cycle, and the program will not be taking place in 2026.",
+          "source": "https://phd.ista.ac.at/isternship/"
+        },
+        {
+          "claim": "stipend",
+          "quote": "In 2025, ISTerns received a monthly fellowship payment of 1.150 Euros to cover basic living expenses.",
+          "source": "https://phd.ista.ac.at/isternship/"
+        }
       ],
       "corrections": "This is the important one. A widely-shared list presents ISTernship as an open opportunity. ISTA's own page states the programme is paused and will not run in 2026. Anyone preparing an application for it is preparing for nothing.",
-      "checked": "2026-08-09"
+      "checked": "2026-08-09",
+      "eligibilityRules": {
+        "minYearsCompleted": 2
+      }
     },
     {
       "id": "mpi-sws-internship",
@@ -185,11 +385,31 @@
       "country": "Germany",
       "flag": "🇩🇪",
       "type": "internship",
-      "level": ["undergraduate", "masters", "phd"],
-      "fields": ["computer-science", "ai-ml", "systems", "security", "algorithms"],
+      "level": [
+        "undergraduate",
+        "masters",
+        "phd"
+      ],
+      "fields": [
+        "computer-science",
+        "ai-ml",
+        "systems",
+        "security",
+        "algorithms"
+      ],
       "duration": "Typically 12–14 weeks; longer possible",
-      "funding": { "stipend": "Monthly stipend — no figure published", "housing": "Free shared housing", "travel": "Travel to and from the hosting institute covered", "insurance": null, "visa": null },
-      "fundingTags": ["stipend", "housing", "travel"],
+      "funding": {
+        "stipend": "Monthly stipend — no figure published",
+        "housing": "Free shared housing",
+        "travel": "Travel to and from the hosting institute covered",
+        "insurance": null,
+        "visa": null
+      },
+      "fundingTags": [
+        "stipend",
+        "housing",
+        "travel"
+      ],
       "deadline": null,
       "deadlineText": "Not published on the pages checked — confirm on the institute site",
       "status": "check-source",
@@ -198,11 +418,22 @@
       "restrictions": null,
       "url": "https://www.mpi-sws.org/research-careers/",
       "evidence": [
-        { "claim": "funding", "quote": "All interns receive a monthly stipend, free (shared) housing, and travel to and from the institute hosting the internship.", "source": "https://www.mpi-sws.org/research-careers/" },
-        { "claim": "duration", "quote": "A typical internship lasts 12 to 14 weeks, but longer internships are possible.", "source": "https://www.mpi-sws.org/research-careers/" }
+        {
+          "claim": "funding",
+          "quote": "All interns receive a monthly stipend, free (shared) housing, and travel to and from the institute hosting the internship.",
+          "source": "https://www.mpi-sws.org/research-careers/"
+        },
+        {
+          "claim": "duration",
+          "quote": "A typical internship lasts 12 to 14 weeks, but longer internships are possible.",
+          "source": "https://www.mpi-sws.org/research-careers/"
+        }
       ],
       "corrections": "A widely-shared list gives '~€900 – €1,200'. MPI-SWS publishes no figure. Marked check-source because the deadline could not be verified either.",
-      "checked": "2026-08-09"
+      "checked": "2026-08-09",
+      "eligibilityRules": {
+        "minYearsCompleted": 3
+      }
     },
     {
       "id": "tigp-iip",
@@ -211,11 +442,30 @@
       "country": "Taiwan",
       "flag": "🇹🇼",
       "type": "internship",
-      "level": ["undergraduate", "masters"],
-      "fields": ["computer-science", "ai-ml", "data-science", "physics", "earth-science"],
+      "level": [
+        "undergraduate",
+        "masters"
+      ],
+      "fields": [
+        "computer-science",
+        "ai-ml",
+        "data-science",
+        "physics",
+        "earth-science"
+      ],
       "duration": "2 months, between June and October",
-      "funding": { "stipend": "NTD 30,000 / month (before tax)", "housing": "On-campus accommodation arranged at a subsidised price", "travel": "Half of the cheapest economy round-trip airfare", "insurance": null, "visa": null },
-      "fundingTags": ["stipend", "housing", "travel"],
+      "funding": {
+        "stipend": "NTD 30,000 / month (before tax)",
+        "housing": "On-campus accommodation arranged at a subsidised price",
+        "travel": "Half of the cheapest economy round-trip airfare",
+        "insurance": null,
+        "visa": null
+      },
+      "fundingTags": [
+        "stipend",
+        "housing",
+        "travel"
+      ],
       "deadline": null,
       "deadlineText": "Window ran 15 Dec – 15 Jan for the previous cycle; expect the same shape",
       "status": "opens-later",
@@ -224,10 +474,17 @@
       "restrictions": "PhD students excluded.",
       "url": "https://tigp.sinica.edu.tw/pages/3127",
       "evidence": [
-        { "claim": "stipend", "quote": "NTD 30,000/month stipend (before tax) and half of the cheapest route round-trip airfare of an economy class", "source": "https://tigp.sinica.edu.tw/pages/3127" }
+        {
+          "claim": "stipend",
+          "quote": "NTD 30,000/month stipend (before tax) and half of the cheapest route round-trip airfare of an economy class",
+          "source": "https://tigp.sinica.edu.tw/pages/3127"
+        }
       ],
       "corrections": "A widely-shared list implies full travel coverage. Academia Sinica covers half the airfare, and the stipend is quoted before tax.",
-      "checked": "2026-08-09"
+      "checked": "2026-08-09",
+      "eligibilityRules": {
+        "excludesPhd": true
+      }
     },
     {
       "id": "utokyo-utrip",
@@ -236,11 +493,27 @@
       "country": "Japan",
       "flag": "🇯🇵",
       "type": "internship",
-      "level": ["undergraduate"],
-      "fields": ["physics", "chemistry", "biology", "earth-science"],
+      "level": [
+        "undergraduate"
+      ],
+      "fields": [
+        "physics",
+        "chemistry",
+        "biology",
+        "earth-science"
+      ],
       "duration": "Summer programme",
-      "funding": { "stipend": "GSS-UTRIP Scholarship — stipend, amount not published", "housing": "Free housing", "travel": null, "insurance": null, "visa": null },
-      "fundingTags": ["stipend", "housing"],
+      "funding": {
+        "stipend": "GSS-UTRIP Scholarship — stipend, amount not published",
+        "housing": "Free housing",
+        "travel": null,
+        "insurance": null,
+        "visa": null
+      },
+      "fundingTags": [
+        "stipend",
+        "housing"
+      ],
       "deadline": null,
       "deadlineText": "Window ran 25 Nov – 7 Jan for the previous cycle; expect the same shape",
       "status": "opens-later",
@@ -249,11 +522,27 @@
       "restrictions": "Graduate School of Science only — physics, astronomy, chemistry, earth & planetary science, biological sciences.",
       "url": "https://www.s.u-tokyo.ac.jp/en/utrip/",
       "evidence": [
-        { "claim": "fields", "quote": "renowned faculty members in the GSS's five departments of physics, astronomy, chemistry, earth & planetary science, and biological sciences", "source": "https://www.s.u-tokyo.ac.jp/en/utrip/" },
-        { "claim": "eligibility", "quote": "currently enrolled in the second or a later year at an accredited college or university outside of Japan, and who are majoring in a natural science or related field", "source": "https://www.s.u-tokyo.ac.jp/en/utrip/" }
+        {
+          "claim": "fields",
+          "quote": "renowned faculty members in the GSS's five departments of physics, astronomy, chemistry, earth & planetary science, and biological sciences",
+          "source": "https://www.s.u-tokyo.ac.jp/en/utrip/"
+        },
+        {
+          "claim": "eligibility",
+          "quote": "currently enrolled in the second or a later year at an accredited college or university outside of Japan, and who are majoring in a natural science or related field",
+          "source": "https://www.s.u-tokyo.ac.jp/en/utrip/"
+        }
       ],
       "corrections": "A widely-shared list advertises UTRIP for 'Data Science, Bio-IT, Computer Science'. UTRIP sits in the Graduate School of Science, whose five departments contain no computer science department. A CS student applying here is applying to the wrong programme.",
-      "checked": "2026-08-09"
+      "checked": "2026-08-09",
+      "eligibilityRules": {
+        "minYearsCompleted": 1,
+        "fieldsAllowed": [
+          "research",
+          "healthcare",
+          "other"
+        ]
+      }
     },
     {
       "id": "ntu-india-connect",
@@ -262,11 +551,25 @@
       "country": "Singapore",
       "flag": "🇸🇬",
       "type": "internship",
-      "level": ["undergraduate"],
-      "fields": ["engineering", "physics", "computer-science"],
+      "level": [
+        "undergraduate"
+      ],
+      "fields": [
+        "engineering",
+        "physics",
+        "computer-science"
+      ],
       "duration": "Minimum 2 months",
-      "funding": { "stipend": null, "housing": "On-campus accommodation allocated to successful applicants", "travel": null, "insurance": null, "visa": "Training Employment Pass required, obtained by the applicant" },
-      "fundingTags": ["housing"],
+      "funding": {
+        "stipend": null,
+        "housing": "On-campus accommodation allocated to successful applicants",
+        "travel": null,
+        "insurance": null,
+        "visa": "Training Employment Pass required, obtained by the applicant"
+      },
+      "fundingTags": [
+        "housing"
+      ],
       "deadline": null,
       "deadlineText": "Not published on the pages checked",
       "status": "check-source",
@@ -275,11 +578,22 @@
       "restrictions": "The programme NTU publishes under this name is India Connect@NTU. Confirm directly with indiaconnect@ntu.edu.sg whether applicants outside India are eligible before investing time in an application.",
       "url": "https://www.ntu.edu.sg/about-us/global/india-connect-ntu",
       "evidence": [
-        { "claim": "fields", "quote": "Students studying for an undergraduate degree in Electrical Engineering, Physics, Biomedical Engineering, Optics, or related fields can apply for this program.", "source": "https://www.ntu.edu.sg/about-us/global/india-connect-ntu" },
-        { "claim": "duration", "quote": "fulfil a minimum of 2 months research attachment", "source": "https://www.ntu.edu.sg/about-us/global/india-connect-ntu" }
+        {
+          "claim": "fields",
+          "quote": "Students studying for an undergraduate degree in Electrical Engineering, Physics, Biomedical Engineering, Optics, or related fields can apply for this program.",
+          "source": "https://www.ntu.edu.sg/about-us/global/india-connect-ntu"
+        },
+        {
+          "claim": "duration",
+          "quote": "fulfil a minimum of 2 months research attachment",
+          "source": "https://www.ntu.edu.sg/about-us/global/india-connect-ntu"
+        }
       ],
       "corrections": "A widely-shared list bills this as a general 'NTU Summer Research Internship' with no nationality caveat. The programme NTU actually runs under that description is India Connect@NTU. If you are not an Indian national, verify eligibility before applying — this is the entry most likely to waste your time.",
-      "checked": "2026-08-09"
+      "checked": "2026-08-09",
+      "eligibilityRules": {
+        "nationalityNote": "NTU publishes this as India Connect@NTU. Confirm eligibility if you are not an Indian national."
+      }
     },
     {
       "id": "ellis-phd",
@@ -288,11 +602,26 @@
       "country": "Europe (multi-country)",
       "flag": "🇪🇺",
       "type": "phd",
-      "level": ["masters", "phd"],
-      "fields": ["ai-ml", "computer-science", "data-science"],
+      "level": [
+        "masters",
+        "phd"
+      ],
+      "fields": [
+        "ai-ml",
+        "computer-science",
+        "data-science"
+      ],
       "duration": "Full PhD, co-supervised across two European institutions",
-      "funding": { "stipend": "Funded through the host institution; EU Horizon / ELIAS grant support", "housing": null, "travel": null, "insurance": null, "visa": null },
-      "fundingTags": ["stipend"],
+      "funding": {
+        "stipend": "Funded through the host institution; EU Horizon / ELIAS grant support",
+        "housing": null,
+        "travel": null,
+        "insurance": null,
+        "visa": null
+      },
+      "fundingTags": [
+        "stipend"
+      ],
       "deadline": null,
       "deadlineText": "Next call expected October 2026; previous deadline was 31 October",
       "status": "opens-soon",
@@ -301,11 +630,22 @@
       "restrictions": null,
       "url": "https://ellis.eu/research/phd-postdoc",
       "evidence": [
-        { "claim": "next call", "quote": "The next call for applications is expected to open in October 2026", "source": "https://ellis.eu/news/ellis-phd-program-call-for-applications-2025" },
-        { "claim": "funding", "quote": "funding from the European Union's Horizon research and innovation programme under ELIAS grant agreement number 101120237", "source": "https://ellis.eu/research/phd-postdoc" }
+        {
+          "claim": "next call",
+          "quote": "The next call for applications is expected to open in October 2026",
+          "source": "https://ellis.eu/news/ellis-phd-program-call-for-applications-2025"
+        },
+        {
+          "claim": "funding",
+          "quote": "funding from the European Union's Horizon research and innovation programme under ELIAS grant agreement number 101120237",
+          "source": "https://ellis.eu/research/phd-postdoc"
+        }
       ],
       "corrections": null,
-      "checked": "2026-08-09"
+      "checked": "2026-08-09",
+      "eligibilityRules": {
+        "minLevel": "masters"
+      }
     },
     {
       "id": "mbzuai-scholarship",
@@ -314,11 +654,31 @@
       "country": "United Arab Emirates",
       "flag": "🇦🇪",
       "type": "scholarship",
-      "level": ["masters", "phd"],
-      "fields": ["ai-ml", "computer-science", "data-science", "robotics"],
+      "level": [
+        "masters",
+        "phd"
+      ],
+      "fields": [
+        "ai-ml",
+        "computer-science",
+        "data-science",
+        "robotics"
+      ],
       "duration": "Full degree",
-      "funding": { "stipend": "Monthly stipend — amount not published", "housing": null, "travel": "One return airfare each year to the home country", "insurance": "Health insurance for the approved funding period", "visa": "University-sponsored UAE residence visa and Emirates ID, where eligible" },
-      "fundingTags": ["tuition", "stipend", "travel", "insurance", "visa"],
+      "funding": {
+        "stipend": "Monthly stipend — amount not published",
+        "housing": null,
+        "travel": "One return airfare each year to the home country",
+        "insurance": "Health insurance for the approved funding period",
+        "visa": "University-sponsored UAE residence visa and Emirates ID, where eligible"
+      },
+      "fundingTags": [
+        "tuition",
+        "stipend",
+        "travel",
+        "insurance",
+        "visa"
+      ],
       "deadline": null,
       "deadlineText": "Admission rounds published on the admissions pages — confirm the current one",
       "status": "check-source",
@@ -327,14 +687,37 @@
       "restrictions": "MSc funding is not guaranteed — students without a funding source are classified as fee-paying. MAAI is excluded entirely.",
       "url": "https://mbzuai.ac.ae/study/graduate-admission-process/",
       "evidence": [
-        { "claim": "what funding covers", "quote": "free tuition fees; a monthly stipend; one return airfare each year to their home country; health insurance for the approved funding period; and University-sponsored UAE residence visa and Emirates ID (where eligible).", "source": "https://mbzuai.ac.ae/study/graduate-admission-process/" },
-        { "claim": "MSc is not automatically funded", "quote": "Year 1 funding: Not automatically funded, fee-paying by default; however, merit-based funding may be available", "source": "https://mbzuai.ac.ae/study/graduate-admission-process/" },
-        { "claim": "no guarantee", "quote": "Guarantee of funding: Not guaranteed for all admitted students; students without a funding source are classified as fee-paying", "source": "https://mbzuai.ac.ae/study/graduate-admission-process/" },
-        { "claim": "PhD year 1", "quote": "Year 1 funding: Centrally funded by the University while matching with a faculty advisor", "source": "https://mbzuai.ac.ae/study/graduate-admission-process/" },
-        { "claim": "MAAI excluded", "quote": "The Master in Applied Artificial Intelligence (MAAI) is a fee-based program; it is not eligible for University or faculty-sponsored funding.", "source": "https://mbzuai.ac.ae/study/graduate-admission-process/" }
+        {
+          "claim": "what funding covers",
+          "quote": "free tuition fees; a monthly stipend; one return airfare each year to their home country; health insurance for the approved funding period; and University-sponsored UAE residence visa and Emirates ID (where eligible).",
+          "source": "https://mbzuai.ac.ae/study/graduate-admission-process/"
+        },
+        {
+          "claim": "MSc is not automatically funded",
+          "quote": "Year 1 funding: Not automatically funded, fee-paying by default; however, merit-based funding may be available",
+          "source": "https://mbzuai.ac.ae/study/graduate-admission-process/"
+        },
+        {
+          "claim": "no guarantee",
+          "quote": "Guarantee of funding: Not guaranteed for all admitted students; students without a funding source are classified as fee-paying",
+          "source": "https://mbzuai.ac.ae/study/graduate-admission-process/"
+        },
+        {
+          "claim": "PhD year 1",
+          "quote": "Year 1 funding: Centrally funded by the University while matching with a faculty advisor",
+          "source": "https://mbzuai.ac.ae/study/graduate-admission-process/"
+        },
+        {
+          "claim": "MAAI excluded",
+          "quote": "The Master in Applied Artificial Intelligence (MAAI) is a fee-based program; it is not eligible for University or faculty-sponsored funding.",
+          "source": "https://mbzuai.ac.ae/study/graduate-admission-process/"
+        }
       ],
       "corrections": "MBZUAI is described almost everywhere as 'fully funded for all admitted students'. Its own admissions page says otherwise: the MSc is fee-paying by default and funding is 'not guaranteed for all admitted students'. Only the PhD is centrally funded in Year 1, and that continues only on a confirmed advisor match. Third-party blogs also quote a monthly stipend figure; MBZUAI publishes none, and two of those blogs contradict each other. Apply with the expectation that MSc funding is competitive, not automatic.",
-      "checked": "2026-08-09"
+      "checked": "2026-08-09",
+      "eligibilityRules": {
+        "minLevel": "masters"
+      }
     },
     {
       "id": "spar",
@@ -343,10 +726,24 @@
       "country": "Remote",
       "flag": "🌐",
       "type": "research",
-      "level": ["undergraduate", "masters", "phd"],
-      "fields": ["ai-ml", "ai-safety", "computer-science"],
+      "level": [
+        "undergraduate",
+        "masters",
+        "phd"
+      ],
+      "fields": [
+        "ai-ml",
+        "ai-safety",
+        "computer-science"
+      ],
       "duration": "One research round, part-time, remote",
-      "funding": { "stipend": null, "housing": null, "travel": null, "insurance": null, "visa": null },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null,
+        "insurance": null,
+        "visa": null
+      },
       "fundingTags": [],
       "deadline": "2026-08-18",
       "deadlineText": "Applications close 18 August 2026",
@@ -356,10 +753,15 @@
       "restrictions": null,
       "url": "https://sparai.org/",
       "evidence": [
-        { "claim": "deadline", "quote": "Deadline recorded as 18 August 2026 by an agent run against the live page on 2026-08-09, and flagged for manual confirmation.", "source": "https://sparai.org/" }
+        {
+          "claim": "deadline",
+          "quote": "Deadline recorded as 18 August 2026 by an agent run against the live page on 2026-08-09, and flagged for manual confirmation.",
+          "source": "https://sparai.org/"
+        }
       ],
       "corrections": "Remote and unfunded, so it costs travel money and visa risk of zero. It is also the only row on this page closing within a month.",
-      "checked": "2026-08-09"
+      "checked": "2026-08-09",
+      "eligibilityRules": {}
     }
   ],
   "jobSources": [

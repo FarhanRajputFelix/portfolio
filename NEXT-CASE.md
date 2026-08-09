@@ -75,47 +75,46 @@ not after a reviewer asks.
 
 ---
 
-## The next piece: Self-Regulating AI
+## The next piece: the opportunity board
 
-**Why this one.** It is the only public repository with no case study. It sits
-on the homepage as a card with nowhere to click through to, and it is the
-project whose subject matter — an agent that treats high loss as
-environment-induced stress and re-tunes itself under drift — is closest to the
-claim the whole site makes. Every other candidate is either already written up,
-absent from my CV, or has no public repo.
+**Status of the last one.** The previous entry here named *Self-Regulating AI*.
+That shipped on 9 August 2026 — [`case-self-regulating.html`](case-self-regulating.html)
+— so this file names the next one rather than leaving a finished task standing
+as an intention. The rule this file exists to enforce applies to the file
+itself: if it names work that is already done, it is decoration.
 
-**Repo:** <https://github.com/FarhanRajputFelix/self-regulating-ai>
+**Why this one.** It is the largest thing on the site with no write-up, and the
+only one that is a running system rather than a finished experiment: eight
+public feeds, two scheduled jobs, ~1,200 listings refreshed twice a day, and a
+client-side eligibility matcher. It is also the piece with the most instructive
+failures, and none of them are in the case studies yet.
+
+**Repo:** the portfolio itself — `tools/fetch-jobs.py`,
+`.github/workflows/jobs.yml`, `opportunities.html`.
 
 **The three beats, sketched:**
 
-1. **Problem** — a model that performs well on stationary data degrades when the
-   distribution moves, and the usual answer is a human noticing and retuning it.
-2. **What I did** — a continuous homeostatic feedback loop: treat rising loss as
-   environment-induced stress and adapt hyperparameters in response, rather than
-   waiting for a scheduled retrain.
-3. **What came of it** — four methods compared on 5D linear regression under
-   induced distribution shift. Pre-shift MSE 0.435–2.243, post-shift peak error
-   3.829–6.542, with the regulator reaching near-best pre-shift performance and
-   the most stable learning-rate behaviour afterwards.
+1. **Problem** — job boards list what exists; none of them answer "can I apply
+   for this?". For a Pakistani undergraduate the deciding lines are visa
+   sponsorship and a GPA minimum, and those are exactly the lines that are
+   missing, buried, or wrong. Four of the ten most-shared funded programmes on
+   LinkedIn were wrong when checked against the official page; one was not
+   running at all.
+2. **What I did** — aggregate eight public feeds on a schedule instead of by
+   hand; classify by type and field; give scarce categories a quota so 500
+   ordinary jobs cannot bury 50 PhD places; and check a visitor's profile
+   against stated requirements entirely in their browser, so a GPA band is
+   compared without ever being transmitted.
+3. **What came of it** — needs the number. Right now I can say 1,213 openings,
+   18 fields, 336 ruled out for my own profile with a named reason. What I
+   cannot yet say is whether the matcher is *right*.
 
-> **Correction, 8 August 2026.** This section originally said the repository
-> recorded no evaluation and that running one was the prerequisite. That was
-> wrong — I wrote it from memory instead of opening the README, which is the
-> exact mistake the rule two sections above warns about, made in the document
-> that states the rule. The experiment was already there. **So the case study
-> was written the same day rather than deferred a month**, and it is live at
-> [case-self-regulating.html](https://farhanbashir.netlify.app/case-self-regulating.html).
-
-**Which makes the next piece something else.** See below.
-
-### The actual next piece
-
-**Cosine annealing and warm restarts as baselines for Self-Regulating AI.** The
-repository names this itself: the regulator is compared against fixed learning
-rate and step decay, but not against the two schedules a practitioner would
-actually reach for. Until that comparison exists, the claim rests on beating the
-easy baselines. That experiment is the difference between an interesting result
-and a defensible one.
+**The real work before this can be written:** hand-check a random sample of
+listings — 30 is enough — against what the matcher claims about each, and
+publish the disagreement rate. Every other case study on this site carries a
+number that survived a check. This one currently carries a count of rows, which
+is not the same thing. If the matcher is wrong 1 in 5 times, that belongs in
+beat 3 in bold.
 
 **Target: by 8 September 2026.**
 
@@ -126,8 +125,12 @@ and a defensible one.
    homepage as the only red page. The fixes are committed. Once they deploy and
    a week of data accumulates, that is a case study with real numbers on both
    sides, which is rarer than it should be.
-2. **Screenshots for the existing three.** Four case studies, zero images of
+2. **Screenshots for the existing four.** Five case studies, zero images of
    anything running. Top of the still-ugly list for two weeks now.
+3. **The missing baselines for Self-Regulating AI** — the case study shipped,
+   but the repository still compares the regulator against fixed learning rate
+   and step decay, not against the two schedules a practitioner would reach for.
+   Carried over from the previous entry because it is still true.
 
 ---
 
