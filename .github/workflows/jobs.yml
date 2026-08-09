@@ -1,0 +1,54 @@
+# Refresh data/jobs.json from public job feeds, twice a day.
+#
+# This is the "live" half of the opportunities section. No API key and no
+# scraping: every source publishes a JSON API or an RSS feed for this purpose.
+# The job commits the result back, so the static page on GitHub Pages serves
+# fresh listings without any server at request time.
+#
+# If one source is down the run still publishes; only every source failing at
+# once is treated as an error, because that means the network or the whole
+# pipeline broke rather than one board having a bad morning.
+
+name: Refresh job listings
+
+on:
+  schedule:
+    - cron: "0 5,17 * * *"     # 05:00 and 17:00 UTC
+  workflow_dispatch:
+  push:
+    paths:
+      - "tools/fetch-jobs.py"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-jobs          # never let two runs race on the same commit
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch listings
+        run: python tools/fetch-jobs.py
+
+      - name: Commit if the listings changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/jobs.json
+          if git diff --staged --quiet; then
+            echo "no change in listings"
+          else
+            COUNT=$(python -c "import json;print(json.load(open('data/jobs.json'))['count'])")
+            git pull --rebase --autostash
+            git commit -m "Refresh job listings: $COUNT live AI/ML roles"
+            git push
+          fi

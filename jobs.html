@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Live AI &amp; ML Jobs — refreshed twice daily — Farhan Bashir</title>
+<meta name="description" content="Live AI, ML and data roles pulled twice a day from Remote OK, Remotive, Jobicy, Himalayas, We Work Remotely and SimplifyJobs. Filter by level, tag, location and visa sponsorship. Links straight to the source posting." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@300;400;600&display=swap" rel="stylesheet" />
+<link rel="canonical" href="https://farhanbashir.netlify.app/jobs.html" />
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Farhan Bashir" />
+<meta property="og:url" content="https://farhanbashir.netlify.app/jobs.html" />
+<meta property="og:title" content="Live AI &amp; ML Jobs — refreshed twice daily" />
+<meta property="og:description" content="Live AI/ML roles from six public job feeds, refreshed twice a day by a GitHub Action. Filter by level, tag, location and visa sponsorship." />
+<meta property="og:image" content="https://farhanbashir.netlify.app/assets/brand/og-card.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Farhan Bashir — I build AI that knows its limits, and ships anyway." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Live AI &amp; ML Jobs — refreshed twice daily" />
+<meta name="twitter:description" content="Live AI/ML roles from six public job feeds, refreshed by a GitHub Action." />
+<meta name="twitter:image" content="https://farhanbashir.netlify.app/assets/brand/og-card.png" />
+<meta name="theme-color" content="#060608" />
+<style>
+  :root{
+    --ink:#060608; --paper:#f4f4f6; --main:#8b5cf6; --main-2:#a78bfa; --accent:#22d3ee;
+    --muted:#9d9da8; --faint:#82828d; --surface:#0c0c10; --surface-2:rgba(255,255,255,.04);
+    --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.17);
+    --green:#4ade80; --amber:#fbbf24; --red:#f87171;
+    --display:'Space Grotesk',system-ui,sans-serif; --body:'Sora',system-ui,sans-serif;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  body{ margin:0; background:var(--ink); color:var(--paper); font-family:var(--body);
+    font-weight:300; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a{ color:var(--main-2); }
+  .wrap{ max-width:1180px; margin:0 auto; padding:clamp(28px,5vw,60px) clamp(18px,5vw,40px) 80px; }
+
+  .label{ font-family:var(--display); font-size:.66rem; font-weight:500;
+    letter-spacing:.28em; text-transform:uppercase; color:var(--muted); }
+  h1{ font-family:var(--display); font-weight:700; letter-spacing:-.04em; text-transform:uppercase;
+    font-size:clamp(1.8rem,5vw,2.8rem); margin:.2em 0 .3em; }
+  h2{ font-family:var(--display); font-weight:600; font-size:1.1rem; margin:0 0 10px; }
+  .sub{ color:var(--muted); max-width:74ch; }
+
+  .subnav{ display:flex; flex-wrap:wrap; gap:6px 16px; font-family:var(--display);
+    font-size:.78rem; padding-bottom:20px; border-bottom:1px solid var(--line); margin-bottom:28px; }
+  .subnav a{ color:var(--muted); text-decoration:none; }
+  .subnav a:hover{ color:var(--paper); }
+  .subnav a[aria-current]{ color:var(--main-2); }
+  .subnav .home{ color:var(--paper); font-weight:600; }
+
+  .live{ display:inline-flex; align-items:center; gap:7px; font-family:var(--display);
+    font-size:.72rem; color:var(--green); border:1px solid rgba(74,222,128,.3);
+    background:rgba(74,222,128,.07); border-radius:99px; padding:5px 13px; }
+  .dot{ width:7px; height:7px; border-radius:50%; background:var(--green); animation:p 2s infinite; }
+  @keyframes p{ 0%,100%{opacity:.35} 50%{opacity:1} }
+
+  .honest{ border-left:3px solid var(--main); background:var(--surface-2);
+    padding:15px 19px; border-radius:0 10px 10px 0; margin:24px 0; }
+  .honest b{ font-family:var(--display); font-size:.79rem; display:block; margin-bottom:6px; }
+  .honest p{ margin:.5em 0; font-size:.9rem; color:var(--muted); }
+  .honest.warn{ border-left-color:var(--amber); }
+
+  .filters{ background:var(--surface-2); border:1px solid var(--line);
+    border-radius:14px; padding:17px 19px; margin:24px 0 18px; }
+  .frow{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:12px; }
+  .frow:last-child{ margin-bottom:0; }
+  .flabel{ font-family:var(--display); font-size:.61rem; font-weight:600; letter-spacing:.15em;
+    text-transform:uppercase; color:var(--faint); flex:0 0 88px; }
+  @media(max-width:640px){ .flabel{ flex:0 0 100%; margin-bottom:2px; } }
+  .chip{ font-family:var(--display); font-size:.73rem; padding:6px 13px; border-radius:99px;
+    cursor:pointer; border:1px solid var(--line-2); background:transparent; color:var(--muted);
+    min-height:32px; }
+  .chip:hover{ color:var(--paper); }
+  .chip[aria-pressed="true"]{ background:var(--main); border-color:var(--main); color:#fff; }
+  .chip.good[aria-pressed="true"]{ background:var(--green); border-color:var(--green); color:#062; }
+  #q{ flex:1; min-width:200px; background:var(--ink); color:var(--paper); border:1px solid var(--line-2);
+    border-radius:9px; padding:10px 13px; font:inherit; font-size:.9rem; min-height:44px; }
+  #q:focus{ outline:2px solid var(--main); outline-offset:1px; }
+  .reset{ font-family:var(--display); font-size:.72rem; background:none; border:none;
+    color:var(--faint); cursor:pointer; text-decoration:underline; padding:8px; min-height:44px; }
+  .reset:hover{ color:var(--paper); }
+  .resultline{ font-family:var(--display); font-size:.78rem; color:var(--faint); margin:0 0 14px; }
+
+  .rows{ display:grid; gap:9px; }
+  .job{ display:grid; grid-template-columns:1fr auto; gap:4px 16px; align-items:start;
+    background:var(--surface-2); border:1px solid var(--line); border-radius:11px;
+    padding:14px 17px; text-decoration:none; color:inherit; }
+  .job:hover{ border-color:var(--line-2); background:rgba(255,255,255,.06); }
+  .jt{ font-family:var(--display); font-weight:600; font-size:.94rem; letter-spacing:-.01em; }
+  .jc{ font-size:.83rem; color:var(--muted); grid-column:1; }
+  .jd{ font-family:var(--display); font-size:.7rem; color:var(--faint); text-align:right;
+    white-space:nowrap; grid-row:1; grid-column:2; }
+  .jtags{ grid-column:1/-1; display:flex; flex-wrap:wrap; gap:5px; margin-top:7px; }
+  .t{ font-family:var(--display); font-size:.63rem; letter-spacing:.05em; color:var(--faint);
+    border:1px solid var(--line); border-radius:4px; padding:2px 7px; }
+  .t.lv{ color:var(--accent); border-color:rgba(34,211,238,.3); }
+  .t.src{ color:var(--muted); }
+  .t.sp-yes{ color:var(--green); border-color:rgba(74,222,128,.45); }
+  .t.sp-no{ color:var(--red);   border-color:rgba(248,113,113,.4); }
+  .t.sal{ color:var(--green); border-color:rgba(74,222,128,.3); }
+  .empty{ text-align:center; color:var(--faint); padding:46px 20px; font-size:.92rem; }
+  #more{ display:block; margin:20px auto 0; font-family:var(--display); font-size:.8rem;
+    background:var(--surface-2); border:1px solid var(--line-2); color:var(--paper);
+    border-radius:9px; padding:12px 26px; cursor:pointer; min-height:44px; }
+  #more:hover{ background:rgba(255,255,255,.09); }
+
+  footer{ margin-top:50px; padding-top:22px; border-top:1px solid var(--line);
+    font-size:.79rem; color:var(--faint); }
+  footer a{ color:var(--muted); }
+  @media(pointer:coarse){ .chip,.reset{ min-height:44px; display:inline-flex; align-items:center; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="subnav" aria-label="Site sections">
+    <a class="home" href="./">← Farhan Bashir</a>
+    <a href="cv.html">CV</a>
+    <a href="case-aqi.html">Air Quality</a>
+    <a href="case-kido.html">KIDO</a>
+    <a href="case-aurexis.html">AUREXIS</a>
+    <a href="workflow.html">Workflow</a>
+    <a href="mcp.html">MCP</a>
+    <a href="agent.html">Agent spec</a>
+    <a href="opportunities.html">Opportunities</a>
+    <a href="jobs.html" aria-current="page">Live jobs</a>
+    <a href="plan.html">Plan</a>
+    <a href="learned.html">Explain it</a>
+  </nav>
+
+  <header>
+    <p class="label">Live feed · AI, ML and data roles</p>
+    <h1>Jobs, pulled from the source</h1>
+    <p class="sub">Real listings from six public job feeds, refreshed twice a day by a scheduled job —
+      not a list I typed. Filter by level, speciality, location and, where the source states it,
+      <strong>visa sponsorship</strong>. Every card links straight to the original posting.</p>
+    <p style="margin-top:14px"><span class="live"><span class="dot"></span><span id="livestamp">loading…</span></span></p>
+  </header>
+
+  <div class="honest">
+    <b>How this works, and what it costs</b>
+    <p>A GitHub Action runs twice a day, calls six public feeds, filters for AI/ML relevance,
+      removes duplicates syndicated across boards, and commits the result. The page you are reading
+      is static — it loads one JSON file. <strong>No API key, no server, no scraping.</strong>
+      Everything is in the open:
+      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/tools/fetch-jobs.py">the fetcher</a>,
+      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/.github/workflows/jobs.yml">the schedule</a>,
+      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/data/jobs.json">the data</a>.</p>
+  </div>
+
+  <div class="filters">
+    <div class="frow">
+      <span class="flabel">Level</span>
+      <div id="f-level" class="frow" style="flex:1;margin:0;gap:8px"></div>
+    </div>
+    <div class="frow">
+      <span class="flabel">Speciality</span>
+      <div id="f-tag" class="frow" style="flex:1;margin:0;gap:8px"></div>
+    </div>
+    <div class="frow">
+      <span class="flabel">Source</span>
+      <div id="f-source" class="frow" style="flex:1;margin:0;gap:8px"></div>
+    </div>
+    <div class="frow">
+      <span class="flabel">Visa</span>
+      <div id="f-visa" class="frow" style="flex:1;margin:0;gap:8px"></div>
+    </div>
+    <div class="frow">
+      <span class="flabel">Search</span>
+      <input id="q" type="search" placeholder="title, company, location…" />
+      <button class="reset" id="reset">clear all</button>
+    </div>
+  </div>
+
+  <p class="resultline" id="resultline">loading listings…</p>
+  <div class="rows" id="rows"></div>
+  <button id="more" hidden>Show more</button>
+
+  <div class="honest warn">
+    <b>Read this before you spend an evening applying</b>
+    <p><strong>A listing here is not a guarantee it is still open.</strong> This mirrors other
+      people's boards twice a day; a role can be filled an hour after it is posted. The date shown
+      is when the <em>source</em> published it, not when I checked it.</p>
+    <p><strong>The AI/ML filter is a regex over the title, not a judgement.</strong> It exists because
+      the feeds' own tagging is loose — one board I looked at had "Pharmacy Technician Refill Calls"
+      filed under an AI track. Mine will still let something odd through, and will still miss a good
+      role with an unusual title.</p>
+    <p><strong>Most listings say nothing about visa sponsorship.</strong> Only one source publishes
+      that field at all, and on most of its rows it is blank. Blank means <em>unstated</em>, never
+      "yes". Use the <em>Says it sponsors</em> filter to see only the ones that actually answered, and
+      <em>Hide no-sponsorship</em> to drop the ones that have already ruled you out.</p>
+    <p>Want a verdict on whether a specific posting is worth <em>your</em> time rather than a list?
+      That is the <a href="agent.html">agent</a> — it reads a posting against a CV and returns apply,
+      caveat or skip. It needs an API key, so it runs on your own machine.</p>
+  </div>
+
+  <footer>
+    <p id="attrib">—</p>
+    <p style="margin-top:12px">
+      <a href="./">← Portfolio</a> ·
+      <a href="opportunities.html">Funded scholarships &amp; research programmes</a> ·
+      <a href="agent.html">The agent</a> ·
+      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/tools/fetch-jobs.py">How it's built</a>
+    </p>
+  </footer>
+</div>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const LEVELS = { internship:"Internship", "new-grad":"New grad", mid:"Mid", senior:"Senior" };
+const TAGS   = { llm:"LLM", nlp:"NLP", vision:"Vision", mlops:"MLOps",
+                 research:"Research", data:"Data", robotics:"Robotics", agents:"Agents" };
+
+const state = { level:new Set(), tag:new Set(), source:new Set(), visa:new Set(), q:"" };
+let DATA = null, shown = [], page = 0;
+const PAGE = 60;
+
+function chipGroup(hostId, key, values, labels, cls) {
+  const host = $(hostId);
+  host.innerHTML = "";
+  for (const v of values) {
+    const b = document.createElement("button");
+    b.className = "chip" + (cls ? " " + cls : "");
+    b.type = "button";
+    b.textContent = (labels && labels[v]) || v;
+    b.setAttribute("aria-pressed", "false");
+    b.addEventListener("click", () => {
+      state[key].has(v) ? state[key].delete(v) : state[key].add(v);
+      b.setAttribute("aria-pressed", String(state[key].has(v)));
+      render();
+    });
+    host.append(b);
+  }
+}
+
+function matches(j) {
+  if (state.level.size && !state.level.has(j.level)) return false;
+  if (state.tag.size && !(j.tags || []).some(t => state.tag.has(t))) return false;
+  if (state.source.size && !state.source.has(j.source)) return false;
+
+  // Two different questions, so two separate switches rather than one tri-state.
+  // "Says it sponsors" is a positive claim by the employer; "hide no-sponsorship"
+  // only removes the ones that have explicitly ruled you out, and leaves the
+  // silent majority in — because silence is not a no.
+  if (state.visa.has("sponsors") && j.sponsorship !== "Offers Sponsorship") return false;
+  if (state.visa.has("hide-no") &&
+      (j.sponsorship === "Does Not Offer Sponsorship" || j.sponsorship === "U.S. Citizenship is Required")) return false;
+
+  if (state.q) {
+    const hay = `${j.title} ${j.company} ${j.location} ${(j.tags||[]).join(" ")}`.toLowerCase();
+    if (!hay.includes(state.q)) return false;
+  }
+  return true;
+}
+
+function ago(d) {
+  if (!d) return "";
+  const days = Math.round((Date.parse(new Date().toISOString().slice(0,10)) - Date.parse(d)) / 86400000);
+  if (days <= 0) return "today";
+  if (days === 1) return "yesterday";
+  if (days < 30) return `${days}d ago`;
+  return `${Math.round(days/30)}mo ago`;
+}
+
+function money(j) {
+  const lo = j.salary_min, hi = j.salary_max;
+  if (!lo && !hi) return "";
+  const k = (n) => n >= 1000 ? `$${Math.round(n/1000)}k` : `$${n}`;
+  return lo && hi ? `${k(lo)}–${k(hi)}` : k(lo || hi);
+}
+
+function row(j) {
+  const sp = j.sponsorship === "Offers Sponsorship"
+      ? `<span class="t sp-yes">sponsors visa</span>`
+    : (j.sponsorship === "Does Not Offer Sponsorship" || j.sponsorship === "U.S. Citizenship is Required")
+      ? `<span class="t sp-no">${esc(j.sponsorship)}</span>` : "";
+  const sal = money(j);
+  return `<a class="job" href="${esc(j.url)}" target="_blank" rel="noopener">
+    <span class="jt">${esc(j.title)}</span>
+    <span class="jd">${esc(ago(j.posted))}</span>
+    <span class="jc">${esc(j.company || "—")}${j.location ? " · " + esc(j.location) : ""}</span>
+    <span class="jtags">
+      <span class="t lv">${esc(LEVELS[j.level] || j.level)}</span>
+      ${(j.tags||[]).map(t => `<span class="t">${esc(TAGS[t] || t)}</span>`).join("")}
+      ${sal ? `<span class="t sal">${esc(sal)}</span>` : ""}
+      ${sp}
+      <span class="t src">via ${esc(j.source)}</span>
+    </span>
+  </a>`;
+}
+
+function paint() {
+  const slice = shown.slice(0, (page + 1) * PAGE);
+  $("#rows").innerHTML = slice.length
+    ? slice.map(row).join("")
+    : `<p class="empty">No listing matches all of those at once.<br>Try clearing a filter.</p>`;
+  const left = shown.length - slice.length;
+  $("#more").hidden = left <= 0;
+  $("#more").textContent = `Show ${Math.min(left, PAGE)} more of ${left}`;
+}
+
+function render() {
+  shown = DATA.jobs.filter(matches);
+  page = 0;
+  const withVisa = shown.filter(j => j.sponsorship === "Offers Sponsorship").length;
+  const interns = shown.filter(j => j.level === "internship").length;
+  $("#resultline").textContent =
+    `${shown.length} of ${DATA.count} listings · ${interns} internships · ${withVisa} state that they sponsor a visa`;
+  paint();
+}
+
+fetch("data/jobs.json")
+  .then(r => r.json())
+  .then(d => {
+    DATA = d;
+    const uniq = (fn) => [...new Set(d.jobs.flatMap(fn))].filter(Boolean).sort();
+
+    chipGroup("#f-level",  "level",  ["internship","new-grad","mid","senior"], LEVELS);
+    chipGroup("#f-tag",    "tag",    uniq(j => j.tags || []), TAGS);
+    chipGroup("#f-source", "source", uniq(j => [j.source]), null);
+    chipGroup("#f-visa",   "visa",   ["sponsors","hide-no"],
+              { sponsors:"Says it sponsors", "hide-no":"Hide no-sponsorship" }, "good");
+
+    $("#livestamp").textContent = `${d.count} live listings · refreshed ${d.checked}`;
+    $("#attrib").textContent = d.attribution;
+    render();
+  })
+  .catch(() => {
+    $("#resultline").textContent = "";
+    $("#rows").innerHTML = `<p class="empty">The listings failed to load. The raw data is still here:
+      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/data/jobs.json">jobs.json</a>.</p>`;
+  });
+
+$("#q").addEventListener("input", e => { state.q = e.target.value.trim().toLowerCase(); render(); });
+$("#more").addEventListener("click", () => { page++; paint(); });
+$("#reset").addEventListener("click", () => {
+  for (const k of ["level","tag","source","visa"]) state[k].clear();
+  state.q = ""; $("#q").value = "";
+  document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed","false"));
+  render();
+});
+</script>
+
+<!-- Cloudflare Web Analytics: cookieless, no personal data. -->
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "892aadd45cb448919272f9d8380aee65"}'></script>
+</body>
+</html>
