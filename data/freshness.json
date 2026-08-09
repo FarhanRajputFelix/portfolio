@@ -1,0 +1,283 @@
+{
+  "generated": "2026-08-09T02:08:04+00:00",
+  "checked": "2026-08-09",
+  "total": 21,
+  "broken": 0,
+  "changed": 0,
+  "note": "A reachable link is not a current deadline. This checks that pages resolve and flags when their visible text changes; it does not read the page.",
+  "sources": [
+    {
+      "url": "https://admissions.kaust.edu.sa/study/internships",
+      "usedBy": [
+        "kaust-vsrp"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "04a9c152c9930e27",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    },
+    {
+      "url": "https://careers.cern/summer",
+      "usedBy": [
+        "cern-summer"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "ce14c51ed8208487",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    },
+    {
+      "url": "https://eee.epfl.ch/",
+      "usedBy": [
+        "epfl-e3"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "361b3dbbb88be6e1",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    },
+    {
+      "url": "https://eee.epfl.ch/program-at-a-glance/",
+      "usedBy": [
+        "epfl-e3"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "3b85377435aafd9b",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    },
+    {
+      "url": "https://ellis.eu/news/ellis-phd-program-call-for-applications-2025",
+      "usedBy": [
+        "ellis-phd"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "1a5af7b1e756aaf7",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    },
+    {
+      "url": "https://ellis.eu/research/jobs",
+      "usedBy": [
+        "job-source"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "3ad9969a6365a105",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    },
+    {
+      "url": "https://ellis.eu/research/phd-postdoc",
+      "usedBy": [
+        "ellis-phd"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "ff13372b9efeace0",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    },
+    {
+      "url": "https://euraxess.ec.europa.eu/jobs",
+      "usedBy": [
+        "job-source"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "fcc3ec34f43e94b5",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    },
+    {
+      "url": "https://home.cern/summer-student-programme",
+      "usedBy": [
+        "cern-summer"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "7e79cf4a1c42b08c",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    },
+    {
+      "url": "https://inf.ethz.ch/studies/summer-research-fellowship.html",
+      "usedBy": [
+        "eth-ssrf"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "4b24bc846cb9a5e6",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    },
+    {
+      "url": "https://inf.ethz.ch/studies/summer-research-fellowship/how-to-apply.html",
+      "usedBy": [
+        "eth-ssrf"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "c1703d52803017fa",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    },
+    {
+      "url": "https://mbzuai.ac.ae/study/graduate-admission-process/",
+      "usedBy": [
+        "mbzuai-scholarship"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "696621a85ef23e4e",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    },
+    {
+      "url": "https://phd.ista.ac.at/isternship/",
+      "usedBy": [
+        "ista-isternship"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "d2faee20afe3a1b1",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    },
+    {
+      "url": "https://sparai.org/",
+      "usedBy": [
+        "spar"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "b1afb97d41c90777",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    },
+    {
+      "url": "https://tigp.sinica.edu.tw/pages/3127",
+      "usedBy": [
+        "tigp-iip"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "6c43b1795aece097",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    },
+    {
+      "url": "https://www.daad.de/deutschland/stipendium/datenbank/en/21148-scholarship-database/",
+      "usedBy": [
+        "job-source"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "330fc6021583db11",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    },
+    {
+      "url": "https://www.findaphd.com/",
+      "usedBy": [
+        "job-source"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "186aca6408a019cf",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    },
+    {
+      "url": "https://www.mpi-sws.org/research-careers/",
+      "usedBy": [
+        "mpi-sws-internship"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "3d7dc12dfa812788",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    },
+    {
+      "url": "https://www.ntu.edu.sg/about-us/global/india-connect-ntu",
+      "usedBy": [
+        "ntu-india-connect"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "ce4757484da44dac",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    },
+    {
+      "url": "https://www.oist.jp/admissions/research-internship/program-description",
+      "usedBy": [
+        "oist-ri"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "51209d74c9f40e07",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    },
+    {
+      "url": "https://www.s.u-tokyo.ac.jp/en/utrip/",
+      "usedBy": [
+        "utokyo-utrip"
+      ],
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "2d25d9e55d28007d",
+      "firstSeen": "2026-08-09",
+      "lastChecked": "2026-08-09",
+      "changedSinceLastCheck": false
+    }
+  ]
+}

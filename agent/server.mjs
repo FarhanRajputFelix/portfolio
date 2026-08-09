@@ -100,6 +100,25 @@ const server = createServer(async (req, res) => {
       return res.end(JSON.stringify(runs));
     }
 
+    /* ---------------- the public catalogue ---------------- */
+    // The same file opportunities.html reads. Served here so the dashboard can
+    // offer real, verified postings to run against instead of asking you to go
+    // and find a URL — the catalogue decides what is worth looking at, the
+    // agent decides whether you specifically should apply.
+    if (url.pathname === "/api/catalogue") {
+      const p = join(REPO, "data", "opportunities.json");
+      if (!existsSync(p)) {
+        res.writeHead(404, { "content-type": "application/json" });
+        return res.end("[]");
+      }
+      const doc = JSON.parse(await readFile(p, "utf8"));
+      const list = doc.opportunities
+        .filter((o) => o.status !== "paused")   // no point evaluating a cancelled programme
+        .map((o) => ({ id: o.id, name: o.name, org: o.org, flag: o.flag, url: o.url, status: o.status, type: o.type }));
+      res.writeHead(200, { "content-type": "application/json" });
+      return res.end(JSON.stringify(list));
+    }
+
     /* ---------------- run the agent ---------------- */
     if (url.pathname === "/api/run" && req.method === "POST") {
       let body = "";

@@ -265,7 +265,15 @@ async function callTool(name, args = {}) {
     /* ---- 3. persistent filesystem write --------------------------- */
     case "log_run": {
       const { programme, fit_score = "—", call, verify_by_hand = "—", source_url = "—" } = args;
-      const index = safePath(join("pipeline", "runs", "INDEX.md"));
+
+      // Mock runs are tests, not history. They were being appended to the real
+      // index, so a rehearsal or an eval sweep left rows like "KAUST VSRP (mock)"
+      // sitting in the same table as decisions about real applications. The
+      // caller sets SCOUT_MOCK when the provider is the recorded transcript;
+      // those runs get their own gitignored file and never touch the real one.
+      const isMock = process.env.SCOUT_MOCK === "1";
+      const indexName = isMock ? "INDEX.mock.md" : "INDEX.md";
+      const index = safePath(join("pipeline", "runs", indexName));
 
       if (!existsSync(index)) {
         await writeFile(
@@ -294,7 +302,7 @@ async function callTool(name, args = {}) {
           {
             type: "text",
             text:
-              `LOGGED row ${n} to pipeline/runs/INDEX.md\n` +
+              `LOGGED row ${n} to pipeline/runs/${indexName}\n` +
               `programme: ${programme}\ncall: ${call}\nfit: ${fit_score}\n` +
               `The index now holds ${n} run${n === 1 ? "" : "s"}. This survives the session — it is a ` +
               `file on disk, not conversation history.`,

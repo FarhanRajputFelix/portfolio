@@ -137,6 +137,15 @@ tbody tr:hover{background:var(--surface)}
     <div class="panel">
       <h2>Run</h2>
 
+      <label for="cat">Pick from the verified catalogue</label>
+      <div class="row" style="margin-top:0">
+        <select id="cat" style="flex:1"><option value="">loading…</option></select>
+        <button id="addcat">Add ↓</button>
+      </div>
+      <p class="hint">The same list as the public
+        <a href="../opportunities.html" target="_blank" rel="noopener">opportunities page</a>.
+        Paused programmes are excluded — no point evaluating one that isn't running.</p>
+
       <label for="urls">Posting URLs — one per line</label>
       <textarea id="urls" rows="4" placeholder="https://admissions.kaust.edu.sa/study/internships&#10;https://sparai.org/"></textarea>
       <p class="hint">Each URL is a separate agent run. They go one at a time so the rate limit holds.</p>
@@ -383,6 +392,31 @@ $("#minfit").addEventListener("change", render);
 chips($("#type-chips"), TYPES, activeTypes, render);
 chips($("#call-chips"), CALLS, activeCalls, render);
 loadRuns();
+
+/* ================= catalogue picker ================= */
+fetch("/api/catalogue")
+  .then(r => r.json())
+  .then(list => {
+    const sel = $("#cat");
+    sel.innerHTML = `<option value="">— ${list.length} verified opportunities —</option>`;
+    for (const o of list) {
+      const opt = document.createElement("option");
+      opt.value = o.url;
+      opt.textContent = `${o.flag} ${o.name} — ${o.org}${o.status === "open" ? " · open" : ""}`;
+      sel.append(opt);
+    }
+  })
+  .catch(() => { $("#cat").innerHTML = '<option value="">catalogue unavailable</option>'; });
+
+$("#addcat").addEventListener("click", () => {
+  const v = $("#cat").value;
+  if (!v) return;
+  const box = $("#urls");
+  const lines = box.value.split(/\n+/).map(s => s.trim()).filter(Boolean);
+  if (lines.includes(v)) return;               // adding the same URL twice is two identical runs
+  lines.push(v);
+  box.value = lines.join("\n");
+});
 </script>
 </body>
 </html>

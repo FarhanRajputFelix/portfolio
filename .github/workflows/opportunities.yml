@@ -1,0 +1,57 @@
+# Re-check every source URL behind opportunities.html, daily.
+#
+# What this proves: the links still resolve, and it flags when a page's visible
+# text changes so I know to re-read it. What it does NOT prove: that a deadline
+# on the page is still correct. Only a human or a model reading the page can
+# say that, and pretending otherwise would make the green tick a lie.
+#
+# It commits data/freshness.json back so the "changed since last check" signal
+# has a previous fingerprint to compare against — without that it can only ever
+# report "reachable".
+
+name: Check opportunity sources
+
+on:
+  schedule:
+    - cron: "0 6 * * *"      # 06:00 UTC daily
+  workflow_dispatch:          # and on demand, for when I have just edited the data
+  push:
+    paths:
+      - "data/opportunities.json"
+      - "tools/check-opportunities.py"
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Re-check every source URL
+        id: check
+        run: python tools/check-opportunities.py
+        continue-on-error: true    # a dead link must still be committed, then fail the job
+
+      - name: Commit freshness data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/freshness.json
+          if git diff --staged --quiet; then
+            echo "no change in source status"
+          else
+            git commit -m "Daily source check: $(python -c "import json;d=json.load(open('data/freshness.json'));print(f\"{d['total']-d['broken']}/{d['total']} reachable, {d['changed']} changed\")")"
+            git push
+          fi
+
+      - name: Fail if any source is unreachable
+        if: steps.check.outcome == 'failure'
+        run: |
+          echo "::error::One or more opportunity sources are unreachable. See data/freshness.json."
+          exit 1

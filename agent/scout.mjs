@@ -68,14 +68,15 @@ function pickProvider(env, forced) {
  * MCP client — spawn the server, speak JSON-RPC 2.0 over stdio
  * ================================================================== */
 class McpClient {
-  constructor() {
+  constructor(env = {}) {
+    this.env = env;   // extra vars for the server process, e.g. SCOUT_MOCK
     this.proc = null;
     this.pending = new Map();
     this.nextId = 1;
   }
 
   async start() {
-    this.proc = spawn(process.execPath, [SERVER], { stdio: ["pipe", "pipe", "pipe"] });
+    this.proc = spawn(process.execPath, [SERVER], { stdio: ["pipe", "pipe", "pipe"], env: { ...process.env, ...this.env } });
     this.proc.stderr.on("data", () => {}); // server logs to stderr; ignore here
     createInterface({ input: this.proc.stdout, crlfDelay: Infinity }).on("line", (line) => {
       if (!line.trim()) return;
@@ -481,7 +482,8 @@ export async function runScout({ url, postingText, providerName, scenario, quiet
 
   const emit = (e) => { try { onEvent && onEvent(e); } catch {} };
   const log = quiet ? () => {} : (...a) => console.log(...a);
-  const mcp = new McpClient();
+  // Tell the server this is a rehearsal so log_run writes to the mock index.
+  const mcp = new McpClient(name === "mock" ? { SCOUT_MOCK: "1" } : {});
   await mcp.start();
 
   const trace = { provider: name, model: provider.model(env), toolCalls: [], text: "", stopReason: null };

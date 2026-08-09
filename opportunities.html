@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Funded Opportunities — verified against the source — Farhan Bashir</title>
+<meta name="description" content="Funded research internships, PhD calls and scholarships in AI and CS. Every figure quoted from the programme's own page, with the source link and the date it was checked. Filter by country, field, level, funding and deadline." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@300;400;600&display=swap" rel="stylesheet" />
+<link rel="canonical" href="https://farhanbashir.netlify.app/opportunities.html" />
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
+
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Farhan Bashir" />
+<meta property="og:url" content="https://farhanbashir.netlify.app/opportunities.html" />
+<meta property="og:title" content="Funded Opportunities — verified against the source" />
+<meta property="og:description" content="Funded research internships, PhD calls and scholarships in AI and CS. Every figure quoted from the programme's own page. Four entries on the popular lists are wrong — this says which." />
+<meta property="og:image" content="https://farhanbashir.netlify.app/assets/brand/og-card.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Farhan Bashir — I build AI that knows its limits, and ships anyway." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Funded Opportunities — verified against the source" />
+<meta name="twitter:description" content="Every figure quoted from the programme's own page, with the date it was checked." />
+<meta name="twitter:image" content="https://farhanbashir.netlify.app/assets/brand/og-card.png" />
+<meta name="theme-color" content="#060608" />
+<style>
+  :root{
+    --ink:#060608; --paper:#f4f4f6; --main:#8b5cf6; --main-2:#a78bfa; --accent:#22d3ee;
+    --muted:#9d9da8; --faint:#82828d; --surface:#0c0c10; --surface-2:rgba(255,255,255,.04);
+    --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.17);
+    --green:#4ade80; --amber:#fbbf24; --red:#f87171;
+    --display:'Space Grotesk',system-ui,sans-serif; --body:'Sora',system-ui,sans-serif;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  body{ margin:0; background:var(--ink); color:var(--paper); font-family:var(--body);
+    font-weight:300; line-height:1.65; -webkit-font-smoothing:antialiased; }
+  a{ color:var(--main-2); }
+  .wrap{ max-width:1180px; margin:0 auto; padding:clamp(28px,5vw,60px) clamp(18px,5vw,40px) 80px; }
+
+  .label{ font-family:var(--display); font-size:.66rem; font-weight:500;
+    letter-spacing:.28em; text-transform:uppercase; color:var(--muted); }
+  h1{ font-family:var(--display); font-weight:700; letter-spacing:-.04em; text-transform:uppercase;
+    font-size:clamp(1.8rem,5vw,2.8rem); margin:.2em 0 .3em; }
+  h2{ font-family:var(--display); font-weight:600; letter-spacing:-.02em; font-size:1.15rem; margin:0 0 10px; }
+  .sub{ color:var(--muted); max-width:74ch; }
+
+  /* ---------- nav ---------- */
+  .subnav{ display:flex; flex-wrap:wrap; gap:6px 16px; font-family:var(--display);
+    font-size:.78rem; padding-bottom:20px; border-bottom:1px solid var(--line); margin-bottom:28px; }
+  .subnav a{ color:var(--muted); text-decoration:none; }
+  .subnav a:hover{ color:var(--paper); }
+  .subnav a[aria-current]{ color:var(--main-2); }
+  .subnav .home{ color:var(--paper); font-weight:600; }
+
+  /* ---------- honesty box ---------- */
+  .honest{ border-left:3px solid var(--main); background:var(--surface-2);
+    padding:16px 20px; border-radius:0 10px 10px 0; margin:26px 0; }
+  .honest b{ font-family:var(--display); font-size:.8rem; letter-spacing:.04em; display:block; margin-bottom:6px; }
+  .honest p{ margin:.55em 0; font-size:.92rem; color:var(--muted); }
+  .honest.warn{ border-left-color:var(--amber); }
+
+  /* ---------- filters ---------- */
+  .filters{ background:var(--surface-2); border:1px solid var(--line);
+    border-radius:14px; padding:18px 20px; margin:26px 0 22px; }
+  .frow{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:14px; }
+  .frow:last-child{ margin-bottom:0; }
+  .flabel{ font-family:var(--display); font-size:.62rem; font-weight:600; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--faint); flex:0 0 92px; }
+  @media(max-width:640px){ .flabel{ flex:0 0 100%; margin-bottom:2px; } }
+  .chip{ font-family:var(--display); font-size:.74rem; padding:7px 14px; border-radius:99px;
+    cursor:pointer; border:1px solid var(--line-2); background:transparent; color:var(--muted);
+    min-height:34px; transition:background .14s,color .14s; }
+  .chip:hover{ color:var(--paper); }
+  .chip[aria-pressed="true"]{ background:var(--main); border-color:var(--main); color:#fff; }
+  #q{ flex:1; min-width:200px; background:var(--ink); color:var(--paper); border:1px solid var(--line-2);
+    border-radius:9px; padding:10px 13px; font:inherit; font-size:.9rem; min-height:44px; }
+  #q:focus{ outline:2px solid var(--main); outline-offset:1px; }
+  .reset{ font-family:var(--display); font-size:.72rem; background:none; border:none;
+    color:var(--faint); cursor:pointer; text-decoration:underline; padding:8px; min-height:44px; }
+  .reset:hover{ color:var(--paper); }
+  .resultline{ font-family:var(--display); font-size:.78rem; color:var(--faint); margin:0 0 18px; }
+
+  /* ---------- cards ---------- */
+  .cards{ display:grid; gap:14px; }
+  .card{ background:var(--surface-2); border:1px solid var(--line); border-radius:14px;
+    padding:20px 22px; transition:border-color .15s; }
+  .card:hover{ border-color:var(--line-2); }
+  .chead{ display:flex; gap:12px; align-items:flex-start; flex-wrap:wrap; }
+  .cflag{ font-size:1.5rem; line-height:1.2; }
+  .ctitle{ flex:1; min-width:220px; }
+  .ctitle h3{ font-family:var(--display); font-weight:600; font-size:1.02rem; margin:0 0 2px;
+    letter-spacing:-.01em; }
+  .ctitle h3 a{ color:var(--paper); text-decoration:none; }
+  .ctitle h3 a:hover{ color:var(--main-2); }
+  .corg{ font-size:.83rem; color:var(--faint); }
+
+  .status{ font-family:var(--display); font-size:.62rem; font-weight:600; letter-spacing:.1em;
+    text-transform:uppercase; padding:4px 10px; border-radius:5px; white-space:nowrap; }
+  .s-open{ background:rgba(74,222,128,.15); color:var(--green); }
+  .s-closing-soon{ background:rgba(251,191,36,.17); color:var(--amber); }
+  .s-opens-soon{ background:rgba(34,211,238,.14); color:var(--accent); }
+  .s-opens-later{ background:rgba(255,255,255,.06); color:var(--muted); }
+  .s-paused{ background:rgba(248,113,113,.16); color:var(--red); }
+  .s-check-source{ background:rgba(255,255,255,.06); color:var(--faint); }
+
+  .meta{ display:flex; flex-wrap:wrap; gap:6px; margin:14px 0 0; }
+  .tag{ font-family:var(--display); font-size:.67rem; color:var(--muted);
+    border:1px solid var(--line); border-radius:5px; padding:3px 9px; }
+  .tag.gpa{ border-color:rgba(251,191,36,.4); color:var(--amber); }
+  .tag.money{ border-color:rgba(74,222,128,.3); color:var(--green); }
+
+  .facts{ margin:14px 0 0; font-size:.88rem; color:var(--muted); }
+  .facts div{ margin:3px 0; }
+  .facts b{ color:var(--paper); font-weight:400; }
+
+  .correction{ margin:14px 0 0; padding:11px 14px; border-radius:8px;
+    background:rgba(251,191,36,.07); border:1px solid rgba(251,191,36,.22);
+    font-size:.86rem; color:#e8d5a8; }
+  .correction b{ font-family:var(--display); font-size:.66rem; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--amber); display:block; margin-bottom:4px; }
+
+  details.ev{ margin:12px 0 0; }
+  details.ev summary{ font-family:var(--display); font-size:.72rem; color:var(--faint);
+    cursor:pointer; padding:6px 0; }
+  details.ev summary:hover{ color:var(--paper); }
+  details.ev blockquote{ margin:8px 0 8px 14px; padding-left:12px; border-left:2px solid var(--line-2);
+    font-size:.84rem; color:var(--muted); font-style:italic; }
+  details.ev blockquote cite{ display:block; font-style:normal; font-size:.74rem; margin-top:4px; }
+
+  .empty{ text-align:center; color:var(--faint); padding:50px 20px; font-size:.92rem; }
+
+  /* ---------- job sources ---------- */
+  .sources{ margin-top:40px; }
+  .srcgrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-top:14px; }
+  .src{ background:var(--surface-2); border:1px solid var(--line); border-radius:11px; padding:15px 17px; }
+  .src a{ font-family:var(--display); font-size:.9rem; font-weight:600; text-decoration:none; }
+  .src p{ margin:5px 0 0; font-size:.83rem; color:var(--faint); }
+
+  footer{ margin-top:56px; padding-top:22px; border-top:1px solid var(--line);
+    display:flex; flex-wrap:wrap; gap:10px 24px; justify-content:space-between;
+    font-size:.8rem; color:var(--faint); }
+  @media(pointer:coarse){ .chip,.reset,a{ min-height:44px; } .chip{ display:inline-flex; align-items:center; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="subnav" aria-label="Site sections">
+    <a class="home" href="./">← Farhan Bashir</a>
+    <a href="cv.html">CV</a>
+    <a href="case-aqi.html">Air Quality</a>
+    <a href="case-kido.html">KIDO</a>
+    <a href="case-aurexis.html">AUREXIS</a>
+    <a href="workflow.html">Workflow</a>
+    <a href="mcp.html">MCP</a>
+    <a href="agent.html">Agent spec</a>
+    <a href="opportunities.html" aria-current="page">Opportunities</a>
+    <a href="plan.html">Plan</a>
+    <a href="learned.html">Explain it</a>
+  </nav>
+
+  <header>
+    <p class="label">Funded opportunities · AI &amp; computer science</p>
+    <h1>Verified against the source</h1>
+    <p class="sub">Research internships, PhD calls and scholarships that pay. Every figure on this page
+      is quoted from the programme's own page, with a link to where I read it and the date I read it.
+      Filter by country, field, level, what's funded, and whether it's actually open.</p>
+  </header>
+
+  <div class="honest warn">
+    <b>Why this page exists</b>
+    <p>A list of ten of these circulates widely on LinkedIn. I checked all ten against the official
+      pages. <strong>Four were wrong in ways that would waste a real application.</strong> One programme
+      on it is not running at all this year. One is advertised to computer-science students by a
+      department that has no computer-science faculty. One quotes a stipend the university has never
+      published. One omits a minimum GPA that decides eligibility outright.</p>
+    <p>So this page shows the correction next to the entry, in yellow, with the quote that proves it.
+      Believe the quote, not me — and click through before you apply, because programmes change and
+      this page is only as fresh as the date on each card.</p>
+  </div>
+
+  <!-- ================= filters ================= -->
+  <div class="filters">
+    <div class="frow">
+      <span class="flabel">I want</span>
+      <div id="f-type" class="frow" style="flex:1; margin:0; gap:8px"></div>
+    </div>
+    <div class="frow">
+      <span class="flabel">My level</span>
+      <div id="f-level" class="frow" style="flex:1; margin:0; gap:8px"></div>
+    </div>
+    <div class="frow">
+      <span class="flabel">Field</span>
+      <div id="f-field" class="frow" style="flex:1; margin:0; gap:8px"></div>
+    </div>
+    <div class="frow">
+      <span class="flabel">Country</span>
+      <div id="f-country" class="frow" style="flex:1; margin:0; gap:8px"></div>
+    </div>
+    <div class="frow">
+      <span class="flabel">Must fund</span>
+      <div id="f-funding" class="frow" style="flex:1; margin:0; gap:8px"></div>
+    </div>
+    <div class="frow">
+      <span class="flabel">Status</span>
+      <div id="f-status" class="frow" style="flex:1; margin:0; gap:8px"></div>
+    </div>
+    <div class="frow">
+      <span class="flabel">Search</span>
+      <input id="q" type="search" placeholder="programme, university, requirement…" />
+      <button class="reset" id="reset">clear all filters</button>
+    </div>
+  </div>
+
+  <p class="resultline" id="resultline"></p>
+  <div class="cards" id="cards"></div>
+
+  <!-- ================= job sources ================= -->
+  <section class="sources">
+    <h2>Looking for a job or a funded PhD, not a summer programme?</h2>
+    <p class="sub">Individual postings churn weekly. A hand-maintained list of them would be stale
+      within days of me writing it, so I am not going to pretend otherwise — here are the boards I
+      would actually send you to.</p>
+    <div class="srcgrid" id="srcgrid"></div>
+  </section>
+
+  <div class="honest">
+    <b>What this page is not</b>
+    <p><strong>It does not search the internet.</strong> It is a hand-verified catalogue of recurring
+      programmes — things with annual cycles and stable URLs, which is exactly the category a list can
+      stay honest about. It does not crawl job boards and it does not claim to be complete.</p>
+    <p><strong>The dates are the weak point.</strong> Deadlines marked "expect the same shape" are
+      inferred from the previous cycle, and I have labelled them that way rather than presenting an
+      inferred date as a fact. A daily job re-checks every source URL and flags any that break; that
+      catches dead links, not silently edited deadlines. Click through before you commit.</p>
+    <p>The judgement of whether <em>you specifically</em> should apply is a separate tool — an
+      <a href="agent.html">agent</a> that reads a posting against a CV and returns apply, caveat or
+      skip. That one needs an API key, so it runs on your own machine rather than here.
+      <a href="https://github.com/FarhanRajputFelix/portfolio/tree/main/agent">Source and setup</a>.</p>
+  </div>
+
+  <footer>
+    <span>Farhan Bashir · Karachi, Pakistan · every entry checked <span id="checked-date">—</span></span>
+    <span><a href="./">← Portfolio</a> · <a href="agent.html">The agent</a> ·
+      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/data/opportunities.json">Raw data (JSON)</a></span>
+  </footer>
+
+</div>
+
+<script>
+/* Static page, no API key, no backend — it reads one JSON file. That is the whole
+   reason it can be hosted anywhere, unlike the agent it links to. */
+const FIELD_LABELS = {
+  "ai-ml": "AI / ML", "ai-safety": "AI safety", "computer-science": "Computer science",
+  "data-science": "Data science", "security": "Security", "robotics": "Robotics",
+  "systems": "Systems", "algorithms": "Algorithms", "engineering": "Engineering",
+  "physics": "Physics", "chemistry": "Chemistry", "biology": "Biology",
+  "neuroscience": "Neuroscience", "maths": "Maths", "earth-science": "Earth science",
+  "bioengineering": "Bioengineering"
+};
+const TYPE_LABELS = {
+  internship: "Internship", phd: "PhD position", scholarship: "Scholarship",
+  research: "Research programme", assistantship: "Assistantship", funding: "Funding / grant"
+};
+const LEVEL_LABELS = { undergraduate: "Undergraduate", masters: "Master's", phd: "PhD" };
+const FUND_LABELS = {
+  stipend: "Stipend", tuition: "Tuition", housing: "Housing",
+  travel: "Travel", insurance: "Insurance", visa: "Visa"
+};
+const STATUS_LABELS = {
+  open: "Open now", "closing-soon": "Closing soon", "opens-soon": "Opens soon",
+  "opens-later": "Cycle closed", paused: "Not running", "check-source": "Verify at source"
+};
+
+const state = { type:new Set(), level:new Set(), field:new Set(), country:new Set(), funding:new Set(), status:new Set(), q:"" };
+let DATA = null;
+
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const $ = (s) => document.querySelector(s);
+
+function chipGroup(hostId, key, values, labels) {
+  const host = $(hostId);
+  host.innerHTML = "";
+  for (const v of values) {
+    const b = document.createElement("button");
+    b.className = "chip";
+    b.type = "button";
+    b.textContent = (labels && labels[v]) || v;
+    b.setAttribute("aria-pressed", "false");
+    b.addEventListener("click", () => {
+      state[key].has(v) ? state[key].delete(v) : state[key].add(v);
+      b.setAttribute("aria-pressed", String(state[key].has(v)));
+      render();
+    });
+    host.append(b);
+  }
+}
+
+/* Multi-select within a facet is OR (a student open to Switzerland or Japan wants
+   both), across facets is AND (an undergraduate internship in Japan). */
+function matches(o) {
+  const s = state;
+  if (s.type.size && !s.type.has(o.type)) return false;
+  if (s.status.size && !s.status.has(o.status)) return false;
+  if (s.level.size && !o.level.some(l => s.level.has(l))) return false;
+  if (s.field.size && !o.fields.some(f => s.field.has(f))) return false;
+  if (s.country.size && !s.country.has(o.country)) return false;
+  if (s.funding.size && ![...s.funding].every(f => o.fundingTags.includes(f))) return false;
+  if (s.q) {
+    const hay = [o.name, o.org, o.country, o.eligibility, o.restrictions, o.corrections,
+                 o.deadlineText, o.gpaRequirement, ...o.fields].join(" ").toLowerCase();
+    if (!hay.includes(s.q)) return false;
+  }
+  return true;
+}
+
+/* Rank so the things you can act on today come first. */
+const STATUS_RANK = { "closing-soon":0, open:1, "opens-soon":2, "opens-later":3, "check-source":4, paused:5 };
+
+function card(o) {
+  const money = Object.entries(o.funding).filter(([, v]) => v).map(([k]) => k);
+  const facts = [];
+  if (o.funding.stipend) facts.push(`<div><b>Pays</b> — ${esc(o.funding.stipend)}</div>`);
+  if (o.duration)        facts.push(`<div><b>Length</b> — ${esc(o.duration)}</div>`);
+  if (o.deadlineText)    facts.push(`<div><b>Applies</b> — ${esc(o.deadlineText)}</div>`);
+  if (o.eligibility)     facts.push(`<div><b>Who</b> — ${esc(o.eligibility)}</div>`);
+  if (o.restrictions)    facts.push(`<div><b>Watch out</b> — ${esc(o.restrictions)}</div>`);
+
+  const tags = [
+    ...o.fundingTags.map(f => `<span class="tag money">${esc(FUND_LABELS[f] || f)}</span>`),
+    ...o.level.map(l => `<span class="tag">${esc(LEVEL_LABELS[l] || l)}</span>`),
+    ...o.fields.slice(0, 4).map(f => `<span class="tag">${esc(FIELD_LABELS[f] || f)}</span>`),
+    o.gpaRequirement ? `<span class="tag gpa">Min GPA ${esc(o.gpaRequirement)}</span>` : ""
+  ].join("");
+
+  const ev = o.evidence.map(e =>
+    `<blockquote>“${esc(e.quote)}”<cite><a href="${esc(e.source)}" target="_blank" rel="noopener">${esc(e.claim)} — source ↗</a></cite></blockquote>`
+  ).join("");
+
+  return `<article class="card">
+    <div class="chead">
+      <span class="cflag" aria-hidden="true">${o.flag}</span>
+      <div class="ctitle">
+        <h3><a href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.name)} ↗</a></h3>
+        <div class="corg">${esc(o.org)} · ${esc(o.country)} · ${esc(TYPE_LABELS[o.type] || o.type)}</div>
+      </div>
+      <span class="status s-${esc(o.status)}">${esc(STATUS_LABELS[o.status] || o.status)}</span>
+    </div>
+    <div class="meta">${tags}</div>
+    <div class="facts">${facts.join("")}</div>
+    ${o.corrections ? `<div class="correction"><b>Correction to the list going around</b>${esc(o.corrections)}</div>` : ""}
+    <details class="ev"><summary>Show the ${o.evidence.length} quote${o.evidence.length===1?"":"s"} this card is built on · checked ${esc(o.checked)}</summary>${ev}</details>
+  </article>`;
+}
+
+function render() {
+  const shown = DATA.opportunities.filter(matches)
+    .sort((a, b) => (STATUS_RANK[a.status] ?? 9) - (STATUS_RANK[b.status] ?? 9)
+                    || String(a.deadline ?? "9").localeCompare(String(b.deadline ?? "9")));
+
+  $("#cards").innerHTML = shown.length
+    ? shown.map(card).join("")
+    : `<p class="empty">Nothing matches all of those at once.<br>Try removing a filter — with 13 entries, narrow combinations run out fast.</p>`;
+
+  const n = DATA.opportunities.length;
+  const funded = shown.filter(o => o.fundingTags.includes("stipend")).length;
+  $("#resultline").textContent =
+    `${shown.length} of ${n} shown · ${funded} pay a stipend · sorted by what you can act on soonest`;
+}
+
+fetch("data/opportunities.json")
+  .then(r => r.json())
+  .then(d => {
+    DATA = d;
+    const os = d.opportunities;
+    const uniq = (fn) => [...new Set(os.flatMap(fn))].sort();
+
+    chipGroup("#f-type",    "type",    uniq(o => [o.type]),        TYPE_LABELS);
+    chipGroup("#f-level",   "level",   ["undergraduate","masters","phd"], LEVEL_LABELS);
+    chipGroup("#f-field",   "field",   uniq(o => o.fields),        FIELD_LABELS);
+    chipGroup("#f-country", "country", uniq(o => [o.country]),     null);
+    chipGroup("#f-funding", "funding", ["stipend","tuition","housing","travel","insurance","visa"], FUND_LABELS);
+    chipGroup("#f-status",  "status",  uniq(o => [o.status]),      STATUS_LABELS);
+
+    $("#srcgrid").innerHTML = d.jobSources.map(s =>
+      `<div class="src"><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)} ↗</a><p>${esc(s.what)}</p></div>`
+    ).join("");
+
+    $("#checked-date").textContent = d.checked;
+    render();
+    return fetch("data/freshness.json").then(r => r.ok ? r.json() : null);
+  })
+  .then(f => {
+    // Written by a daily GitHub Action. It proves the links resolve — not that
+    // the deadlines behind them are current. The wording says so.
+    if (!f) return;
+    const el = document.createElement("p");
+    el.className = "resultline";
+    el.style.marginTop = "10px";
+    el.innerHTML = `Sources last auto-checked <b>${esc(f.checked)}</b> — `
+      + `${f.total - f.broken}/${f.total} reachable`
+      + (f.broken ? `, <span style="color:var(--red)">${f.broken} broken</span>` : "")
+      + (f.changed ? `, <span style="color:var(--amber)">${f.changed} page(s) changed since the last check</span>` : "")
+      + `. That checks the links resolve, not that the dates on them are still right.`;
+    $("#resultline").after(el);
+  })
+  .catch(() => {
+    $("#cards").innerHTML = `<p class="empty">The opportunity data failed to load.
+      You can still read it directly:
+      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/data/opportunities.json">opportunities.json</a>.</p>`;
+  });
+
+$("#q").addEventListener("input", (e) => { state.q = e.target.value.trim().toLowerCase(); render(); });
+$("#reset").addEventListener("click", () => {
+  for (const k of ["type","level","field","country","funding","status"]) state[k].clear();
+  state.q = ""; $("#q").value = "";
+  document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", "false"));
+  render();
+});
+</script>
+
+<!-- Cloudflare Web Analytics: cookieless, no personal data. -->
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "892aadd45cb448919272f9d8380aee65"}'></script>
+</body>
+</html>

@@ -45,7 +45,15 @@ def main() -> int:
 
     for page in pages:
         html = io.open(page, encoding="utf-8").read()
-        for href in re.findall(r'href="([^"]+)"', html):
+
+        # Strip <script> before extracting hrefs. opportunities.html builds its
+        # cards in JS, so the source contains href="${esc(o.url)}" — a template
+        # literal, not a link. Regexing the raw file reported three "broken
+        # links" that are not links at all. Markup is what ships to the browser;
+        # script is what writes it, and only the former can be checked this way.
+        markup = re.sub(r"(?is)<script\b[^>]*>.*?</script>", " ", html)
+
+        for href in re.findall(r'href="([^"]+)"', markup):
             if href.startswith(SKIP):
                 continue
             target = href.split("#")[0]
