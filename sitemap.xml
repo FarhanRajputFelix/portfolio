@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Sitemap for farhanbashir.netlify.app (canonical host).
+  Sitemap for farhanrajputfelix.github.io/portfolio (canonical host).
+  Set by tools/set-base-url.py — do not edit the host here by hand.
   The GitHub Pages copy at farhanrajputfelix.github.io/portfolio stays live;
   every page carries a canonical tag pointing here so the two are not
   treated as competing duplicates.
@@ -10,112 +11,112 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://farhanbashir.netlify.app/</loc>
+    <loc>https://farhanrajputfelix.github.io/portfolio/</loc>
     <lastmod>2026-08-07</lastmod>
     <priority>1.0</priority>
   </url>
 
   <!-- Case studies -->
   <url>
-    <loc>https://farhanbashir.netlify.app/case-aqi.html</loc>
+    <loc>https://farhanrajputfelix.github.io/portfolio/case-aqi.html</loc>
     <lastmod>2026-08-07</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://farhanbashir.netlify.app/case-kido.html</loc>
+    <loc>https://farhanrajputfelix.github.io/portfolio/case-kido.html</loc>
     <lastmod>2026-08-07</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://farhanbashir.netlify.app/case-aurexis.html</loc>
+    <loc>https://farhanrajputfelix.github.io/portfolio/case-aurexis.html</loc>
     <lastmod>2026-08-07</lastmod>
     <priority>0.9</priority>
   </url>
 
   <!-- Process -->
   <url>
-    <loc>https://farhanbashir.netlify.app/workflow.html</loc>
+    <loc>https://farhanrajputfelix.github.io/portfolio/workflow.html</loc>
     <lastmod>2026-08-07</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://farhanbashir.netlify.app/mcp.html</loc>
+    <loc>https://farhanrajputfelix.github.io/portfolio/mcp.html</loc>
     <lastmod>2026-08-07</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://farhanbashir.netlify.app/agent.html</loc>
+    <loc>https://farhanrajputfelix.github.io/portfolio/agent.html</loc>
     <lastmod>2026-08-07</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://farhanbashir.netlify.app/cv.html</loc>
+    <loc>https://farhanrajputfelix.github.io/portfolio/cv.html</loc>
     <lastmod>2026-08-07</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://farhanbashir.netlify.app/dns.html</loc>
+    <loc>https://farhanrajputfelix.github.io/portfolio/dns.html</loc>
     <lastmod>2026-08-07</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://farhanbashir.netlify.app/learned.html</loc>
+    <loc>https://farhanrajputfelix.github.io/portfolio/learned.html</loc>
     <lastmod>2026-08-08</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://farhanbashir.netlify.app/feature.html</loc>
+    <loc>https://farhanrajputfelix.github.io/portfolio/feature.html</loc>
     <lastmod>2026-08-08</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://farhanbashir.netlify.app/crit.html</loc>
+    <loc>https://farhanrajputfelix.github.io/portfolio/crit.html</loc>
     <lastmod>2026-08-08</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://farhanbashir.netlify.app/break.html</loc>
+    <loc>https://farhanrajputfelix.github.io/portfolio/break.html</loc>
     <lastmod>2026-08-08</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://farhanbashir.netlify.app/fixes.html</loc>
+    <loc>https://farhanrajputfelix.github.io/portfolio/fixes.html</loc>
     <lastmod>2026-08-08</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://farhanbashir.netlify.app/ugly.html</loc>
+    <loc>https://farhanrajputfelix.github.io/portfolio/ugly.html</loc>
     <lastmod>2026-08-07</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://farhanbashir.netlify.app/plan.html</loc>
-    <lastmod>2026-08-07</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://farhanbashir.netlify.app/brand.html</loc>
+    <loc>https://farhanrajputfelix.github.io/portfolio/plan.html</loc>
     <lastmod>2026-08-07</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://farhanbashir.netlify.app/stack.html</loc>
+    <loc>https://farhanrajputfelix.github.io/portfolio/brand.html</loc>
     <lastmod>2026-08-07</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://farhanbashir.netlify.app/images.html</loc>
+    <loc>https://farhanrajputfelix.github.io/portfolio/stack.html</loc>
+    <lastmod>2026-08-07</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://farhanrajputfelix.github.io/portfolio/images.html</loc>
     <lastmod>2026-08-07</lastmod>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://farhanbashir.netlify.app/case-self-regulating.html</loc>
+    <loc>https://farhanrajputfelix.github.io/portfolio/case-self-regulating.html</loc>
     <lastmod>2026-08-08</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://farhanbashir.netlify.app/opportunities.html</loc>
+    <loc>https://farhanrajputfelix.github.io/portfolio/opportunities.html</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>

@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@300;400;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/case.css" />
-<link rel="canonical" href="https://farhanbashir.netlify.app/dns.html" />
+<link rel="canonical" href="https://farhanrajputfelix.github.io/portfolio/dns.html" />
 <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
 <link rel="apple-touch-icon" sizes="180x180" href="assets/brand/icon-180.png" />
 
@@ -17,17 +17,17 @@
      renders a blank rectangle - which is what it did until Week 9. -->
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="Farhan Bashir" />
-<meta property="og:url" content="https://farhanbashir.netlify.app/dns.html" />
+<meta property="og:url" content="https://farhanrajputfelix.github.io/portfolio/dns.html" />
 <meta property="og:title" content="DNS walkthrough" />
 <meta property="og:description" content="What a CNAME record is, what value mine will hold, and the eight things that happen between someone typing my address and my host answering." />
-<meta property="og:image" content="https://farhanbashir.netlify.app/assets/brand/og-card.png" />
+<meta property="og:image" content="https://farhanrajputfelix.github.io/portfolio/assets/brand/og-card.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content="Farhan Bashir — I build AI that knows its limits, and ships anyway." />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="DNS walkthrough" />
 <meta name="twitter:description" content="What a CNAME record is, what value mine will hold, and the eight things that happen between someone typing my address and my host answering." />
-<meta name="twitter:image" content="https://farhanbashir.netlify.app/assets/brand/og-card.png" />
+<meta name="twitter:image" content="https://farhanrajputfelix.github.io/portfolio/assets/brand/og-card.png" />
 <meta name="theme-color" content="#060608" />
 <style>
   ol.hops{ counter-reset:hop; list-style:none; padding:0; margin:16px 0 0; }
@@ -84,6 +84,23 @@
       that book: it says "this name is an alias for that other name — go look that one up instead."</p>
     <p>Mine will say <code>farhan.flyrank.ai</code> → <code>farhanbashir.netlify.app</code>. Nothing
       about my site changes. <strong>A custom domain is a pointer, not a migration.</strong></p>
+  </div>
+
+  <div class="honest">
+    <b>Update, 9 August 2026 — the host in this walkthrough changed, and the reason proves the point</b>
+    <p>This page was written with Netlify as the host. The site now serves from <strong>GitHub
+      Pages</strong>, because Netlify's free build minutes ran out and its copy went stale: three
+      pages that exist in the repository were returning 404 on the Netlify URL while working fine
+      elsewhere. Worse, every page on the site still advertised the Netlify address in its
+      <code>canonical</code> tag, so a search engine was being pointed at missing pages.</p>
+    <p>The walkthrough below is unchanged and still correct — only the right-hand side of the arrow
+      moved, from <code>farhanbashir.netlify.app</code> to <code>farhanrajputfelix.github.io</code>.
+      That <em>is</em> the lesson this page was written to teach: the domain is a pointer, so
+      changing hosts is a one-line DNS edit and nothing about the site itself moves.</p>
+    <p>The 113 references to the old address across 25 files were not a one-line edit, though, which
+      is the part I got wrong. They are now set by
+      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/tools/set-base-url.py">one
+      script</a> instead of by hand, so the next host change really is a single command.</p>
   </div>
 
   <!-- ============ 01 ============ -->

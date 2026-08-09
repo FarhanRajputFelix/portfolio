@@ -8,7 +8,7 @@ interesting ones, because they are the things I still cannot see.
 **Proof statement given to the reviewer:** *"I build AI that knows its limits — and ships anyway."*
 **One action the site is meant to produce:** an email about an AI/ML role, internship or research
 collaboration.
-**URL reviewed:** https://farhanbashir.netlify.app/
+**URL reviewed:** https://farhanrajputfelix.github.io/portfolio/
 
 ---
 
