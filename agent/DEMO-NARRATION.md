@@ -173,6 +173,42 @@ normal pace and you are done in one take plus a retry.
 
 Your face stays off camera either way.
 
+## Optional swap: a stronger guardrail story, found today
+
+The brief asks you to verbally explain "one design decision **and** one limitation
+or guardrail". The script above uses the E2 regression. This is the alternative,
+and it is better in one specific way: it happened today, you watched it happen,
+and the fix is the clearest example of structural guarding in the whole project.
+
+Use it **in place of** the first three sentences of the limitation section, or as
+an extra 35 seconds if you are comfortably under 5:00.
+
+**On screen:** the dashboard, with the yellow `url corrected` line visible in the log.
+
+> One more thing, and this one is from today. I asked the agent to evaluate S P A R,
+> at s p a r a i dot org. Watch the log line in yellow. The model asked to fetch
+> s p a r i dot org. It dropped a letter.
+
+> That domain resolves. It belongs to an animal rescue charity. So the agent
+> fetched a real website, read it correctly, and gave me a perfectly sensible
+> verdict about an animal shelter.
+
+> There is a row in my run history from days ago called Shepherd's Paws Animal
+> Rescue. I logged it as an oddity at the time. It was this bug, and I did not
+> understand it until today.
+
+> I could not fix that with a better prompt. A typo is not a reasoning error, and
+> it corrupted the address differently on each run. But the U R L was never the
+> model's to decide. It is an input to the run.
+
+> So the loop now substitutes the address I gave it and shows the correction. That
+> is the same pattern as the G P A gate: do not ask the model to avoid the
+> mistake, remove its opportunity to make it.
+
+**Why a reviewer will like this**: it is a live defect, honestly described, with a
+fix that follows a principle rather than a patch — and it is visible on screen
+while you say it, which is exactly what "not slides" means.
+
 ## Checklist before uploading
 
 - [ ] 3 to 5 minutes
