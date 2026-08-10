@@ -555,6 +555,27 @@ export async function runScout({ url, postingText, providerName, scenario, quiet
       const results = [];
       for (const call of step.toolCalls) {
         calls++;
+
+        // The harness owns the URL. The model does not get to retype it.
+        //
+        // Asked to evaluate https://sparai.org/ the model emitted
+        // fetch_posting({url: "https://spari.org/"}) — one letter dropped. That
+        // domain resolves: it is Shepherd's Paws Animal Rescue. So the agent
+        // fetched a real, wrong website, read it correctly, and returned a
+        // perfectly reasoned SKIP about an animal shelter. The "Shepherd's Paws"
+        // row in pipeline/runs/INDEX.md is this bug, logged before I understood it.
+        //
+        // No prompt fixes this reliably; a typo is not a reasoning error. But the
+        // URL was never the model's to decide — it is an input to the run. So it
+        // is substituted here, and the correction is surfaced rather than hidden.
+        if (call.name === "fetch_posting" && url && call.args?.url && call.args.url !== url) {
+          const wrong = call.args.url;
+          call.args = { ...call.args, url };
+          log(`\x1b[33m  ! url corrected: model asked for ${wrong}\x1b[0m`);
+          emit({ type: "correction", field: "url", from: wrong, to: url });
+          trace.corrections = (trace.corrections ?? 0) + 1;
+        }
+
         log(`\x1b[35m→ tool\x1b[0m  ${call.name}(${JSON.stringify(call.args).slice(0, 110)})`);
         emit({ type: "tool", name: call.name, args: call.args });
         let out = await mcp.callTool(call.name, call.args);

@@ -143,7 +143,10 @@ tbody tr:hover{background:var(--surface)}
         <button id="addcat">Add ↓</button>
       </div>
       <p class="hint">The same list as the public
-        <a href="../opportunities.html" target="_blank" rel="noopener">opportunities page</a>.
+        <!-- Absolute, not ../. The server refuses to serve outside agent/ by design
+             (path-traversal guard), so a relative link to the site root 404s. -->
+        <a href="https://farhanrajputfelix.github.io/portfolio/opportunities.html"
+           target="_blank" rel="noopener">opportunities page</a>.
         Paused programmes are excluded — no point evaluating one that isn't running.</p>
 
       <label for="urls">Posting URLs — one per line</label>
