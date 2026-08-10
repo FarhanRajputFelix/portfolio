@@ -17,3 +17,10 @@ pipeline/private/
 
 # Mock/eval runs are rehearsals, not history. See mcp/outreach-server.mjs log_run.
 pipeline/runs/INDEX.mock.md
+
+# CV source and the LinkedIn copy pack. Kept OUT of the public repo: the .tex
+# carries a phone number that cv.html deliberately omits, and both files quote
+# private audit scores in their comments. Working copies live in
+# pipeline/private/cv/, which is already gitignored.
+cv/farhan-bashir-cv.tex
+cv/LINKEDIN-COPY.md
