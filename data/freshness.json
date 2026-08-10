@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-10T07:16:25+00:00",
+  "generated": "2026-08-10T13:12:17+00:00",
   "checked": "2026-08-10",
   "total": 21,
   "broken": 1,
@@ -17,7 +17,7 @@
       "fingerprint": "04a9c152c9930e27",
       "firstSeen": "2026-08-10",
       "lastChecked": "2026-08-10",
-      "changedSinceLastCheck": true
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://careers.cern/summer",
@@ -27,7 +27,7 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "83ee906dcebb570b",
+      "fingerprint": "09b4ceb02f4dde6a",
       "firstSeen": "2026-08-10",
       "lastChecked": "2026-08-10",
       "changedSinceLastCheck": true
@@ -170,10 +170,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "d2faee20afe3a1b1",
-      "firstSeen": "2026-08-09",
+      "fingerprint": "cc34531ff435ae7f",
+      "firstSeen": "2026-08-10",
       "lastChecked": "2026-08-10",
-      "changedSinceLastCheck": false
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://sparai.org/",
@@ -222,7 +222,7 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "8efebc8f8b3eada9",
+      "fingerprint": "b55006c3de89ac28",
       "firstSeen": "2026-08-10",
       "lastChecked": "2026-08-10",
       "changedSinceLastCheck": true
