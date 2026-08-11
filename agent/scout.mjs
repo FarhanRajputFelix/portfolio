@@ -514,7 +514,7 @@ export async function runScout({ url, postingText, providerName, scenario, quiet
       brief: condense(brief, 2200),
       stale,
     });
-    log(`[36mcontext[0m   ~${Math.round(system.length / 4)} tokens of system prompt`);
+    log(`\x1b[36mcontext\x1b[0m   ~${Math.round(system.length / 4)} tokens of system prompt`);
     emit({ type: "start", provider: name, model: provider.model(env), tools: tools.map(t => t.name), url, tokens: Math.round(system.length / 4) });
     // A posting can arrive as a URL to fetch, or as text already in hand (a PDF,
     // an email, a JS-rendered page the fetch tool cannot read). Both are real

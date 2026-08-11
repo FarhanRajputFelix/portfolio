@@ -75,8 +75,10 @@
     align-items:center; gap:12px; flex-wrap:wrap; cursor:pointer; padding:14px 18px;
     font-family:var(--display); font-size:.92rem; list-style:none; }
   .profile > summary::-webkit-details-marker, .filters > summary::-webkit-details-marker{ display:none; }
-  .profile > summary::before, .filters > summary::before{ content:"B8"; color:var(--main-2);
-    font-size:.8rem; margin-right:2px; transition:transform .15s; }
+  .profile > summary::before, .filters > summary::before{ content:""; width:0; height:0; flex:0 0 auto;
+    border-left:5px solid var(--main-2); border-top:4px solid transparent;
+    border-bottom:4px solid transparent; margin-right:4px;
+    transition:transform .15s; }
   .profile[open] > summary::before, .filters[open] > summary::before{ transform:rotate(90deg); }
   .profile > *:not(summary), .filters > *:not(summary){ padding-left:18px; padding-right:18px; }
   .profile[open] > summary{ border-bottom:1px solid rgba(139,92,246,.25); }

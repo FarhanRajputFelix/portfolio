@@ -33,6 +33,10 @@ jobs:
         with:
           python-version: "3.12"
 
+      # Cheap, and it has caught four shipped bugs' worth of mangled escapes.
+      - name: No stray control characters in source
+        run: python tools/check-control-chars.py
+
       - name: Re-check every source URL
         id: check
         run: python tools/check-opportunities.py
