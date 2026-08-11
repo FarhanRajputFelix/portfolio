@@ -66,10 +66,23 @@
   .honest p{ margin:.5em 0; font-size:.9rem; color:var(--muted); }
   .honest.warn{ border-left-color:var(--amber); }
 
+  /* Both panels start closed. 187 words of prose, six dropdowns and about
+     thirty chips used to sit between the visitor and the first job. The tool
+     still does everything it did; it just does not demand a form first. */
   .profile{ background:linear-gradient(135deg,rgba(139,92,246,.10),rgba(34,211,238,.05));
-    border:1px solid rgba(139,92,246,.32); border-radius:14px; padding:18px 20px; margin:24px 0 0; }
-  .phead{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; }
-  .profile h2{ font-family:var(--display); font-size:1rem; margin:0 0 4px; }
+    border:1px solid rgba(139,92,246,.32); border-radius:14px; margin:18px 0 0; }
+  .profile > summary, .filters > summary{ display:flex; justify-content:space-between;
+    align-items:center; gap:12px; flex-wrap:wrap; cursor:pointer; padding:14px 18px;
+    font-family:var(--display); font-size:.92rem; list-style:none; }
+  .profile > summary::-webkit-details-marker, .filters > summary::-webkit-details-marker{ display:none; }
+  .profile > summary::before, .filters > summary::before{ content:"B8"; color:var(--main-2);
+    font-size:.8rem; margin-right:2px; transition:transform .15s; }
+  .profile[open] > summary::before, .filters[open] > summary::before{ transform:rotate(90deg); }
+  .profile > *:not(summary), .filters > *:not(summary){ padding-left:18px; padding-right:18px; }
+  .profile[open] > summary{ border-bottom:1px solid rgba(139,92,246,.25); }
+  .filters[open] > summary{ border-bottom:1px solid var(--line); }
+  .profile > .pnote:last-of-type, .filters .frow:last-child{ padding-bottom:16px; }
+  #p-badge, #f-badge{ font-size:.72rem; color:var(--accent); font-weight:400; }
   .pnote{ font-size:.84rem; color:var(--muted); margin:6px 0 0; max-width:80ch; }
   .pgrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(168px,1fr)); gap:11px; margin-top:14px; }
   .pgrid label{ display:flex; flex-direction:column; gap:5px; font-family:var(--display);
@@ -87,7 +100,7 @@
   .why .ok{ color:#b8f0cd; background:rgba(74,222,128,.08); border-left:2px solid rgba(74,222,128,.5); }
 
   .filters{ background:var(--surface-2); border:1px solid var(--line);
-    border-radius:14px; padding:17px 19px; margin:24px 0 18px; }
+    border-radius:14px; margin:10px 0 16px; }
   .frow{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:12px; }
   .frow:last-child{ margin-bottom:0; }
   .flabel{ font-family:var(--display); font-size:.61rem; font-weight:600; letter-spacing:.15em;
@@ -196,14 +209,13 @@
        localStorage and is never sent anywhere — there is no server to send it
        to. That is the same trade the agent makes with its GPA gate: answer the
        question without the number leaving the machine. -->
-  <div class="profile" id="profile">
-    <div class="phead">
-      <h2>Only show what I can actually apply for</h2>
+  <details class="profile" id="profile">
+    <summary>
+      <span><strong>Only show what I can apply for</strong> <span id="p-badge"></span></span>
       <button class="reset" id="profile-clear" hidden>forget my profile</button>
-    </div>
-    <p class="pnote">Answer what you like and the list checks each opening against it. Stored in this
-      browser only &mdash; <strong>nothing is sent anywhere</strong>, because there is no server here
-      to send it to. Leave a box on &ldquo;any&rdquo; and that rule is simply not applied.</p>
+    </summary>
+    <p class="pnote">Optional. Anything you leave on &ldquo;any&rdquo; is simply not checked. Stored in
+      this browser only &mdash; there is no server here to send it to.</p>
 
     <div class="pgrid">
       <label>Stage
@@ -251,9 +263,10 @@
       </label>
     </div>
     <p class="pnote" id="p-summary"></p>
-  </div>
+  </details>
 
-  <div class="filters">
+  <details class="filters" id="filterbox">
+    <summary><strong>Filters</strong> <span id="f-badge"></span></summary>
     <div class="frow">
       <span class="flabel">I want</span>
       <div id="f-type" class="frow" style="flex:1;margin:0;gap:8px"></div>
@@ -287,7 +300,7 @@
       <input id="q" type="search" placeholder="title, company, location…" />
       <button class="reset" id="reset">clear all</button>
     </div>
-  </div>
+  </details>
 
   <p class="resultline" id="resultline">loading listings…</p>
   <div class="rows" id="rows"></div>
@@ -674,6 +687,23 @@ function render() {
     `${shown.length} of ${DATA.count} · ${fields} field${fields === 1 ? "" : "s"} · `
     + `${interns} internships · ${ver} hand-verified · ${withVisa} state that they sponsor a visa`;
 
+  // Summary badges: the panels are shut, so say what they are doing.
+  const activeFilters = ["type","field","level","source","visa","verified","mark"]
+    .reduce((n, k) => n + state[k].size, 0) + (state.q ? 1 : 0);
+  const fb = $("#f-badge");
+  if (fb) fb.textContent = activeFilters
+    ? `${activeFilters} active · ${shown.length} shown`
+    : `${DATA.count} openings, nothing filtered`;
+
+  const pb = $("#p-badge");
+  if (pb) {
+    if (!profileActive()) pb.textContent = "— optional, 20 seconds";
+    else {
+      const clear = DATA.jobs.filter(j => assess(j).blockers.length === 0).length;
+      pb.textContent = `— ${clear} of ${DATA.count} clear for you`;
+    }
+  }
+
   const sum = $("#p-summary");
   if (!profileActive()) {
     sum.textContent = "";
@@ -779,6 +809,7 @@ Promise.all([
     }
     loadMarks();
     loadProfile();
+    if (profileActive()) $("#profile").open = true;
 
     if (programmes && programmes.jobSources) {
       $("#srcgrid").innerHTML = programmes.jobSources.map(x =>
