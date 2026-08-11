@@ -129,6 +129,18 @@
   .t.st-paused{ color:var(--red); border-color:rgba(248,113,113,.5); }
   .t.st-opens-later,.t.st-opens-soon,.t.st-check-source{ color:var(--faint); }
   .jc.note{ color:var(--accent); font-size:.79rem; }
+  .mark{ position:absolute; top:12px; right:14px; display:flex; gap:6px; }
+  .mark button{ font-family:var(--display); font-size:.62rem; letter-spacing:.06em;
+    text-transform:uppercase; padding:5px 10px; border-radius:6px; cursor:pointer;
+    border:1px solid var(--line-2); background:var(--ink); color:var(--faint); min-height:28px; }
+  .mark button:hover{ color:var(--paper); border-color:var(--paper); }
+  .mark button[aria-pressed="true"]{ background:var(--green); border-color:var(--green); color:#052e16; font-weight:600; }
+  .mark button.no[aria-pressed="true"]{ background:var(--red); border-color:var(--red); color:#450a0a; }
+  .jobwrap{ position:relative; }
+  .job{ padding-right:150px; }
+  @media(max-width:640px){ .job{ padding-right:17px; } .mark{ position:static; margin-top:9px; } }
+  .job.is-applied{ border-color:rgba(74,222,128,.45); background:rgba(74,222,128,.05); }
+  .job.is-dismissed{ opacity:.45; }
   .jc.corr{ color:#e8d5a8; font-size:.79rem; background:rgba(251,191,36,.07);
     border-left:2px solid rgba(251,191,36,.45); padding:5px 9px; margin-top:5px; border-radius:0 5px 5px 0; }
   .t.src{ color:var(--muted); }
@@ -164,29 +176,20 @@
     <a href="learned.html">Explain it</a>
   </nav>
 
+  <!-- Visitor-first ordering, and it took a blunt correction to get here.
+       This page used to open with a paragraph about how I built it, then a
+       second box about what it cost, and only then the tool. Somebody arriving
+       to look for a job does not care how the page was made. So: one sentence,
+       then the filters, then the listings. The build story is a <details> at
+       the bottom for the people who actually want it. -->
   <header>
     <p class="label">Jobs · internships · PhD · research · scholarships</p>
-    <h1>Opportunities, pulled from the source</h1>
-    <p class="sub">One list: <strong>jobs, internships, PhD places, research posts and funded
-      scholarships</strong>. Most of it refreshes itself twice a day from eight public feeds — not a
-      list I typed. Every field, not just tech: software, design, marketing, finance, healthcare,
-      legal, education and more. Filter by what you actually want, then by field, level and, where
-      the source states it, <strong>visa sponsorship</strong>. Every card links to the original.</p>
-    <p style="margin-top:14px"><span class="live"><span class="dot"></span><span id="livestamp">loading…</span></span></p>
+    <h1>Find something to apply for</h1>
+    <p class="sub">Free, no sign-up. Tell it your stage and field and it shows what you actually
+      qualify for — and names the requirement that rules you out of the rest. Every card links to
+      the original posting.</p>
+    <p style="margin-top:12px"><span class="live"><span class="dot"></span><span id="livestamp">loading…</span></span></p>
   </header>
-
-  <div class="honest">
-    <b>How this works, and what it costs</b>
-    <p>A GitHub Action runs twice a day, calls eight public feeds, drops rows that are not really an
-      opening, removes duplicates syndicated across boards, tags each listing with a type and a field,
-      and commits the result. Rare categories get a quota so 500 ordinary jobs cannot bury 50 PhD
-      places. The page you are reading is static — it loads two JSON files.
-      <strong>No API key, no server, no scraping.</strong>
-      Everything is in the open:
-      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/tools/fetch-jobs.py">the fetcher</a>,
-      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/.github/workflows/jobs.yml">the schedule</a>,
-      <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/data/jobs.json">the data</a>.</p>
-  </div>
 
 
   <!-- Eligibility matcher. Everything typed here stays in this browser's
@@ -268,6 +271,10 @@
       <div id="f-verified" class="frow" style="flex:1;margin:0;gap:8px"></div>
     </div>
     <div class="frow">
+      <span class="flabel">My progress</span>
+      <div id="f-mark" class="frow" style="flex:1;margin:0;gap:8px"></div>
+    </div>
+    <div class="frow">
       <span class="flabel">Source</span>
       <div id="f-source" class="frow" style="flex:1;margin:0;gap:8px"></div>
     </div>
@@ -325,6 +332,36 @@
       caveat or skip. It needs an API key, so it runs on your own machine.</p>
   </div>
 
+  <!-- Restored. These four boards existed on the earlier version of this page and
+       were lost when I rebuilt it from the job-board layout — data/opportunities.json
+       has been carrying `jobSources` unused ever since. Worth having: this list is
+       recurring programmes and feed listings, and a live search on a real board finds
+       things it never will. -->
+  <section class="sources">
+    <h2>Not finding it here? Search these directly</h2>
+    <p class="sub">This page is a daily mirror plus a hand-checked set. These four run live
+      searches over far more than it holds.</p>
+    <div class="srcgrid" id="srcgrid"></div>
+  </section>
+
+  <details class="how">
+    <summary>How this is built, for whoever wants it</summary>
+    <div class="howbody">
+      <p>A GitHub Action runs twice a day, calls eight public feeds, drops rows that are not really an
+        opening, removes duplicates syndicated across boards, tags each listing with a type and a
+        field, and commits the result. Rare categories get a quota so 500 ordinary jobs cannot bury
+        50 PhD places. The page you are reading is static &mdash; it loads two JSON files.
+        <strong>No API key, no server, no scraping.</strong></p>
+      <p>The eligibility check runs entirely in your browser, and your profile and your applied
+        markers are held in localStorage. Nothing you enter is transmitted, because there is no
+        server here to transmit it to.</p>
+      <p>Open: <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/tools/fetch-jobs.py">the fetcher</a>
+        &middot; <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/.github/workflows/jobs.yml">the schedule</a>
+        &middot; <a href="https://github.com/FarhanRajputFelix/portfolio/blob/main/data/jobs.json">the data</a>
+        &middot; <a href="agent.html">the agent that judges one posting against a CV</a></p>
+    </div>
+  </details>
+
   <footer>
     <p id="attrib">—</p>
     <p style="margin-top:12px">
@@ -353,7 +390,8 @@ const TAGS   = { llm:"LLM", nlp:"NLP", vision:"Vision", mlops:"MLOps",
 const TYPES = { job:"Job", internship:"Internship", phd:"PhD place",
                 research:"Research post", scholarship:"Scholarship / funding" };
 const state = { type:new Set(), field:new Set(), level:new Set(),
-                source:new Set(), visa:new Set(), verified:new Set(), q:"" };
+                source:new Set(), visa:new Set(), verified:new Set(),
+                mark:new Set(), q:"" };
 let DATA = null, shown = [], page = 0;
 const PAGE = 60;
 
@@ -390,6 +428,31 @@ function chipGroup(hostId, key, values, labels, cls) {
  * implies otherwise would send people to apply for things they cannot get.
  * Only an explicit, quoted requirement can produce a blocker.
  * ================================================================== */
+/* ------------------------------------------------------------------ *
+ * Applied / not-for-me tracking.
+ *
+ * A list of 1,200 openings is only useful once for each one: the second time
+ * you scroll past a posting you already applied to, the list is working
+ * against you. So each card can be marked, the marks live in this browser, and
+ * the filters can hide what you have dealt with.
+ *
+ * Keyed by URL rather than by index, because the feed reorders twice a day and
+ * an index would silently point at a different job by tomorrow.
+ * ------------------------------------------------------------------ */
+const MARKS_KEY = "fb-opportunity-marks-v1";
+let marks = {};        // { url: "applied" | "dismissed" }
+
+function loadMarks() {
+  try { marks = JSON.parse(localStorage.getItem(MARKS_KEY)) || {}; }
+  catch { marks = {}; }
+}
+function setMark(url, value) {
+  if (marks[url] === value) delete marks[url];   // clicking again un-marks
+  else marks[url] = value;
+  try { localStorage.setItem(MARKS_KEY, JSON.stringify(marks)); } catch {}
+  render();
+}
+
 const PROFILE_KEY = "fb-opportunity-profile-v1";
 let profile = {};
 
@@ -488,6 +551,11 @@ function assess(row) {
 const profileActive = () => PFIELDS.some(([, k]) => k !== "mode" && profile[k]);
 
 function matches(j) {
+  const mk = marks[j.url];
+  if (state.mark.has("applied") && mk !== "applied") return false;
+  if (state.mark.has("todo") && mk) return false;          // hide anything dealt with
+  if (!state.mark.size && mk === "dismissed") return false; // dismissed stays hidden by default
+
   const mode = profile.mode || "all";
   if (profileActive() && mode !== "all") {
     const blocked = assess(j).blockers.length > 0;
@@ -554,7 +622,16 @@ function row(j) {
     : (j.sponsorship === "Does Not Offer Sponsorship" || j.sponsorship === "U.S. Citizenship is Required")
       ? `<span class="t sp-no">${esc(j.sponsorship)}</span>` : "";
   const sal = money(j);
-  return `<a class="job${blockedCls}" href="${esc(j.url)}" target="_blank" rel="noopener">
+  const mk = marks[j.url] || "";
+  const markCls = mk === "applied" ? " is-applied" : mk === "dismissed" ? " is-dismissed" : "";
+  const buttons = `<span class="mark">
+      <button data-mark="applied" data-url="${esc(j.url)}" aria-pressed="${mk === "applied"}"
+              title="I applied to this">${mk === "applied" ? "✓ applied" : "applied"}</button>
+      <button class="no" data-mark="dismissed" data-url="${esc(j.url)}" aria-pressed="${mk === "dismissed"}"
+              title="Not for me — hide it">not for me</button>
+    </span>`;
+
+  return `<div class="jobwrap">${buttons}<a class="job${blockedCls}${markCls}" href="${esc(j.url)}" target="_blank" rel="noopener">
     <span class="jt">${esc(j.title)}</span>
     <span class="jd">${esc(ago(j.posted))}</span>
     <span class="jc">${esc(j.company || "—")}${j.location ? " · " + esc(j.location) : ""}</span>
@@ -573,7 +650,7 @@ function row(j) {
       <span class="t src">via ${esc(j.source)}</span>
     </span>
     ${why}
-  </a>`;
+  </a></div>`;
 }
 
 function paint() {
@@ -690,6 +767,9 @@ Promise.all([
     chipGroup("#f-visa",   "visa",   ["sponsors","hide-no"],
               { sponsors:"Says it sponsors", "hide-no":"Hide no-sponsorship" }, "good");
     chipGroup("#f-verified", "verified", ["yes"], { yes:`Hand-verified ${verifiedRows.length}` }, "good");
+    const nApplied = Object.values(marks).filter(v => v === "applied").length;
+    chipGroup("#f-mark", "mark", ["applied", "todo"],
+              { applied:`Applied ${nApplied}`, todo:"Not dealt with yet" }, "good");
 
     const pf = $("#p-field");
     for (const f of fieldsBySize) {
@@ -697,7 +777,14 @@ Promise.all([
       opt.value = f; opt.textContent = FIELDS[f] || f;
       pf.append(opt);
     }
+    loadMarks();
     loadProfile();
+
+    if (programmes && programmes.jobSources) {
+      $("#srcgrid").innerHTML = programmes.jobSources.map(x =>
+        `<div class="src"><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)} ↗</a>`
+        + `<p>${esc(x.what)}</p></div>`).join("");
+    }
 
     $("#livestamp").textContent =
       `${live.count} live listings + ${verifiedRows.length} verified programmes · refreshed ${live.checked}`;
@@ -722,10 +809,20 @@ $("#profile-clear").addEventListener("click", () => {
   render();
 });
 
+// One delegated listener on the container: the cards are re-rendered on every
+// filter change, so per-button listeners would be re-attached hundreds of times.
+$("#rows").addEventListener("click", (e) => {
+  const btn = e.target.closest("button[data-mark]");
+  if (!btn) return;
+  e.preventDefault();          // the card is a link; do not follow it
+  e.stopPropagation();
+  setMark(btn.dataset.url, btn.dataset.mark);
+});
+
 $("#q").addEventListener("input", e => { state.q = e.target.value.trim().toLowerCase(); render(); });
 $("#more").addEventListener("click", () => { page++; paint(); });
 $("#reset").addEventListener("click", () => {
-  for (const k of ["type","field","level","source","visa","verified"]) state[k].clear();
+  for (const k of ["type","field","level","source","visa","verified","mark"]) state[k].clear();
   state.q = ""; $("#q").value = "";
   document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed","false"));
   render();

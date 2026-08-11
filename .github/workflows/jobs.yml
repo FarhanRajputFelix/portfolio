@@ -46,9 +46,24 @@ jobs:
           git add data/jobs.json
           if git diff --staged --quiet; then
             echo "no change in listings"
-          else
-            COUNT=$(python -c "import json;print(json.load(open('data/jobs.json'))['count'])")
-            git pull --rebase --autostash
-            git commit -m "Refresh job listings: $COUNT live AI/ML roles"
-            git push
+            exit 0
           fi
+
+          COUNT=$(python -c "import json;print(json.load(open('data/jobs.json'))['count'])")
+          git commit -m "Refresh job listings: $COUNT live roles"
+
+          # Retry the push. This step failed once because a history rewrite landed
+          # while the workflow was mid-run, leaving its ref stale. Any push racing
+          # a concurrent commit has the same shape, so rebase and try again rather
+          # than reporting a red X for something that resolves itself.
+          for attempt in 1 2 3; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              exit 0
+            fi
+            echo "push rejected, rebasing and retrying ($attempt/3)"
+            git pull --rebase --autostash origin main || exit 1
+            sleep 5
+          done
+          echo "::error::could not push after 3 attempts"
+          exit 1

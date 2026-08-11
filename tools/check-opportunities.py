@@ -159,12 +159,30 @@ def main() -> int:
         for u in changed:
             log(f"     {u}")
     if broken:
-        log(f"\n  {len(broken)} BROKEN:")
+        log(f"\n  {len(broken)} unreachable:")
         for u, why in broken:
             log(f"     {why}  {u}")
+
+    # Exit non-zero only when the failure is probably OURS, not a third party's.
+    #
+    # This used to fail on a single dead link, so the daily run showed a red X
+    # whenever any one university site had a bad morning. That is the
+    # cry-wolf failure mode I warned about when adding retries: a check that
+    # goes red for things outside your control gets ignored, and then it is
+    # worth nothing on the day it matters. One or two sites down is weather.
+    # A third of them down at once means the network, the runner, or this
+    # script broke.
+    threshold = max(3, len(results) // 3)
+    if len(broken) >= threshold:
+        log(f"\n  {len(broken)} of {len(results)} unreachable — at or past the "
+            f"{threshold} mark, so this looks like our problem, not theirs")
         return 1
 
-    log("\n  all sources reachable")
+    if broken:
+        log(f"\n  under the {threshold}-source threshold; treating as third-party "
+            f"weather and passing. data/freshness.json records which.")
+    else:
+        log("\n  all sources reachable")
     return 0
 
 

@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-10T13:12:17+00:00",
-  "checked": "2026-08-10",
+  "generated": "2026-08-11T04:13:32+00:00",
+  "checked": "2026-08-11",
   "total": 21,
-  "broken": 1,
-  "changed": 3,
+  "broken": 0,
+  "changed": 4,
   "note": "A reachable link is not a current deadline. This checks that pages resolve and flags when their visible text changes; it does not read the page.",
   "sources": [
     {
@@ -16,7 +16,7 @@
       "error": null,
       "fingerprint": "04a9c152c9930e27",
       "firstSeen": "2026-08-10",
-      "lastChecked": "2026-08-10",
+      "lastChecked": "2026-08-11",
       "changedSinceLastCheck": false
     },
     {
@@ -27,9 +27,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "09b4ceb02f4dde6a",
-      "firstSeen": "2026-08-10",
-      "lastChecked": "2026-08-10",
+      "fingerprint": "86b3778c00da2d6e",
+      "firstSeen": "2026-08-11",
+      "lastChecked": "2026-08-11",
       "changedSinceLastCheck": true
     },
     {
@@ -42,7 +42,7 @@
       "error": null,
       "fingerprint": "361b3dbbb88be6e1",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-10",
+      "lastChecked": "2026-08-11",
       "changedSinceLastCheck": false
     },
     {
@@ -55,7 +55,7 @@
       "error": null,
       "fingerprint": "3b85377435aafd9b",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-10",
+      "lastChecked": "2026-08-11",
       "changedSinceLastCheck": false
     },
     {
@@ -68,7 +68,7 @@
       "error": null,
       "fingerprint": "1a5af7b1e756aaf7",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-10",
+      "lastChecked": "2026-08-11",
       "changedSinceLastCheck": false
     },
     {
@@ -81,7 +81,7 @@
       "error": null,
       "fingerprint": "3ad9969a6365a105",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-10",
+      "lastChecked": "2026-08-11",
       "changedSinceLastCheck": false
     },
     {
@@ -94,7 +94,7 @@
       "error": null,
       "fingerprint": "ff13372b9efeace0",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-10",
+      "lastChecked": "2026-08-11",
       "changedSinceLastCheck": false
     },
     {
@@ -107,7 +107,7 @@
       "error": null,
       "fingerprint": "fcc3ec34f43e94b5",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-10",
+      "lastChecked": "2026-08-11",
       "changedSinceLastCheck": false
     },
     {
@@ -120,7 +120,7 @@
       "error": null,
       "fingerprint": "7e79cf4a1c42b08c",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-10",
+      "lastChecked": "2026-08-11",
       "changedSinceLastCheck": false
     },
     {
@@ -133,7 +133,7 @@
       "error": null,
       "fingerprint": "4b24bc846cb9a5e6",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-10",
+      "lastChecked": "2026-08-11",
       "changedSinceLastCheck": false
     },
     {
@@ -146,7 +146,7 @@
       "error": null,
       "fingerprint": "c1703d52803017fa",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-10",
+      "lastChecked": "2026-08-11",
       "changedSinceLastCheck": false
     },
     {
@@ -159,7 +159,7 @@
       "error": null,
       "fingerprint": "696621a85ef23e4e",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-10",
+      "lastChecked": "2026-08-11",
       "changedSinceLastCheck": false
     },
     {
@@ -172,8 +172,8 @@
       "error": null,
       "fingerprint": "cc34531ff435ae7f",
       "firstSeen": "2026-08-10",
-      "lastChecked": "2026-08-10",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-08-11",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://sparai.org/",
@@ -183,10 +183,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "b1afb97d41c90777",
-      "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-10",
-      "changedSinceLastCheck": false
+      "fingerprint": "aefa9a1b844316bc",
+      "firstSeen": "2026-08-11",
+      "lastChecked": "2026-08-11",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://tigp.sinica.edu.tw/pages/3127",
@@ -198,7 +198,7 @@
       "error": null,
       "fingerprint": "6c43b1795aece097",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-10",
+      "lastChecked": "2026-08-11",
       "changedSinceLastCheck": false
     },
     {
@@ -206,12 +206,12 @@
       "usedBy": [
         "job-source"
       ],
-      "status": 403,
-      "ok": false,
-      "error": "HTTP 403",
-      "fingerprint": null,
-      "firstSeen": "2026-08-10",
-      "lastChecked": "2026-08-10",
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "330fc6021583db11",
+      "firstSeen": "2026-08-11",
+      "lastChecked": "2026-08-11",
       "changedSinceLastCheck": false
     },
     {
@@ -222,9 +222,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "b55006c3de89ac28",
-      "firstSeen": "2026-08-10",
-      "lastChecked": "2026-08-10",
+      "fingerprint": "29946fa79efb785a",
+      "firstSeen": "2026-08-11",
+      "lastChecked": "2026-08-11",
       "changedSinceLastCheck": true
     },
     {
@@ -237,7 +237,7 @@
       "error": null,
       "fingerprint": "3d7dc12dfa812788",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-10",
+      "lastChecked": "2026-08-11",
       "changedSinceLastCheck": false
     },
     {
@@ -250,7 +250,7 @@
       "error": null,
       "fingerprint": "ce4757484da44dac",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-10",
+      "lastChecked": "2026-08-11",
       "changedSinceLastCheck": false
     },
     {
@@ -261,10 +261,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "51209d74c9f40e07",
-      "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-10",
-      "changedSinceLastCheck": false
+      "fingerprint": "3c55689eb6991240",
+      "firstSeen": "2026-08-11",
+      "lastChecked": "2026-08-11",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://www.s.u-tokyo.ac.jp/en/utrip/",
@@ -276,7 +276,7 @@
       "error": null,
       "fingerprint": "2d25d9e55d28007d",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-10",
+      "lastChecked": "2026-08-11",
       "changedSinceLastCheck": false
     }
   ]
