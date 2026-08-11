@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-11T04:14:42+00:00",
+  "generated": "2026-08-11T06:54:14+00:00",
   "checked": "2026-08-11",
   "total": 21,
   "broken": 0,
-  "changed": 2,
+  "changed": 3,
   "note": "A reachable link is not a current deadline. This checks that pages resolve and flags when their visible text changes; it does not read the page.",
   "sources": [
     {
@@ -14,7 +14,7 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "6e8eb2ac904adf08",
+      "fingerprint": "04a9c152c9930e27",
       "firstSeen": "2026-08-11",
       "lastChecked": "2026-08-11",
       "changedSinceLastCheck": true
@@ -27,10 +27,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "86b3778c00da2d6e",
+      "fingerprint": "588efae998a0f758",
       "firstSeen": "2026-08-11",
       "lastChecked": "2026-08-11",
-      "changedSinceLastCheck": false
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://eee.epfl.ch/",
@@ -222,7 +222,7 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "7417e3b313bff336",
+      "fingerprint": "902030386940b17e",
       "firstSeen": "2026-08-11",
       "lastChecked": "2026-08-11",
       "changedSinceLastCheck": true
