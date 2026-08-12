@@ -14,14 +14,18 @@ farhanrajputfelix.github.io/portfolio or backed by a credential ID below.
 
 | Field | Value |
 |---|---|
-| Full name | Farhan Muhammad Bashir |
-| Goes by | Farhan Bashir |
+| Full name | **Farhan** — a single given name, as printed on his CNIC |
+| Father's name | Muhammad Bashir — a separate CNIC field, NOT a surname |
+| Goes by | Farhan |
+| Display name in public | Farhan Bashir — the chosen brand on the site and LinkedIn. Not a legal name, and fine to keep; do not "correct" it |
 | Location | Karachi, Pakistan (remote-friendly) |
 | Email | farhanmuhammadbashir@gmail.com |
 | LinkedIn | https://www.linkedin.com/in/farhan-rajput/ |
 | GitHub | https://github.com/FarhanRajputFelix |
 | Portfolio | https://FarhanRajputFelix.github.io/portfolio/ |
 | Current title | Computer Science undergraduate · AI Intern |
+
+**Never write his name as "Farhan Muhammad Bashir" or "Farhan Bashir" on a CV, application form or anything an employer may check against ID.** His legal name is the single name Farhan. Treating a father's name as a surname is a common shortcut and it is still wrong on a document that gets verified. The display brand on the website is a separate thing and may stay.
 
 **Never describe me as:** researcher, AI researcher, ML engineer, senior, expert, or anyone with
 industry years. I am an undergraduate with no publications. "Aspiring researcher" is acceptable only
