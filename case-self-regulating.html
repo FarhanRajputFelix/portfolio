@@ -54,8 +54,8 @@
 
     <div class="stats">
       <div class="stat"><b>4</b><span>methods compared, same task</span></div>
-      <div class="stat"><b>0.435</b><span>best pre-shift MSE across methods</span></div>
-      <div class="stat"><b>3.829</b><span>lowest post-shift peak error</span></div>
+      <div class="stat"><b>0.486</b><span>the regulator's pre-shift MSE &mdash; 2nd of 4</span></div>
+      <div class="stat"><b>3.915</b><span>its post-shift peak &mdash; fixed LR beat it at 3.829</span></div>
       <div class="stat accent"><b>5D linear</b><span>and only 5D linear &mdash; see &sect;04</span></div>
     </div>
 
@@ -141,7 +141,7 @@
       <thead><tr><th>Measure</th><th>Range across the four methods</th><th>What it means</th></tr></thead>
       <tbody>
         <tr>
-          <td class="what">Pre-shift MSE</td>
+          <td class="what">Pre-shift MSE, all four methods</td>
           <td class="why">0.435 &ndash; 2.243</td>
           <td class="why">How well each method learns before anything moves. The regulator lands
             near the best of these &mdash; it does not pay for its adaptability up front.</td>
@@ -155,6 +155,44 @@
       </tbody>
     </table>
     </div>
+
+    <!-- Added after the fact. The rows above give ranges, which is accurate and
+         useless: a reader cannot tell which method scored what, and the hero
+         stats up top read as though the best numbers were the regulator's. They
+         are not. The full table is the only version that lets someone check the
+         "stability, not victory" claim below rather than take it on trust. -->
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Method</th><th>Pre-shift MSE</th><th>Post-shift peak error</th><th>Learning rate</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="what"><strong>Homeostatic regulator</strong> (mine)</td>
+          <td class="why">0.486</td><td class="why">3.915</td>
+          <td class="why"><strong>Most stable</strong></td>
+        </tr>
+        <tr>
+          <td class="what">Fixed learning rate, 0.01</td>
+          <td class="why"><strong>0.435</strong></td><td class="why"><strong>3.829</strong></td>
+          <td class="why">Static</td>
+        </tr>
+        <tr>
+          <td class="what">Step decay</td>
+          <td class="why">1.039</td><td class="why">6.542</td>
+          <td class="why">Staircase</td>
+        </tr>
+        <tr>
+          <td class="what">Adam-style</td>
+          <td class="why">2.243</td><td class="why">4.527</td>
+          <td class="why">High variance</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p class="sub"><strong>Read the bold column, not mine.</strong> A fixed learning rate &mdash; the
+      simplest thing in the comparison, and the one with no adaptation at all &mdash; won on both error
+      measures. My regulator came second on each. It won one column: the learning rate stayed stable
+      where the others did not.</p>
 
     <p class="sub">The repository's own summary is the fair one: the regulator is
       <em>"competitive with or outperforms fixed LR and step decay baselines, especially in recovery
