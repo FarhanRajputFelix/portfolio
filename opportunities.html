@@ -93,6 +93,16 @@
   .pgrid select{ background:var(--ink); color:var(--paper); border:1px solid var(--line-2);
     border-radius:8px; padding:9px 10px; font:inherit; font-size:.86rem; min-height:42px; }
   .pgrid select:focus{ outline:2px solid var(--main); outline-offset:1px; }
+  .pgo{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:14px 0 4px; padding-bottom:16px; }
+  #p-apply{ font-family:var(--display); font-size:.85rem; font-weight:600; cursor:pointer;
+    background:var(--main); border:1px solid var(--main); color:#fff;
+    border-radius:9px; padding:11px 22px; min-height:44px; transition:background .15s; }
+  #p-apply:hover{ background:var(--main-2); }
+  .pgohint{ font-size:.76rem; color:var(--faint); }
+  /* Brief flash on the result line so a change is visible even if the button
+     is never pressed. Without it the only feedback was a number far off-screen. */
+  @keyframes flashline{ 0%{ background:rgba(139,92,246,.28) } 100%{ background:transparent } }
+  .resultline.pulse{ animation:flashline .9s ease-out; border-radius:6px; }
 
   .job.blocked{ opacity:.62; }
   .why{ grid-column:1/-1; margin-top:8px; display:flex; flex-direction:column; gap:4px; }
@@ -123,14 +133,16 @@
   .resultline{ font-family:var(--display); font-size:.78rem; color:var(--faint); margin:0 0 14px; }
 
   .rows{ display:grid; gap:9px; }
-  .job{ display:grid; grid-template-columns:1fr auto; gap:4px 16px; align-items:start;
+  .job{ display:grid; grid-template-columns:1fr; gap:4px 16px; align-items:start;
     background:var(--surface-2); border:1px solid var(--line); border-radius:11px;
     padding:14px 17px; text-decoration:none; color:inherit; }
   .job:hover{ border-color:var(--line-2); background:rgba(255,255,255,.06); }
   .jt{ font-family:var(--display); font-weight:600; font-size:.94rem; letter-spacing:-.01em; }
   .jc{ font-size:.83rem; color:var(--muted); grid-column:1; }
-  .jd{ font-family:var(--display); font-size:.7rem; color:var(--faint); text-align:right;
-    white-space:nowrap; grid-row:1; grid-column:2; }
+  /* The age used to sit in the top-right grid cell, which is exactly where the
+     APPLIED / NOT FOR ME buttons are absolutely positioned. It rendered as
+     "6d a..." clipped behind them. It now lives inline on the company line. */
+  .age{ font-family:var(--display); font-size:.68rem; color:var(--faint); white-space:nowrap; }
   .jtags{ grid-column:1/-1; display:flex; flex-wrap:wrap; gap:5px; margin-top:7px; }
   .t{ font-family:var(--display); font-size:.63rem; letter-spacing:.05em; color:var(--faint);
     border:1px solid var(--line); border-radius:4px; padding:2px 7px; }
@@ -265,6 +277,10 @@
       </label>
     </div>
     <p class="pnote" id="p-summary"></p>
+    <div class="pgo">
+      <button id="p-apply" type="button">Show my matches</button>
+      <span class="pgohint">Filters apply as you choose them &mdash; this just takes you to the list.</span>
+    </div>
   </details>
 
   <details class="filters" id="filterbox">
@@ -648,8 +664,8 @@ function row(j) {
 
   return `<div class="jobwrap">${buttons}<a class="job${blockedCls}${markCls}" href="${esc(j.url)}" target="_blank" rel="noopener">
     <span class="jt">${esc(j.title)}</span>
-    <span class="jd">${esc(ago(j.posted))}</span>
-    <span class="jc">${esc(j.company || "—")}${j.location ? " · " + esc(j.location) : ""}</span>
+    <span class="jc">${esc(j.company || "—")}${j.location ? " · " + esc(j.location) : ""}`
+    + `${j.posted ? ` · <span class="age">${esc(ago(j.posted))}</span>` : ""}</span>
     ${j.deadlineText ? `<span class="jc note">Applies: ${esc(j.deadlineText)}</span>` : ""}
     ${j.corrections ? `<span class="jc corr">Correction: ${esc(j.corrections)}</span>` : ""}
     <span class="jtags">
@@ -705,6 +721,11 @@ function render() {
       pb.textContent = `— ${clear} of ${DATA.count} clear for you`;
     }
   }
+
+  const apply = $("#p-apply");
+  if (apply) apply.textContent = profileActive()
+    ? `Show my ${shown.length} matches`
+    : `Show all ${shown.length}`;
 
   const sum = $("#p-summary");
   if (!profileActive()) {
@@ -844,6 +865,28 @@ $("#profile-clear").addEventListener("click", () => {
 
 // One delegated listener on the container: the cards are re-rendered on every
 // filter change, so per-button listeners would be re-attached hundreds of times.
+$("#p-apply").addEventListener("click", () => {
+  $("#profile").open = false;          // get the form out of the way
+  const line = $("#resultline");
+  line.scrollIntoView({ behavior: "smooth", block: "start" });
+  line.classList.remove("pulse");
+  void line.offsetWidth;               // restart the animation if it is mid-run
+  line.classList.add("pulse");
+});
+
+// Any change to the profile flashes the count too, so someone who never finds
+// the button still sees that something happened.
+PFIELDS.forEach(([id]) => {
+  const el = $(id);
+  if (!el) return;
+  el.addEventListener("change", () => {
+    const line = $("#resultline");
+    line.classList.remove("pulse");
+    void line.offsetWidth;
+    line.classList.add("pulse");
+  });
+});
+
 $("#rows").addEventListener("click", (e) => {
   const btn = e.target.closest("button[data-mark]");
   if (!btn) return;
