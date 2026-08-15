@@ -24,3 +24,12 @@ pipeline/runs/INDEX.mock.md
 # pipeline/private/cv/, which is already gitignored.
 cv/farhan-bashir-cv.tex
 cv/LINKEDIN-COPY.md
+
+# Demo prep for the FL-09 video. Working files for recording, not deliverables:
+# the submission is agent/README.md plus a YouTube link. Three overlapping
+# scripts in a public repo made agent/ look confused. Kept locally in
+# pipeline/private/demo/ and at agent/DEMO-CUECARD.md.
+agent/DEMO-SCRIPT.md
+agent/DEMO-NARRATION.md
+agent/DEMO-CUECARD.md
+agent/demo-subtitles.srt
