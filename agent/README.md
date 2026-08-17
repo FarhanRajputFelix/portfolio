@@ -254,6 +254,55 @@ the entire argument for writing evals first.
 
 ---
 
+## Where AI did the work
+
+Required by the assignment, and worth saying plainly: **this was built with Claude
+as a pair, over several sessions.** Naming that is not a caveat on the work, it is
+part of describing it accurately.
+
+**What the model did.** Most of the typing. The provider adapters for four
+different APIs, the JSON-RPC plumbing to the MCP server, the schema conversion
+that strips keywords Gemini rejects, the SSE wiring in the dashboard, and a great
+deal of the prose in this file. Given a decision I had already made, it
+implemented it faster than I would have.
+
+**What I did.** The decisions, and the checking.
+
+- **The six eval cases were written before any agent code existed** — that is the
+  whole method, and it is why the rest of this README has numbers in it rather
+  than adjectives. E1 exists because I expected the model to invent a GPA
+  requirement. On the first complete live run, it did.
+- **The guardrails are mine and they are structural.** No send capability in the
+  tool list; a gate that returns PASS/FAIL without exposing the value; a hard cap
+  of 8 calls. Each one removes an opportunity for error rather than instructing
+  the model to avoid it. That is a design stance, not generated code.
+- **Every number here was checked against the thing it describes**, not against
+  what the model told me it was. That habit caught real errors, including one in
+  a sibling project where a result I was about to publish belonged to the
+  baseline, not to my method.
+
+**Two failures worth naming, because they are the argument for checking.**
+
+The token-budget optimisation that broke E2 was mine, suggested to save rate
+limit, and it silently truncated a posting past its stated GPA minimum. The agent
+then reasoned correctly from incomplete input and told me to apply somewhere I
+cannot get in. A test written before the code caught it; no amount of reading the
+diff would have.
+
+And the URL-correction guardrail in `scout.mjs` exists because the model kept
+retyping the posting URL and getting it wrong — `spari.org` instead of
+`sparai.org`, which resolves, and belongs to an animal rescue charity. The agent
+fetched a real but wrong website and returned a perfectly sensible verdict about
+a dog shelter. No prompt fixes that reliably. Taking the decision away from the
+model does.
+
+**The short version:** I did not ask AI to invent anything here. I asked it to
+build things I had specified, then I tested whether it had. The tests are in
+`evals.mjs`; the failures are in [`BUILD-LOG.md`](BUILD-LOG.md), in the order
+they happened.
+
+---
+
 ## Limitations
 
 Honest ones. None of these are hypothetical.
