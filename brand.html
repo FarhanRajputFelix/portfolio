@@ -269,9 +269,37 @@
     </p>
   </section>
 
+  <!-- ================= FRAME, NOT UPSTAGE ================= -->
+  <section>
+    <div class="sec-head"><span class="n">05</span><h2>Frame, not upstage</h2></div>
+    <p class="sub" style="margin-top:0">The rule that is specific to a portfolio rather than to
+      design generally: <strong>the design frames the work; it never competes with it.</strong> Every
+      choice above serves that. Two fonts, not five. Colour only where it points at something. A
+      near-black background so a chart or a screenshot is the brightest thing on screen.</p>
+
+    <div class="note">
+      <p><b>I broke this rule, and it took two strangers to tell me.</b> The 3D robot on the homepage
+        was the most expensive thing here to build, so I gave it the most room. On a phone it sat
+        directly on top of my own name and headline &mdash; the one sentence explaining what I do.
+        A reviewer put it plainly: <em>&ldquo;the robotic character has layout issues in mobile
+        view&rdquo;</em>. A second reviewer, independently, said nobody could tell what I did in ten
+        seconds.</p>
+      <p>I had screenshotted that page myself and looked straight past it, because I already knew what
+        the text said. That is the failure mode: the person who built it cannot see it.</p>
+      <p><b>The fix was to make the decoration yield.</b> On phones the character is capped at
+        <code>min(48vw, 186px)</code>, the hero reserves exactly its height as padding so no viewport
+        can put text underneath it, and it fades out entirely when it is not at the hero or the chat.
+        Both animation loops were also capped at 30fps, because two 60fps WebGL loops were costing
+        interaction responsiveness on a page whose job is to be read.</p>
+      <p><b>The test I use now:</b> if a visitor cannot say what I do within ten seconds, the design
+        has upstaged the work &mdash; regardless of how good the design is, and regardless of how long
+        it took.</p>
+    </div>
+  </section>
+
   <!-- ================= STYLE NOTE ================= -->
   <section>
-    <div class="sec-head"><span class="n">04</span><h2>Style note</h2></div>
+    <div class="sec-head"><span class="n">06</span><h2>Style note</h2></div>
     <div class="note">
       <p><b>Type:</b> Space Grotesk (headings, labels) + Sora (body). <b>Palette:</b> ink #060608,
         paper #F4F4F6, violet #8B5CF6, signal cyan #22D3EE.</p>
