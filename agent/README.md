@@ -256,50 +256,63 @@ the entire argument for writing evals first.
 
 ## Where AI did the work
 
-Required by the assignment, and worth saying plainly: **this was built with Claude
-as a pair, over several sessions.** Naming that is not a caveat on the work, it is
-part of describing it accurately.
+This project was built with Claude as an active collaborator. Naming that is not
+a caveat on the work — it is part of describing it accurately.
 
-**What the model did.** Most of the typing. The provider adapters for four
-different APIs, the JSON-RPC plumbing to the MCP server, the schema conversion
-that strips keywords Gemini rejects, the SSE wiring in the dashboard, and a great
-deal of the prose in this file. Given a decision I had already made, it
-implemented it faster than I would have.
+**What the model did:** most of the typing and structure. The four provider
+adapters (Anthropic, Groq, Gemini, mock), the MCP tool-calling loop, the
+`condense()` token-budget logic, the retry and backoff handling, and most of this
+documentation.
 
-**What I did.** The decisions, and the checking.
+**What I did:** the decisions and the checking. All six eval cases (E1–E6) were
+written **before the agent existed**, so "does this work" had a fixed target
+instead of a moving one. I designed guardrails that remove the opportunity for an
+error rather than instruct against it — the 8-call cap, the thin-extraction
+guard, the HTTP-status check. And every number in the eval results table was
+checked against a real run, not accepted from the model's own report.
 
-- **The six eval cases were written before any agent code existed** — that is the
-  whole method, and it is why the rest of this README has numbers in it rather
-  than adjectives. E1 exists because I expected the model to invent a GPA
-  requirement. On the first complete live run, it did.
-- **The guardrails are mine and they are structural.** No send capability in the
-  tool list; a gate that returns PASS/FAIL without exposing the value; a hard cap
-  of 8 calls. Each one removes an opportunity for error rather than instructing
-  the model to avoid it. That is a design stance, not generated code.
-- **Every number here was checked against the thing it describes**, not against
-  what the model told me it was. That habit caught real errors, including one in
-  a sibling project where a result I was about to publish belonged to the
-  baseline, not to my method.
+### Four failures worth naming, because they are the argument for checking
 
-**Two failures worth naming, because they are the argument for checking.**
+**1. It invented a requirement.** On a live run against SPAR — a posting that
+states no GPA requirement anywhere — the agent called the GPA gate with an
+invented threshold of 3, got FAIL, and rejected the single best-fit opportunity
+in the pipeline, eleven days before its deadline. E1 was written before the code
+existed specifically to catch this. It caught the real thing on the first live
+run.
 
-The token-budget optimisation that broke E2 was mine, suggested to save rate
-limit, and it silently truncated a posting past its stated GPA minimum. The agent
-then reasoned correctly from incomplete input and told me to apply somewhere I
-cannot get in. A test written before the code caught it; no amount of reading the
-diff would have.
+**2. A performance fix silently became a correctness bug.** Trimming the posting
+fetch to 2,500 characters to stay under a rate limit cut off KAUST's stated
+`Minimum GPA: 3.5/4`, which sat just past the cutoff. The agent then reasoned
+correctly — on the truncated text it could see — that no GPA was stated, and
+skipped the gate it should have called. The reasoning was sound; the input was
+wrong. **E2 failed on the first v2 run because of my optimisation, not the
+model's judgement**, and only reached 5/5 once the fetch scanned past the clip
+for gate-relevant lines and carried them forward.
 
-And the URL-correction guardrail in `scout.mjs` exists because the model kept
-retyping the posting URL and getting it wrong — `spari.org` instead of
-`sparai.org`, which resolves, and belongs to an animal rescue charity. The agent
-fetched a real but wrong website and returned a perfectly sensible verdict about
-a dog shelter. No prompt fixes that reliably. Taking the decision away from the
-model does.
+**3. The model mistyped a URL into a real, wrong website.** Asked to evaluate
+`sparai.org`, it emitted `fetch_posting({url: "spari.org"})` — one letter
+dropped. That domain resolves. It belongs to **Shepherd's Paws Animal Rescue**.
+So this was not a fetch failure: the agent retrieved a real page, read it
+correctly, and returned a perfectly sensible SKIP about an animal shelter. That
+row sat in `pipeline/runs/INDEX.md` for days before I understood what it was.
 
-**The short version:** I did not ask AI to invent anything here. I asked it to
-build things I had specified, then I tested whether it had. The tests are in
-`evals.mjs`; the failures are in [`BUILD-LOG.md`](BUILD-LOG.md), in the order
-they happened.
+It did not correct itself. A second run corrupted the string differently
+(`sparapi.org`), so it was not even a stable mistake, and no prompt fixed it. The
+loop now substitutes the requested URL and logs the correction, because the URL
+was never the model's to decide — it is an input to the run. **A silent wrong
+answer that looks right is worse than a visible crash**, and this is the cleanest
+example of it in the project.
+
+**4. A provider rejected a correct answer.** Groq returned `400
+tool_use_failed` when the model reasoned correctly in prose — *"the
+check_gpa_gate function is not necessary in this case"* — instead of emitting a
+parseable tool call. The reasoning was right; the call format was not. The
+adapter now salvages this as a text turn and flags it, rather than silently
+recording it as a clean pass.
+
+**None of these were caught by trusting the model.** All four were caught by
+evals written in advance, by checking output against source text, or by
+hand-tracing a run that looked fine at a glance.
 
 ---
 
