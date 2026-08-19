@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-18T06:31:07+00:00",
-  "checked": "2026-08-18",
+  "generated": "2026-08-19T06:30:59+00:00",
+  "checked": "2026-08-19",
   "total": 21,
-  "broken": 2,
-  "changed": 3,
+  "broken": 0,
+  "changed": 6,
   "note": "A reachable link is not a current deadline. This checks that pages resolve and flags when their visible text changes; it does not read the page.",
   "sources": [
     {
@@ -16,7 +16,7 @@
       "error": null,
       "fingerprint": "950f4e2ef5d57e85",
       "firstSeen": "2026-08-17",
-      "lastChecked": "2026-08-18",
+      "lastChecked": "2026-08-19",
       "changedSinceLastCheck": false
     },
     {
@@ -27,9 +27,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "7e7387b77f75062d",
-      "firstSeen": "2026-08-18",
-      "lastChecked": "2026-08-18",
+      "fingerprint": "f87700ae1e6eb571",
+      "firstSeen": "2026-08-19",
+      "lastChecked": "2026-08-19",
       "changedSinceLastCheck": true
     },
     {
@@ -42,7 +42,7 @@
       "error": null,
       "fingerprint": "b8070a99fb5b269a",
       "firstSeen": "2026-08-12",
-      "lastChecked": "2026-08-18",
+      "lastChecked": "2026-08-19",
       "changedSinceLastCheck": false
     },
     {
@@ -55,7 +55,7 @@
       "error": null,
       "fingerprint": "58efc0f349aa1f6c",
       "firstSeen": "2026-08-12",
-      "lastChecked": "2026-08-18",
+      "lastChecked": "2026-08-19",
       "changedSinceLastCheck": false
     },
     {
@@ -68,7 +68,7 @@
       "error": null,
       "fingerprint": "55cef32cd3926927",
       "firstSeen": "2026-08-15",
-      "lastChecked": "2026-08-18",
+      "lastChecked": "2026-08-19",
       "changedSinceLastCheck": false
     },
     {
@@ -79,10 +79,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "6cd4bba5213e61a1",
-      "firstSeen": "2026-08-17",
-      "lastChecked": "2026-08-18",
-      "changedSinceLastCheck": false
+      "fingerprint": "34209ea8c7a2c9a3",
+      "firstSeen": "2026-08-19",
+      "lastChecked": "2026-08-19",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://ellis.eu/research/phd-postdoc",
@@ -92,10 +92,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "19bc66d7869e0e3a",
-      "firstSeen": "2026-08-15",
-      "lastChecked": "2026-08-18",
-      "changedSinceLastCheck": false
+      "fingerprint": "7fd60120ba09221b",
+      "firstSeen": "2026-08-19",
+      "lastChecked": "2026-08-19",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://euraxess.ec.europa.eu/jobs",
@@ -107,7 +107,7 @@
       "error": null,
       "fingerprint": "fcc3ec34f43e94b5",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-18",
+      "lastChecked": "2026-08-19",
       "changedSinceLastCheck": false
     },
     {
@@ -120,7 +120,7 @@
       "error": null,
       "fingerprint": "7e79cf4a1c42b08c",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-18",
+      "lastChecked": "2026-08-19",
       "changedSinceLastCheck": false
     },
     {
@@ -133,7 +133,7 @@
       "error": null,
       "fingerprint": "4b24bc846cb9a5e6",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-18",
+      "lastChecked": "2026-08-19",
       "changedSinceLastCheck": false
     },
     {
@@ -146,7 +146,7 @@
       "error": null,
       "fingerprint": "c1703d52803017fa",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-18",
+      "lastChecked": "2026-08-19",
       "changedSinceLastCheck": false
     },
     {
@@ -157,22 +157,22 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "36547714d0f234dd",
-      "firstSeen": "2026-08-14",
-      "lastChecked": "2026-08-18",
-      "changedSinceLastCheck": false
+      "fingerprint": "56fd557b5f736ba5",
+      "firstSeen": "2026-08-19",
+      "lastChecked": "2026-08-19",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://phd.ista.ac.at/isternship/",
       "usedBy": [
         "ista-isternship"
       ],
-      "status": null,
-      "ok": false,
-      "error": "URLError after 3 attempts",
-      "fingerprint": null,
-      "firstSeen": "2026-08-18",
-      "lastChecked": "2026-08-18",
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "cc34531ff435ae7f",
+      "firstSeen": "2026-08-19",
+      "lastChecked": "2026-08-19",
       "changedSinceLastCheck": false
     },
     {
@@ -183,9 +183,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "fbd0312fcd5166d4",
-      "firstSeen": "2026-08-18",
-      "lastChecked": "2026-08-18",
+      "fingerprint": "783184bba6729878",
+      "firstSeen": "2026-08-19",
+      "lastChecked": "2026-08-19",
       "changedSinceLastCheck": true
     },
     {
@@ -198,7 +198,7 @@
       "error": null,
       "fingerprint": "6c43b1795aece097",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-18",
+      "lastChecked": "2026-08-19",
       "changedSinceLastCheck": false
     },
     {
@@ -206,12 +206,12 @@
       "usedBy": [
         "job-source"
       ],
-      "status": 403,
-      "ok": false,
-      "error": "HTTP 403",
-      "fingerprint": null,
-      "firstSeen": "2026-08-16",
-      "lastChecked": "2026-08-18",
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "17f6463033b6c82f",
+      "firstSeen": "2026-08-19",
+      "lastChecked": "2026-08-19",
       "changedSinceLastCheck": false
     },
     {
@@ -222,9 +222,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "35850eeb0cb6d5a0",
-      "firstSeen": "2026-08-18",
-      "lastChecked": "2026-08-18",
+      "fingerprint": "30df5e4e6bbb6e66",
+      "firstSeen": "2026-08-19",
+      "lastChecked": "2026-08-19",
       "changedSinceLastCheck": true
     },
     {
@@ -237,7 +237,7 @@
       "error": null,
       "fingerprint": "3d7dc12dfa812788",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-18",
+      "lastChecked": "2026-08-19",
       "changedSinceLastCheck": false
     },
     {
@@ -250,7 +250,7 @@
       "error": null,
       "fingerprint": "ce4757484da44dac",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-18",
+      "lastChecked": "2026-08-19",
       "changedSinceLastCheck": false
     },
     {
@@ -263,7 +263,7 @@
       "error": null,
       "fingerprint": "3c55689eb6991240",
       "firstSeen": "2026-08-11",
-      "lastChecked": "2026-08-18",
+      "lastChecked": "2026-08-19",
       "changedSinceLastCheck": false
     },
     {
@@ -276,7 +276,7 @@
       "error": null,
       "fingerprint": "2d25d9e55d28007d",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-18",
+      "lastChecked": "2026-08-19",
       "changedSinceLastCheck": false
     }
   ]
