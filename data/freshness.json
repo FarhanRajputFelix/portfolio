@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-27T17:10:58+00:00",
-  "checked": "2026-08-27",
+  "generated": "2026-08-28T17:57:51+00:00",
+  "checked": "2026-08-28",
   "total": 21,
-  "broken": 1,
-  "changed": 6,
+  "broken": 0,
+  "changed": 2,
   "note": "A reachable link is not a current deadline. This checks that pages resolve and flags when their visible text changes; it does not read the page.",
   "sources": [
     {
@@ -16,8 +16,8 @@
       "error": null,
       "fingerprint": "de4b06b9a48fc676",
       "firstSeen": "2026-08-27",
-      "lastChecked": "2026-08-27",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-08-28",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://careers.cern/summer",
@@ -27,9 +27,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "312575271481f391",
-      "firstSeen": "2026-08-27",
-      "lastChecked": "2026-08-27",
+      "fingerprint": "468fa41f7cdc9c07",
+      "firstSeen": "2026-08-28",
+      "lastChecked": "2026-08-28",
       "changedSinceLastCheck": true
     },
     {
@@ -42,7 +42,7 @@
       "error": null,
       "fingerprint": "b8070a99fb5b269a",
       "firstSeen": "2026-08-12",
-      "lastChecked": "2026-08-27",
+      "lastChecked": "2026-08-28",
       "changedSinceLastCheck": false
     },
     {
@@ -55,7 +55,7 @@
       "error": null,
       "fingerprint": "58efc0f349aa1f6c",
       "firstSeen": "2026-08-12",
-      "lastChecked": "2026-08-27",
+      "lastChecked": "2026-08-28",
       "changedSinceLastCheck": false
     },
     {
@@ -68,7 +68,7 @@
       "error": null,
       "fingerprint": "55cef32cd3926927",
       "firstSeen": "2026-08-15",
-      "lastChecked": "2026-08-27",
+      "lastChecked": "2026-08-28",
       "changedSinceLastCheck": false
     },
     {
@@ -81,8 +81,8 @@
       "error": null,
       "fingerprint": "e1380ae6e13f5ebd",
       "firstSeen": "2026-08-27",
-      "lastChecked": "2026-08-27",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-08-28",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://ellis.eu/research/phd-postdoc",
@@ -94,7 +94,7 @@
       "error": null,
       "fingerprint": "7fd60120ba09221b",
       "firstSeen": "2026-08-19",
-      "lastChecked": "2026-08-27",
+      "lastChecked": "2026-08-28",
       "changedSinceLastCheck": false
     },
     {
@@ -107,7 +107,7 @@
       "error": null,
       "fingerprint": "fcc3ec34f43e94b5",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-27",
+      "lastChecked": "2026-08-28",
       "changedSinceLastCheck": false
     },
     {
@@ -120,7 +120,7 @@
       "error": null,
       "fingerprint": "7e79cf4a1c42b08c",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-27",
+      "lastChecked": "2026-08-28",
       "changedSinceLastCheck": false
     },
     {
@@ -133,7 +133,7 @@
       "error": null,
       "fingerprint": "4b24bc846cb9a5e6",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-27",
+      "lastChecked": "2026-08-28",
       "changedSinceLastCheck": false
     },
     {
@@ -146,7 +146,7 @@
       "error": null,
       "fingerprint": "c1703d52803017fa",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-27",
+      "lastChecked": "2026-08-28",
       "changedSinceLastCheck": false
     },
     {
@@ -159,8 +159,8 @@
       "error": null,
       "fingerprint": "5c61bfde7a26b601",
       "firstSeen": "2026-08-27",
-      "lastChecked": "2026-08-27",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-08-28",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://phd.ista.ac.at/isternship/",
@@ -172,7 +172,7 @@
       "error": null,
       "fingerprint": "cc34531ff435ae7f",
       "firstSeen": "2026-08-19",
-      "lastChecked": "2026-08-27",
+      "lastChecked": "2026-08-28",
       "changedSinceLastCheck": false
     },
     {
@@ -185,8 +185,8 @@
       "error": null,
       "fingerprint": "1dae5474daad5cc4",
       "firstSeen": "2026-08-27",
-      "lastChecked": "2026-08-27",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-08-28",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://tigp.sinica.edu.tw/pages/3127",
@@ -198,7 +198,7 @@
       "error": null,
       "fingerprint": "6c43b1795aece097",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-27",
+      "lastChecked": "2026-08-28",
       "changedSinceLastCheck": false
     },
     {
@@ -206,12 +206,12 @@
       "usedBy": [
         "job-source"
       ],
-      "status": 403,
-      "ok": false,
-      "error": "HTTP 403",
-      "fingerprint": null,
-      "firstSeen": "2026-08-27",
-      "lastChecked": "2026-08-27",
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "32dbe92200674ed0",
+      "firstSeen": "2026-08-28",
+      "lastChecked": "2026-08-28",
       "changedSinceLastCheck": false
     },
     {
@@ -222,9 +222,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "4a80f1c962498c78",
-      "firstSeen": "2026-08-27",
-      "lastChecked": "2026-08-27",
+      "fingerprint": "0c0360d64e85cd3d",
+      "firstSeen": "2026-08-28",
+      "lastChecked": "2026-08-28",
       "changedSinceLastCheck": true
     },
     {
@@ -237,7 +237,7 @@
       "error": null,
       "fingerprint": "3d7dc12dfa812788",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-27",
+      "lastChecked": "2026-08-28",
       "changedSinceLastCheck": false
     },
     {
@@ -250,7 +250,7 @@
       "error": null,
       "fingerprint": "ce4757484da44dac",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-27",
+      "lastChecked": "2026-08-28",
       "changedSinceLastCheck": false
     },
     {
@@ -263,7 +263,7 @@
       "error": null,
       "fingerprint": "3c55689eb6991240",
       "firstSeen": "2026-08-11",
-      "lastChecked": "2026-08-27",
+      "lastChecked": "2026-08-28",
       "changedSinceLastCheck": false
     },
     {
@@ -276,7 +276,7 @@
       "error": null,
       "fingerprint": "2d25d9e55d28007d",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-08-27",
+      "lastChecked": "2026-08-28",
       "changedSinceLastCheck": false
     }
   ]
