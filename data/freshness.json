@@ -1,9 +1,9 @@
 {
-  "generated": "2026-09-07T11:13:00+00:00",
-  "checked": "2026-09-07",
+  "generated": "2026-09-08T10:22:29+00:00",
+  "checked": "2026-09-08",
   "total": 21,
   "broken": 0,
-  "changed": 4,
+  "changed": 3,
   "note": "A reachable link is not a current deadline. This checks that pages resolve and flags when their visible text changes; it does not read the page.",
   "sources": [
     {
@@ -16,8 +16,8 @@
       "error": null,
       "fingerprint": "de4b06b9a48fc676",
       "firstSeen": "2026-09-07",
-      "lastChecked": "2026-09-07",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-09-08",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://careers.cern/summer",
@@ -27,9 +27,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "a6be9a3a70c15ea4",
-      "firstSeen": "2026-09-07",
-      "lastChecked": "2026-09-07",
+      "fingerprint": "3b98cf2755f3919f",
+      "firstSeen": "2026-09-08",
+      "lastChecked": "2026-09-08",
       "changedSinceLastCheck": true
     },
     {
@@ -42,7 +42,7 @@
       "error": null,
       "fingerprint": "b8070a99fb5b269a",
       "firstSeen": "2026-08-12",
-      "lastChecked": "2026-09-07",
+      "lastChecked": "2026-09-08",
       "changedSinceLastCheck": false
     },
     {
@@ -55,7 +55,7 @@
       "error": null,
       "fingerprint": "58efc0f349aa1f6c",
       "firstSeen": "2026-08-12",
-      "lastChecked": "2026-09-07",
+      "lastChecked": "2026-09-08",
       "changedSinceLastCheck": false
     },
     {
@@ -68,7 +68,7 @@
       "error": null,
       "fingerprint": "55cef32cd3926927",
       "firstSeen": "2026-08-15",
-      "lastChecked": "2026-09-07",
+      "lastChecked": "2026-09-08",
       "changedSinceLastCheck": false
     },
     {
@@ -81,7 +81,7 @@
       "error": null,
       "fingerprint": "07275eeafc5b6b87",
       "firstSeen": "2026-09-06",
-      "lastChecked": "2026-09-07",
+      "lastChecked": "2026-09-08",
       "changedSinceLastCheck": false
     },
     {
@@ -94,7 +94,7 @@
       "error": null,
       "fingerprint": "7fd60120ba09221b",
       "firstSeen": "2026-08-19",
-      "lastChecked": "2026-09-07",
+      "lastChecked": "2026-09-08",
       "changedSinceLastCheck": false
     },
     {
@@ -107,7 +107,7 @@
       "error": null,
       "fingerprint": "fcc3ec34f43e94b5",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-07",
+      "lastChecked": "2026-09-08",
       "changedSinceLastCheck": false
     },
     {
@@ -120,7 +120,7 @@
       "error": null,
       "fingerprint": "7e79cf4a1c42b08c",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-07",
+      "lastChecked": "2026-09-08",
       "changedSinceLastCheck": false
     },
     {
@@ -133,7 +133,7 @@
       "error": null,
       "fingerprint": "4b24bc846cb9a5e6",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-07",
+      "lastChecked": "2026-09-08",
       "changedSinceLastCheck": false
     },
     {
@@ -146,7 +146,7 @@
       "error": null,
       "fingerprint": "c1703d52803017fa",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-07",
+      "lastChecked": "2026-09-08",
       "changedSinceLastCheck": false
     },
     {
@@ -159,7 +159,7 @@
       "error": null,
       "fingerprint": "497b88adc607e862",
       "firstSeen": "2026-09-06",
-      "lastChecked": "2026-09-07",
+      "lastChecked": "2026-09-08",
       "changedSinceLastCheck": false
     },
     {
@@ -172,7 +172,7 @@
       "error": null,
       "fingerprint": "cc34531ff435ae7f",
       "firstSeen": "2026-08-19",
-      "lastChecked": "2026-09-07",
+      "lastChecked": "2026-09-08",
       "changedSinceLastCheck": false
     },
     {
@@ -183,9 +183,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "c7155b1d9f247c39",
-      "firstSeen": "2026-09-07",
-      "lastChecked": "2026-09-07",
+      "fingerprint": "64e222980c346d01",
+      "firstSeen": "2026-09-08",
+      "lastChecked": "2026-09-08",
       "changedSinceLastCheck": true
     },
     {
@@ -198,7 +198,7 @@
       "error": null,
       "fingerprint": "f5013d7f967b3626",
       "firstSeen": "2026-09-03",
-      "lastChecked": "2026-09-07",
+      "lastChecked": "2026-09-08",
       "changedSinceLastCheck": false
     },
     {
@@ -211,7 +211,7 @@
       "error": null,
       "fingerprint": "32dbe92200674ed0",
       "firstSeen": "2026-09-07",
-      "lastChecked": "2026-09-07",
+      "lastChecked": "2026-09-08",
       "changedSinceLastCheck": false
     },
     {
@@ -222,9 +222,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "0f0383dd41ecf141",
-      "firstSeen": "2026-09-07",
-      "lastChecked": "2026-09-07",
+      "fingerprint": "794d72138360d1fc",
+      "firstSeen": "2026-09-08",
+      "lastChecked": "2026-09-08",
       "changedSinceLastCheck": true
     },
     {
@@ -237,7 +237,7 @@
       "error": null,
       "fingerprint": "3d7dc12dfa812788",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-07",
+      "lastChecked": "2026-09-08",
       "changedSinceLastCheck": false
     },
     {
@@ -250,7 +250,7 @@
       "error": null,
       "fingerprint": "dcc2b1700a4a346e",
       "firstSeen": "2026-08-31",
-      "lastChecked": "2026-09-07",
+      "lastChecked": "2026-09-08",
       "changedSinceLastCheck": false
     },
     {
@@ -263,7 +263,7 @@
       "error": null,
       "fingerprint": "3c55689eb6991240",
       "firstSeen": "2026-08-11",
-      "lastChecked": "2026-09-07",
+      "lastChecked": "2026-09-08",
       "changedSinceLastCheck": false
     },
     {
@@ -276,7 +276,7 @@
       "error": null,
       "fingerprint": "2d25d9e55d28007d",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-07",
+      "lastChecked": "2026-09-08",
       "changedSinceLastCheck": false
     }
   ]
