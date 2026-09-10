@@ -1,9 +1,9 @@
 {
-  "generated": "2026-09-09T10:31:50+00:00",
-  "checked": "2026-09-09",
+  "generated": "2026-09-10T10:20:58+00:00",
+  "checked": "2026-09-10",
   "total": 21,
-  "broken": 3,
-  "changed": 2,
+  "broken": 2,
+  "changed": 6,
   "note": "A reachable link is not a current deadline. This checks that pages resolve and flags when their visible text changes; it does not read the page.",
   "sources": [
     {
@@ -14,9 +14,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "c74d1aec8e0c7a5c",
-      "firstSeen": "2026-09-09",
-      "lastChecked": "2026-09-09",
+      "fingerprint": "a1fc6036b1b2a096",
+      "firstSeen": "2026-09-10",
+      "lastChecked": "2026-09-10",
       "changedSinceLastCheck": true
     },
     {
@@ -27,9 +27,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "77823b808f930fc8",
-      "firstSeen": "2026-09-09",
-      "lastChecked": "2026-09-09",
+      "fingerprint": "44ea8307e6dd0a26",
+      "firstSeen": "2026-09-10",
+      "lastChecked": "2026-09-10",
       "changedSinceLastCheck": true
     },
     {
@@ -42,7 +42,7 @@
       "error": null,
       "fingerprint": "b8070a99fb5b269a",
       "firstSeen": "2026-08-12",
-      "lastChecked": "2026-09-09",
+      "lastChecked": "2026-09-10",
       "changedSinceLastCheck": false
     },
     {
@@ -55,7 +55,7 @@
       "error": null,
       "fingerprint": "58efc0f349aa1f6c",
       "firstSeen": "2026-08-12",
-      "lastChecked": "2026-09-09",
+      "lastChecked": "2026-09-10",
       "changedSinceLastCheck": false
     },
     {
@@ -68,7 +68,7 @@
       "error": null,
       "fingerprint": "55cef32cd3926927",
       "firstSeen": "2026-08-15",
-      "lastChecked": "2026-09-09",
+      "lastChecked": "2026-09-10",
       "changedSinceLastCheck": false
     },
     {
@@ -79,10 +79,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "07275eeafc5b6b87",
-      "firstSeen": "2026-09-06",
-      "lastChecked": "2026-09-09",
-      "changedSinceLastCheck": false
+      "fingerprint": "249d24cd1638ccae",
+      "firstSeen": "2026-09-10",
+      "lastChecked": "2026-09-10",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://ellis.eu/research/phd-postdoc",
@@ -92,10 +92,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "7fd60120ba09221b",
-      "firstSeen": "2026-08-19",
-      "lastChecked": "2026-09-09",
-      "changedSinceLastCheck": false
+      "fingerprint": "5a3286f9beb4cdde",
+      "firstSeen": "2026-09-10",
+      "lastChecked": "2026-09-10",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://euraxess.ec.europa.eu/jobs",
@@ -107,7 +107,7 @@
       "error": null,
       "fingerprint": "fcc3ec34f43e94b5",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-09",
+      "lastChecked": "2026-09-10",
       "changedSinceLastCheck": false
     },
     {
@@ -120,7 +120,7 @@
       "error": null,
       "fingerprint": "7e79cf4a1c42b08c",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-09",
+      "lastChecked": "2026-09-10",
       "changedSinceLastCheck": false
     },
     {
@@ -133,7 +133,7 @@
       "error": null,
       "fingerprint": "4b24bc846cb9a5e6",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-09",
+      "lastChecked": "2026-09-10",
       "changedSinceLastCheck": false
     },
     {
@@ -146,7 +146,7 @@
       "error": null,
       "fingerprint": "c1703d52803017fa",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-09",
+      "lastChecked": "2026-09-10",
       "changedSinceLastCheck": false
     },
     {
@@ -159,7 +159,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-09-09",
-      "lastChecked": "2026-09-09",
+      "lastChecked": "2026-09-10",
       "changedSinceLastCheck": false
     },
     {
@@ -172,7 +172,7 @@
       "error": null,
       "fingerprint": "cc34531ff435ae7f",
       "firstSeen": "2026-08-19",
-      "lastChecked": "2026-09-09",
+      "lastChecked": "2026-09-10",
       "changedSinceLastCheck": false
     },
     {
@@ -185,7 +185,7 @@
       "error": null,
       "fingerprint": "64e222980c346d01",
       "firstSeen": "2026-09-08",
-      "lastChecked": "2026-09-09",
+      "lastChecked": "2026-09-10",
       "changedSinceLastCheck": false
     },
     {
@@ -198,7 +198,7 @@
       "error": null,
       "fingerprint": "f5013d7f967b3626",
       "firstSeen": "2026-09-03",
-      "lastChecked": "2026-09-09",
+      "lastChecked": "2026-09-10",
       "changedSinceLastCheck": false
     },
     {
@@ -211,7 +211,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-09-09",
-      "lastChecked": "2026-09-09",
+      "lastChecked": "2026-09-10",
       "changedSinceLastCheck": false
     },
     {
@@ -219,12 +219,12 @@
       "usedBy": [
         "job-source"
       ],
-      "status": 403,
-      "ok": false,
-      "error": "HTTP 403",
-      "fingerprint": null,
-      "firstSeen": "2026-09-09",
-      "lastChecked": "2026-09-09",
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "94c8771ab4db3613",
+      "firstSeen": "2026-09-10",
+      "lastChecked": "2026-09-10",
       "changedSinceLastCheck": false
     },
     {
@@ -237,7 +237,7 @@
       "error": null,
       "fingerprint": "3d7dc12dfa812788",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-09",
+      "lastChecked": "2026-09-10",
       "changedSinceLastCheck": false
     },
     {
@@ -248,10 +248,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "dcc2b1700a4a346e",
-      "firstSeen": "2026-08-31",
-      "lastChecked": "2026-09-09",
-      "changedSinceLastCheck": false
+      "fingerprint": "e7756694ea34ffb1",
+      "firstSeen": "2026-09-10",
+      "lastChecked": "2026-09-10",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://www.oist.jp/admissions/research-internship/program-description",
@@ -261,10 +261,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "3c55689eb6991240",
-      "firstSeen": "2026-08-11",
-      "lastChecked": "2026-09-09",
-      "changedSinceLastCheck": false
+      "fingerprint": "923c54801879a9fe",
+      "firstSeen": "2026-09-10",
+      "lastChecked": "2026-09-10",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://www.s.u-tokyo.ac.jp/en/utrip/",
@@ -276,7 +276,7 @@
       "error": null,
       "fingerprint": "2d25d9e55d28007d",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-09",
+      "lastChecked": "2026-09-10",
       "changedSinceLastCheck": false
     }
   ]
