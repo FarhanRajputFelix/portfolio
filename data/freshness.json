@@ -1,9 +1,9 @@
 {
-  "generated": "2026-09-16T10:35:35+00:00",
-  "checked": "2026-09-16",
+  "generated": "2026-09-17T10:45:03+00:00",
+  "checked": "2026-09-17",
   "total": 21,
   "broken": 1,
-  "changed": 6,
+  "changed": 5,
   "note": "A reachable link is not a current deadline. This checks that pages resolve and flags when their visible text changes; it does not read the page.",
   "sources": [
     {
@@ -14,9 +14,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "ac1c8f65cc77ccae",
-      "firstSeen": "2026-09-16",
-      "lastChecked": "2026-09-16",
+      "fingerprint": "de4b06b9a48fc676",
+      "firstSeen": "2026-09-17",
+      "lastChecked": "2026-09-17",
       "changedSinceLastCheck": true
     },
     {
@@ -27,9 +27,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "2635bcf5580a50a6",
-      "firstSeen": "2026-09-16",
-      "lastChecked": "2026-09-16",
+      "fingerprint": "252c7a6a5930373c",
+      "firstSeen": "2026-09-17",
+      "lastChecked": "2026-09-17",
       "changedSinceLastCheck": true
     },
     {
@@ -42,7 +42,7 @@
       "error": null,
       "fingerprint": "b8070a99fb5b269a",
       "firstSeen": "2026-08-12",
-      "lastChecked": "2026-09-16",
+      "lastChecked": "2026-09-17",
       "changedSinceLastCheck": false
     },
     {
@@ -55,7 +55,7 @@
       "error": null,
       "fingerprint": "58efc0f349aa1f6c",
       "firstSeen": "2026-08-12",
-      "lastChecked": "2026-09-16",
+      "lastChecked": "2026-09-17",
       "changedSinceLastCheck": false
     },
     {
@@ -68,7 +68,7 @@
       "error": null,
       "fingerprint": "55cef32cd3926927",
       "firstSeen": "2026-08-15",
-      "lastChecked": "2026-09-16",
+      "lastChecked": "2026-09-17",
       "changedSinceLastCheck": false
     },
     {
@@ -79,9 +79,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "79fb368a4823543e",
-      "firstSeen": "2026-09-16",
-      "lastChecked": "2026-09-16",
+      "fingerprint": "0444e8c51ab17a06",
+      "firstSeen": "2026-09-17",
+      "lastChecked": "2026-09-17",
       "changedSinceLastCheck": true
     },
     {
@@ -92,10 +92,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "9f3c1cdd0b99d4f2",
-      "firstSeen": "2026-09-15",
-      "lastChecked": "2026-09-16",
-      "changedSinceLastCheck": false
+      "fingerprint": "3711bc0b86caae68",
+      "firstSeen": "2026-09-17",
+      "lastChecked": "2026-09-17",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://euraxess.ec.europa.eu/jobs",
@@ -107,7 +107,7 @@
       "error": null,
       "fingerprint": "fcc3ec34f43e94b5",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-16",
+      "lastChecked": "2026-09-17",
       "changedSinceLastCheck": false
     },
     {
@@ -120,7 +120,7 @@
       "error": null,
       "fingerprint": "7e79cf4a1c42b08c",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-16",
+      "lastChecked": "2026-09-17",
       "changedSinceLastCheck": false
     },
     {
@@ -133,7 +133,7 @@
       "error": null,
       "fingerprint": "c1d09d3f986aba7c",
       "firstSeen": "2026-09-11",
-      "lastChecked": "2026-09-16",
+      "lastChecked": "2026-09-17",
       "changedSinceLastCheck": false
     },
     {
@@ -146,7 +146,7 @@
       "error": null,
       "fingerprint": "c1703d52803017fa",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-16",
+      "lastChecked": "2026-09-17",
       "changedSinceLastCheck": false
     },
     {
@@ -159,7 +159,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-09-09",
-      "lastChecked": "2026-09-16",
+      "lastChecked": "2026-09-17",
       "changedSinceLastCheck": false
     },
     {
@@ -172,7 +172,7 @@
       "error": null,
       "fingerprint": "cc34531ff435ae7f",
       "firstSeen": "2026-09-16",
-      "lastChecked": "2026-09-16",
+      "lastChecked": "2026-09-17",
       "changedSinceLastCheck": false
     },
     {
@@ -185,8 +185,8 @@
       "error": null,
       "fingerprint": "918f3992233d28ab",
       "firstSeen": "2026-09-16",
-      "lastChecked": "2026-09-16",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-09-17",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://tigp.sinica.edu.tw/pages/3127",
@@ -198,8 +198,8 @@
       "error": null,
       "fingerprint": "e277ef1062e466e0",
       "firstSeen": "2026-09-16",
-      "lastChecked": "2026-09-16",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-09-17",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://www.daad.de/deutschland/stipendium/datenbank/en/21148-scholarship-database/",
@@ -211,7 +211,7 @@
       "error": null,
       "fingerprint": "32dbe92200674ed0",
       "firstSeen": "2026-09-14",
-      "lastChecked": "2026-09-16",
+      "lastChecked": "2026-09-17",
       "changedSinceLastCheck": false
     },
     {
@@ -222,9 +222,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "f3ab3599810f2a09",
-      "firstSeen": "2026-09-16",
-      "lastChecked": "2026-09-16",
+      "fingerprint": "0d5dcd57a8aa80d9",
+      "firstSeen": "2026-09-17",
+      "lastChecked": "2026-09-17",
       "changedSinceLastCheck": true
     },
     {
@@ -237,7 +237,7 @@
       "error": null,
       "fingerprint": "3d7dc12dfa812788",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-16",
+      "lastChecked": "2026-09-17",
       "changedSinceLastCheck": false
     },
     {
@@ -250,7 +250,7 @@
       "error": null,
       "fingerprint": "e7756694ea34ffb1",
       "firstSeen": "2026-09-10",
-      "lastChecked": "2026-09-16",
+      "lastChecked": "2026-09-17",
       "changedSinceLastCheck": false
     },
     {
@@ -263,7 +263,7 @@
       "error": null,
       "fingerprint": "923c54801879a9fe",
       "firstSeen": "2026-09-10",
-      "lastChecked": "2026-09-16",
+      "lastChecked": "2026-09-17",
       "changedSinceLastCheck": false
     },
     {
@@ -276,7 +276,7 @@
       "error": null,
       "fingerprint": "2d25d9e55d28007d",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-16",
+      "lastChecked": "2026-09-17",
       "changedSinceLastCheck": false
     }
   ]
