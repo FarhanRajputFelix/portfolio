@@ -1,9 +1,9 @@
 {
-  "generated": "2026-09-27T11:07:56+00:00",
-  "checked": "2026-09-27",
+  "generated": "2026-09-28T12:32:13+00:00",
+  "checked": "2026-09-28",
   "total": 21,
-  "broken": 2,
-  "changed": 6,
+  "broken": 1,
+  "changed": 3,
   "note": "A reachable link is not a current deadline. This checks that pages resolve and flags when their visible text changes; it does not read the page.",
   "sources": [
     {
@@ -14,9 +14,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "aee12a33fc0b53a0",
-      "firstSeen": "2026-09-27",
-      "lastChecked": "2026-09-27",
+      "fingerprint": "de4b06b9a48fc676",
+      "firstSeen": "2026-09-28",
+      "lastChecked": "2026-09-28",
       "changedSinceLastCheck": true
     },
     {
@@ -27,10 +27,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "7da82a18b6cb3d2e",
-      "firstSeen": "2026-09-26",
-      "lastChecked": "2026-09-27",
-      "changedSinceLastCheck": false
+      "fingerprint": "adb8636ef1be0f09",
+      "firstSeen": "2026-09-28",
+      "lastChecked": "2026-09-28",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://eee.epfl.ch/",
@@ -42,7 +42,7 @@
       "error": null,
       "fingerprint": "b8070a99fb5b269a",
       "firstSeen": "2026-08-12",
-      "lastChecked": "2026-09-27",
+      "lastChecked": "2026-09-28",
       "changedSinceLastCheck": false
     },
     {
@@ -55,7 +55,7 @@
       "error": null,
       "fingerprint": "58efc0f349aa1f6c",
       "firstSeen": "2026-08-12",
-      "lastChecked": "2026-09-27",
+      "lastChecked": "2026-09-28",
       "changedSinceLastCheck": false
     },
     {
@@ -68,8 +68,8 @@
       "error": null,
       "fingerprint": "99a3aad3fe123219",
       "firstSeen": "2026-09-27",
-      "lastChecked": "2026-09-27",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-09-28",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://ellis.eu/research/jobs",
@@ -81,8 +81,8 @@
       "error": null,
       "fingerprint": "a66e0a877168eaf7",
       "firstSeen": "2026-09-27",
-      "lastChecked": "2026-09-27",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-09-28",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://ellis.eu/research/phd-postdoc",
@@ -94,8 +94,8 @@
       "error": null,
       "fingerprint": "9de7601921f000ba",
       "firstSeen": "2026-09-27",
-      "lastChecked": "2026-09-27",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-09-28",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://euraxess.ec.europa.eu/jobs",
@@ -107,7 +107,7 @@
       "error": null,
       "fingerprint": "fcc3ec34f43e94b5",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-27",
+      "lastChecked": "2026-09-28",
       "changedSinceLastCheck": false
     },
     {
@@ -120,7 +120,7 @@
       "error": null,
       "fingerprint": "7e79cf4a1c42b08c",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-27",
+      "lastChecked": "2026-09-28",
       "changedSinceLastCheck": false
     },
     {
@@ -133,7 +133,7 @@
       "error": null,
       "fingerprint": "c1d09d3f986aba7c",
       "firstSeen": "2026-09-11",
-      "lastChecked": "2026-09-27",
+      "lastChecked": "2026-09-28",
       "changedSinceLastCheck": false
     },
     {
@@ -146,7 +146,7 @@
       "error": null,
       "fingerprint": "c1703d52803017fa",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-27",
+      "lastChecked": "2026-09-28",
       "changedSinceLastCheck": false
     },
     {
@@ -159,7 +159,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-09-09",
-      "lastChecked": "2026-09-27",
+      "lastChecked": "2026-09-28",
       "changedSinceLastCheck": false
     },
     {
@@ -172,7 +172,7 @@
       "error": null,
       "fingerprint": "30b7af3457074aca",
       "firstSeen": "2026-09-24",
-      "lastChecked": "2026-09-27",
+      "lastChecked": "2026-09-28",
       "changedSinceLastCheck": false
     },
     {
@@ -185,7 +185,7 @@
       "error": null,
       "fingerprint": "918f3992233d28ab",
       "firstSeen": "2026-09-24",
-      "lastChecked": "2026-09-27",
+      "lastChecked": "2026-09-28",
       "changedSinceLastCheck": false
     },
     {
@@ -198,7 +198,7 @@
       "error": null,
       "fingerprint": "e277ef1062e466e0",
       "firstSeen": "2026-09-16",
-      "lastChecked": "2026-09-27",
+      "lastChecked": "2026-09-28",
       "changedSinceLastCheck": false
     },
     {
@@ -206,12 +206,12 @@
       "usedBy": [
         "job-source"
       ],
-      "status": 403,
-      "ok": false,
-      "error": "HTTP 403",
-      "fingerprint": null,
-      "firstSeen": "2026-09-27",
-      "lastChecked": "2026-09-27",
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "2e92c4b1a1b46708",
+      "firstSeen": "2026-09-28",
+      "lastChecked": "2026-09-28",
       "changedSinceLastCheck": false
     },
     {
@@ -222,9 +222,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "34ab01683f81792e",
-      "firstSeen": "2026-09-27",
-      "lastChecked": "2026-09-27",
+      "fingerprint": "88b85bd4abb05b7e",
+      "firstSeen": "2026-09-28",
+      "lastChecked": "2026-09-28",
       "changedSinceLastCheck": true
     },
     {
@@ -237,7 +237,7 @@
       "error": null,
       "fingerprint": "3d7dc12dfa812788",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-27",
+      "lastChecked": "2026-09-28",
       "changedSinceLastCheck": false
     },
     {
@@ -250,8 +250,8 @@
       "error": null,
       "fingerprint": "93dceb418410ce72",
       "firstSeen": "2026-09-27",
-      "lastChecked": "2026-09-27",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-09-28",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://www.oist.jp/admissions/research-internship/program-description",
@@ -263,7 +263,7 @@
       "error": null,
       "fingerprint": "923c54801879a9fe",
       "firstSeen": "2026-09-10",
-      "lastChecked": "2026-09-27",
+      "lastChecked": "2026-09-28",
       "changedSinceLastCheck": false
     },
     {
@@ -276,7 +276,7 @@
       "error": null,
       "fingerprint": "2d25d9e55d28007d",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-09-27",
+      "lastChecked": "2026-09-28",
       "changedSinceLastCheck": false
     }
   ]
