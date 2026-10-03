@@ -1,9 +1,9 @@
 {
-  "generated": "2026-10-02T11:40:43+00:00",
-  "checked": "2026-10-02",
+  "generated": "2026-10-03T10:54:18+00:00",
+  "checked": "2026-10-03",
   "total": 21,
-  "broken": 2,
-  "changed": 7,
+  "broken": 1,
+  "changed": 2,
   "note": "A reachable link is not a current deadline. This checks that pages resolve and flags when their visible text changes; it does not read the page.",
   "sources": [
     {
@@ -16,8 +16,8 @@
       "error": null,
       "fingerprint": "de4b06b9a48fc676",
       "firstSeen": "2026-10-02",
-      "lastChecked": "2026-10-02",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-10-03",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://careers.cern/summer",
@@ -27,9 +27,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "365aecaecb0709b4",
-      "firstSeen": "2026-10-02",
-      "lastChecked": "2026-10-02",
+      "fingerprint": "fff04d67beefd06d",
+      "firstSeen": "2026-10-03",
+      "lastChecked": "2026-10-03",
       "changedSinceLastCheck": true
     },
     {
@@ -42,8 +42,8 @@
       "error": null,
       "fingerprint": "7f605d720286de45",
       "firstSeen": "2026-10-02",
-      "lastChecked": "2026-10-02",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-10-03",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://eee.epfl.ch/program-at-a-glance/",
@@ -55,8 +55,8 @@
       "error": null,
       "fingerprint": "5fac5cbd3e1cab17",
       "firstSeen": "2026-10-02",
-      "lastChecked": "2026-10-02",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-10-03",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://ellis.eu/news/ellis-phd-program-call-for-applications-2025",
@@ -68,7 +68,7 @@
       "error": null,
       "fingerprint": "99a3aad3fe123219",
       "firstSeen": "2026-09-27",
-      "lastChecked": "2026-10-02",
+      "lastChecked": "2026-10-03",
       "changedSinceLastCheck": false
     },
     {
@@ -81,8 +81,8 @@
       "error": null,
       "fingerprint": "a621cba396f74d5e",
       "firstSeen": "2026-10-02",
-      "lastChecked": "2026-10-02",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-10-03",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://ellis.eu/research/phd-postdoc",
@@ -94,7 +94,7 @@
       "error": null,
       "fingerprint": "9de7601921f000ba",
       "firstSeen": "2026-09-27",
-      "lastChecked": "2026-10-02",
+      "lastChecked": "2026-10-03",
       "changedSinceLastCheck": false
     },
     {
@@ -107,7 +107,7 @@
       "error": null,
       "fingerprint": "fcc3ec34f43e94b5",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-10-02",
+      "lastChecked": "2026-10-03",
       "changedSinceLastCheck": false
     },
     {
@@ -120,7 +120,7 @@
       "error": null,
       "fingerprint": "7e79cf4a1c42b08c",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-10-02",
+      "lastChecked": "2026-10-03",
       "changedSinceLastCheck": false
     },
     {
@@ -133,7 +133,7 @@
       "error": null,
       "fingerprint": "c1d09d3f986aba7c",
       "firstSeen": "2026-09-11",
-      "lastChecked": "2026-10-02",
+      "lastChecked": "2026-10-03",
       "changedSinceLastCheck": false
     },
     {
@@ -146,7 +146,7 @@
       "error": null,
       "fingerprint": "c1703d52803017fa",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-10-02",
+      "lastChecked": "2026-10-03",
       "changedSinceLastCheck": false
     },
     {
@@ -159,7 +159,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-09-09",
-      "lastChecked": "2026-10-02",
+      "lastChecked": "2026-10-03",
       "changedSinceLastCheck": false
     },
     {
@@ -172,7 +172,7 @@
       "error": null,
       "fingerprint": "b52ff298759c6e3d",
       "firstSeen": "2026-09-30",
-      "lastChecked": "2026-10-02",
+      "lastChecked": "2026-10-03",
       "changedSinceLastCheck": false
     },
     {
@@ -185,7 +185,7 @@
       "error": null,
       "fingerprint": "918f3992233d28ab",
       "firstSeen": "2026-09-24",
-      "lastChecked": "2026-10-02",
+      "lastChecked": "2026-10-03",
       "changedSinceLastCheck": false
     },
     {
@@ -198,7 +198,7 @@
       "error": null,
       "fingerprint": "e277ef1062e466e0",
       "firstSeen": "2026-09-16",
-      "lastChecked": "2026-10-02",
+      "lastChecked": "2026-10-03",
       "changedSinceLastCheck": false
     },
     {
@@ -206,12 +206,12 @@
       "usedBy": [
         "job-source"
       ],
-      "status": 403,
-      "ok": false,
-      "error": "HTTP 403",
-      "fingerprint": null,
-      "firstSeen": "2026-09-29",
-      "lastChecked": "2026-10-02",
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "90ecff32158ff69d",
+      "firstSeen": "2026-10-03",
+      "lastChecked": "2026-10-03",
       "changedSinceLastCheck": false
     },
     {
@@ -222,9 +222,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "88f0879ab122e21a",
-      "firstSeen": "2026-10-02",
-      "lastChecked": "2026-10-02",
+      "fingerprint": "6aee36113655492e",
+      "firstSeen": "2026-10-03",
+      "lastChecked": "2026-10-03",
       "changedSinceLastCheck": true
     },
     {
@@ -237,7 +237,7 @@
       "error": null,
       "fingerprint": "3d7dc12dfa812788",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-10-02",
+      "lastChecked": "2026-10-03",
       "changedSinceLastCheck": false
     },
     {
@@ -250,7 +250,7 @@
       "error": null,
       "fingerprint": "6b4bd8bf4b9e43f4",
       "firstSeen": "2026-10-01",
-      "lastChecked": "2026-10-02",
+      "lastChecked": "2026-10-03",
       "changedSinceLastCheck": false
     },
     {
@@ -263,8 +263,8 @@
       "error": null,
       "fingerprint": "a62ee53f839d8d09",
       "firstSeen": "2026-10-02",
-      "lastChecked": "2026-10-02",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-10-03",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://www.s.u-tokyo.ac.jp/en/utrip/",
@@ -276,7 +276,7 @@
       "error": null,
       "fingerprint": "2d25d9e55d28007d",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-10-02",
+      "lastChecked": "2026-10-03",
       "changedSinceLastCheck": false
     }
   ]
