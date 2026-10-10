@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-09T12:22:23+00:00",
-  "checked": "2026-10-09",
+  "generated": "2026-10-10T11:41:25+00:00",
+  "checked": "2026-10-10",
   "total": 21,
   "broken": 1,
   "changed": 4,
@@ -16,7 +16,7 @@
       "error": null,
       "fingerprint": "de4b06b9a48fc676",
       "firstSeen": "2026-10-08",
-      "lastChecked": "2026-10-09",
+      "lastChecked": "2026-10-10",
       "changedSinceLastCheck": false
     },
     {
@@ -27,9 +27,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "3a9fa55c70e5b507",
-      "firstSeen": "2026-10-09",
-      "lastChecked": "2026-10-09",
+      "fingerprint": "f12342f4f7a32363",
+      "firstSeen": "2026-10-10",
+      "lastChecked": "2026-10-10",
       "changedSinceLastCheck": true
     },
     {
@@ -42,7 +42,7 @@
       "error": null,
       "fingerprint": "7f605d720286de45",
       "firstSeen": "2026-10-02",
-      "lastChecked": "2026-10-09",
+      "lastChecked": "2026-10-10",
       "changedSinceLastCheck": false
     },
     {
@@ -55,7 +55,7 @@
       "error": null,
       "fingerprint": "5fac5cbd3e1cab17",
       "firstSeen": "2026-10-02",
-      "lastChecked": "2026-10-09",
+      "lastChecked": "2026-10-10",
       "changedSinceLastCheck": false
     },
     {
@@ -68,7 +68,7 @@
       "error": null,
       "fingerprint": "99a3aad3fe123219",
       "firstSeen": "2026-09-27",
-      "lastChecked": "2026-10-09",
+      "lastChecked": "2026-10-10",
       "changedSinceLastCheck": false
     },
     {
@@ -79,9 +79,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "3b510ecc060957fd",
-      "firstSeen": "2026-10-09",
-      "lastChecked": "2026-10-09",
+      "fingerprint": "c5154c52be5c3d8b",
+      "firstSeen": "2026-10-10",
+      "lastChecked": "2026-10-10",
       "changedSinceLastCheck": true
     },
     {
@@ -94,7 +94,7 @@
       "error": null,
       "fingerprint": "1d103041ec0bf7be",
       "firstSeen": "2026-10-08",
-      "lastChecked": "2026-10-09",
+      "lastChecked": "2026-10-10",
       "changedSinceLastCheck": false
     },
     {
@@ -107,7 +107,7 @@
       "error": null,
       "fingerprint": "2d562b4d01db73a3",
       "firstSeen": "2026-10-08",
-      "lastChecked": "2026-10-09",
+      "lastChecked": "2026-10-10",
       "changedSinceLastCheck": false
     },
     {
@@ -120,7 +120,7 @@
       "error": null,
       "fingerprint": "7e79cf4a1c42b08c",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-10-09",
+      "lastChecked": "2026-10-10",
       "changedSinceLastCheck": false
     },
     {
@@ -133,7 +133,7 @@
       "error": null,
       "fingerprint": "c1d09d3f986aba7c",
       "firstSeen": "2026-09-11",
-      "lastChecked": "2026-10-09",
+      "lastChecked": "2026-10-10",
       "changedSinceLastCheck": false
     },
     {
@@ -146,7 +146,7 @@
       "error": null,
       "fingerprint": "c1703d52803017fa",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-10-09",
+      "lastChecked": "2026-10-10",
       "changedSinceLastCheck": false
     },
     {
@@ -159,7 +159,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-09-09",
-      "lastChecked": "2026-10-09",
+      "lastChecked": "2026-10-10",
       "changedSinceLastCheck": false
     },
     {
@@ -172,7 +172,7 @@
       "error": null,
       "fingerprint": "b52ff298759c6e3d",
       "firstSeen": "2026-09-30",
-      "lastChecked": "2026-10-09",
+      "lastChecked": "2026-10-10",
       "changedSinceLastCheck": false
     },
     {
@@ -183,10 +183,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "918f3992233d28ab",
-      "firstSeen": "2026-09-24",
-      "lastChecked": "2026-10-09",
-      "changedSinceLastCheck": false
+      "fingerprint": "3dfb40fd7d110e1a",
+      "firstSeen": "2026-10-10",
+      "lastChecked": "2026-10-10",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://tigp.sinica.edu.tw/pages/3127",
@@ -198,7 +198,7 @@
       "error": null,
       "fingerprint": "e277ef1062e466e0",
       "firstSeen": "2026-09-16",
-      "lastChecked": "2026-10-09",
+      "lastChecked": "2026-10-10",
       "changedSinceLastCheck": false
     },
     {
@@ -211,7 +211,7 @@
       "error": null,
       "fingerprint": "32dbe92200674ed0",
       "firstSeen": "2026-10-09",
-      "lastChecked": "2026-10-09",
+      "lastChecked": "2026-10-10",
       "changedSinceLastCheck": false
     },
     {
@@ -222,9 +222,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "08f24a1a45f50cfb",
-      "firstSeen": "2026-10-09",
-      "lastChecked": "2026-10-09",
+      "fingerprint": "954ac0a25730369f",
+      "firstSeen": "2026-10-10",
+      "lastChecked": "2026-10-10",
       "changedSinceLastCheck": true
     },
     {
@@ -237,7 +237,7 @@
       "error": null,
       "fingerprint": "3d7dc12dfa812788",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-10-09",
+      "lastChecked": "2026-10-10",
       "changedSinceLastCheck": false
     },
     {
@@ -250,8 +250,8 @@
       "error": null,
       "fingerprint": "427cb22ad675887e",
       "firstSeen": "2026-10-09",
-      "lastChecked": "2026-10-09",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-10-10",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://www.oist.jp/admissions/research-internship/program-description",
@@ -263,7 +263,7 @@
       "error": null,
       "fingerprint": "717c6009a01f5b74",
       "firstSeen": "2026-10-06",
-      "lastChecked": "2026-10-09",
+      "lastChecked": "2026-10-10",
       "changedSinceLastCheck": false
     },
     {
@@ -276,7 +276,7 @@
       "error": null,
       "fingerprint": "2d25d9e55d28007d",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-10-09",
+      "lastChecked": "2026-10-10",
       "changedSinceLastCheck": false
     }
   ]
