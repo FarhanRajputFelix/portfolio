@@ -1,9 +1,9 @@
 {
-  "generated": "2026-10-20T10:45:16+00:00",
-  "checked": "2026-10-20",
+  "generated": "2026-10-21T10:56:50+00:00",
+  "checked": "2026-10-21",
   "total": 21,
   "broken": 1,
-  "changed": 4,
+  "changed": 5,
   "note": "A reachable link is not a current deadline. This checks that pages resolve and flags when their visible text changes; it does not read the page.",
   "sources": [
     {
@@ -14,9 +14,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "de4b06b9a48fc676",
-      "firstSeen": "2026-10-20",
-      "lastChecked": "2026-10-20",
+      "fingerprint": "5708ae7a49e536f9",
+      "firstSeen": "2026-10-21",
+      "lastChecked": "2026-10-21",
       "changedSinceLastCheck": true
     },
     {
@@ -27,9 +27,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "b5b2504318d28d1b",
-      "firstSeen": "2026-10-20",
-      "lastChecked": "2026-10-20",
+      "fingerprint": "9f16afcd41c4aec5",
+      "firstSeen": "2026-10-21",
+      "lastChecked": "2026-10-21",
       "changedSinceLastCheck": true
     },
     {
@@ -42,7 +42,7 @@
       "error": null,
       "fingerprint": "3c9f55baaa6a89fe",
       "firstSeen": "2026-10-12",
-      "lastChecked": "2026-10-20",
+      "lastChecked": "2026-10-21",
       "changedSinceLastCheck": false
     },
     {
@@ -55,7 +55,7 @@
       "error": null,
       "fingerprint": "5fac5cbd3e1cab17",
       "firstSeen": "2026-10-02",
-      "lastChecked": "2026-10-20",
+      "lastChecked": "2026-10-21",
       "changedSinceLastCheck": false
     },
     {
@@ -68,7 +68,7 @@
       "error": null,
       "fingerprint": "99a3aad3fe123219",
       "firstSeen": "2026-09-27",
-      "lastChecked": "2026-10-20",
+      "lastChecked": "2026-10-21",
       "changedSinceLastCheck": false
     },
     {
@@ -81,8 +81,8 @@
       "error": null,
       "fingerprint": "fea6add67bfeb87b",
       "firstSeen": "2026-10-20",
-      "lastChecked": "2026-10-20",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-10-21",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://ellis.eu/research/phd-postdoc",
@@ -94,7 +94,7 @@
       "error": null,
       "fingerprint": "1d103041ec0bf7be",
       "firstSeen": "2026-10-08",
-      "lastChecked": "2026-10-20",
+      "lastChecked": "2026-10-21",
       "changedSinceLastCheck": false
     },
     {
@@ -107,7 +107,7 @@
       "error": null,
       "fingerprint": "2d562b4d01db73a3",
       "firstSeen": "2026-10-08",
-      "lastChecked": "2026-10-20",
+      "lastChecked": "2026-10-21",
       "changedSinceLastCheck": false
     },
     {
@@ -120,7 +120,7 @@
       "error": null,
       "fingerprint": "7e79cf4a1c42b08c",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-10-20",
+      "lastChecked": "2026-10-21",
       "changedSinceLastCheck": false
     },
     {
@@ -133,7 +133,7 @@
       "error": null,
       "fingerprint": "c1d09d3f986aba7c",
       "firstSeen": "2026-09-11",
-      "lastChecked": "2026-10-20",
+      "lastChecked": "2026-10-21",
       "changedSinceLastCheck": false
     },
     {
@@ -144,10 +144,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "34ad41f81f141f2b",
-      "firstSeen": "2026-10-17",
-      "lastChecked": "2026-10-20",
-      "changedSinceLastCheck": false
+      "fingerprint": "3ec24924138cff32",
+      "firstSeen": "2026-10-21",
+      "lastChecked": "2026-10-21",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://mbzuai.ac.ae/study/graduate-admission-process/",
@@ -159,7 +159,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-09-09",
-      "lastChecked": "2026-10-20",
+      "lastChecked": "2026-10-21",
       "changedSinceLastCheck": false
     },
     {
@@ -172,7 +172,7 @@
       "error": null,
       "fingerprint": "b52ff298759c6e3d",
       "firstSeen": "2026-09-30",
-      "lastChecked": "2026-10-20",
+      "lastChecked": "2026-10-21",
       "changedSinceLastCheck": false
     },
     {
@@ -185,7 +185,7 @@
       "error": null,
       "fingerprint": "44fe49fe67fec76d",
       "firstSeen": "2026-10-17",
-      "lastChecked": "2026-10-20",
+      "lastChecked": "2026-10-21",
       "changedSinceLastCheck": false
     },
     {
@@ -198,7 +198,7 @@
       "error": null,
       "fingerprint": "e277ef1062e466e0",
       "firstSeen": "2026-09-16",
-      "lastChecked": "2026-10-20",
+      "lastChecked": "2026-10-21",
       "changedSinceLastCheck": false
     },
     {
@@ -211,7 +211,7 @@
       "error": null,
       "fingerprint": "1929d9d3e17b707e",
       "firstSeen": "2026-10-17",
-      "lastChecked": "2026-10-20",
+      "lastChecked": "2026-10-21",
       "changedSinceLastCheck": false
     },
     {
@@ -222,9 +222,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "5a1673c3b7180caa",
-      "firstSeen": "2026-10-20",
-      "lastChecked": "2026-10-20",
+      "fingerprint": "2f7e87af8df3103d",
+      "firstSeen": "2026-10-21",
+      "lastChecked": "2026-10-21",
       "changedSinceLastCheck": true
     },
     {
@@ -237,7 +237,7 @@
       "error": null,
       "fingerprint": "a5753de587105197",
       "firstSeen": "2026-10-14",
-      "lastChecked": "2026-10-20",
+      "lastChecked": "2026-10-21",
       "changedSinceLastCheck": false
     },
     {
@@ -248,10 +248,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "621b87406fc3f919",
-      "firstSeen": "2026-10-19",
-      "lastChecked": "2026-10-20",
-      "changedSinceLastCheck": false
+      "fingerprint": "fe7e05efd35f272a",
+      "firstSeen": "2026-10-21",
+      "lastChecked": "2026-10-21",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://www.oist.jp/admissions/research-internship/program-description",
@@ -263,7 +263,7 @@
       "error": null,
       "fingerprint": "873ddd05f0ef2aa1",
       "firstSeen": "2026-10-11",
-      "lastChecked": "2026-10-20",
+      "lastChecked": "2026-10-21",
       "changedSinceLastCheck": false
     },
     {
@@ -276,7 +276,7 @@
       "error": null,
       "fingerprint": "2d25d9e55d28007d",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-10-20",
+      "lastChecked": "2026-10-21",
       "changedSinceLastCheck": false
     }
   ]
