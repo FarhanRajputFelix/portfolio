@@ -1,9 +1,9 @@
 {
-  "generated": "2026-10-22T10:56:24+00:00",
-  "checked": "2026-10-22",
+  "generated": "2026-10-23T10:48:17+00:00",
+  "checked": "2026-10-23",
   "total": 21,
-  "broken": 4,
-  "changed": 6,
+  "broken": 3,
+  "changed": 4,
   "note": "A reachable link is not a current deadline. This checks that pages resolve and flags when their visible text changes; it does not read the page.",
   "sources": [
     {
@@ -16,8 +16,8 @@
       "error": null,
       "fingerprint": "de4b06b9a48fc676",
       "firstSeen": "2026-10-22",
-      "lastChecked": "2026-10-22",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-10-23",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://careers.cern/summer",
@@ -27,9 +27,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "035b419f50cda736",
-      "firstSeen": "2026-10-22",
-      "lastChecked": "2026-10-22",
+      "fingerprint": "1cee190148e2cdc9",
+      "firstSeen": "2026-10-23",
+      "lastChecked": "2026-10-23",
       "changedSinceLastCheck": true
     },
     {
@@ -37,12 +37,12 @@
       "usedBy": [
         "epfl-e3"
       ],
-      "status": null,
-      "ok": false,
-      "error": "RemoteDisconnected after 3 attempts",
-      "fingerprint": null,
-      "firstSeen": "2026-10-22",
-      "lastChecked": "2026-10-22",
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "3c9f55baaa6a89fe",
+      "firstSeen": "2026-10-23",
+      "lastChecked": "2026-10-23",
       "changedSinceLastCheck": false
     },
     {
@@ -50,12 +50,12 @@
       "usedBy": [
         "epfl-e3"
       ],
-      "status": null,
-      "ok": false,
-      "error": "RemoteDisconnected after 3 attempts",
-      "fingerprint": null,
-      "firstSeen": "2026-10-22",
-      "lastChecked": "2026-10-22",
+      "status": 200,
+      "ok": true,
+      "error": null,
+      "fingerprint": "5fac5cbd3e1cab17",
+      "firstSeen": "2026-10-23",
+      "lastChecked": "2026-10-23",
       "changedSinceLastCheck": false
     },
     {
@@ -68,7 +68,7 @@
       "error": null,
       "fingerprint": "99a3aad3fe123219",
       "firstSeen": "2026-09-27",
-      "lastChecked": "2026-10-22",
+      "lastChecked": "2026-10-23",
       "changedSinceLastCheck": false
     },
     {
@@ -79,9 +79,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "ea7fa7fbb818db18",
-      "firstSeen": "2026-10-22",
-      "lastChecked": "2026-10-22",
+      "fingerprint": "be8fe871edd63041",
+      "firstSeen": "2026-10-23",
+      "lastChecked": "2026-10-23",
       "changedSinceLastCheck": true
     },
     {
@@ -94,7 +94,7 @@
       "error": null,
       "fingerprint": "1d103041ec0bf7be",
       "firstSeen": "2026-10-08",
-      "lastChecked": "2026-10-22",
+      "lastChecked": "2026-10-23",
       "changedSinceLastCheck": false
     },
     {
@@ -107,7 +107,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-10-22",
-      "lastChecked": "2026-10-22",
+      "lastChecked": "2026-10-23",
       "changedSinceLastCheck": false
     },
     {
@@ -120,8 +120,8 @@
       "error": null,
       "fingerprint": "64331ee73b8b9898",
       "firstSeen": "2026-10-22",
-      "lastChecked": "2026-10-22",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-10-23",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://inf.ethz.ch/studies/summer-research-fellowship.html",
@@ -133,7 +133,7 @@
       "error": null,
       "fingerprint": "c1d09d3f986aba7c",
       "firstSeen": "2026-09-11",
-      "lastChecked": "2026-10-22",
+      "lastChecked": "2026-10-23",
       "changedSinceLastCheck": false
     },
     {
@@ -146,7 +146,7 @@
       "error": null,
       "fingerprint": "3ec24924138cff32",
       "firstSeen": "2026-10-21",
-      "lastChecked": "2026-10-22",
+      "lastChecked": "2026-10-23",
       "changedSinceLastCheck": false
     },
     {
@@ -159,7 +159,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-09-09",
-      "lastChecked": "2026-10-22",
+      "lastChecked": "2026-10-23",
       "changedSinceLastCheck": false
     },
     {
@@ -172,7 +172,7 @@
       "error": null,
       "fingerprint": "b52ff298759c6e3d",
       "firstSeen": "2026-09-30",
-      "lastChecked": "2026-10-22",
+      "lastChecked": "2026-10-23",
       "changedSinceLastCheck": false
     },
     {
@@ -185,7 +185,7 @@
       "error": null,
       "fingerprint": "44fe49fe67fec76d",
       "firstSeen": "2026-10-17",
-      "lastChecked": "2026-10-22",
+      "lastChecked": "2026-10-23",
       "changedSinceLastCheck": false
     },
     {
@@ -198,7 +198,7 @@
       "error": null,
       "fingerprint": "e277ef1062e466e0",
       "firstSeen": "2026-09-16",
-      "lastChecked": "2026-10-22",
+      "lastChecked": "2026-10-23",
       "changedSinceLastCheck": false
     },
     {
@@ -206,12 +206,12 @@
       "usedBy": [
         "job-source"
       ],
-      "status": 200,
-      "ok": true,
-      "error": null,
-      "fingerprint": "1929d9d3e17b707e",
-      "firstSeen": "2026-10-17",
-      "lastChecked": "2026-10-22",
+      "status": 403,
+      "ok": false,
+      "error": "HTTP 403",
+      "fingerprint": null,
+      "firstSeen": "2026-10-23",
+      "lastChecked": "2026-10-23",
       "changedSinceLastCheck": false
     },
     {
@@ -222,9 +222,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "af000fd736f44272",
-      "firstSeen": "2026-10-22",
-      "lastChecked": "2026-10-22",
+      "fingerprint": "b8193e776a60b15c",
+      "firstSeen": "2026-10-23",
+      "lastChecked": "2026-10-23",
       "changedSinceLastCheck": true
     },
     {
@@ -237,7 +237,7 @@
       "error": null,
       "fingerprint": "a5753de587105197",
       "firstSeen": "2026-10-14",
-      "lastChecked": "2026-10-22",
+      "lastChecked": "2026-10-23",
       "changedSinceLastCheck": false
     },
     {
@@ -250,7 +250,7 @@
       "error": null,
       "fingerprint": "fe7e05efd35f272a",
       "firstSeen": "2026-10-21",
-      "lastChecked": "2026-10-22",
+      "lastChecked": "2026-10-23",
       "changedSinceLastCheck": false
     },
     {
@@ -261,9 +261,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "e4111fcf70e09bc8",
-      "firstSeen": "2026-10-22",
-      "lastChecked": "2026-10-22",
+      "fingerprint": "93360a4c1c95ce90",
+      "firstSeen": "2026-10-23",
+      "lastChecked": "2026-10-23",
       "changedSinceLastCheck": true
     },
     {
@@ -276,7 +276,7 @@
       "error": null,
       "fingerprint": "2d25d9e55d28007d",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-10-22",
+      "lastChecked": "2026-10-23",
       "changedSinceLastCheck": false
     }
   ]
