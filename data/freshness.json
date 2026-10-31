@@ -1,9 +1,9 @@
 {
-  "generated": "2026-10-30T11:56:17+00:00",
-  "checked": "2026-10-30",
+  "generated": "2026-10-31T11:29:35+00:00",
+  "checked": "2026-10-31",
   "total": 21,
   "broken": 2,
-  "changed": 2,
+  "changed": 3,
   "note": "A reachable link is not a current deadline. This checks that pages resolve and flags when their visible text changes; it does not read the page.",
   "sources": [
     {
@@ -16,7 +16,7 @@
       "error": null,
       "fingerprint": "de4b06b9a48fc676",
       "firstSeen": "2026-10-29",
-      "lastChecked": "2026-10-30",
+      "lastChecked": "2026-10-31",
       "changedSinceLastCheck": false
     },
     {
@@ -29,8 +29,8 @@
       "error": null,
       "fingerprint": "306deb69cff2c7b0",
       "firstSeen": "2026-10-30",
-      "lastChecked": "2026-10-30",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-10-31",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://eee.epfl.ch/",
@@ -42,7 +42,7 @@
       "error": null,
       "fingerprint": "3c9f55baaa6a89fe",
       "firstSeen": "2026-10-23",
-      "lastChecked": "2026-10-30",
+      "lastChecked": "2026-10-31",
       "changedSinceLastCheck": false
     },
     {
@@ -55,7 +55,7 @@
       "error": null,
       "fingerprint": "5fac5cbd3e1cab17",
       "firstSeen": "2026-10-23",
-      "lastChecked": "2026-10-30",
+      "lastChecked": "2026-10-31",
       "changedSinceLastCheck": false
     },
     {
@@ -68,7 +68,7 @@
       "error": null,
       "fingerprint": "99a3aad3fe123219",
       "firstSeen": "2026-09-27",
-      "lastChecked": "2026-10-30",
+      "lastChecked": "2026-10-31",
       "changedSinceLastCheck": false
     },
     {
@@ -79,9 +79,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "a641883a94638962",
-      "firstSeen": "2026-10-30",
-      "lastChecked": "2026-10-30",
+      "fingerprint": "e302a9a2fe3d527e",
+      "firstSeen": "2026-10-31",
+      "lastChecked": "2026-10-31",
       "changedSinceLastCheck": true
     },
     {
@@ -92,10 +92,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "1d103041ec0bf7be",
-      "firstSeen": "2026-10-28",
-      "lastChecked": "2026-10-30",
-      "changedSinceLastCheck": false
+      "fingerprint": "1253c6730d5c236d",
+      "firstSeen": "2026-10-31",
+      "lastChecked": "2026-10-31",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://euraxess.ec.europa.eu/jobs",
@@ -107,7 +107,7 @@
       "error": null,
       "fingerprint": "2d562b4d01db73a3",
       "firstSeen": "2026-10-30",
-      "lastChecked": "2026-10-30",
+      "lastChecked": "2026-10-31",
       "changedSinceLastCheck": false
     },
     {
@@ -118,10 +118,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "64331ee73b8b9898",
-      "firstSeen": "2026-10-22",
-      "lastChecked": "2026-10-30",
-      "changedSinceLastCheck": false
+      "fingerprint": "0ddc4edd2e32b193",
+      "firstSeen": "2026-10-31",
+      "lastChecked": "2026-10-31",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://inf.ethz.ch/studies/summer-research-fellowship.html",
@@ -133,7 +133,7 @@
       "error": null,
       "fingerprint": "c1d09d3f986aba7c",
       "firstSeen": "2026-09-11",
-      "lastChecked": "2026-10-30",
+      "lastChecked": "2026-10-31",
       "changedSinceLastCheck": false
     },
     {
@@ -146,7 +146,7 @@
       "error": null,
       "fingerprint": "3ec24924138cff32",
       "firstSeen": "2026-10-21",
-      "lastChecked": "2026-10-30",
+      "lastChecked": "2026-10-31",
       "changedSinceLastCheck": false
     },
     {
@@ -159,7 +159,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-09-09",
-      "lastChecked": "2026-10-30",
+      "lastChecked": "2026-10-31",
       "changedSinceLastCheck": false
     },
     {
@@ -172,7 +172,7 @@
       "error": null,
       "fingerprint": "b52ff298759c6e3d",
       "firstSeen": "2026-09-30",
-      "lastChecked": "2026-10-30",
+      "lastChecked": "2026-10-31",
       "changedSinceLastCheck": false
     },
     {
@@ -185,7 +185,7 @@
       "error": null,
       "fingerprint": "44fe49fe67fec76d",
       "firstSeen": "2026-10-17",
-      "lastChecked": "2026-10-30",
+      "lastChecked": "2026-10-31",
       "changedSinceLastCheck": false
     },
     {
@@ -198,7 +198,7 @@
       "error": null,
       "fingerprint": "e277ef1062e466e0",
       "firstSeen": "2026-09-16",
-      "lastChecked": "2026-10-30",
+      "lastChecked": "2026-10-31",
       "changedSinceLastCheck": false
     },
     {
@@ -211,7 +211,7 @@
       "error": null,
       "fingerprint": "1929d9d3e17b707e",
       "firstSeen": "2026-10-27",
-      "lastChecked": "2026-10-30",
+      "lastChecked": "2026-10-31",
       "changedSinceLastCheck": false
     },
     {
@@ -224,7 +224,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-10-26",
-      "lastChecked": "2026-10-30",
+      "lastChecked": "2026-10-31",
       "changedSinceLastCheck": false
     },
     {
@@ -237,7 +237,7 @@
       "error": null,
       "fingerprint": "a5753de587105197",
       "firstSeen": "2026-10-14",
-      "lastChecked": "2026-10-30",
+      "lastChecked": "2026-10-31",
       "changedSinceLastCheck": false
     },
     {
@@ -250,7 +250,7 @@
       "error": null,
       "fingerprint": "fe7e05efd35f272a",
       "firstSeen": "2026-10-21",
-      "lastChecked": "2026-10-30",
+      "lastChecked": "2026-10-31",
       "changedSinceLastCheck": false
     },
     {
@@ -263,7 +263,7 @@
       "error": null,
       "fingerprint": "a55a2bf26791077e",
       "firstSeen": "2026-10-29",
-      "lastChecked": "2026-10-30",
+      "lastChecked": "2026-10-31",
       "changedSinceLastCheck": false
     },
     {
@@ -276,7 +276,7 @@
       "error": null,
       "fingerprint": "2d25d9e55d28007d",
       "firstSeen": "2026-08-09",
-      "lastChecked": "2026-10-30",
+      "lastChecked": "2026-10-31",
       "changedSinceLastCheck": false
     }
   ]
