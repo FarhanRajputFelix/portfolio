@@ -1,9 +1,9 @@
 {
-  "generated": "2026-11-02T14:23:47+00:00",
-  "checked": "2026-11-02",
+  "generated": "2026-11-03T13:23:06+00:00",
+  "checked": "2026-11-03",
   "total": 21,
   "broken": 2,
-  "changed": 4,
+  "changed": 2,
   "note": "A reachable link is not a current deadline. This checks that pages resolve and flags when their visible text changes; it does not read the page.",
   "sources": [
     {
@@ -16,7 +16,7 @@
       "error": null,
       "fingerprint": "de4b06b9a48fc676",
       "firstSeen": "2026-10-29",
-      "lastChecked": "2026-11-02",
+      "lastChecked": "2026-11-03",
       "changedSinceLastCheck": false
     },
     {
@@ -27,10 +27,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "306deb69cff2c7b0",
-      "firstSeen": "2026-10-30",
-      "lastChecked": "2026-11-02",
-      "changedSinceLastCheck": false
+      "fingerprint": "55aa8941a9081a2d",
+      "firstSeen": "2026-11-03",
+      "lastChecked": "2026-11-03",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://eee.epfl.ch/",
@@ -42,8 +42,8 @@
       "error": null,
       "fingerprint": "77666841739503e8",
       "firstSeen": "2026-11-02",
-      "lastChecked": "2026-11-02",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-11-03",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://eee.epfl.ch/program-at-a-glance/",
@@ -55,7 +55,7 @@
       "error": null,
       "fingerprint": "5fac5cbd3e1cab17",
       "firstSeen": "2026-10-23",
-      "lastChecked": "2026-11-02",
+      "lastChecked": "2026-11-03",
       "changedSinceLastCheck": false
     },
     {
@@ -68,7 +68,7 @@
       "error": null,
       "fingerprint": "99a3aad3fe123219",
       "firstSeen": "2026-09-27",
-      "lastChecked": "2026-11-02",
+      "lastChecked": "2026-11-03",
       "changedSinceLastCheck": false
     },
     {
@@ -81,8 +81,8 @@
       "error": null,
       "fingerprint": "413420fbca0611b1",
       "firstSeen": "2026-11-02",
-      "lastChecked": "2026-11-02",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-11-03",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://ellis.eu/research/phd-postdoc",
@@ -94,7 +94,7 @@
       "error": null,
       "fingerprint": "1253c6730d5c236d",
       "firstSeen": "2026-10-31",
-      "lastChecked": "2026-11-02",
+      "lastChecked": "2026-11-03",
       "changedSinceLastCheck": false
     },
     {
@@ -105,10 +105,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "2d562b4d01db73a3",
-      "firstSeen": "2026-10-30",
-      "lastChecked": "2026-11-02",
-      "changedSinceLastCheck": false
+      "fingerprint": "e3cc4bba5c8906c2",
+      "firstSeen": "2026-11-03",
+      "lastChecked": "2026-11-03",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://home.cern/summer-student-programme",
@@ -120,7 +120,7 @@
       "error": null,
       "fingerprint": "0ddc4edd2e32b193",
       "firstSeen": "2026-10-31",
-      "lastChecked": "2026-11-02",
+      "lastChecked": "2026-11-03",
       "changedSinceLastCheck": false
     },
     {
@@ -133,7 +133,7 @@
       "error": null,
       "fingerprint": "c1d09d3f986aba7c",
       "firstSeen": "2026-09-11",
-      "lastChecked": "2026-11-02",
+      "lastChecked": "2026-11-03",
       "changedSinceLastCheck": false
     },
     {
@@ -146,7 +146,7 @@
       "error": null,
       "fingerprint": "3ec24924138cff32",
       "firstSeen": "2026-10-21",
-      "lastChecked": "2026-11-02",
+      "lastChecked": "2026-11-03",
       "changedSinceLastCheck": false
     },
     {
@@ -159,7 +159,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-09-09",
-      "lastChecked": "2026-11-02",
+      "lastChecked": "2026-11-03",
       "changedSinceLastCheck": false
     },
     {
@@ -172,7 +172,7 @@
       "error": null,
       "fingerprint": "b52ff298759c6e3d",
       "firstSeen": "2026-09-30",
-      "lastChecked": "2026-11-02",
+      "lastChecked": "2026-11-03",
       "changedSinceLastCheck": false
     },
     {
@@ -185,8 +185,8 @@
       "error": null,
       "fingerprint": "64e222980c346d01",
       "firstSeen": "2026-11-02",
-      "lastChecked": "2026-11-02",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-11-03",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://tigp.sinica.edu.tw/pages/3127",
@@ -198,7 +198,7 @@
       "error": null,
       "fingerprint": "e277ef1062e466e0",
       "firstSeen": "2026-09-16",
-      "lastChecked": "2026-11-02",
+      "lastChecked": "2026-11-03",
       "changedSinceLastCheck": false
     },
     {
@@ -211,7 +211,7 @@
       "error": null,
       "fingerprint": "1929d9d3e17b707e",
       "firstSeen": "2026-10-27",
-      "lastChecked": "2026-11-02",
+      "lastChecked": "2026-11-03",
       "changedSinceLastCheck": false
     },
     {
@@ -224,7 +224,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-10-26",
-      "lastChecked": "2026-11-02",
+      "lastChecked": "2026-11-03",
       "changedSinceLastCheck": false
     },
     {
@@ -237,7 +237,7 @@
       "error": null,
       "fingerprint": "a5753de587105197",
       "firstSeen": "2026-10-14",
-      "lastChecked": "2026-11-02",
+      "lastChecked": "2026-11-03",
       "changedSinceLastCheck": false
     },
     {
@@ -250,7 +250,7 @@
       "error": null,
       "fingerprint": "fe7e05efd35f272a",
       "firstSeen": "2026-10-21",
-      "lastChecked": "2026-11-02",
+      "lastChecked": "2026-11-03",
       "changedSinceLastCheck": false
     },
     {
@@ -263,7 +263,7 @@
       "error": null,
       "fingerprint": "a55a2bf26791077e",
       "firstSeen": "2026-10-29",
-      "lastChecked": "2026-11-02",
+      "lastChecked": "2026-11-03",
       "changedSinceLastCheck": false
     },
     {
@@ -276,8 +276,8 @@
       "error": null,
       "fingerprint": "2715c3d3b6fccb72",
       "firstSeen": "2026-11-02",
-      "lastChecked": "2026-11-02",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-11-03",
+      "changedSinceLastCheck": false
     }
   ]
 }
