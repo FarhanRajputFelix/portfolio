@@ -84,7 +84,6 @@ TEMPLATE = """<!DOCTYPE html>
     <a href="agent.html">Agent spec</a>
     <a href="crit.html">The crit</a>
     <a href="break.html">Where it breaks</a>
-    <a href="ugly.html">Still ugly</a>
   </nav>
 
   <header class="top">
@@ -162,7 +161,7 @@ TEMPLATE = """<!DOCTYPE html>
 
   <footer>
     <span>Farhan Bashir · Karachi, Pakistan</span>
-    <span><a href="./">← Portfolio</a> · <a href="ugly.html">Still ugly</a></span>
+    <span><a href="./">← Portfolio</a></span>
   </footer>
 
 </div>
@@ -217,8 +216,8 @@ def main():
         s = io.open(f, encoding="utf-8").read()
         if path in s:
             continue
-        s2 = s.replace('<a href="ugly.html">Still ugly</a>',
-                       f"{link} · <a href=\"ugly.html\">Still ugly</a>", 1)
+        s2 = s.replace('<a href="./">← Portfolio</a>',
+                       f'<a href="./">← Portfolio</a> · {link}', 1)
         if s2 != s:
             io.open(f, "w", encoding="utf-8", newline="").write(s2)
             print(f"  footer   {f}")

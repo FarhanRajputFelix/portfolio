@@ -23,7 +23,7 @@ farhanrajputfelix.github.io/portfolio or backed by a credential ID below.
 | LinkedIn | https://www.linkedin.com/in/farhan-rajput/ |
 | GitHub | https://github.com/FarhanRajputFelix |
 | Portfolio | https://FarhanRajputFelix.github.io/portfolio/ |
-| Current title | Computer Science undergraduate · AI Intern |
+| Current title | Computer Science undergraduate · ML intern (FlyRank AI, ended 2 Sep 2026) |
 
 **Never write his name as "Farhan Muhammad Bashir" or "Farhan Bashir" on a CV, application form or anything an employer may check against ID.** His legal name is the single name Farhan. Treating a father's name as a surname is a common shortcut and it is still wrong on a document that gets verified. The display brand on the website is a separate thing and may stay.
 
@@ -50,7 +50,7 @@ Coursework and projects across AI, ML, data science and software engineering.
 
 ## 3. Experience
 
-**Artificial Intelligence Intern — FlyRank AI** · July 2026 — present · Remote
+**Machine Learning Intern — FlyRank AI** · 1 July 2026 — 2 September 2026 (ended) · Remote
 General AI Fluency track. AI learning pathways, professional development and applied AI projects;
 modern AI workflows and real-world applications. Completed the Anthropic AI Fluency certification
 series during the internship.

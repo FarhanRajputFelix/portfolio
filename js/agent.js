@@ -44,7 +44,7 @@
       phrases: ['where do you work', 'your experience', 'current role', 'what do you do',
                 'work history', 'work experience'],
       answer:
-        "Current role — Artificial Intelligence Intern at FlyRank AI (July 2026 – present, remote).\n\n" +
+        "Role — Machine Learning Intern at FlyRank AI (July – September 2026, remote; internship ended 2 September 2026).\n\n" +
         "I'm on the General AI Fluency track, working on AI learning pathways, professional development " +
         "and applied AI projects, and I've completed the Anthropic AI Fluency certification series.\n\n" +
         "I also competed in the Google AI Seekho Antigravity Hackathon, where I built Crisis " +
