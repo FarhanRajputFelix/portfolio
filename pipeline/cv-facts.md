@@ -55,12 +55,17 @@ General AI Fluency track. AI learning pathways, professional development and app
 modern AI workflows and real-world applications. Completed the Anthropic AI Fluency certification
 series during the internship.
 
-**Antigravity Hackathon — Google AI Seekho** · 2026
-Team-built **SAHARA AI**, "Pakistan's Agentic Urban Crisis Intelligence & Response System" —
-Challenge 3 submission. A 6-agent sequential pipeline (verify → severity → plan → simulate) with
-conditional routing and a fallback-recovery agent when verification confidence is low. FastAPI,
-Flutter/Dart, gemini-1.5-flash, Google ADK v1.34+, Firebase, Docker. Repo: `Anti-gravity-Hackathon`.
-**Under active development — no deployed instance.**
+**Antigravity Hackathon (SAHARA AI) — REMOVED from the site and CV at Farhan's instruction
+(13 Nov 2026). Do not surface it in applications.**
+
+**SAANS — explainable smog forecast for five Pakistani cities** · Sept 2026 — present ·
+[live app](https://saansgit-uhebsjzld3rfqxupnygsop.streamlit.app/) ·
+[repo](https://github.com/FarhanRajputFelix/saans)
+Forecasts the next 24 and 48 hours of PM2.5 for Lahore, Faisalabad, Multan, Islamabad and Karachi,
+explained with SHAP and turned into English and Urdu advice. About 2.0 million raw records (OpenAQ,
+NASA FIRMS, ERA5, GDELT) cleaned in nine logged steps into a 266,760-row hourly table. Trained on
+2020-2023 seasons, tested on the 2024 and 2025 smog seasons. Found and fixed a sensor-correction step
+that created a false 40% drop in Lahore. Python, SHAP, Streamlit, pandas, parquet, Jupyter.
 
 **Retail Sales Manager — Bashir Communication** · Karachi · 2019 – 2021
 **Deliberately excluded from the CV and from outreach, at Farhan's instruction (8 Aug 2026).** It was
@@ -118,7 +123,7 @@ Taken from the CV's own skills section, which is narrower than the website's lis
 scikit-learn · **PyTorch** · model evaluation and optimisation · principles of AI · NLP
 **Cloud & infrastructure:** AWS · CDN · scalable infrastructure · cloud security and compliance ·
 cloud architecture design
-**Backend & web:** Laravel · FastAPI · MySQL · REST APIs · Laravel Sanctum · AJAX · Bootstrap 5
+**Backend & web:** FastAPI · MySQL · REST APIs · AJAX · Bootstrap 5 · Streamlit (Laravel removed from the CV at Farhan's instruction, 13 Nov 2026)
 **Also evidenced by projects:** NumPy · Pandas · Docker · Node.js · Three.js · HTML/JS/CSS
 **Other:** penetration testing · cyber security · project management · MS Office · configuration
 management · ICT network routing · operating systems

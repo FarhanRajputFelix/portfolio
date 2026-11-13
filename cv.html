@@ -172,19 +172,28 @@
       </ul>
     </div>
 
-    <div class="entry">
-      <div class="role">
-        <h3>Antigravity Hackathon — Google AI Seekho</h3>
-        <span class="when">2026</span>
-      </div>
-      <ul><li>Team-built "Crisis Intelligence", an emergency-response tool combining AI agents, live
-        maps and a Python backend, under hackathon time constraints.</li></ul>
-    </div>
   </section>
 
   <!-- ============ PROJECTS ============ -->
   <section>
     <div class="sec-head"><span class="n">03</span><h2>Projects</h2></div>
+
+    <div class="entry">
+      <div class="role">
+        <h3>SAANS — explainable smog forecast for five Pakistani cities</h3>
+        <span class="when">Sept 2026 – present · <a href="https://saansgit-uhebsjzld3rfqxupnygsop.streamlit.app/">live app</a> · <a href="https://github.com/FarhanRajputFelix/saans">repo</a></span>
+      </div>
+      <ul>
+        <li>Forecasts the next 24 and 48 hours of PM2.5 for Lahore, Faisalabad, Multan, Islamabad and
+          Karachi, explained with SHAP and turned into English and Urdu advice.</li>
+        <li>Collected about <strong>2.0 million raw records</strong> (OpenAQ sensors, NASA FIRMS satellite
+          fire detections, ERA5 weather, GDELT news); cleaned them in nine logged steps into a
+          <strong>266,760-row</strong> hourly table.</li>
+        <li>Trained on the 2020&ndash;2023 seasons and tested on the 2024 and 2025 smog seasons. Found and
+          fixed a sensor-correction step that created a false 40% drop in Lahore.</li>
+        <li>Python, SHAP, Streamlit, pandas, parquet, Jupyter.</li>
+      </ul>
+    </div>
 
     <div class="entry">
       <div class="role">
@@ -269,11 +278,11 @@
     <div class="sec-head"><span class="n">04</span><h2>Technical skills</h2></div>
     <dl class="kv">
       <dt>Languages</dt><dd>Python · TypeScript · JavaScript · C/C++ · Java · Kotlin · SQL · PHP</dd>
-      <dt>ML / AI</dt><dd>scikit-learn · ensemble methods (Random Forest, gradient boosting) · model
+      <dt>ML / AI</dt><dd>scikit-learn · SHAP explainability · ensemble methods (Random Forest, gradient boosting) · model
         evaluation · multi-agent systems · ReAct-style tool-calling loops · LLM integration
         (Groq, Gemini) · Model Context Protocol · responsible &amp; explainable AI</dd>
-      <dt>Web &amp; backend</dt><dd>Next.js · React · Node.js · FastAPI · Laravel · REST APIs ·
-        Three.js · Gradio</dd>
+      <dt>Web &amp; backend</dt><dd>Next.js · React · Node.js · FastAPI · REST APIs ·
+        Three.js · Gradio · Streamlit</dd>
       <dt>Data &amp; infra</dt><dd>PostgreSQL (Neon) · MySQL · Prisma · Docker · AWS · Vercel ·
         GitHub Actions · GitHub Pages</dd>
       <dt>Tools</dt><dd>Git · Linux · VS Code · Jupyter · Postman · Figma</dd>

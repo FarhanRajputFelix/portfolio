@@ -22,7 +22,7 @@
                 'introduce yourself', 'about farhan', 'your background'],
       answer:
         "I'm Farhan Bashir — a Computer Science undergraduate at SZABIST University in Karachi, Pakistan, " +
-        "and currently an Artificial Intelligence Intern at FlyRank AI on the General AI Fluency track.\n\n" +
+        "and was a Machine Learning Intern at FlyRank AI (July – September 2026).\n\n" +
         "I'm passionate about AI, Machine Learning, Agentic AI and Data Science, and I build intelligent " +
         "systems for education, healthcare, crisis management and sustainability."
     },
@@ -45,10 +45,8 @@
                 'work history', 'work experience'],
       answer:
         "Role — Machine Learning Intern at FlyRank AI (July – September 2026, remote; internship ended 2 September 2026).\n\n" +
-        "I'm on the General AI Fluency track, working on AI learning pathways, professional development " +
-        "and applied AI projects, and I've completed the Anthropic AI Fluency certification series.\n\n" +
-        "I also competed in the Google AI Seekho Antigravity Hackathon, where I built Crisis " +
-        "Intelligence — an emergency-response tool driven by AI agents."
+        "I was on the General AI Fluency track, working on AI learning pathways, professional development " +
+        "and applied AI projects, and I completed the Anthropic AI Fluency certification series."
     },
     {
       id: 'skills',
@@ -58,7 +56,7 @@
       phrases: ['what are your skills', 'tech stack', 'what can you do', 'what languages'],
       answer:
         "Languages: Python, C++, Java, JavaScript, PHP, SQL, HTML, CSS, Dart\n\n" +
-        "Frameworks: TensorFlow, Scikit-learn, Pandas, NumPy, OpenCV, FastAPI, Flutter, Laravel, " +
+        "Frameworks: TensorFlow, Scikit-learn, Pandas, NumPy, OpenCV, FastAPI, Flutter, SHAP, Streamlit, " +
         "Node.js / Express.js\n\n" +
         "Databases: PostgreSQL, Neon PostgreSQL, MySQL, Firebase, Redis\n\n" +
         "Cloud & DevOps: AWS, Docker, GitHub Actions, Firebase\n\n" +
@@ -88,9 +86,8 @@
         "2. Self-Regulating AI System — research prototype on adaptive agents that detect drift and " +
         "self-correct using entropy-based regulation.\n\n" +
         "3. Air Quality Prediction — Random Forest AQI model, R² ≈ 0.97.\n\n" +
-        "4. Crisis Intelligence — Google AI Seekho Antigravity Hackathon build for emergency response " +
-        "using AI agents, maps, Flutter, Firebase and a Python backend.\n\n" +
-        "5. Laravel Canteen Management System, a Job Portal, and a Contact Management System.\n\n" +
+        "4. SAANS — explainable PM2.5 smog forecast for five Pakistani cities (SHAP, Streamlit, pandas), " +
+        "trained on about 2.0 million raw records and tested on the 2024 and 2025 smog seasons.\n\n" +
         "Ask me about any one of them for detail."
     },
     {
@@ -124,14 +121,20 @@
         "It's my main hands-on exploration of Agentic AI and adaptive systems."
     },
     {
-      id: 'hackathon',
-      keys: ['hackathon', 'crisis', 'emergency', 'seekho', 'antigravity', 'google', 'competition',
-             'disaster', 'maps'],
-      phrases: ['crisis intelligence', 'hackathon project'],
+      id: 'saans',
+      keys: ['saans', 'smog', 'pm2.5', 'pm25', 'forecast', 'forecasting', 'shap', 'streamlit',
+             'lahore', 'urdu', 'explainable'],
+      phrases: ['tell me about saans', 'what is saans', 'smog forecast'],
       answer:
-        "Crisis Intelligence was built for the Google AI Seekho Antigravity Hackathon. It focuses on " +
-        "emergency response, combining AI agents, live maps, a Flutter front end, Firebase and a " +
-        "Python backend."
+        "SAANS is an explainable smog forecast for five Pakistani cities — Lahore, Faisalabad, Multan, " +
+        "Islamabad and Karachi. It forecasts the next 24 and 48 hours of PM2.5, explains each forecast " +
+        "with SHAP, and turns it into English and Urdu advice.\n\n" +
+        "Data: about 2.0 million raw records (OpenAQ sensors, NASA FIRMS fire detections, ERA5 weather, " +
+        "GDELT news), cleaned in nine logged steps into a 266,760-row hourly table. Trained on the " +
+        "2020-2023 seasons and tested on the 2024 and 2025 smog seasons. I also found and fixed a " +
+        "sensor-correction step that created a false 40% drop in Lahore.\n\n" +
+        "Live app: https://saansgit-uhebsjzld3rfqxupnygsop.streamlit.app/ · " +
+        "Repo: https://github.com/FarhanRajputFelix/saans"
     },
     {
       id: 'research',
@@ -199,7 +202,7 @@
       phrases: ['your achievements', 'any awards'],
       answer:
         "Achievements: Gold Medalist at TCF School, two Open Doors High Achievement Diplomas " +
-        "(Applied Mathematics & AI, and Engineering & Technology), AI hackathon participant, " +
+        "(Applied Mathematics & AI, and Engineering & Technology), " +
         "research proposal author, Machine Learning project developer and active open-source learner."
     },
     {
@@ -209,8 +212,7 @@
       phrases: ['leadership skills', 'leadership experience', 'lead a team', 'work in a team'],
       answer:
         "Leadership: I captained my cricket team, and I lead collaborative projects — including " +
-        "hackathon teamwork at the Google AI Seekho Antigravity Hackathon, where we built Crisis " +
-        "Intelligence under time pressure.\n\n" +
+        "my capstone and research prototypes.\n\n" +
         "I'm also the kind of teammate who documents and reviews: software quality assurance and " +
         "code review are among my top listed skills, and I hold Anthropic's Teaching the AI Fluency " +
         "Framework certificate, which is about guiding other people through AI workflows."
@@ -271,7 +273,7 @@
       answer:
         "What I'd point to: I build full systems, not just notebooks — KIDO spans Flutter, FastAPI, " +
         "PostgreSQL and Redis, and my AQI model went from raw environmental data to R² ≈ 0.97.\n\n" +
-        "I also ship under pressure (Google AI Seekho Antigravity Hackathon), lead teams (cricket team " +
+        "I also lead teams (cricket team " +
         "captain, collaborative project lead), and keep a steady record of certifications and research " +
         "proposals alongside full-time coursework. Persistence is the through-line."
     }
@@ -308,7 +310,7 @@
     'What projects have you built?',
     'Tell me about the Air Quality model',
     'What is the Self-Regulating AI System?',
-    'Tell me about the hackathon project',
+    'Tell me about SAANS',
     'Do you know AWS and cloud?',
     'What is your career goal?',
     'Any plans for graduate study?',
@@ -381,7 +383,7 @@
     if (ranked[0].s < 3) {
       return "I don't have that in Farhan's knowledge base, so I won't guess.\n\n" +
              "Here's what I can cover: his background and education, AI/ML skills and tech stack, " +
-             "projects (KIDO, Air Quality Prediction, Self-Regulating AI, Crisis Intelligence), " +
+             "projects (KIDO, Air Quality Prediction, Self-Regulating AI, SAANS), " +
              "research interests, certifications, achievements, and contact details.\n\n" +
              "For anything else, email him directly: farhanmuhammadbashir@gmail.com";
     }
