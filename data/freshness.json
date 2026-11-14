@@ -1,9 +1,9 @@
 {
-  "generated": "2026-11-13T13:43:33+00:00",
-  "checked": "2026-11-13",
+  "generated": "2026-11-14T12:47:56+00:00",
+  "checked": "2026-11-14",
   "total": 21,
   "broken": 3,
-  "changed": 6,
+  "changed": 3,
   "note": "A reachable link is not a current deadline. This checks that pages resolve and flags when their visible text changes; it does not read the page.",
   "sources": [
     {
@@ -14,9 +14,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "dfd5a664fcd27eae",
-      "firstSeen": "2026-11-13",
-      "lastChecked": "2026-11-13",
+      "fingerprint": "de4b06b9a48fc676",
+      "firstSeen": "2026-11-14",
+      "lastChecked": "2026-11-14",
       "changedSinceLastCheck": true
     },
     {
@@ -27,10 +27,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "5382ed0857272428",
-      "firstSeen": "2026-11-12",
-      "lastChecked": "2026-11-13",
-      "changedSinceLastCheck": false
+      "fingerprint": "15651e736dfafcca",
+      "firstSeen": "2026-11-14",
+      "lastChecked": "2026-11-14",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://eee.epfl.ch/",
@@ -42,7 +42,7 @@
       "error": null,
       "fingerprint": "77666841739503e8",
       "firstSeen": "2026-11-02",
-      "lastChecked": "2026-11-13",
+      "lastChecked": "2026-11-14",
       "changedSinceLastCheck": false
     },
     {
@@ -55,7 +55,7 @@
       "error": null,
       "fingerprint": "5fac5cbd3e1cab17",
       "firstSeen": "2026-10-23",
-      "lastChecked": "2026-11-13",
+      "lastChecked": "2026-11-14",
       "changedSinceLastCheck": false
     },
     {
@@ -68,8 +68,8 @@
       "error": null,
       "fingerprint": "07ade9c2b6ce5050",
       "firstSeen": "2026-11-13",
-      "lastChecked": "2026-11-13",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-11-14",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://ellis.eu/research/jobs",
@@ -79,9 +79,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "030f18dc5b0a4596",
-      "firstSeen": "2026-11-13",
-      "lastChecked": "2026-11-13",
+      "fingerprint": "91c967f69c75571c",
+      "firstSeen": "2026-11-14",
+      "lastChecked": "2026-11-14",
       "changedSinceLastCheck": true
     },
     {
@@ -94,8 +94,8 @@
       "error": null,
       "fingerprint": "c9ba4633088d0f2c",
       "firstSeen": "2026-11-13",
-      "lastChecked": "2026-11-13",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-11-14",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://euraxess.ec.europa.eu/jobs",
@@ -107,7 +107,7 @@
       "error": null,
       "fingerprint": "2d562b4d01db73a3",
       "firstSeen": "2026-11-04",
-      "lastChecked": "2026-11-13",
+      "lastChecked": "2026-11-14",
       "changedSinceLastCheck": false
     },
     {
@@ -120,7 +120,7 @@
       "error": null,
       "fingerprint": "0ddc4edd2e32b193",
       "firstSeen": "2026-10-31",
-      "lastChecked": "2026-11-13",
+      "lastChecked": "2026-11-14",
       "changedSinceLastCheck": false
     },
     {
@@ -133,7 +133,7 @@
       "error": null,
       "fingerprint": "c1d09d3f986aba7c",
       "firstSeen": "2026-09-11",
-      "lastChecked": "2026-11-13",
+      "lastChecked": "2026-11-14",
       "changedSinceLastCheck": false
     },
     {
@@ -146,7 +146,7 @@
       "error": null,
       "fingerprint": "9ca3292162983b5c",
       "firstSeen": "2026-11-05",
-      "lastChecked": "2026-11-13",
+      "lastChecked": "2026-11-14",
       "changedSinceLastCheck": false
     },
     {
@@ -159,7 +159,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-09-09",
-      "lastChecked": "2026-11-13",
+      "lastChecked": "2026-11-14",
       "changedSinceLastCheck": false
     },
     {
@@ -172,7 +172,7 @@
       "error": null,
       "fingerprint": "b52ff298759c6e3d",
       "firstSeen": "2026-09-30",
-      "lastChecked": "2026-11-13",
+      "lastChecked": "2026-11-14",
       "changedSinceLastCheck": false
     },
     {
@@ -185,8 +185,8 @@
       "error": null,
       "fingerprint": "3e42334884a74cb5",
       "firstSeen": "2026-11-13",
-      "lastChecked": "2026-11-13",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-11-14",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://tigp.sinica.edu.tw/pages/3127",
@@ -198,7 +198,7 @@
       "error": null,
       "fingerprint": "e277ef1062e466e0",
       "firstSeen": "2026-09-16",
-      "lastChecked": "2026-11-13",
+      "lastChecked": "2026-11-14",
       "changedSinceLastCheck": false
     },
     {
@@ -211,7 +211,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-11-13",
-      "lastChecked": "2026-11-13",
+      "lastChecked": "2026-11-14",
       "changedSinceLastCheck": false
     },
     {
@@ -224,7 +224,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-10-26",
-      "lastChecked": "2026-11-13",
+      "lastChecked": "2026-11-14",
       "changedSinceLastCheck": false
     },
     {
@@ -237,7 +237,7 @@
       "error": null,
       "fingerprint": "a5753de587105197",
       "firstSeen": "2026-10-14",
-      "lastChecked": "2026-11-13",
+      "lastChecked": "2026-11-14",
       "changedSinceLastCheck": false
     },
     {
@@ -250,7 +250,7 @@
       "error": null,
       "fingerprint": "717c424e8dd485f1",
       "firstSeen": "2026-11-04",
-      "lastChecked": "2026-11-13",
+      "lastChecked": "2026-11-14",
       "changedSinceLastCheck": false
     },
     {
@@ -263,8 +263,8 @@
       "error": null,
       "fingerprint": "06c2fd0212a2dd83",
       "firstSeen": "2026-11-13",
-      "lastChecked": "2026-11-13",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-11-14",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://www.s.u-tokyo.ac.jp/en/utrip/",
@@ -276,7 +276,7 @@
       "error": null,
       "fingerprint": "2715c3d3b6fccb72",
       "firstSeen": "2026-11-02",
-      "lastChecked": "2026-11-13",
+      "lastChecked": "2026-11-14",
       "changedSinceLastCheck": false
     }
   ]
