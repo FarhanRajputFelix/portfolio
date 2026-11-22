@@ -1,9 +1,9 @@
 {
-  "generated": "2026-11-21T13:58:24+00:00",
-  "checked": "2026-11-21",
+  "generated": "2026-11-22T13:51:56+00:00",
+  "checked": "2026-11-22",
   "total": 21,
   "broken": 3,
-  "changed": 1,
+  "changed": 2,
   "note": "A reachable link is not a current deadline. This checks that pages resolve and flags when their visible text changes; it does not read the page.",
   "sources": [
     {
@@ -16,7 +16,7 @@
       "error": null,
       "fingerprint": "de4b06b9a48fc676",
       "firstSeen": "2026-11-19",
-      "lastChecked": "2026-11-21",
+      "lastChecked": "2026-11-22",
       "changedSinceLastCheck": false
     },
     {
@@ -29,7 +29,7 @@
       "error": null,
       "fingerprint": "43bb2e68a54b2baa",
       "firstSeen": "2026-11-20",
-      "lastChecked": "2026-11-21",
+      "lastChecked": "2026-11-22",
       "changedSinceLastCheck": false
     },
     {
@@ -42,7 +42,7 @@
       "error": null,
       "fingerprint": "77666841739503e8",
       "firstSeen": "2026-11-02",
-      "lastChecked": "2026-11-21",
+      "lastChecked": "2026-11-22",
       "changedSinceLastCheck": false
     },
     {
@@ -55,7 +55,7 @@
       "error": null,
       "fingerprint": "5fac5cbd3e1cab17",
       "firstSeen": "2026-10-23",
-      "lastChecked": "2026-11-21",
+      "lastChecked": "2026-11-22",
       "changedSinceLastCheck": false
     },
     {
@@ -68,7 +68,7 @@
       "error": null,
       "fingerprint": "07ade9c2b6ce5050",
       "firstSeen": "2026-11-13",
-      "lastChecked": "2026-11-21",
+      "lastChecked": "2026-11-22",
       "changedSinceLastCheck": false
     },
     {
@@ -79,10 +79,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "befb6fe544471c5c",
-      "firstSeen": "2026-11-20",
-      "lastChecked": "2026-11-21",
-      "changedSinceLastCheck": false
+      "fingerprint": "644a50b5dae0cfe3",
+      "firstSeen": "2026-11-22",
+      "lastChecked": "2026-11-22",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://ellis.eu/research/phd-postdoc",
@@ -94,7 +94,7 @@
       "error": null,
       "fingerprint": "c9ba4633088d0f2c",
       "firstSeen": "2026-11-13",
-      "lastChecked": "2026-11-21",
+      "lastChecked": "2026-11-22",
       "changedSinceLastCheck": false
     },
     {
@@ -107,7 +107,7 @@
       "error": null,
       "fingerprint": "2d562b4d01db73a3",
       "firstSeen": "2026-11-04",
-      "lastChecked": "2026-11-21",
+      "lastChecked": "2026-11-22",
       "changedSinceLastCheck": false
     },
     {
@@ -118,9 +118,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "0ddc4edd2e32b193",
-      "firstSeen": "2026-11-21",
-      "lastChecked": "2026-11-21",
+      "fingerprint": "eb4dce64b7142a0e",
+      "firstSeen": "2026-11-22",
+      "lastChecked": "2026-11-22",
       "changedSinceLastCheck": true
     },
     {
@@ -133,7 +133,7 @@
       "error": null,
       "fingerprint": "c1d09d3f986aba7c",
       "firstSeen": "2026-09-11",
-      "lastChecked": "2026-11-21",
+      "lastChecked": "2026-11-22",
       "changedSinceLastCheck": false
     },
     {
@@ -146,7 +146,7 @@
       "error": null,
       "fingerprint": "9ca3292162983b5c",
       "firstSeen": "2026-11-05",
-      "lastChecked": "2026-11-21",
+      "lastChecked": "2026-11-22",
       "changedSinceLastCheck": false
     },
     {
@@ -159,7 +159,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-09-09",
-      "lastChecked": "2026-11-21",
+      "lastChecked": "2026-11-22",
       "changedSinceLastCheck": false
     },
     {
@@ -172,7 +172,7 @@
       "error": null,
       "fingerprint": "b52ff298759c6e3d",
       "firstSeen": "2026-09-30",
-      "lastChecked": "2026-11-21",
+      "lastChecked": "2026-11-22",
       "changedSinceLastCheck": false
     },
     {
@@ -185,7 +185,7 @@
       "error": null,
       "fingerprint": "3e42334884a74cb5",
       "firstSeen": "2026-11-13",
-      "lastChecked": "2026-11-21",
+      "lastChecked": "2026-11-22",
       "changedSinceLastCheck": false
     },
     {
@@ -198,7 +198,7 @@
       "error": null,
       "fingerprint": "92c53b34e23ada3a",
       "firstSeen": "2026-11-19",
-      "lastChecked": "2026-11-21",
+      "lastChecked": "2026-11-22",
       "changedSinceLastCheck": false
     },
     {
@@ -211,7 +211,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-11-21",
-      "lastChecked": "2026-11-21",
+      "lastChecked": "2026-11-22",
       "changedSinceLastCheck": false
     },
     {
@@ -224,7 +224,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-10-26",
-      "lastChecked": "2026-11-21",
+      "lastChecked": "2026-11-22",
       "changedSinceLastCheck": false
     },
     {
@@ -237,7 +237,7 @@
       "error": null,
       "fingerprint": "a5753de587105197",
       "firstSeen": "2026-10-14",
-      "lastChecked": "2026-11-21",
+      "lastChecked": "2026-11-22",
       "changedSinceLastCheck": false
     },
     {
@@ -250,7 +250,7 @@
       "error": null,
       "fingerprint": "95755c86bce18f54",
       "firstSeen": "2026-11-19",
-      "lastChecked": "2026-11-21",
+      "lastChecked": "2026-11-22",
       "changedSinceLastCheck": false
     },
     {
@@ -263,7 +263,7 @@
       "error": null,
       "fingerprint": "c39b255e50d67033",
       "firstSeen": "2026-11-17",
-      "lastChecked": "2026-11-21",
+      "lastChecked": "2026-11-22",
       "changedSinceLastCheck": false
     },
     {
@@ -276,7 +276,7 @@
       "error": null,
       "fingerprint": "2715c3d3b6fccb72",
       "firstSeen": "2026-11-02",
-      "lastChecked": "2026-11-21",
+      "lastChecked": "2026-11-22",
       "changedSinceLastCheck": false
     }
   ]
