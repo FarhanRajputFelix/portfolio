@@ -1,9 +1,9 @@
 {
-  "generated": "2026-11-26T16:07:55+00:00",
-  "checked": "2026-11-26",
+  "generated": "2026-11-27T15:55:19+00:00",
+  "checked": "2026-11-27",
   "total": 21,
   "broken": 2,
-  "changed": 6,
+  "changed": 5,
   "note": "A reachable link is not a current deadline. This checks that pages resolve and flags when their visible text changes; it does not read the page.",
   "sources": [
     {
@@ -14,9 +14,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "de4b06b9a48fc676",
-      "firstSeen": "2026-11-26",
-      "lastChecked": "2026-11-26",
+      "fingerprint": "ccd18b75ed8b924a",
+      "firstSeen": "2026-11-27",
+      "lastChecked": "2026-11-27",
       "changedSinceLastCheck": true
     },
     {
@@ -29,8 +29,8 @@
       "error": null,
       "fingerprint": "5d0b967bb11604c8",
       "firstSeen": "2026-11-26",
-      "lastChecked": "2026-11-26",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-11-27",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://eee.epfl.ch/",
@@ -42,7 +42,7 @@
       "error": null,
       "fingerprint": "77666841739503e8",
       "firstSeen": "2026-11-02",
-      "lastChecked": "2026-11-26",
+      "lastChecked": "2026-11-27",
       "changedSinceLastCheck": false
     },
     {
@@ -55,7 +55,7 @@
       "error": null,
       "fingerprint": "5fac5cbd3e1cab17",
       "firstSeen": "2026-10-23",
-      "lastChecked": "2026-11-26",
+      "lastChecked": "2026-11-27",
       "changedSinceLastCheck": false
     },
     {
@@ -68,7 +68,7 @@
       "error": null,
       "fingerprint": "07ade9c2b6ce5050",
       "firstSeen": "2026-11-13",
-      "lastChecked": "2026-11-26",
+      "lastChecked": "2026-11-27",
       "changedSinceLastCheck": false
     },
     {
@@ -79,10 +79,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "5794f2f6168cc9a8",
-      "firstSeen": "2026-11-23",
-      "lastChecked": "2026-11-26",
-      "changedSinceLastCheck": false
+      "fingerprint": "c9719e22e2b83cb9",
+      "firstSeen": "2026-11-27",
+      "lastChecked": "2026-11-27",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://ellis.eu/research/phd-postdoc",
@@ -94,8 +94,8 @@
       "error": null,
       "fingerprint": "663f44510cc56596",
       "firstSeen": "2026-11-26",
-      "lastChecked": "2026-11-26",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-11-27",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://euraxess.ec.europa.eu/jobs",
@@ -107,8 +107,8 @@
       "error": null,
       "fingerprint": "c9a4afd363843207",
       "firstSeen": "2026-11-26",
-      "lastChecked": "2026-11-26",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-11-27",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://home.cern/summer-student-programme",
@@ -118,10 +118,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "0ddc4edd2e32b193",
-      "firstSeen": "2026-11-24",
-      "lastChecked": "2026-11-26",
-      "changedSinceLastCheck": false
+      "fingerprint": "eb4dce64b7142a0e",
+      "firstSeen": "2026-11-27",
+      "lastChecked": "2026-11-27",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://inf.ethz.ch/studies/summer-research-fellowship.html",
@@ -133,7 +133,7 @@
       "error": null,
       "fingerprint": "c1d09d3f986aba7c",
       "firstSeen": "2026-09-11",
-      "lastChecked": "2026-11-26",
+      "lastChecked": "2026-11-27",
       "changedSinceLastCheck": false
     },
     {
@@ -146,7 +146,7 @@
       "error": null,
       "fingerprint": "9ca3292162983b5c",
       "firstSeen": "2026-11-05",
-      "lastChecked": "2026-11-26",
+      "lastChecked": "2026-11-27",
       "changedSinceLastCheck": false
     },
     {
@@ -159,7 +159,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-09-09",
-      "lastChecked": "2026-11-26",
+      "lastChecked": "2026-11-27",
       "changedSinceLastCheck": false
     },
     {
@@ -172,7 +172,7 @@
       "error": null,
       "fingerprint": "b52ff298759c6e3d",
       "firstSeen": "2026-09-30",
-      "lastChecked": "2026-11-26",
+      "lastChecked": "2026-11-27",
       "changedSinceLastCheck": false
     },
     {
@@ -185,8 +185,8 @@
       "error": null,
       "fingerprint": "0e963b4a878056e0",
       "firstSeen": "2026-11-26",
-      "lastChecked": "2026-11-26",
-      "changedSinceLastCheck": true
+      "lastChecked": "2026-11-27",
+      "changedSinceLastCheck": false
     },
     {
       "url": "https://tigp.sinica.edu.tw/pages/3127",
@@ -198,7 +198,7 @@
       "error": null,
       "fingerprint": "92c53b34e23ada3a",
       "firstSeen": "2026-11-19",
-      "lastChecked": "2026-11-26",
+      "lastChecked": "2026-11-27",
       "changedSinceLastCheck": false
     },
     {
@@ -209,10 +209,10 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "a2018f6cee742e8e",
-      "firstSeen": "2026-11-23",
-      "lastChecked": "2026-11-26",
-      "changedSinceLastCheck": false
+      "fingerprint": "1d9dd31d9a10d345",
+      "firstSeen": "2026-11-27",
+      "lastChecked": "2026-11-27",
+      "changedSinceLastCheck": true
     },
     {
       "url": "https://www.findaphd.com/",
@@ -224,7 +224,7 @@
       "error": "HTTP 403",
       "fingerprint": null,
       "firstSeen": "2026-10-26",
-      "lastChecked": "2026-11-26",
+      "lastChecked": "2026-11-27",
       "changedSinceLastCheck": false
     },
     {
@@ -237,7 +237,7 @@
       "error": null,
       "fingerprint": "a5753de587105197",
       "firstSeen": "2026-10-14",
-      "lastChecked": "2026-11-26",
+      "lastChecked": "2026-11-27",
       "changedSinceLastCheck": false
     },
     {
@@ -248,9 +248,9 @@
       "status": 200,
       "ok": true,
       "error": null,
-      "fingerprint": "1a12569b543add70",
-      "firstSeen": "2026-11-26",
-      "lastChecked": "2026-11-26",
+      "fingerprint": "2b083d4a6f7be659",
+      "firstSeen": "2026-11-27",
+      "lastChecked": "2026-11-27",
       "changedSinceLastCheck": true
     },
     {
@@ -263,7 +263,7 @@
       "error": null,
       "fingerprint": "c39b255e50d67033",
       "firstSeen": "2026-11-17",
-      "lastChecked": "2026-11-26",
+      "lastChecked": "2026-11-27",
       "changedSinceLastCheck": false
     },
     {
@@ -276,7 +276,7 @@
       "error": null,
       "fingerprint": "2715c3d3b6fccb72",
       "firstSeen": "2026-11-02",
-      "lastChecked": "2026-11-26",
+      "lastChecked": "2026-11-27",
       "changedSinceLastCheck": false
     }
   ]
